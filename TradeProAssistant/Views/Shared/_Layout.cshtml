@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradePro Assistant</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/dist/css/app.css" rel="stylesheet" />
+    <!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
+    @Scripts.Render("~/bundles/jquery")
+    <link href="https://kendo.cdn.telerik.com/2019.3.1023/styles/kendo.common-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2019.3.1023/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2019.3.1023/styles/kendo.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://kendo.cdn.telerik.com/2019.3.1023/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2019.3.1023/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2019.3.1023/js/kendo.aspnetmvc.min.js"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">TradePro Assistant</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class='@String.Format("nav-item{0}", ViewBag.tab == "Home" ? " active" : "")'>
+                            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                        </li>
+                        <li class='@String.Format("nav-item{0}", ViewBag.tab == "Calculators" ? " active" : "")'>
+                            @Html.ActionLink("Calculators", "Index", "Calculators", null, new { @class = "nav-link" })
+                        </li>
+                        <li class='@String.Format("nav-item{0}", ViewBag.tab == "Scanner" ? " active" : "")'>
+                            @Html.ActionLink("Scanner", "Index", "Scanner", null, new { @class = "nav-link" })
+                        </li>
+                        <li class='@String.Format("nav-item{0}", ViewBag.tab == "WeeklyIncome" ? " active" : "")'>
+                            @Html.ActionLink("Weekly Income", "Index", "WeeklyIncome", null, new { @class = "nav-link" })
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="app" class="container" style="padding-top: 70px;">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - TradePro Assistant</p>
+        </footer>
+    </div>
+
+    <input type="hidden" id="uxInput_RootUrl" value="@Url.Content("~")" />
+
+
+    @Scripts.Render("~/bundles/jquerySignalR")
+    <script src="~/signalr/hubs"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="~/Content/dist/js/app.js"></script>
+
+    <script>
+        new Vue({
+        }).$mount('#app')
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

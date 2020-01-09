@@ -1,0 +1,48 @@
+﻿<#@ template debug="true" language="C#" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Data.Entity.Design"#>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ include file="TemplateFileManager.ttinclude" #>
+<#
+	string entityMapContent = System.IO.File.ReadAllText(System.IO.Path.GetDirectoryName(this.Host.TemplateFile) + "\\DataAccessStarterEntityMap.xml");
+	XDocument entityMap = XDocument.Parse(entityMapContent);
+	XNamespace entityMapNamespace = "http://www.codesmithtools.com/entitymap";
+	var p = PluralizationService.CreateService(new CultureInfo("en-US"));
+
+var manager = TemplateFileManager.Create(this);
+string serviceNamespace = entityMap.Element(entityMapNamespace + "EntityMap").Attribute("ServiceNamespace").Value;
+
+List<XElement> entities = entityMap.Descendants(entityMapNamespace + "Entity").ToList();
+foreach(XElement entity in entities)
+{
+	string entityName = entity.Attribute("Name").Value;
+		
+	manager.StartNewFile(String.Format("{0}Service.cs", entityName),  null, "Code Generation.Non Source Output.Services");
+#>
+/*
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace <#= serviceNamespace #>
+{
+	public class <#= entityName #>Service : <#= entityName #>ServiceBase
+	{
+		#region Custom Methods
+
+		#endregion
+	}
+}
+*/
+
+<#
+}
+manager.Process();
+#>

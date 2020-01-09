@@ -1,0 +1,230 @@
+﻿<#@ template debug="true" language="C#" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Data.Entity.Design"#>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ include file="TemplateFileManager.ttinclude" #>
+<#
+	string entityMapContent = System.IO.File.ReadAllText(System.IO.Path.GetDirectoryName(this.Host.TemplateFile) + "\\DataAccessStarterEntityMap.xml");
+	XDocument entityMap = XDocument.Parse(entityMapContent);
+	XNamespace entityMapNamespace = "http://www.codesmithtools.com/entitymap";
+	var p = PluralizationService.CreateService(new CultureInfo("en-US"));
+
+var manager = TemplateFileManager.Create(this);
+string serviceNamespace = entityMap.Element(entityMapNamespace + "EntityMap").Attribute("ServiceNamespace").Value;
+string contextName = entityMap.Element(entityMapNamespace + "EntityMap").Attribute("Name").Value;
+
+List<XElement> entities = entityMap.Descendants(entityMapNamespace + "Entity").ToList();
+foreach(XElement entity in entities)
+{
+	string entityName = entity.Attribute("Name").Value;
+	string entityNamePlural = p.Pluralize(entityName);
+		
+	manager.StartNewFile(String.Format("{0}ServiceBase.cs", entityName),  null, String.Format("{0}.Base", serviceNamespace.Replace("Services", "ServicesFolder")));
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Contexts;
+using Data.Framework;
+using Entities;
+using System.Linq.Dynamic;
+using System.Data;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
+
+namespace <#= serviceNamespace #>
+{
+	public class <#= entityName #>ServiceBase
+	{
+		#region SetIncludes
+		private static DbQuery<<#= entityName #>> SetIncludes(DbQuery<<#= entityName #>> dbQuery, List<String> includes)
+        {
+            foreach (String include in includes)
+            {
+                dbQuery = dbQuery.Include(include);
+            }
+
+			return dbQuery;
+        }
+		#endregion
+
+		#region Get
+        public static <#= entityName #> Get(int identifier)
+        {
+            return Get(identifier, new List<String>());
+        }
+
+		public static <#= entityName #> Get(int identifier, List<String> includes)
+        {
+            Query query = new Query();
+			query.Includes = includes;
+            query.QuerySingleFilters.Add(new QuerySingleFilter()
+            {
+                IsAndFilter = false,
+                Parameter = identifier.ToString(),
+                PropertyName = <#= entityName #>.PropertyNames.Identifier,
+                QueryOperator = QueryOperators.Equals
+            });
+
+            return Get(query);
+        }
+
+        public static <#= entityName #> Get(Query query)
+        {
+            using(<#= contextName #>Context context = new <#= contextName #>Context()) 
+			{
+				DbQuery<<#= entityName #>> dbQuery = context.<#= entityNamePlural #>;
+
+				if(query.Includes.Count > 0)
+				{
+					dbQuery = SetIncludes(dbQuery, query.Includes);
+				}
+
+				var <#= entityNamePlural.ToLower() #> = dbQuery.Where(query.WhereClause).Take(1);
+
+				return (<#= entityNamePlural.ToLower() #> != null && <#= entityNamePlural.ToLower() #>.Count() > 0) ? <#= entityNamePlural.ToLower() #>.First() : null;
+			}
+        }
+        #endregion
+
+		#region GetCollection
+        public static List<<#= entityName #>> GetCollection()
+        {
+            return GetCollection(new List<String>());
+        }
+
+		public static List<<#= entityName #>> GetCollection(List<String> includes)
+        {
+            return GetCollection(new Query() { Includes = includes });
+        }
+
+        public static List<<#= entityName #>> GetCollection(Query query)
+        {
+            using(<#= contextName #>Context context = new <#= contextName #>Context()) 
+			{
+				if (String.IsNullOrEmpty(query.WhereClause))
+				{
+					query.QuerySingleFilters.Add(new QuerySingleFilter()
+					{
+						IsAndFilter = false,
+						Parameter = "0",
+						PropertyName = <#= entityName #>.PropertyNames.Identifier,
+						QueryOperator = QueryOperators.NotEquals
+					});
+				}
+
+				if (String.IsNullOrEmpty(query.SortPropertyName))
+				{
+					query.SortPropertyName = <#= entityName #>.PropertyNames.<#= entity.Attribute("DefaultSortField").Value #>;
+					query.SortDescending = <#= entity.Attribute("DefaultSortDescending").Value #>;
+				}
+
+				DbQuery<<#= entityName #>> dbQuery = context.<#= entityNamePlural #>;
+
+				if(query.Includes.Count > 0)
+				{
+					dbQuery = SetIncludes(dbQuery, query.Includes);
+				}
+
+				if (query.UsePaging)
+				{
+					return dbQuery.Where(query.WhereClause).OrderBy(query.SortExpression).Skip(query.CurrentPage * query.PageSize).Take(query.PageSize).ToList();
+				}
+				else
+				{
+					return dbQuery.Where(query.WhereClause).OrderBy(query.SortExpression).ToList();
+				}
+			}
+        }
+        #endregion
+
+		#region GetCount
+        public static int GetCount()
+        {
+            return GetCount(new Query());
+        }
+
+        public static int GetCount(Query query)
+        {
+            using(<#= contextName #>Context context = new <#= contextName #>Context()) 
+			{
+				if (String.IsNullOrEmpty(query.WhereClause))
+				{
+					query.QuerySingleFilters.Add(new QuerySingleFilter()
+					{
+						IsAndFilter = false,
+						Parameter = "0",
+						PropertyName = <#= entityName #>.PropertyNames.Identifier,
+						QueryOperator = QueryOperators.NotEquals
+					});
+				}
+
+				return context.<#= entityNamePlural #>.Count(query.WhereClause);
+			}
+        }
+        #endregion
+
+		#region Save
+		public static int Save(<#= entityName #> <#= entityName.ToLower() #>)
+		{
+			using(<#= contextName #>Context context = new <#= contextName #>Context()) 
+			{
+				context.Entry(<#= entityName.ToLower() #>).State = <#= entityName.ToLower() #>.IsNew ?
+										   EntityState.Added :
+										   EntityState.Modified;
+ 
+				context.SaveChanges();
+
+				return <#= entityName.ToLower() #>.Identifier;
+			}
+		}
+		#endregion
+
+		#region Delete
+		public static void Delete(Query query)
+        {
+            using (<#= contextName #>Context context = new <#= contextName #>Context())
+            {
+                DbQuery<<#= entityName #>> dbQuery = context.<#= entityNamePlural #>;
+                List<int> identifiers = dbQuery.Where(query.WhereClause).Select(i => i.Identifier).ToList();
+
+                foreach (int identifier in identifiers)
+                {
+                    Delete(identifier);
+                }
+            }
+        }
+
+        public static void Delete(<#= entityName #> <#= entityName.ToLower() #>)
+        {
+            Delete(<#= entityName.ToLower() #>.Identifier);
+        }
+
+        public static void Delete(int identifier)
+        {
+            using(<#= contextName #>Context context = new <#= contextName #>Context()) 
+			{
+                try
+                {
+                    <#= entityName #> <#= entityName.ToLower() #> = context.<#= entityNamePlural #>.Find(identifier);
+                    context.Entry(<#= entityName.ToLower() #>).State = EntityState.Deleted;
+                    context.SaveChanges();
+                }
+                catch { }
+            }
+        }
+        #endregion
+	}
+}
+
+<#
+}
+manager.Process();
+#>

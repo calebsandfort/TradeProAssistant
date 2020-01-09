@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://www.codesmithtools.com/entitymap" elementFormDefault="qualified" xmlns="http://www.codesmithtools.com/entitymap" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cst="http://www.codesmithtools.com/XmlPropertyExtensions">
+  <!-- XmlProperty will use the last element tag that appears in the schema as the default root element type, but you can specify a RootElement attribute on the XmlProperty directive to override this behaviour. -->
+  <xs:element name="EntityMap">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Entity" type="Entity" minOccurs="1" maxOccurs="unbounded" cst:description="Name" cst:collectionName="MyEntities" />
+        <xs:element name="EntityEnum" type="EntityEnum" minOccurs="0" maxOccurs="unbounded" cst:description="Name" cst:collectionName="MyEntityEnums" />
+      </xs:sequence>
+      <xs:attribute name="Version" type="xs:string" use="required" />
+      <xs:attribute name="Name" use="required" type="xs:string" />
+      <xs:attribute name="EntityNamespace" use="required" type="xs:string" />
+      <xs:attribute name="EnumNamespace" use="required" type="xs:string" />
+      <xs:attribute name="EnumLocation" use="required" type="xs:string" />
+      <xs:attribute name="ContextNamespace" use="required" type="xs:string" />
+      <xs:attribute name="ServiceNamespace" use="required" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Entity" cst:description="Name" cst:collectionName="MyEntities">
+    <xs:sequence>
+      <xs:element name="Property" type="Property" minOccurs="1" maxOccurs="unbounded" />
+      <xs:element name="EnumProperty" type="EnumProperty" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="Relationship" type="Relationship" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="CollectionProperty" type="CollectionProperty" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Name" use="required" type="xs:string" />
+    <xs:attribute name="DefaultSortField" use="required" type="xs:string" />
+    <xs:attribute name="DefaultSortDescending" use="required" type="xs:boolean" />
+    <xs:attribute name="TableName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="Property" cst:description="Name" cst:collectionName="MyProperties">
+    <xs:attribute name="Name" use="required" type="xs:string" />
+    <xs:attribute name="Type" use="required" type="xs:string" />
+    <xs:attribute name="Size" use="optional" type="xs:string" />
+    <xs:attribute name="RelationshipIdentifier" use="optional" type="xs:boolean" default="false" />
+    <xs:attribute name="AllowNull" use="optional" type="xs:boolean" default="false" />
+    <xs:attribute name="DataAnnotationRequired" use="optional" type="xs:boolean" default="false" />
+    <xs:attribute name="DataAnnotationDisplay" use="optional" type="xs:string" />
+    <xs:attribute name="DefaultValue" use="optional" type="xs:string" default="" />
+    <xs:attribute name="IncludeInDto" use="optional" type="xs:boolean" default="false" />
+  </xs:complexType>
+  <xs:complexType name="Relationship" cst:description="Name" cst:collectionName="MyRelationships">
+    <xs:attribute name="Name" use="required" type="xs:string" />
+    <xs:attribute name="DbName" use="optional" type="xs:string" />
+    <xs:attribute name="Type" use="required" type="xs:string" />
+    <xs:attribute name="LazyLoad" use="optional" type="xs:boolean" default="false" />
+    <xs:attribute name="IncludeInDto" use="optional" type="xs:boolean" default="false" />
+  </xs:complexType>
+  <xs:complexType name="CollectionProperty" cst:description="Name" cst:collectionName="MyCollectionProperties">
+    <xs:attribute name="Name" use="required" type="xs:string" />
+    <xs:attribute name="Type" use="required" type="xs:string" />
+    <xs:attribute name="Cardinality" use="required" type="xs:string" />
+    <xs:attribute name="TableName" use="optional" type="xs:string" />
+    <xs:attribute name="RightName" use="optional" type="xs:string" />
+    <xs:attribute name="OrderByProperty" use="optional" type="xs:string" default="Identifier" />
+    <xs:attribute name="OrderByDirection" use="optional" type="xs:string" default="" />
+    <xs:attribute name="IncludeInDto" use="optional" type="xs:boolean" default="false" />
+  </xs:complexType>
+  <xs:complexType name="EntityEnum" cst:description="Name" cst:collectionName="MyEntityEnums">
+    <xs:sequence>
+      <xs:element name="EnumMember" type="EnumMember" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="EnumMember" cst:description="Name" cst:collectionName="MyEnumMembers">
+    <xs:attribute name="Name" use="required" type="xs:string" />
+    <xs:attribute name="DisplayValue" use="required" type="xs:string" />
+    <xs:attribute name="Value" use="required" type="xs:integer" />
+  </xs:complexType>
+  <xs:complexType name="EnumProperty" cst:description="Name" cst:collectionName="MyEnumProperties">
+    <xs:attribute name="Name" use="required" type="xs:string" />
+    <xs:attribute name="Type" use="required" type="xs:string" />
+    <xs:attribute name="DataAnnotationRequired" use="optional" type="xs:boolean" default="false" />
+    <xs:attribute name="DataAnnotationDisplay" use="optional" type="xs:string" />
+    <xs:attribute name="IncludeInDto" use="optional" type="xs:boolean" default="false" />
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,201 @@
+﻿<#@ template debug="true" language="C#" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Data.Entity.Design"#>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ include file="TemplateFileManager.ttinclude" #>
+<#
+	string entityMapContent = System.IO.File.ReadAllText(System.IO.Path.GetDirectoryName(this.Host.TemplateFile) + "\\DataAccessStarterEntityMap.xml");
+	XDocument entityMap = XDocument.Parse(entityMapContent);
+	XNamespace entityMapNamespace = "http://www.codesmithtools.com/entitymap";
+	var p = PluralizationService.CreateService(new CultureInfo("en-US"));
+
+var manager = TemplateFileManager.Create(this);
+string entityNamespace = entityMap.Element(entityMapNamespace + "EntityMap").Attribute("EntityNamespace").Value;
+string enumNamespace = entityMap.Element(entityMapNamespace + "EntityMap").Attribute("EnumNamespace").Value;
+
+List<XElement> entities = entityMap.Descendants(entityMapNamespace + "Entity").ToList();
+foreach(XElement entity in entities)
+{
+	string entityName = entity.Attribute("Name").Value;
+		
+	manager.StartNewFile(String.Format("{0}.cs", entityName),  null, entityNamespace);
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+<# if(entity.Descendants(entityMapNamespace + "EnumProperty").Count() > 0) { #>
+using <#= enumNamespace #>;
+<# } #>
+
+namespace <#= entityNamespace #>
+{
+<#
+	XAttribute tableNameAttribute = entity.Attribute("TableName");
+	if(tableNameAttribute != null)
+	{
+#>
+	[Table("<#= tableNameAttribute.Value #>")]
+<#
+	}
+#>
+	public partial class <#= entityName #>
+	{
+		[NotMapped]
+		public static <#= entityName #>PropertyNames PropertyNames = new <#= entityName #>PropertyNames();
+
+		[Key]
+		public int Identifier { get; set; }
+
+		[NotMapped]
+		public bool IsNew { get{ return this.Identifier == 0; } }
+<#
+List<XElement> properties = entity.Descendants(entityMapNamespace + "Property").ToList();
+foreach(XElement prop in properties)
+{
+#>
+
+<#
+	XAttribute sizeAttribute = prop.Attribute("Size");
+	if(sizeAttribute != null)
+	{
+#>
+		[MaxLength(<#= sizeAttribute.Value #>)]
+<#
+	}
+
+	XAttribute allowNullAttribute = prop.Attribute("AllowNull");
+	string nullString = "";
+	if(allowNullAttribute != null && allowNullAttribute.Value == "true")
+	{
+		nullString = "?";
+    }
+#>
+		public <#= prop.Attribute("Type").Value #><#= nullString #> <#= prop.Attribute("Name").Value #> { get; set; }
+<#
+}
+
+List<XElement> enumProperties = entity.Descendants(entityMapNamespace + "EnumProperty").ToList();
+foreach(XElement enumProp in enumProperties)
+{
+#>
+
+		public <#= enumProp.Attribute("Type").Value #> <#= enumProp.Attribute("Name").Value #> { get; set; }
+<#
+}
+
+List<XElement> relatedProperties = entity.Descendants(entityMapNamespace + "Relationship").ToList();
+
+if(relatedProperties.Count > 0)
+{
+#>
+
+<#
+	foreach(XElement relatedProperty in relatedProperties)
+	{
+#>
+		public int? <#= relatedProperty.Attribute("Name").Value #>Identifier { get; set; }
+		public virtual <#= relatedProperty.Attribute("Type").Value #> <#= relatedProperty.Attribute("Name").Value #> { get; set; }
+<#
+    }
+}
+
+
+List<XElement> collectionProperties = entity.Descendants(entityMapNamespace + "CollectionProperty").ToList();
+
+if(collectionProperties.Count > 0)
+{
+#>
+
+<#
+	foreach(XElement collectionProperty in collectionProperties)
+	{
+#>
+		public virtual List<<#= collectionProperty.Attribute("Type").Value #>> <#= collectionProperty.Attribute("Name").Value #> { get; set; }
+<#
+    }
+}
+#>
+
+		#region Constructor
+		public  <#= entityName #>()
+		{
+		<#
+		foreach(XElement prop in properties)
+		{
+			XAttribute defaultValueAttribute = prop.Attribute("DefaultValue");
+			if(defaultValueAttribute != null && defaultValueAttribute.Value != String.Empty && prop.Attribute("Type").Value == "Double")
+			{
+		#>
+	this.<#= prop.Attribute("Name").Value #> = <#= prop.Attribute("DefaultValue").Value #>;
+		<#
+            }
+        }
+		#>
+}
+		#endregion
+
+		#region Comparisons
+		public static bool operator ==(<#= entityName #> entity, object obj)
+		{
+			if ((object)entity == null && obj == null)
+			{
+				return true;
+			}
+			else if ((object)entity != null && obj is <#= entityName #> && entity.GetType() == obj.GetType())
+			{
+				return (entity.Identifier == ((<#= entityName #>)obj).Identifier);
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public static bool operator !=(<#= entityName #> entity, object obj)
+		{
+			if ((object)entity == null && obj == null)
+			{
+				return false;
+			}
+			else if ((object)entity != null && obj is <#= entityName #> && entity.GetType() == obj.GetType())
+			{
+				return (entity.Identifier != ((<#= entityName #>)obj).Identifier);
+			}
+			else
+			{
+				return true;
+			}
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (obj is <#= entityName #> && this.GetType() == obj.GetType())
+			{
+				return (this.Identifier == ((<#= entityName #>)obj).Identifier);
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
+		#endregion
+	}
+}
+<#
+}
+manager.Process();
+#>

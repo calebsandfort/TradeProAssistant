@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.tab = "Scanner";
+}
+
+@(Html.Kendo().ComboBox()
+              .Name("securities")
+              .Placeholder("Select a security")
+              .DataTextField("SymbolAndName")
+              .DataValueField("Identifier")
+              .HtmlAttributes(new { style = "width:100%;" })
+              .Filter("contains")
+              .AutoBind(false)
+              .MinLength(2)
+              .Delay(250)
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetSecurities", "Scanner");
+                  })
+                  .ServerFiltering(true);
+              })
+)

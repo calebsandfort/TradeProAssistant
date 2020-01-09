@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.tab = "Calculators";
+}
+
+<ul class="nav nav-tabs" id="calculatorTabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="iron-condor-tab" data-toggle="tab" href="#iron-condor" role="tab" aria-controls="iron-condor" aria-selected="true">Iron Condor</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="stock-position-tab" data-toggle="tab" href="#stock-position" role="tab" aria-controls="stock-position" aria-selected="false">Stock Position</a>
+    </li>
+</ul>
+<div class="tab-content" id="calculatorTabsContent" style="padding-top: 10px;">
+    <div class="tab-pane fade show active" id="iron-condor" role="tabpanel" aria-labelledby="iron-condor-tab">
+        <iron-condor-calculator></iron-condor-calculator>
+    </div>
+    <div class="tab-pane fade" id="stock-position" role="tabpanel" aria-labelledby="stock-position-tab">
+        <stock-position-calculator></stock-position-calculator>
+    </div>
+</div>
+
+
+

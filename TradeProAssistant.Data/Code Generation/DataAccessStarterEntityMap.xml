@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<EntityMap Version="1.0" Name="TradeProAssistant" EntityNamespace="Entities" EnumNamespace="Enums" EnumLocation="Entities.Enums" ServiceNamespace="Services" ContextNamespace="Contexts"
+  xmlns="http://www.codesmithtools.com/entitymap" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Entity Name="Security" DefaultSortField="Name" DefaultSortDescending="false">
+    <Property Name="Name" Type="String" Size="255" IncludeInDto="true" />
+    <Property Name="Symbol" Type="String" Size="5" IncludeInDto="true" />
+    <Property Name="MarketCap" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Sector" Type="String" Size="50" IncludeInDto="true" />
+    <Property Name="AssetClass" Type="String" Size="50" IncludeInDto="true" />
+    <Property Name="PairEligible" Type="bool" IncludeInDto="true" />
+    <EnumProperty Name="SectorEnum" Type="Sectors" IncludeInDto="true"/>
+    <EnumProperty Name="AssetClassEnum" Type="AssetClasses" IncludeInDto="true"/>
+    <CollectionProperty Name="DailyCandlesticks" Type="DayCandlestick" Cardinality="ManyToOne"/>
+    <CollectionProperty Name="WeeklyCandlesticks" Type="WeekCandlestick" Cardinality="ManyToOne"/>
+  </Entity>
+  <Entity Name="DayCandlestick" DefaultSortField="Date" DefaultSortDescending="false">
+    <Property Name="Date" Type="DateTime" IncludeInDto="true" />
+    <Property Name="Open" Type="Decimal" IncludeInDto="true" />
+    <Property Name="High" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Low" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Close" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Volume" Type="Int32" IncludeInDto="true" />
+  </Entity>
+  <Entity Name="WeekCandlestick" DefaultSortField="Date" DefaultSortDescending="false">
+    <Property Name="Date" Type="DateTime" IncludeInDto="true" />
+    <Property Name="Open" Type="Decimal" IncludeInDto="true" />
+    <Property Name="High" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Low" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Close" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Volume" Type="Int32" IncludeInDto="true" />
+  </Entity>
+  <EntityEnum Name="Sectors">
+    <EnumMember Name="ConsumerDiscretionary" Value="1" DisplayValue="Consumer Discretionary"/>
+    <EnumMember Name="ConsumerStaples" Value="2" DisplayValue="Consumer Staples"/>
+    <EnumMember Name="Utilities" Value="3" DisplayValue="Utilities"/>
+    <EnumMember Name="CashAndOrDerivatives" Value="4" DisplayValue="Cash and/or Derivatives"/>
+    <EnumMember Name="Materials" Value="5" DisplayValue="Materials"/>
+    <EnumMember Name="Financials" Value="6" DisplayValue="Financials"/>
+    <EnumMember Name="RealEstate" Value="7" DisplayValue="Real Estate"/>
+    <EnumMember Name="Energy" Value="8" DisplayValue="Energy"/>
+    <EnumMember Name="HealthCare" Value="9" DisplayValue="Health Care"/>
+    <EnumMember Name="Industrials" Value="10" DisplayValue="Industrials"/>
+    <EnumMember Name="InformationTechnology" Value="11" DisplayValue="Information Technology"/>
+    <EnumMember Name="Communication" Value="12" DisplayValue="Communication"/>
+    <EnumMember Name="Technology" Value="13" DisplayValue="Technology"/>
+    <EnumMember Name="Index" Value="14" DisplayValue="Index"/>
+  </EntityEnum>
+  <EntityEnum Name="AssetClasses">
+    <EnumMember Name="Equity" Value="1" DisplayValue="Equity"/>
+    <EnumMember Name="ETF" Value="2" DisplayValue="ETF"/>
+  </EntityEnum>
+</EntityMap>

@@ -1,0 +1,96 @@
+﻿<#@ template debug="true" language="C#" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Data.Entity.Design"#>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ import namespace="System.Data.Entity.Design.PluralizationServices" #>
+<#@ include file="TemplateFileManager.ttinclude" #>
+<#
+	string entityMapContent = System.IO.File.ReadAllText(System.IO.Path.GetDirectoryName(this.Host.TemplateFile) + "\\DataAccessStarterEntityMap.xml");
+	XDocument entityMap = XDocument.Parse(entityMapContent);
+	XNamespace entityMapNamespace = "http://www.codesmithtools.com/entitymap";
+	var p = PluralizationService.CreateService(new CultureInfo("en-US"));
+
+var manager = TemplateFileManager.Create(this);
+string entityNamespace = entityMap.Element(entityMapNamespace + "EntityMap").Attribute("EntityNamespace").Value;
+string contextNamespace = entityMap.Element(entityMapNamespace + "EntityMap").Attribute("ContextNamespace").Value;
+string contextName = entityMap.Element(entityMapNamespace + "EntityMap").Attribute("Name").Value;
+
+manager.StartNewFile(String.Format("{0}Context.cs", contextName),  null, contextNamespace);
+#>
+using <#= entityNamespace #>;
+using System.Data.Entity;
+
+namespace <#= contextNamespace #>
+{
+	public class <#= contextName #>Context : DbContext
+	{
+<#
+List<XElement> entities = entityMap.Descendants(entityMapNamespace + "Entity").ToList();
+bool addLine = false;
+foreach(XElement entity in entities)
+{
+	string entityName = entity.Attribute("Name").Value;
+#>
+		public DbSet<<#= entityName #>> <#= p.Pluralize(entity.Attribute("Name").Value) #> { get; set; }
+<# } #>
+		
+		public <#= contextName #>Context() : base("<#= contextName #>") {}
+
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		{
+<#
+List<string> manyToManyTables = new List<string>();
+
+bool addNewLine = false;
+foreach(XElement entity in entities)
+{
+	List<XElement> manyToManyollectionProperties = entity.Descendants(entityMapNamespace + "CollectionProperty").Where(cp => cp.Attribute("Cardinality").Value == "ManyToMany").ToList();
+
+	if(manyToManyollectionProperties.Count > 0)
+	{
+		string leftType = entity.Attribute("Name").Value;
+		foreach(XElement collectionProperty in manyToManyollectionProperties)
+		{
+			string tableName = collectionProperty.Attribute("TableName").Value;
+			if(!manyToManyTables.Contains(tableName))
+			{
+				string leftName = collectionProperty.Attribute("Name").Value;
+				string rightType = collectionProperty.Attribute("Type").Value;
+				string rightName = collectionProperty.Attribute("RightName").Value;		
+				if(addNewLine)
+				{
+#>
+
+<#
+                }	
+				else
+				{
+					addNewLine = true;
+                }
+#>
+			modelBuilder.Entity<<#= leftType #>>()
+				.HasMany(t => t.<#= leftName #>)
+				.WithMany(t => t.<#= rightName #>)
+				.Map(m =>
+				{
+					m.ToTable("<#= tableName #>");
+					m.MapLeftKey("<#= string.Format("{0}Identifier", leftType) #>");
+					m.MapRightKey("<#= string.Format("{0}Identifier", rightType) #>");
+				});
+<#
+				manyToManyTables.Add(tableName);
+            }
+		}
+	}
+}
+#>
+		}
+	}
+}
+<# manager.Process(); #>

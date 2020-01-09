@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{24BEF412-6C0D-4971-A930-15F28C7BA93A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TradeProAssistant.Data</RootNamespace>
+    <AssemblyName>TradeProAssistant.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CsvHelper, Version=12.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.12.2.2\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code Generation\Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Entity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\EntityDto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityDto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Enum.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Enum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\DayCandlestick.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\Security.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\WeekCandlestick.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\DayCandlestickService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\SecurityService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\WeekCandlestickService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\PartialClasses.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PartialClasses.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\PropertyNames.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyNames.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Service.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\ServiceBase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contexts\TradeProAssistantContext.cs">
+      <DependentUpon>Context.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\DayCandlestick.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Dtos\DayCandlestickDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Dtos\SecurityDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Dtos\WeekCandlestickDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Enums\AssetClasses.cs">
+      <DependentUpon>Enum.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Enums\Sectors.cs">
+      <DependentUpon>Enum.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PartialClasses\DayCandlestick.cs" />
+    <Compile Include="Entities\PartialClasses\Security.cs" />
+    <Compile Include="Entities\PartialClasses\WeekCandlestick.cs" />
+    <Compile Include="Entities\PropertyNames\DayCandlestickPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PropertyNames\PropertyNamesBase.cs" />
+    <Compile Include="Entities\PropertyNames\SecurityPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PropertyNames\WeekCandlestickPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Security.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\WeekCandlestick.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Dynamic.cs" />
+    <Compile Include="Framework\EnumExtensions.cs" />
+    <Compile Include="Framework\Query.cs" />
+    <Compile Include="Framework\QueryExtensions.cs" />
+    <Compile Include="Framework\QueryFilter.cs" />
+    <Compile Include="Framework\QueryFilterGroup.cs" />
+    <Compile Include="Framework\QueryOperators.cs" />
+    <Compile Include="Framework\QuerySingleFilter.cs" />
+    <Compile Include="Migrations\201912162353122_Initial.cs" />
+    <Compile Include="Migrations\201912162353122_Initial.designer.cs">
+      <DependentUpon>201912162353122_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912180031493_AddSecurityMarketCap.cs" />
+    <Compile Include="Migrations\201912180031493_AddSecurityMarketCap.designer.cs">
+      <DependentUpon>201912180031493_AddSecurityMarketCap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001082130399_AddSector.cs" />
+    <Compile Include="Migrations\202001082130399_AddSector.designer.cs">
+      <DependentUpon>202001082130399_AddSector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001082220261_AddSectorEnum.cs" />
+    <Compile Include="Migrations\202001082220261_AddSectorEnum.designer.cs">
+      <DependentUpon>202001082220261_AddSectorEnum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001082229461_AddAssetClass.cs" />
+    <Compile Include="Migrations\202001082229461_AddAssetClass.designer.cs">
+      <DependentUpon>202001082229461_AddAssetClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001082234130_AddAssetClassEnum.cs" />
+    <Compile Include="Migrations\202001082234130_AddAssetClassEnum.designer.cs">
+      <DependentUpon>202001082234130_AddAssetClassEnum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001082249331_AddPairEligible.cs" />
+    <Compile Include="Migrations\202001082249331_AddPairEligible.designer.cs">
+      <DependentUpon>202001082249331_AddPairEligible.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicesFolder\Base\DayCandlestickServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="ServicesFolder\Base\SecurityServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="ServicesFolder\Base\WeekCandlestickServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="ServicesFolder\DayCandlestickService.cs" />
+    <Compile Include="ServicesFolder\SecurityService.cs" />
+    <Compile Include="ServicesFolder\WeekCandlestickService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Code Generation\EntityMap.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Code Generation\Non Source Output\Partial Classes\PartialClasses.txt4" />
+    <None Include="Code Generation\Non Source Output\Services\Service.txt4" />
+    <None Include="Code Generation\TemplateFileManager.ttinclude" />
+    <None Include="Contexts\Context.txt4" />
+    <None Include="Entities\Dtos\EntityDto.txt4" />
+    <None Include="Entities\Entity.txt4" />
+    <None Include="Entities\Enums\Enum.txt4" />
+    <None Include="Entities\PropertyNames\PropertyNames.txt4" />
+    <None Include="packages.config" />
+    <EmbeddedResource Include="Migrations\201912180031493_AddSecurityMarketCap.resx">
+      <DependentUpon>201912180031493_AddSecurityMarketCap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001082130399_AddSector.resx">
+      <DependentUpon>202001082130399_AddSector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001082220261_AddSectorEnum.resx">
+      <DependentUpon>202001082220261_AddSectorEnum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001082229461_AddAssetClass.resx">
+      <DependentUpon>202001082229461_AddAssetClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001082234130_AddAssetClassEnum.resx">
+      <DependentUpon>202001082234130_AddAssetClassEnum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001082249331_AddPairEligible.resx">
+      <DependentUpon>202001082249331_AddPairEligible.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SeedData\SP500_Constituents.csv" />
+    <EmbeddedResource Include="SeedData\SPMidCap_Constituents.csv" />
+    <EmbeddedResource Include="SeedData\SPSmallCap_Constituents.csv" />
+    <None Include="ServicesFolder\Base\ServiceBase.txt4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Code Generation\Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Code Generation\DataAccessStarterEntityMap.xml" />
+    <Content Include="Code Generation\Entity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Entity.cs</LastGenOutput>
+    </Content>
+    <Content Include="Code Generation\EntityDto.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityDto.cs</LastGenOutput>
+    </Content>
+    <Content Include="Code Generation\Enum.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Enum.cs</LastGenOutput>
+    </Content>
+    <Content Include="Code Generation\PartialClasses.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PartialClasses.cs</LastGenOutput>
+    </Content>
+    <Content Include="Code Generation\PropertyNames.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropertyNames.cs</LastGenOutput>
+    </Content>
+    <Content Include="Code Generation\Service.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Service.cs</LastGenOutput>
+    </Content>
+    <Content Include="Code Generation\ServiceBase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ServiceBase.cs</LastGenOutput>
+    </Content>
+    <EmbeddedResource Include="SeedData\WeeklyOptionSecurities.csv" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201912162353122_Initial.resx">
+      <DependentUpon>201912162353122_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+</Project>
