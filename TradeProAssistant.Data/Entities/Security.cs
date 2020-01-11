@@ -26,6 +26,8 @@ namespace Entities
 
 		public Decimal MarketCap { get; set; }
 
+		public Decimal CurrentPrice { get; set; }
+
 		[MaxLength(50)]
 		public String Sector { get; set; }
 
@@ -40,10 +42,14 @@ namespace Entities
 
 		public virtual List<DayCandlestick> DailyCandlesticks { get; set; }
 		public virtual List<WeekCandlestick> WeeklyCandlesticks { get; set; }
+		public virtual List<OptionChain> OptionChains { get; set; }
 
 		#region Constructor
 		public  Security()
 		{
+			DailyCandlesticks = new List<DayCandlestick>();
+	WeeklyCandlesticks = new List<WeekCandlestick>();
+	OptionChains = new List<OptionChain>();
 		}
 		#endregion
 

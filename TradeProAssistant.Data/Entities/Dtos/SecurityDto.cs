@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Enums;
 
 namespace Entities.Dtos
@@ -10,6 +11,7 @@ namespace Entities.Dtos
 		public String Name { get; set; }
 		public String Symbol { get; set; }
 		public Decimal MarketCap { get; set; }
+		public Decimal CurrentPrice { get; set; }
 		public String Sector { get; set; }
 		public String AssetClass { get; set; }
 		public bool PairEligible { get; set; }

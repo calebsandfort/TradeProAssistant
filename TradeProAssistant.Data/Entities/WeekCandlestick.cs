@@ -32,7 +32,7 @@ namespace Entities
 		#region Constructor
 		public  WeekCandlestick()
 		{
-		}
+				}
 		#endregion
 
 		#region Comparisons

@@ -43,12 +43,46 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlBuilders, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlBuilders.2.0.5\lib\net45\HtmlBuilders.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.10.0\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20505.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20505.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -78,7 +112,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Enum.tt</DependentUpon>
     </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\Call.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Code Generation\Non Source Output\Partial Classes\DayCandlestick.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\OptionChain.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\OptionDate.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\OptionStrike.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\Put.cs">
       <DependentUpon>PartialClasses.txt4</DependentUpon>
     </Compile>
     <Compile Include="Code Generation\Non Source Output\Partial Classes\Security.cs">
@@ -87,7 +136,22 @@
     <Compile Include="Code Generation\Non Source Output\Partial Classes\WeekCandlestick.cs">
       <DependentUpon>PartialClasses.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\CallService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Code Generation\Non Source Output\Services\DayCandlestickService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\OptionChainService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\OptionDateService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\OptionStrikeService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\PutService.cs">
       <DependentUpon>Service.txt4</DependentUpon>
     </Compile>
     <Compile Include="Code Generation\Non Source Output\Services\SecurityService.cs">
@@ -119,10 +183,28 @@
     <Compile Include="Contexts\TradeProAssistantContext.cs">
       <DependentUpon>Context.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Call.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\DayCandlestick.cs">
       <DependentUpon>Entity.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Dtos\CallDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Dtos\DayCandlestickDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Dtos\OptionChainDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Dtos\OptionDateDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Dtos\OptionStrikeDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Dtos\PutDto.cs">
       <DependentUpon>EntityDto.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\Dtos\SecurityDto.cs">
@@ -137,18 +219,50 @@
     <Compile Include="Entities\Enums\Sectors.cs">
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\OptionChain.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\OptionDate.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\OptionStrike.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PartialClasses\Call.cs" />
     <Compile Include="Entities\PartialClasses\DayCandlestick.cs" />
+    <Compile Include="Entities\PartialClasses\OptionChain.cs" />
+    <Compile Include="Entities\PartialClasses\OptionDate.cs" />
+    <Compile Include="Entities\PartialClasses\OptionStrike.cs" />
+    <Compile Include="Entities\PartialClasses\Put.cs" />
     <Compile Include="Entities\PartialClasses\Security.cs" />
     <Compile Include="Entities\PartialClasses\WeekCandlestick.cs" />
+    <Compile Include="Entities\PropertyNames\CallPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\PropertyNames\DayCandlestickPropertyNames.cs">
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\PropertyNames\OptionChainPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PropertyNames\OptionDatePropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PropertyNames\OptionStrikePropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\PropertyNames\PropertyNamesBase.cs" />
+    <Compile Include="Entities\PropertyNames\PutPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\PropertyNames\SecurityPropertyNames.cs">
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\PropertyNames\WeekCandlestickPropertyNames.cs">
       <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Put.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\Security.cs">
       <DependentUpon>Entity.txt4</DependentUpon>
@@ -158,6 +272,7 @@
     </Compile>
     <Compile Include="Framework\Dynamic.cs" />
     <Compile Include="Framework\EnumExtensions.cs" />
+    <Compile Include="Framework\ProgressMessageEventArgs.cs" />
     <Compile Include="Framework\Query.cs" />
     <Compile Include="Framework\QueryExtensions.cs" />
     <Compile Include="Framework\QueryFilter.cs" />
@@ -192,9 +307,34 @@
     <Compile Include="Migrations\202001082249331_AddPairEligible.designer.cs">
       <DependentUpon>202001082249331_AddPairEligible.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001100010567_AddOptionChain.cs" />
+    <Compile Include="Migrations\202001100010567_AddOptionChain.designer.cs">
+      <DependentUpon>202001100010567_AddOptionChain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001102243254_ReworkOptionChain.cs" />
+    <Compile Include="Migrations\202001102243254_ReworkOptionChain.designer.cs">
+      <DependentUpon>202001102243254_ReworkOptionChain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\OpcGetOptionChainResponse.cs" />
+    <Compile Include="Models\OpcGetStockPriceResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicesFolder\Base\CallServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
     <Compile Include="ServicesFolder\Base\DayCandlestickServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="ServicesFolder\Base\OptionChainServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="ServicesFolder\Base\OptionDateServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="ServicesFolder\Base\OptionStrikeServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="ServicesFolder\Base\PutServiceBase.cs">
       <DependentUpon>ServiceBase.txt4</DependentUpon>
     </Compile>
     <Compile Include="ServicesFolder\Base\SecurityServiceBase.cs">
@@ -203,9 +343,15 @@
     <Compile Include="ServicesFolder\Base\WeekCandlestickServiceBase.cs">
       <DependentUpon>ServiceBase.txt4</DependentUpon>
     </Compile>
+    <Compile Include="ServicesFolder\CallService.cs" />
     <Compile Include="ServicesFolder\DayCandlestickService.cs" />
+    <Compile Include="ServicesFolder\OptionChainService.cs" />
+    <Compile Include="ServicesFolder\OptionDateService.cs" />
+    <Compile Include="ServicesFolder\OptionStrikeService.cs" />
+    <Compile Include="ServicesFolder\PutService.cs" />
     <Compile Include="ServicesFolder\SecurityService.cs" />
     <Compile Include="ServicesFolder\WeekCandlestickService.cs" />
+    <Compile Include="ServicesFolder\WeeklyIncomeService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -238,6 +384,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001082249331_AddPairEligible.resx">
       <DependentUpon>202001082249331_AddPairEligible.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001100010567_AddOptionChain.resx">
+      <DependentUpon>202001100010567_AddOptionChain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001102243254_ReworkOptionChain.resx">
+      <DependentUpon>202001102243254_ReworkOptionChain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\SP500_Constituents.csv" />
     <EmbeddedResource Include="SeedData\SPMidCap_Constituents.csv" />

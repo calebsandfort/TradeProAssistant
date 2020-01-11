@@ -1,11 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using Hangfire;
+using Newtonsoft.Json;
 using RestSharp;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TradeProAssistant.Models;
+using TradeProAssistant.Utilities;
 
 namespace TradeProAssistant.Controllers
 {
@@ -47,6 +50,31 @@ namespace TradeProAssistant.Controllers
             }
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult GenerateWeeklyIncome()
+        {
+            string jobId = Guid.NewGuid().ToString("N");
+            ViewBag.JobId = jobId;
+            BackgroundJob.Enqueue(() => GenerateWeeklyIncomeJob(jobId));
+
+            return View();
+        }
+
+        public async System.Threading.Tasks.Task GenerateWeeklyIncomeJob(string jobId)
+        {
+            using (WeeklyIncomeService service = new WeeklyIncomeService(jobId))
+            {
+                service.ProgressMessageRaised += Service_ProgressMessageRaised;
+
+                await service.GenerateWeeklyIncome();
+            }
+        }
+
+        private void Service_ProgressMessageRaised(object sender, Data.Framework.ProgressMessageEventArgs e)
+        {
+            JobProgressHub.SendProgressMessage(e.ProgressMessage, e.JobId);
         }
     }
 }

@@ -139,8 +139,18 @@ if(collectionProperties.Count > 0)
 		<#
             }
         }
-		#>
+
+if(collectionProperties.Count > 0)
+{
+	foreach(XElement collectionProperty in collectionProperties)
+	{
+#>
+	<#= collectionProperty.Attribute("Name").Value #> = new List<<#= collectionProperty.Attribute("Type").Value #>>();
+<#
+    }
 }
+#>
+		}
 		#endregion
 
 		#region Comparisons

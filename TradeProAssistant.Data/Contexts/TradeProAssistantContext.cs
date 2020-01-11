@@ -8,10 +8,13 @@ namespace Contexts
 		public DbSet<Security> Securities { get; set; }
 		public DbSet<DayCandlestick> DayCandlesticks { get; set; }
 		public DbSet<WeekCandlestick> WeekCandlesticks { get; set; }
-
-        public TradeProAssistantContext() : base("TradeProAssistant")
-        {
-        }
+		public DbSet<Call> Calls { get; set; }
+		public DbSet<Put> Puts { get; set; }
+		public DbSet<OptionStrike> OptionStrikes { get; set; }
+		public DbSet<OptionDate> OptionDates { get; set; }
+		public DbSet<OptionChain> OptionChains { get; set; }
+		
+		public TradeProAssistantContext() : base("TradeProAssistant") {}
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{

@@ -28,6 +28,7 @@ foreach(XElement entity in entities)
 	manager.StartNewFile(String.Format("{0}Dto.cs", entityName),  null, entityNamespace + ".Dtos");
 #>
 using System;
+using System.Collections.Generic;
 <# if(entity.Descendants(entityMapNamespace + "EnumProperty").Count() > 0) { #>
 using <#= enumNamespace #>;
 <# } #>
@@ -96,9 +97,9 @@ if(collectionProperties.Count > 0)
 		XAttribute IncludeInDtoAttribute = collectionProperty.Attribute("IncludeInDto");
 		if(IncludeInDtoAttribute != null && IncludeInDtoAttribute.Value == "true")
 		{
-	#>
-			public List<<#= collectionProperty.Attribute("Type").Value #>Dto> <#= collectionProperty.Attribute("Name").Value #> { get; set; }
-	<#
+#>
+		public List<<#= collectionProperty.Attribute("Type").Value #>Dto> <#= collectionProperty.Attribute("Name").Value #> { get; set; }
+<#
 		}
     }
 }

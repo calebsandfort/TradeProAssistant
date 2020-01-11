@@ -1,0 +1,32 @@
+﻿@{
+
+    ViewBag.tab = "WeeklyIncome";
+}
+
+<div class="row">
+    <div class="col-12">
+        <ul id="messageList" class="list-group" style="overflow: auto;">
+        </ul>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(function () {
+            $(".list-group").css("max-height", $(window).height() - 150);
+
+            var jobProgressHub = $.connection.jobProgressHub;
+
+            jobProgressHub.client.progressMessage = function (message) {
+                console.log(message);
+                $("#messageList").prepend(message);
+            };
+
+            $.connection.hub.start().done(function () {
+                jobProgressHub.server.associateJob("@ViewBag.JobId");
+
+            });
+        });
+    </script>
+}

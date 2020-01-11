@@ -32,7 +32,7 @@ namespace Entities
 		#region Constructor
 		public  DayCandlestick()
 		{
-		}
+				}
 		#endregion
 
 		#region Comparisons

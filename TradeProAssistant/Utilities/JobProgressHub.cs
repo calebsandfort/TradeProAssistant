@@ -14,10 +14,10 @@ namespace TradeProAssistant.Utilities
             await Groups.Add(Context.ConnectionId, jobId);
         }
 
-        public static void SendProgress(int i, string jobId)
+        public static void SendProgressMessage(String message, string jobId)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<JobProgressHub>();
-            context.Clients.Group(jobId).progress(i);
+            context.Clients.Group(jobId).progressMessage(message);
         }
     }
 }
