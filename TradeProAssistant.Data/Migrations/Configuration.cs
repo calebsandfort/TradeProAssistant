@@ -84,7 +84,7 @@ namespace TradeProAssistant.Data.Migrations
                 using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
                 {
                     CsvReader csvReader = new CsvReader(reader);
-                    csvReader.Configuration.RegisterClassMap<WeeklyOptionSecurityMap>();
+                    csvReader.Configuration.RegisterClassMap<SecurityMap>();
                     csvReader.Configuration.HeaderValidated = null;
                     csvReader.Configuration.MissingFieldFound = null;
                     var stocks = csvReader.GetRecords<Security>().ToArray();
@@ -116,6 +116,7 @@ namespace TradeProAssistant.Data.Migrations
                 Map(x => x.SectorEnum).ConvertUsing(row => row.GetField("Sector").ToSector());
                 Map(x => x.AssetClass).ConvertUsing(row => row.GetField("Asset Class"));
                 Map(x => x.AssetClassEnum).ConvertUsing(row => row.GetField("Asset Class").ToAssetClass());
+                Map(x => x.PairEligible);
             }
         }
 
