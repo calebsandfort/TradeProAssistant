@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <EntityMap Version="1.0" Name="TradeProAssistant" EntityNamespace="Entities" EnumNamespace="Enums" EnumLocation="Entities.Enums" ServiceNamespace="Services" ContextNamespace="Contexts"
   xmlns="http://www.codesmithtools.com/entitymap" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Entity Name="Security" DefaultSortField="Name" DefaultSortDescending="false">
+  <Entity Name="Security" DefaultSortField="Name" DefaultSortDescending="false" ToStringField="Name">
     <Property Name="Name" Type="String" Size="255" IncludeInDto="true" />
     <Property Name="Symbol" Type="String" Size="5" IncludeInDto="true" />
     <Property Name="MarketCap" Type="Decimal" IncludeInDto="true" />
@@ -9,50 +9,82 @@
     <Property Name="Sector" Type="String" Size="50" IncludeInDto="true" />
     <Property Name="AssetClass" Type="String" Size="50" IncludeInDto="true" />
     <Property Name="PairEligible" Type="bool" IncludeInDto="true" />
+    <Property Name="ExDividendDate" Type="DateTime?" IncludeInDto="true" />
+    <Property Name="NextEarningsDate" Type="DateTime?" IncludeInDto="true" />
     <EnumProperty Name="SectorEnum" Type="Sectors" IncludeInDto="true"/>
     <EnumProperty Name="AssetClassEnum" Type="AssetClasses" IncludeInDto="true"/>
     <CollectionProperty Name="DailyCandlesticks" Type="DayCandlestick" Cardinality="ManyToOne"/>
     <CollectionProperty Name="WeeklyCandlesticks" Type="WeekCandlestick" Cardinality="ManyToOne"/>
     <CollectionProperty Name="OptionChains" Type="OptionChain" Cardinality="ManyToOne"/>
   </Entity>
-  <Entity Name="DayCandlestick" DefaultSortField="Date" DefaultSortDescending="false">
-    <Property Name="Date" Type="DateTime" IncludeInDto="true" />
-    <Property Name="Open" Type="Decimal" IncludeInDto="true" />
-    <Property Name="High" Type="Decimal" IncludeInDto="true" />
-    <Property Name="Low" Type="Decimal" IncludeInDto="true" />
-    <Property Name="Close" Type="Decimal" IncludeInDto="true" />
-    <Property Name="Volume" Type="Int32" IncludeInDto="true" />
-  </Entity>
-  <Entity Name="WeekCandlestick" DefaultSortField="Date" DefaultSortDescending="false">
-    <Property Name="Date" Type="DateTime" IncludeInDto="true" />
-    <Property Name="Open" Type="Decimal" IncludeInDto="true" />
-    <Property Name="High" Type="Decimal" IncludeInDto="true" />
-    <Property Name="Low" Type="Decimal" IncludeInDto="true" />
-    <Property Name="Close" Type="Decimal" IncludeInDto="true" />
-    <Property Name="Volume" Type="Int32" IncludeInDto="true" />
-  </Entity>
-  <Entity Name="Call" DefaultSortField="Identifier" DefaultSortDescending="false">
+  <Entity Name="Call" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Identifier">
     <Property Name="Bid" Type="Decimal" IncludeInDto="true" />
     <Property Name="Ask" Type="Decimal" IncludeInDto="true" />
   </Entity>
-  <Entity Name="Put" DefaultSortField="Identifier" DefaultSortDescending="false">
+  <Entity Name="Put" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Identifier">
     <Property Name="Bid" Type="Decimal" IncludeInDto="true" />
     <Property Name="Ask" Type="Decimal" IncludeInDto="true" />
   </Entity>
-  <Entity Name="OptionStrike" DefaultSortField="StrikePrice" DefaultSortDescending="false">
+  <Entity Name="OptionStrike" DefaultSortField="StrikePrice" DefaultSortDescending="false" ToStringField="Identifier">
     <Property Name="StrikePrice" Type="Decimal" IncludeInDto="true" />
     <Relationship Name="OptionDate" Type="OptionDate"/>
     <Relationship Name="Call" Type="Call"/>
     <Relationship Name="Put" Type="Put"/>
   </Entity>
-  <Entity Name="OptionDate" DefaultSortField="ExpiryDate" DefaultSortDescending="false">
+  <Entity Name="OptionDate" DefaultSortField="ExpiryDate" DefaultSortDescending="false" ToStringField="ExpiryDate">
     <Property Name="ExpiryDate" Type="DateTime" IncludeInDto="true" />
     <CollectionProperty Name="Strikes" Type="OptionStrike" Cardinality="ManyToOne" IncludeInDto="true"/>
   </Entity>
-  <Entity Name="OptionChain" DefaultSortField="Identifier" DefaultSortDescending="false">
+  <Entity Name="OptionChain" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Date">
     <Property Name="Date" Type="DateTime" IncludeInDto="true" />
     <Relationship Name="Security" Type="Security" IncludeInDto="true"/>
     <CollectionProperty Name="Dates" Type="OptionDate" Cardinality="ManyToOne" IncludeInDto="true"/>
+  </Entity>
+  <Entity Name="WeeklyIncomeActionPlan" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Expiry">
+    <Property Name="Credit" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Risk" Type="Decimal" IncludeInDto="true" />
+    <Property Name="TimeStamp" Type="DateTime" IncludeInDto="true" />
+    <Property Name="Expiry" Type="DateTime" IncludeInDto="true" />
+    <CollectionProperty Name="Pairs" Type="PairCondor" Cardinality="ManyToOne" IncludeInDto="true"/>
+  </Entity>
+  <Entity Name="PairCondor" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Identifier">
+    <Property Name="Credit" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Risk" Type="Decimal" IncludeInDto="true" />
+    <EnumProperty Name="SectorEnum" Type="Sectors" IncludeInDto="true"/>
+    <Relationship Name="BullPutSpread" Type="BullPutSpread" IncludeInDto="true"/>
+    <Relationship Name="BearCallSpread" Type="BearCallSpread" IncludeInDto="true"/>
+  </Entity>
+  <Entity Name="BullPutSpread" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Identifier">
+    <Property Name="Credit" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Risk" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Quantity" Type="Int32" IncludeInDto="true" />
+    <Property Name="SellStrike" Type="Decimal" IncludeInDto="true" />
+    <Property Name="BuyStrike" Type="Decimal" IncludeInDto="true" />
+    <Relationship Name="Security" Type="Security" IncludeInDto="true"/>
+  </Entity>
+  <Entity Name="BearCallSpread" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Identifier">
+    <Property Name="Credit" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Risk" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Quantity" Type="Int32" IncludeInDto="true" />
+    <Property Name="SellStrike" Type="Decimal" IncludeInDto="true" />
+    <Property Name="BuyStrike" Type="Decimal" IncludeInDto="true" />
+    <Relationship Name="Security" Type="Security" IncludeInDto="true"/>
+  </Entity>
+  <Entity Name="DayCandlestick" DefaultSortField="Date" DefaultSortDescending="false" ToStringField="Identifier">
+    <Property Name="Date" Type="DateTime" IncludeInDto="true" />
+    <Property Name="Open" Type="Decimal" IncludeInDto="true" />
+    <Property Name="High" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Low" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Close" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Volume" Type="Int32" IncludeInDto="true" />
+  </Entity>
+  <Entity Name="WeekCandlestick" DefaultSortField="Date" DefaultSortDescending="false" ToStringField="Identifier">
+    <Property Name="Date" Type="DateTime" IncludeInDto="true" />
+    <Property Name="Open" Type="Decimal" IncludeInDto="true" />
+    <Property Name="High" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Low" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Close" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Volume" Type="Int32" IncludeInDto="true" />
   </Entity>
   <EntityEnum Name="Sectors">
     <EnumMember Name="ConsumerDiscretionary" Value="1" DisplayValue="Consumer Discretionary"/>

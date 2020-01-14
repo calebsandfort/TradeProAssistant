@@ -25,6 +25,7 @@
     </xs:sequence>
     <xs:attribute name="Name" use="required" type="xs:string" />
     <xs:attribute name="DefaultSortField" use="required" type="xs:string" />
+    <xs:attribute name="ToStringField" use="required" type="xs:string" />
     <xs:attribute name="DefaultSortDescending" use="required" type="xs:boolean" />
     <xs:attribute name="TableName" use="optional" type="xs:string" />
   </xs:complexType>

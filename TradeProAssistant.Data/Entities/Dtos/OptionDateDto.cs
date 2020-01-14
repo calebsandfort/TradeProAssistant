@@ -61,5 +61,12 @@ namespace Entities.Dtos
 			return base.GetHashCode();
 		}
 		#endregion
+
+		#region ToString
+		public override string ToString()
+        {
+            return ExpiryDate.ToString();
+        }
+		#endregion
 	}
 }

@@ -11,7 +11,7 @@ using System.Data.Entity;
 
 namespace Services
 {
-	public class CallServiceBase
+	public class CallServiceBase : ServiceBase
 	{
 		#region SetIncludes
 		private static DbQuery<Call> SetIncludes(DbQuery<Call> dbQuery, List<String> includes)

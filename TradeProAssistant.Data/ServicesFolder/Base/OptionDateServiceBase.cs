@@ -11,7 +11,7 @@ using System.Data.Entity;
 
 namespace Services
 {
-	public class OptionDateServiceBase
+	public class OptionDateServiceBase : ServiceBase
 	{
 		#region SetIncludes
 		private static DbQuery<OptionDate> SetIncludes(DbQuery<OptionDate> dbQuery, List<String> includes)

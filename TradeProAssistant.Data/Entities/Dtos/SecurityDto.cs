@@ -15,6 +15,8 @@ namespace Entities.Dtos
 		public String Sector { get; set; }
 		public String AssetClass { get; set; }
 		public bool PairEligible { get; set; }
+		public DateTime? ExDividendDate { get; set; }
+		public DateTime? NextEarningsDate { get; set; }
 
 		public Sectors SectorEnum { get; set; }
 
@@ -70,6 +72,13 @@ namespace Entities.Dtos
 		{
 			return base.GetHashCode();
 		}
+		#endregion
+
+		#region ToString
+		public override string ToString()
+        {
+            return Name.ToString();
+        }
 		#endregion
 	}
 }

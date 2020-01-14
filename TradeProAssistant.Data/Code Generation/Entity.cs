@@ -3,6 +3,10 @@
 // Generated helper templates
 // TradeProAssistant\TradeProAssistant.Data\Entities\Entity.txt4
 // Generated items
+// TradeProAssistant\TradeProAssistant.Data\Entities\BearCallSpread.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\BullPutSpread.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\PairCondor.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\WeeklyIncomeActionPlan.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\OptionChain.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\OptionDate.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\OptionStrike.cs

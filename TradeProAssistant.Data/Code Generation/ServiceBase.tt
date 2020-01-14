@@ -41,7 +41,7 @@ using System.Data.Entity;
 
 namespace <#= serviceNamespace #>
 {
-	public class <#= entityName #>ServiceBase
+	public class <#= entityName #>ServiceBase : ServiceBase
 	{
 		#region SetIncludes
 		private static DbQuery<<#= entityName #>> SetIncludes(DbQuery<<#= entityName #>> dbQuery, List<String> includes)

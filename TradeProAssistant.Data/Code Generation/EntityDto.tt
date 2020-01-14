@@ -155,6 +155,13 @@ if(collectionProperties.Count > 0)
 			return base.GetHashCode();
 		}
 		#endregion
+
+		#region ToString
+		public override string ToString()
+        {
+            return <#= entity.Attribute("ToStringField").Value #>.ToString();
+        }
+		#endregion
 	}
 }
 <#

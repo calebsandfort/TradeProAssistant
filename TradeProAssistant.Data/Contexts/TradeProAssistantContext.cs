@@ -13,6 +13,10 @@ namespace Contexts
 		public DbSet<OptionStrike> OptionStrikes { get; set; }
 		public DbSet<OptionDate> OptionDates { get; set; }
 		public DbSet<OptionChain> OptionChains { get; set; }
+		public DbSet<WeeklyIncomeActionPlan> WeeklyIncomeActionPlans { get; set; }
+		public DbSet<PairCondor> PairCondors { get; set; }
+		public DbSet<BullPutSpread> BullPutSpreads { get; set; }
+		public DbSet<BearCallSpread> BearCallSpreads { get; set; }
 		
 		public TradeProAssistantContext() : base("TradeProAssistant") {}
 

@@ -7,12 +7,70 @@ namespace Entities
 {
 	public partial class Security
 	{
-		#region Custom Properties
+        #region Custom Properties
 
-		#endregion
+        #endregion
 
-		#region Custom Methods
+        #region Custom Methods
 
-		#endregion
-	}
+        #endregion
+
+        #region Comparisons
+        public static bool operator ==(Security entity, object obj)
+        {
+            if ((object)entity == null && obj == null)
+            {
+                return true;
+            }
+            else if ((object)entity != null && obj is Security && entity.GetType() == obj.GetType())
+            {
+                return (entity.Identifier == ((Security)obj).Identifier);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool operator !=(Security entity, object obj)
+        {
+            if ((object)entity == null && obj == null)
+            {
+                return false;
+            }
+            else if ((object)entity != null && obj is Security && entity.GetType() == obj.GetType())
+            {
+                return (entity.Identifier != ((Security)obj).Identifier);
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Security && this.GetType() == obj.GetType())
+            {
+                return (this.Identifier == ((Security)obj).Identifier);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+        #endregion
+
+        #region ToString
+        public override string ToString()
+        {
+            return Name.ToString();
+        }
+        #endregion
+    }
 }

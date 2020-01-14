@@ -52,25 +52,71 @@ namespace TradeProAssistant.Controllers
             return View();
         }
 
+        #region BuildPlan
         [HttpPost]
-        public ActionResult GenerateWeeklyIncome()
+        public ActionResult BuildPlan()
         {
             string jobId = Guid.NewGuid().ToString("N");
             ViewBag.JobId = jobId;
-            BackgroundJob.Enqueue(() => GenerateWeeklyIncomeJob(jobId));
+            BackgroundJob.Enqueue(() => BuildPlanJob(jobId));
 
-            return View();
+            return View("ProgressLog");
         }
 
-        public async System.Threading.Tasks.Task GenerateWeeklyIncomeJob(string jobId)
+        public async System.Threading.Tasks.Task BuildPlanJob(string jobId)
         {
             using (WeeklyIncomeService service = new WeeklyIncomeService(jobId))
             {
                 service.ProgressMessageRaised += Service_ProgressMessageRaised;
 
-                await service.GenerateWeeklyIncome();
+                await service.BuildPlan();
             }
         }
+        #endregion
+
+        #region DownloadOptionChains
+        [HttpPost]
+        public ActionResult DownloadOptionChains()
+        {
+            string jobId = Guid.NewGuid().ToString("N");
+            ViewBag.JobId = jobId;
+            BackgroundJob.Enqueue(() => DownloadOptionChainsJob(jobId));
+
+            return View("ProgressLog");
+        }
+
+        public async System.Threading.Tasks.Task DownloadOptionChainsJob(string jobId)
+        {
+            using (WeeklyIncomeService service = new WeeklyIncomeService(jobId))
+            {
+                service.ProgressMessageRaised += Service_ProgressMessageRaised;
+
+                await service.DownloadOptionChains();
+            }
+        }
+        #endregion
+
+        #region ScrapeDates
+        [HttpPost]
+        public ActionResult ScrapeDates()
+        {
+            string jobId = Guid.NewGuid().ToString("N");
+            ViewBag.JobId = jobId;
+            BackgroundJob.Enqueue(() => ScrapeDatesJob(jobId));
+
+            return View("ProgressLog");
+        }
+
+        public async System.Threading.Tasks.Task ScrapeDatesJob(string jobId)
+        {
+            using (SecurityService service = new SecurityService(jobId))
+            {
+                service.ProgressMessageRaised += Service_ProgressMessageRaised;
+
+                await service.ScrapeDatesMaster();
+            }
+        }
+        #endregion
 
         private void Service_ProgressMessageRaised(object sender, Data.Framework.ProgressMessageEventArgs e)
         {

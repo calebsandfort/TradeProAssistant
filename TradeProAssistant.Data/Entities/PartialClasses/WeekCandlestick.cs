@@ -7,12 +7,70 @@ namespace Entities
 {
 	public partial class WeekCandlestick
 	{
-		#region Custom Properties
+        #region Custom Properties
 
-		#endregion
+        #endregion
 
-		#region Custom Methods
+        #region Custom Methods
 
-		#endregion
-	}
+        #endregion
+
+        #region Comparisons
+        public static bool operator ==(WeekCandlestick entity, object obj)
+        {
+            if ((object)entity == null && obj == null)
+            {
+                return true;
+            }
+            else if ((object)entity != null && obj is WeekCandlestick && entity.GetType() == obj.GetType())
+            {
+                return (entity.Identifier == ((WeekCandlestick)obj).Identifier);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool operator !=(WeekCandlestick entity, object obj)
+        {
+            if ((object)entity == null && obj == null)
+            {
+                return false;
+            }
+            else if ((object)entity != null && obj is WeekCandlestick && entity.GetType() == obj.GetType())
+            {
+                return (entity.Identifier != ((WeekCandlestick)obj).Identifier);
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is WeekCandlestick && this.GetType() == obj.GetType())
+            {
+                return (this.Identifier == ((WeekCandlestick)obj).Identifier);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+        #endregion
+
+        #region ToString
+        public override string ToString()
+        {
+            return Identifier.ToString();
+        }
+        #endregion
+    }
 }

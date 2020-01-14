@@ -30,56 +30,5 @@ namespace Entities
 			Dates = new List<OptionDate>();
 		}
 		#endregion
-
-		#region Comparisons
-		public static bool operator ==(OptionChain entity, object obj)
-		{
-			if ((object)entity == null && obj == null)
-			{
-				return true;
-			}
-			else if ((object)entity != null && obj is OptionChain && entity.GetType() == obj.GetType())
-			{
-				return (entity.Identifier == ((OptionChain)obj).Identifier);
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		public static bool operator !=(OptionChain entity, object obj)
-		{
-			if ((object)entity == null && obj == null)
-			{
-				return false;
-			}
-			else if ((object)entity != null && obj is OptionChain && entity.GetType() == obj.GetType())
-			{
-				return (entity.Identifier != ((OptionChain)obj).Identifier);
-			}
-			else
-			{
-				return true;
-			}
-		}
-
-		public override bool Equals(object obj)
-		{
-			if (obj is OptionChain && this.GetType() == obj.GetType())
-			{
-				return (this.Identifier == ((OptionChain)obj).Identifier);
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		public override int GetHashCode()
-		{
-			return base.GetHashCode();
-		}
-		#endregion
 	}
 }

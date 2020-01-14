@@ -171,6 +171,7 @@
     <Compile Include="Controllers\ScannerController.cs" />
     <Compile Include="Controllers\WeeklyIncomeController.cs" />
     <Compile Include="Framework\GuerillaLogisticsApiJsonResult.cs" />
+    <Compile Include="Framework\HelperUtilities.cs" />
     <Compile Include="Framework\LinqExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -341,7 +342,7 @@
     <Content Include="Views\Scanner\Index.cshtml" />
     <Content Include="src\components\IronCondorCalculator.vue" />
     <Content Include="Views\WeeklyIncome\Index.cshtml" />
-    <Content Include="Views\WeeklyIncome\GenerateWeeklyIncome.cshtml" />
+    <Content Include="Views\WeeklyIncome\ProgressLog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

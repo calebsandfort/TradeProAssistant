@@ -11,7 +11,7 @@ using System.Data.Entity;
 
 namespace Services
 {
-	public class WeekCandlestickServiceBase
+	public class WeekCandlestickServiceBase : ServiceBase
 	{
 		#region SetIncludes
 		private static DbQuery<WeekCandlestick> SetIncludes(DbQuery<WeekCandlestick> dbQuery, List<String> includes)

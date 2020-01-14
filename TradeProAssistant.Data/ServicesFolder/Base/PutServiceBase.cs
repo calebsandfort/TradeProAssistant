@@ -11,7 +11,7 @@ using System.Data.Entity;
 
 namespace Services
 {
-	public class PutServiceBase
+	public class PutServiceBase : ServiceBase
 	{
 		#region SetIncludes
 		private static DbQuery<Put> SetIncludes(DbQuery<Put> dbQuery, List<String> includes)
