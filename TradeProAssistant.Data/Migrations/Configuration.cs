@@ -30,66 +30,69 @@ namespace TradeProAssistant.Data.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
 
-            Assembly assembly = Assembly.GetExecutingAssembly();
-
-            string resourceName = "TradeProAssistant.Data.SeedData.SP500_Constituents.csv";
-            
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            if (context.Securities.Count() == 0)
             {
-                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                Assembly assembly = Assembly.GetExecutingAssembly();
+
+                string resourceName = "TradeProAssistant.Data.SeedData.SP500_Constituents.csv";
+
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
                 {
-                    CsvReader csvReader = new CsvReader(reader);
-                    csvReader.Configuration.RegisterClassMap<SecurityMap>();
-                    csvReader.Configuration.HeaderValidated = null;
-                    csvReader.Configuration.MissingFieldFound = null;
-                    var stocks = csvReader.GetRecords<Security>().ToArray();
-                    context.Securities.AddOrUpdate(s => s.Symbol, stocks);
+                    using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                    {
+                        CsvReader csvReader = new CsvReader(reader);
+                        csvReader.Configuration.RegisterClassMap<SecurityMap>();
+                        csvReader.Configuration.HeaderValidated = null;
+                        csvReader.Configuration.MissingFieldFound = null;
+                        var stocks = csvReader.GetRecords<Security>().ToArray();
+                        context.Securities.AddOrUpdate(s => s.Symbol, stocks);
+                    }
                 }
-            }
 
-            resourceName = "TradeProAssistant.Data.SeedData.SPMidCap_Constituents.csv";
+                resourceName = "TradeProAssistant.Data.SeedData.SPMidCap_Constituents.csv";
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            {
-                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
                 {
-                    CsvReader csvReader = new CsvReader(reader);
-                    csvReader.Configuration.RegisterClassMap<SecurityMap>();
-                    csvReader.Configuration.HeaderValidated = null;
-                    csvReader.Configuration.MissingFieldFound = null;
-                    var stocks = csvReader.GetRecords<Security>().ToArray();
-                    context.Securities.AddOrUpdate(s => s.Symbol, stocks);
+                    using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                    {
+                        CsvReader csvReader = new CsvReader(reader);
+                        csvReader.Configuration.RegisterClassMap<SecurityMap>();
+                        csvReader.Configuration.HeaderValidated = null;
+                        csvReader.Configuration.MissingFieldFound = null;
+                        var stocks = csvReader.GetRecords<Security>().ToArray();
+                        context.Securities.AddOrUpdate(s => s.Symbol, stocks);
+                    }
                 }
-            }
 
-            resourceName = "TradeProAssistant.Data.SeedData.SPSmallCap_Constituents.csv";
+                resourceName = "TradeProAssistant.Data.SeedData.SPSmallCap_Constituents.csv";
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            {
-                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
                 {
-                    CsvReader csvReader = new CsvReader(reader);
-                    csvReader.Configuration.RegisterClassMap<SecurityMap>();
-                    csvReader.Configuration.HeaderValidated = null;
-                    csvReader.Configuration.MissingFieldFound = null;
-                    var stocks = csvReader.GetRecords<Security>().ToArray();
-                    context.Securities.AddOrUpdate(s => s.Symbol, stocks);
+                    using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                    {
+                        CsvReader csvReader = new CsvReader(reader);
+                        csvReader.Configuration.RegisterClassMap<SecurityMap>();
+                        csvReader.Configuration.HeaderValidated = null;
+                        csvReader.Configuration.MissingFieldFound = null;
+                        var stocks = csvReader.GetRecords<Security>().ToArray();
+                        context.Securities.AddOrUpdate(s => s.Symbol, stocks);
+                    }
                 }
-            }
 
-            resourceName = "TradeProAssistant.Data.SeedData.WeeklyOptionSecurities.csv";
+                resourceName = "TradeProAssistant.Data.SeedData.WeeklyOptionSecurities.csv";
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            {
-                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
                 {
-                    CsvReader csvReader = new CsvReader(reader);
-                    csvReader.Configuration.RegisterClassMap<SecurityMap>();
-                    csvReader.Configuration.HeaderValidated = null;
-                    csvReader.Configuration.MissingFieldFound = null;
-                    var stocks = csvReader.GetRecords<Security>().ToArray();
-                    context.Securities.AddOrUpdate(s => s.Symbol, stocks);
-                }
+                    using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                    {
+                        CsvReader csvReader = new CsvReader(reader);
+                        csvReader.Configuration.RegisterClassMap<SecurityMap>();
+                        csvReader.Configuration.HeaderValidated = null;
+                        csvReader.Configuration.MissingFieldFound = null;
+                        var stocks = csvReader.GetRecords<Security>().ToArray();
+                        context.Securities.AddOrUpdate(s => s.Symbol, stocks);
+                    }
+                } 
             }
         }
 

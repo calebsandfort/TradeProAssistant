@@ -3,6 +3,8 @@
 // Generated helper templates
 // TradeProAssistant\TradeProAssistant.Data\Entities\Entity.txt4
 // Generated items
+// TradeProAssistant\TradeProAssistant.Data\Entities\WeekCandlestick.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\DayCandlestick.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\BearCallSpread.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\BullPutSpread.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\PairCondor.cs
@@ -12,6 +14,4 @@
 // TradeProAssistant\TradeProAssistant.Data\Entities\OptionStrike.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\Put.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\Call.cs
-// TradeProAssistant\TradeProAssistant.Data\Entities\WeekCandlestick.cs
-// TradeProAssistant\TradeProAssistant.Data\Entities\DayCandlestick.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\Security.cs

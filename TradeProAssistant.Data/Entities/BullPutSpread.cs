@@ -23,10 +23,10 @@ namespace Entities
 
 		public Int32 Quantity { get; set; }
 
-		public Decimal SellStrike { get; set; }
-
-		public Decimal BuyStrike { get; set; }
-
+		public int? SellPutIdentifier { get; set; }
+		public virtual Put SellPut { get; set; }
+		public int? BuyPutIdentifier { get; set; }
+		public virtual Put BuyPut { get; set; }
 		public int? SecurityIdentifier { get; set; }
 		public virtual Security Security { get; set; }
 

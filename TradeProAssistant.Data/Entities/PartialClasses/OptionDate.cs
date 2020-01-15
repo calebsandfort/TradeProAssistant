@@ -8,7 +8,7 @@ namespace Entities
 	public partial class OptionDate
 	{
         #region Custom Properties
-
+        
         #endregion
 
         #region Custom Methods

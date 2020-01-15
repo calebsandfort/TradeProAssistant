@@ -63,6 +63,19 @@ namespace Services
                         .Append(HtmlTags.B.Append(securities.Count.ToString()))
                         .Append(HtmlTags.Span.Append("&nbsp;optionable securities retrieved"))
                         .ToHtml().ToString(), this.JobId);
+
+            foreach(Security security in securities)
+            {
+                OnProgressMessageRaised(new HtmlTag("li").Class("list-group-item")
+                .Append(HtmlTags.B.Append($"{security.Symbol}"))
+                .Append(HtmlTags.Span.Append("&nbsp;expected move:&nbsp;"))
+                .Append(HtmlTags.B.Append($"{security.ExpectedMove:C} ({(security.ExpectedMove / security.CurrentPrice):P2})"))
+                .Append(HtmlTags.Span.Append($",&nbsp;price range:&nbsp;"))
+                .Append(HtmlTags.B.Append($"{security.LowerBoundStrike:C} : {security.ExpectedLowerMove:C} : {security.CurrentPrice:C} : {security.ExpectedUpperMove:C} : {security.UpperBoundStrike:C}"))
+                .Append(HtmlTags.Span.Append($",&nbsp;step/qty:&nbsp;"))
+                .Append(HtmlTags.B.Append($"{security.StrikeStep:C} / {security.ContractQuantity}"))
+                .ToHtml().ToString(), this.JobId);
+            }
         }
         #endregion
 
@@ -113,31 +126,7 @@ namespace Services
                         .Append(HtmlTags.Span.Append("&nbsp;option chain retrieved"))
                         .ToHtml().ToString(), this.JobId);
 
-                        //Decimal expectedMove = 0.0m;
-                        //if(optionChain.Dates[0].Strikes.Any(x => x.StrikePrice == security.CurrentPrice))
-                        //{
-                        //    OptionStrike optionStrike = optionChain.Dates[0].Strikes.First(x => x.StrikePrice == security.CurrentPrice);
-                        //    expectedMove = (optionStrike.Call.Ask + optionStrike.Put.Ask) / 2;
-                        //}
-                        //else
-                        //{
-                        //    for(int j = 0; j < optionChain.Dates[0].Strikes.Count - 1; j++)
-                        //    {
-                        //        OptionStrike lowStrike = optionChain.Dates[0].Strikes[j];
-                        //        OptionStrike highStrike = optionChain.Dates[0].Strikes[j + 1];
-
-                        //        if(security.CurrentPrice > lowStrike.StrikePrice && security.CurrentPrice < highStrike.StrikePrice)
-                        //        {
-                        //            expectedMove = (lowStrike.Call.Ask + lowStrike.Put.Ask + highStrike.Call.Ask + highStrike.Put.Ask) / 4;
-                        //        }
-                        //    }
-                        //}
-
-                        //OnProgressMessageRaised(new HtmlTag("li").Class("list-group-item")
-                        //.Append(HtmlTags.B.Append(security.Symbol))
-                        //.Append(HtmlTags.Span.Append("&nbsp;expected move:&nbsp;"))
-                        //.Append(HtmlTags.B.Append($"{expectedMove:C} ({(expectedMove / security.CurrentPrice):P2})"))
-                        //.ToHtml().ToString(), this.JobId);
+                        optionChain.SecurityIdentifier = security.Identifier;
 
                         OptionChainService.Save(optionChain);
                     }

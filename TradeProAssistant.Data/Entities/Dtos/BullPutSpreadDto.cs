@@ -10,9 +10,9 @@ namespace Entities.Dtos
 		public Decimal Credit { get; set; }
 		public Decimal Risk { get; set; }
 		public Int32 Quantity { get; set; }
-		public Decimal SellStrike { get; set; }
-		public Decimal BuyStrike { get; set; }
 
+		public PutDto SellPut { get; set; }
+		public PutDto BuyPut { get; set; }
 		public SecurityDto Security { get; set; }
 
 		#region Comparisons
