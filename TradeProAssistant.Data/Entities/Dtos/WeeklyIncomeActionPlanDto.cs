@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Enums;
 
 namespace Entities.Dtos
 {
@@ -9,8 +10,9 @@ namespace Entities.Dtos
 		public bool IsNew { get{ return this.Identifier == 0; } }
 		public Decimal Credit { get; set; }
 		public Decimal Risk { get; set; }
-		public DateTime TimeStamp { get; set; }
-		public DateTime Expiry { get; set; }
+
+		public WeeklyActionPlanGenerationMethods GenerationMethod { get; set; }
+
 
 		public List<PairCondorDto> Pairs { get; set; }
 
@@ -68,7 +70,7 @@ namespace Entities.Dtos
 		#region ToString
 		public override string ToString()
         {
-            return Expiry.ToString();
+            return Identifier.ToString();
         }
 		#endregion
 	}

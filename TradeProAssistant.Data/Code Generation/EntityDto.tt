@@ -52,6 +52,14 @@ foreach(XElement prop in properties)
 	}
 }
 
+List<XElement> dtoOnlyProperties = entity.Descendants(entityMapNamespace + "DtoOnlyProperty").ToList();
+foreach(XElement prop in dtoOnlyProperties)
+{
+#>
+		public <#= prop.Attribute("Type").Value #> <#= prop.Attribute("Name").Value #> { get; set; }
+<#
+}
+
 List<XElement> enumProperties = entity.Descendants(entityMapNamespace + "EnumProperty").ToList();
 foreach(XElement enumProp in enumProperties)
 {

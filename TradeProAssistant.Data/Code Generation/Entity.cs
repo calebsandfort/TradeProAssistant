@@ -9,6 +9,8 @@
 // TradeProAssistant\TradeProAssistant.Data\Entities\BullPutSpread.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\PairCondor.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\WeeklyIncomeActionPlan.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\WeeklyIncomeComboCount.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\WeeklyIncomePlaySheet.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\OptionChain.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\OptionDate.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\OptionStrike.cs

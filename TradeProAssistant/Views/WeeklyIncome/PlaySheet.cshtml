@@ -1,0 +1,50 @@
+﻿@model WeeklyIncomePlaySheetDto
+
+@{
+    ViewBag.tab = "WeeklyIncome";
+}
+
+<div class="row">
+    <div class="col-12">
+        <ul class="nav nav-tabs" role="tablist">
+            @for (int i = 0; i < Model.ActionPlans.Count; i++)
+            {
+                <li class="nav-item">
+                    <a class='@String.Format("nav-link{0}", i == 0 ? " active" : "")'
+                       id='@String.Format("{0}-tab", Model.ActionPlans[i].GenerationMethod)'
+                       href='@String.Format("#{0}", Model.ActionPlans[i].GenerationMethod)'
+                       data-toggle="tab"
+                       role="tab">@Model.ActionPlans[i].GenerationMethod.GetStringValue()</a>
+                </li>
+            }
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            @for (int i = 0; i < Model.ActionPlans.Count; i++)
+            {
+            <div class='@String.Format("tab-pane fade{0}", i == 0 ? " show active" : "")'
+                 id="@Model.ActionPlans[i].GenerationMethod" role="tabpanel" style="padding-top: 10px;">
+                @Html.Partial("_ActionPlanTable", Model.ActionPlans[i])
+            </div>
+            }
+        </div>
+    </div>
+        @*<div class="col-4">
+            <table class="table table-borderless table-sm">
+                <tr>
+                    <td class="font-weight-bold">Timestamp</td>
+                    <td>@(String.Format("{0} {1}", Model.TimeStamp.ToShortDateString(), @Model.TimeStamp.ToShortTimeString()))</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Expiry</td>
+                    <td>@Model.Expiry.ToShortDateString()</td>
+                </tr>
+                @foreach (WeeklyIncomeComboCountDto comboCount in Model.ComboCounts.OrderByDescending(x => x.Count))
+                {
+                    <tr>
+                        <td class="font-weight-bold">@comboCount.SectorEnum.GetStringValue()</td>
+                        <td>@comboCount.Count</td>
+                    </tr>
+                }
+            </table>
+        </div>*@
+</div>

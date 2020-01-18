@@ -7,9 +7,11 @@ namespace Entities.Dtos
 	{
 		public int Identifier { get; set; }
 		public bool IsNew { get{ return this.Identifier == 0; } }
+		public Int32 Quantity { get; set; }
+		public Decimal SellStrike { get; set; }
+		public Decimal BuyStrike { get; set; }
 		public Decimal Credit { get; set; }
 		public Decimal Risk { get; set; }
-		public Int32 Quantity { get; set; }
 
 		public CallDto SellCall { get; set; }
 		public CallDto BuyCall { get; set; }

@@ -343,6 +343,8 @@
     <Content Include="src\components\IronCondorCalculator.vue" />
     <Content Include="Views\WeeklyIncome\Index.cshtml" />
     <Content Include="Views\WeeklyIncome\ProgressLog.cshtml" />
+    <Content Include="Views\WeeklyIncome\PlaySheet.cshtml" />
+    <Content Include="Views\WeeklyIncome\_ActionPlanTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Services;
 
 namespace Entities
 {
@@ -88,13 +89,13 @@ namespace Entities
                         if (this.LatestOptionStrikes.Any(x => x.StrikePrice == this.CurrentPrice))
                         {
                             OptionStrike optionStrike = this.LatestOptionStrikes.First(x => x.StrikePrice == this.CurrentPrice);
-                            expectedMove = (optionStrike.Call.Ask + optionStrike.Put.Ask) / 2;
+                            expectedMove = (optionStrike.Call.Mid + optionStrike.Put.Mid + optionStrike.Call.Mid + optionStrike.Put.Mid) / 2;
                         }
                         else
                         {
                             OptionStrike lowStrike = this.LatestOptionStrikes.Where(x => x.StrikePrice < this.CurrentPrice).OrderBy(x => x.StrikePrice).Last();
                             OptionStrike highStrike = this.LatestOptionStrikes.Where(x => x.StrikePrice > this.CurrentPrice).OrderBy(x => x.StrikePrice).First();
-                            expectedMove = (lowStrike.Call.Ask + lowStrike.Put.Ask + highStrike.Call.Ask + highStrike.Put.Ask) / 4;
+                            expectedMove = (lowStrike.Call.Mid + lowStrike.Put.Mid + highStrike.Call.Mid + highStrike.Put.Mid) / 2;
                         }
                     }
                 }
@@ -225,68 +226,6 @@ namespace Entities
         }
         #endregion
 
-        #region StrikeStep
-        private Decimal strikeStep = -1m;
-        public Decimal StrikeStep
-        {
-            get
-            {
-                if (this.strikeStep < 0m && this.LatestOptionStrikes.Count > 0)
-                {
-                    OptionStrike lowStrike = this.LatestOptionStrikes.Where(x => x.StrikePrice < this.CurrentPrice).OrderBy(x => x.StrikePrice).Last();
-                    int idx = this.LatestOptionStrikes.IndexOf(lowStrike);
-                    this.strikeStep = this.LatestOptionStrikes[idx + 1].StrikePrice - this.LatestOptionStrikes[idx].StrikePrice;
-                }
-                else if (this.strikeStep < 0m)
-                {
-                    this.strikeStep = 1m;
-                }
-
-                return this.strikeStep;
-            }
-        }
-        #endregion
-
-        #region StrikeIndexPlus
-        private int strikeIndexDist = -1;
-        public int StrikeIndexDist
-        {
-            get
-            {
-                if (this.strikeIndexDist < 0 && this.LatestOptionStrikes.Count > 0)
-                {
-                    this.strikeIndexDist = this.StrikeStep == .5m ? 2 : 1;
-                }
-                else if (this.strikeIndexDist < 0)
-                {
-                    this.strikeIndexDist = 1;
-                }
-
-                return this.strikeIndexDist;
-            }
-        }
-        #endregion
-
-        #region ContractQuantity
-        private int contractQuantity = -1;
-        public int ContractQuantity
-        {
-            get
-            {
-                if (this.contractQuantity < 0 && this.LatestOptionStrikes.Count > 0)
-                {
-                    this.contractQuantity = this.StrikeStep == .5m ? 10 : (int)(10 / this.StrikeStep);
-                }
-                else if (this.contractQuantity < 0)
-                {
-                    this.contractQuantity = 10;
-                }
-
-                return this.contractQuantity;
-            }
-        }
-        #endregion
-
         #region BullPutSpread
         private BullPutSpread bullPutSpread = null;
         [NotMapped]
@@ -297,8 +236,25 @@ namespace Entities
                 if (this.bullPutSpread == null && this.OptionChains.Count > 0)
                 {
                     this.bullPutSpread = new BullPutSpread();
+                    this.bullPutSpread.SecurityIdentifier = this.Identifier;
                     this.bullPutSpread.SellPut = this.LatestOptionStrikes[this.LowerBoundStrikeIndex].Put;
-                    this.bullPutSpread.BuyPut = this.LatestOptionStrikes[this.LowerBoundStrikeIndex - this.StrikeIndexDist].Put;
+                    this.bullPutSpread.SellStrike = this.LatestOptionStrikes[this.LowerBoundStrikeIndex].StrikePrice;
+
+                    int buyIndex = this.LowerBoundStrikeIndex - 1;
+                    Decimal strikeDiff = this.LatestOptionStrikes[this.LowerBoundStrikeIndex].StrikePrice
+                        - this.LatestOptionStrikes[buyIndex].StrikePrice;
+
+                    while(strikeDiff < 1m)
+                    {
+                        buyIndex -= 1;
+                        strikeDiff = this.LatestOptionStrikes[this.LowerBoundStrikeIndex].StrikePrice
+                        - this.LatestOptionStrikes[buyIndex].StrikePrice;
+                    }
+
+                    this.bullPutSpread.Quantity = (int)Math.Ceiling(10m / strikeDiff);
+
+                    this.bullPutSpread.BuyPut = this.LatestOptionStrikes[buyIndex].Put;
+                    this.bullPutSpread.BuyStrike = this.LatestOptionStrikes[buyIndex].StrikePrice;
                 }
                 else if (this.bullPutSpread == null)
                 {
@@ -321,8 +277,25 @@ namespace Entities
                 if (this.bearCallSpread == null && this.OptionChains.Count > 0)
                 {
                     this.bearCallSpread = new BearCallSpread();
+                    this.bearCallSpread.SecurityIdentifier = this.Identifier;
                     this.bearCallSpread.SellCall = this.LatestOptionStrikes[this.UpperBoundStrikeIndex].Call;
-                    this.bearCallSpread.BuyCall = this.LatestOptionStrikes[this.UpperBoundStrikeIndex + this.StrikeIndexDist].Call;
+                    this.bearCallSpread.SellStrike = this.LatestOptionStrikes[this.UpperBoundStrikeIndex].StrikePrice;
+
+                    int buyIndex = this.UpperBoundStrikeIndex + 1;
+                    Decimal strikeDiff = this.LatestOptionStrikes[buyIndex].StrikePrice
+                        - this.LatestOptionStrikes[this.UpperBoundStrikeIndex].StrikePrice;
+
+                    while (strikeDiff < 1m)
+                    {
+                        buyIndex += 1;
+                        strikeDiff = this.LatestOptionStrikes[buyIndex].StrikePrice
+                            - this.LatestOptionStrikes[this.UpperBoundStrikeIndex].StrikePrice;
+                    }
+
+                    this.bearCallSpread.Quantity = (int)Math.Ceiling(10m / strikeDiff);
+
+                    this.bearCallSpread.BuyCall= this.LatestOptionStrikes[buyIndex].Call;
+                    this.bearCallSpread.BuyStrike = this.LatestOptionStrikes[buyIndex].StrikePrice;
                 }
                 else if (this.bearCallSpread == null)
                 {

@@ -90,7 +90,23 @@ namespace TradeProAssistant.Data.Migrations
                         csvReader.Configuration.HeaderValidated = null;
                         csvReader.Configuration.MissingFieldFound = null;
                         var stocks = csvReader.GetRecords<Security>().ToArray();
-                        context.Securities.AddOrUpdate(s => s.Symbol, stocks);
+                        //context.Securities.AddOrUpdate(s => s.Symbol, stocks);
+                        foreach(Security stock in stocks)
+                        {
+                            Security s = context.Securities.FirstOrDefault(x => x.Symbol == stock.Symbol);
+                            if(s == null)
+                            {
+                                context.Securities.Add(stock);
+                            }
+                            else
+                            {
+                                s.PairEligible = stock.PairEligible;
+                                s.Sector = stock.Sector;
+                                s.SectorEnum = stock.Sector.ToSector();
+                                s.PairEligible = stock.PairEligible;
+                            }
+                        }
+                        context.SaveChanges();
                     }
                 } 
             }

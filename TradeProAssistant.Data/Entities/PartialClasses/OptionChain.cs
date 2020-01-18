@@ -19,7 +19,7 @@ namespace Entities
 
             if(opcGetOptionChainResponse.Dates != null && opcGetOptionChainResponse.Dates.Count > 0)
             {
-                int dateIndex = this.Date.DayOfWeek == DayOfWeek.Friday ? 1 : 0;
+                int dateIndex = (this.Date.DayOfWeek == DayOfWeek.Friday || this.Date.DayOfWeek == DayOfWeek.Thursday) ? 1 : 0;
                 KeyValuePair<String, OpcDate> opcDatePair = opcGetOptionChainResponse.Dates.ElementAt(dateIndex);
 
                 OptionDate optionDate = new OptionDate();

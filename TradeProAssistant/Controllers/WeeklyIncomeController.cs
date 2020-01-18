@@ -1,4 +1,7 @@
-﻿using Hangfire;
+﻿using AutoMapper;
+using Entities;
+using Entities.Dtos;
+using Hangfire;
 using Newtonsoft.Json;
 using RestSharp;
 using Services;
@@ -14,6 +17,20 @@ namespace TradeProAssistant.Controllers
 {
     public class WeeklyIncomeController : Controller
     {
+        #region Ctor
+        private readonly IMapper mapper;
+
+        public WeeklyIncomeController()
+        {
+        }
+
+        public WeeklyIncomeController(IMapper mapper)
+        {
+            this.mapper = mapper;
+        } 
+        #endregion
+
+        #region Index
         // GET: WeeklyIncome
         public ActionResult Index()
         {
@@ -51,6 +68,29 @@ namespace TradeProAssistant.Controllers
 
             return View();
         }
+        #endregion
+
+        #region PlaySheet
+        public ActionResult PlaySheet(int id)
+        {
+            List<String> includes = new List<string>();
+            includes.Add(WeeklyIncomePlaySheet.PropertyNames.ComboCountsInclude);
+            includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlansInclude);
+            includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.PairsInclude);
+            includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BullPutSpreadInclude);
+            includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BullPutSpread.SecurityInclude);
+            includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BullPutSpread.SellPutInclude);
+            includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BullPutSpread.BuyPutInclude);
+            includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BearCallSpreadInclude);
+            includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BearCallSpread.SecurityInclude);
+            includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BearCallSpread.SellCallInclude);
+            includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BearCallSpread.BuyCallInclude);
+
+            WeeklyIncomePlaySheetDto model = this.mapper.Map<WeeklyIncomePlaySheetDto>(WeeklyIncomePlaySheetService.Get(id, includes));
+
+            return View(model);
+        } 
+        #endregion
 
         #region BuildPlan
         [HttpPost]
@@ -68,6 +108,7 @@ namespace TradeProAssistant.Controllers
             using (WeeklyIncomeService service = new WeeklyIncomeService(jobId))
             {
                 service.ProgressMessageRaised += Service_ProgressMessageRaised;
+                service.RedirectRaised += Service_RedirectRaised;
 
                 await service.BuildPlan();
             }
@@ -118,9 +159,16 @@ namespace TradeProAssistant.Controllers
         }
         #endregion
 
+        #region Event Handlers
         private void Service_ProgressMessageRaised(object sender, Data.Framework.ProgressMessageEventArgs e)
         {
             JobProgressHub.SendProgressMessage(e.ProgressMessage, e.JobId);
         }
+
+        private void Service_RedirectRaised(object sender, Data.Framework.RedirectEventArgs e)
+        {
+            JobProgressHub.SendRedirect(e.Controller, e.Action, e.Id, e.JobId);
+        } 
+        #endregion
     }
 }

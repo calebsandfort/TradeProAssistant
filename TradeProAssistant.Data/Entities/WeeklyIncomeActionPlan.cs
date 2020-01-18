@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Enums;
 
 namespace Entities
 {
@@ -17,13 +18,12 @@ namespace Entities
 		[NotMapped]
 		public bool IsNew { get{ return this.Identifier == 0; } }
 
-		public Decimal Credit { get; set; }
+		public Int32 Dummy { get; set; }
 
-		public Decimal Risk { get; set; }
+		public WeeklyActionPlanGenerationMethods GenerationMethod { get; set; }
 
-		public DateTime TimeStamp { get; set; }
-
-		public DateTime Expiry { get; set; }
+		public int? PlaySheetIdentifier { get; set; }
+		public virtual WeeklyIncomePlaySheet PlaySheet { get; set; }
 
 		public virtual List<PairCondor> Pairs { get; set; }
 

@@ -19,6 +19,7 @@
   <xs:complexType name="Entity" cst:description="Name" cst:collectionName="MyEntities">
     <xs:sequence>
       <xs:element name="Property" type="Property" minOccurs="1" maxOccurs="unbounded" />
+      <xs:element name="DtoOnlyProperty" type="DtoOnlyProperty" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="EnumProperty" type="EnumProperty" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="Relationship" type="Relationship" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="CollectionProperty" type="CollectionProperty" minOccurs="0" maxOccurs="unbounded" />
@@ -39,6 +40,10 @@
     <xs:attribute name="DataAnnotationDisplay" use="optional" type="xs:string" />
     <xs:attribute name="DefaultValue" use="optional" type="xs:string" default="" />
     <xs:attribute name="IncludeInDto" use="optional" type="xs:boolean" default="false" />
+  </xs:complexType>
+  <xs:complexType name="DtoOnlyProperty" cst:description="Name" cst:collectionName="MyDtoOnlyProperties">
+    <xs:attribute name="Name" use="required" type="xs:string" />
+    <xs:attribute name="Type" use="required" type="xs:string" />
   </xs:complexType>
   <xs:complexType name="Relationship" cst:description="Name" cst:collectionName="MyRelationships">
     <xs:attribute name="Name" use="required" type="xs:string" />

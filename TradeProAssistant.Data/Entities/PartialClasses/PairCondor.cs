@@ -2,21 +2,54 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
 	public partial class PairCondor
 	{
-		#region Custom Properties
+        #region Custom Properties
+        #region Credit
+        private Decimal credit = -1m;
+        [NotMapped]
+        public Decimal Credit
+        {
+            get
+            {
+                if (credit < 0m)
+                {
+                    credit = this.BullPutSpread.Credit + this.BearCallSpread.Credit;
+                }
 
-		#endregion
+                return credit;
+            }
+        }
+        #endregion
 
-		#region Custom Methods
+        #region Risk
+        private Decimal risk = -1m;
+        [NotMapped]
+        public Decimal Risk
+        {
+            get
+            {
+                if (risk < 0m)
+                {
+                    risk = this.BullPutSpread.Risk + this.BearCallSpread.Risk;
+                }
 
-		#endregion
+                return risk;
+            }
+        }
+        #endregion
+        #endregion
 
-		#region Comparisons
-		public static bool operator ==(PairCondor entity, object obj)
+        #region Custom Methods
+
+        #endregion
+
+        #region Comparisons
+        public static bool operator ==(PairCondor entity, object obj)
 		{
 			if ((object)entity == null && obj == null)
 			{

@@ -24,6 +24,14 @@ namespace TradeProAssistant
                 cfg.CreateMap<Security, SecurityModel>();
                 cfg.CreateMap<DayCandlestick, DayCandlestickDto>();
                 cfg.CreateMap<WeekCandlestick, WeekCandlestickDto>();
+                cfg.CreateMap<WeeklyIncomePlaySheet, WeeklyIncomePlaySheetDto>();
+                cfg.CreateMap<WeeklyIncomeActionPlan, WeeklyIncomeActionPlanDto>();
+                cfg.CreateMap<WeeklyIncomeComboCount, WeeklyIncomeComboCountDto>();
+                cfg.CreateMap<BullPutSpread, BullPutSpreadDto>();
+                cfg.CreateMap<BearCallSpread, BearCallSpreadDto>();
+                cfg.CreateMap<Put, PutDto>();
+                cfg.CreateMap<Call, CallDto>();
+                cfg.CreateMap<PairCondor, PairCondorDto>();
             });
             IMapper mapper = config.CreateMapper();
             container.RegisterInstance(mapper);

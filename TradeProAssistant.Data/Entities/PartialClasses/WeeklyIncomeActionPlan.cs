@@ -2,21 +2,68 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
 	public partial class WeeklyIncomeActionPlan
 	{
-		#region Custom Properties
+        #region Custom Properties
+        #region Credit
+        private Decimal credit = -1m;
+        [NotMapped]
+        public Decimal Credit
+        {
+            get
+            {
+                if (credit < 0m)
+                {
+                    credit = this.Pairs.Sum(x => x.Credit);
+                }
 
-		#endregion
+                return credit;
+            }
+        }
+        #endregion
 
-		#region Custom Methods
+        #region Risk
+        private Decimal risk = -1m;
+        [NotMapped]
+        public Decimal Risk
+        {
+            get
+            {
+                if (risk < 0m)
+                {
+                    risk = this.Pairs.Sum(x => x.Risk);
+                }
 
-		#endregion
+                return risk;
+            }
+        }
+        #endregion
+        #endregion
 
-		#region Comparisons
-		public static bool operator ==(WeeklyIncomeActionPlan entity, object obj)
+        #region Custom Methods
+        public bool AddPairCondor(PairCondor pairCondor)
+        {
+            if(this.Pairs.Any(x => x.BullPutSpread.SecurityIdentifier == pairCondor.BullPutSpread.SecurityIdentifier
+            || x.BullPutSpread.SecurityIdentifier == pairCondor.BearCallSpread.SecurityIdentifier
+            || x.BearCallSpread.SecurityIdentifier == pairCondor.BullPutSpread.SecurityIdentifier
+            || x.BearCallSpread.SecurityIdentifier == pairCondor.BearCallSpread.SecurityIdentifier))
+            {
+                return false;
+            }
+            else
+            {
+                this.Pairs.Add(pairCondor);
+                return true;
+            }
+        }
+        #endregion
+
+        #region Comparisons
+        public static bool operator ==(WeeklyIncomeActionPlan entity, object obj)
 		{
 			if ((object)entity == null && obj == null)
 			{
@@ -69,7 +116,7 @@ namespace Entities
 		#region ToString
 		public override string ToString()
         {
-            return Expiry.ToString();
+            return Identifier.ToString();
         }
 		#endregion
 	}

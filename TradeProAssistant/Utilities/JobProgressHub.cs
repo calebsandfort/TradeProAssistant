@@ -19,5 +19,11 @@ namespace TradeProAssistant.Utilities
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<JobProgressHub>();
             context.Clients.Group(jobId).progressMessage(message);
         }
+
+        public static void SendRedirect(String controller, String action, int id, String jobId)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<JobProgressHub>();
+            context.Clients.Group(jobId).redirect(controller, action, id);
+        }
     }
 }

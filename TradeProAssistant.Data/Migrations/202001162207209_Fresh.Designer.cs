@@ -7,13 +7,13 @@ namespace TradeProAssistant.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class AddImportantDates2 : IMigrationMetadata
+    public sealed partial class Fresh : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddImportantDates2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Fresh));
         
         string IMigrationMetadata.Id
         {
-            get { return "202001131708461_AddImportantDates2"; }
+            get { return "202001162207209_Fresh"; }
         }
         
         string IMigrationMetadata.Source

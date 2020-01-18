@@ -40,32 +40,49 @@
     <Relationship Name="Security" Type="Security" IncludeInDto="true"/>
     <CollectionProperty Name="Dates" Type="OptionDate" Cardinality="ManyToOne" IncludeInDto="true"/>
   </Entity>
-  <Entity Name="WeeklyIncomeActionPlan" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Expiry">
-    <Property Name="Credit" Type="Decimal" IncludeInDto="true" />
-    <Property Name="Risk" Type="Decimal" IncludeInDto="true" />
+  <Entity Name="WeeklyIncomePlaySheet" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Expiry">
     <Property Name="TimeStamp" Type="DateTime" IncludeInDto="true" />
     <Property Name="Expiry" Type="DateTime" IncludeInDto="true" />
+    <CollectionProperty Name="ActionPlans" Type="WeeklyIncomeActionPlan" Cardinality="ManyToOne" IncludeInDto="true"/>
+    <CollectionProperty Name="ComboCounts" Type="WeeklyIncomeComboCount" Cardinality="ManyToOne" IncludeInDto="true"/>
+  </Entity>
+  <Entity Name="WeeklyIncomeComboCount" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Count">
+    <Property Name="Count" Type="Int32" IncludeInDto="true" />
+    <EnumProperty Name="SectorEnum" Type="Sectors" IncludeInDto="true"/>
+    <Relationship Name="PlaySheet" Type="WeeklyIncomePlaySheet"/>
+  </Entity>
+  <Entity Name="WeeklyIncomeActionPlan" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Identifier">
+    <Property Name="Dummy" Type="Int32" />
+    <DtoOnlyProperty Name="Credit" Type="Decimal" />
+    <DtoOnlyProperty Name="Risk" Type="Decimal" />
+    <EnumProperty Name="GenerationMethod" Type="WeeklyActionPlanGenerationMethods" IncludeInDto="true"/>
+    <Relationship Name="PlaySheet" Type="WeeklyIncomePlaySheet"/>
     <CollectionProperty Name="Pairs" Type="PairCondor" Cardinality="ManyToOne" IncludeInDto="true"/>
   </Entity>
   <Entity Name="PairCondor" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Identifier">
-    <Property Name="Credit" Type="Decimal" IncludeInDto="true" />
-    <Property Name="Risk" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Dummy" Type="Int32" />
+    <DtoOnlyProperty Name="Credit" Type="Decimal" />
+    <DtoOnlyProperty Name="Risk" Type="Decimal" />
     <EnumProperty Name="SectorEnum" Type="Sectors" IncludeInDto="true"/>
     <Relationship Name="BullPutSpread" Type="BullPutSpread" IncludeInDto="true"/>
     <Relationship Name="BearCallSpread" Type="BearCallSpread" IncludeInDto="true"/>
   </Entity>
   <Entity Name="BullPutSpread" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Identifier">
-    <Property Name="Credit" Type="Decimal" IncludeInDto="true" />
-    <Property Name="Risk" Type="Decimal" IncludeInDto="true" />
     <Property Name="Quantity" Type="Int32" IncludeInDto="true" />
+    <Property Name="SellStrike" Type="Decimal" IncludeInDto="true" />
+    <Property Name="BuyStrike" Type="Decimal" IncludeInDto="true" />
+    <DtoOnlyProperty Name="Credit" Type="Decimal" />
+    <DtoOnlyProperty Name="Risk" Type="Decimal" />
     <Relationship Name="SellPut" Type="Put" IncludeInDto="true"/>
     <Relationship Name="BuyPut" Type="Put" IncludeInDto="true"/>
     <Relationship Name="Security" Type="Security" IncludeInDto="true"/>
   </Entity>
   <Entity Name="BearCallSpread" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Identifier">
-    <Property Name="Credit" Type="Decimal" IncludeInDto="true" />
-    <Property Name="Risk" Type="Decimal" IncludeInDto="true" />
     <Property Name="Quantity" Type="Int32" IncludeInDto="true" />
+    <Property Name="SellStrike" Type="Decimal" IncludeInDto="true" />
+    <Property Name="BuyStrike" Type="Decimal" IncludeInDto="true" />
+    <DtoOnlyProperty Name="Credit" Type="Decimal" />
+    <DtoOnlyProperty Name="Risk" Type="Decimal" />
     <Relationship Name="SellCall" Type="Call" IncludeInDto="true"/>
     <Relationship Name="BuyCall" Type="Call" IncludeInDto="true"/>
     <Relationship Name="Security" Type="Security" IncludeInDto="true"/>
@@ -105,5 +122,9 @@
   <EntityEnum Name="AssetClasses">
     <EnumMember Name="Equity" Value="1" DisplayValue="Equity"/>
     <EnumMember Name="ETF" Value="2" DisplayValue="ETF"/>
+  </EntityEnum>
+  <EntityEnum Name="WeeklyActionPlanGenerationMethods">
+    <EnumMember Name="BruteForce" Value="1" DisplayValue="Brute Force"/>
+    <EnumMember Name="RandomSearch" Value="2" DisplayValue="RandomSearch"/>
   </EntityEnum>
 </EntityMap>

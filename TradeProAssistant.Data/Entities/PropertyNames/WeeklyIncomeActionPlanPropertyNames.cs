@@ -8,10 +8,10 @@ namespace Entities
 		public WeeklyIncomeActionPlanPropertyNames(String parent) : base(parent) {}
 
 		public String Identifier { get { return ResolvePropertyName("Identifier"); } }
-		public String Credit { get { return ResolvePropertyName("Credit"); } }
-		public String Risk { get { return ResolvePropertyName("Risk"); } }
-		public String TimeStamp { get { return ResolvePropertyName("TimeStamp"); } }
-		public String Expiry { get { return ResolvePropertyName("Expiry"); } }
+		public String Dummy { get { return ResolvePropertyName("Dummy"); } }
+		public String PlaySheetIdentifier { get { return ResolvePropertyName("PlaySheetIdentifier"); } }
+		public String PlaySheetInclude { get { return ResolvePropertyName("PlaySheet"); } }
+		public WeeklyIncomePlaySheetPropertyNames PlaySheet { get { return new WeeklyIncomePlaySheetPropertyNames(ResolvePropertyName("PlaySheet")); } }
 		public String PairsInclude { get { return ResolvePropertyName("Pairs"); } }
 		public PairCondorPropertyNames Pairs { get { return new PairCondorPropertyNames(ResolvePropertyName("Pairs")); } }
 	}

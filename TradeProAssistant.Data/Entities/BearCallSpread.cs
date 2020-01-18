@@ -17,11 +17,11 @@ namespace Entities
 		[NotMapped]
 		public bool IsNew { get{ return this.Identifier == 0; } }
 
-		public Decimal Credit { get; set; }
-
-		public Decimal Risk { get; set; }
-
 		public Int32 Quantity { get; set; }
+
+		public Decimal SellStrike { get; set; }
+
+		public Decimal BuyStrike { get; set; }
 
 		public int? SellCallIdentifier { get; set; }
 		public virtual Call SellCall { get; set; }

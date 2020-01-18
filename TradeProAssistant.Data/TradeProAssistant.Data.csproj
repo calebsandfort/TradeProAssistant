@@ -148,6 +148,12 @@
     <Compile Include="Code Generation\Non Source Output\Partial Classes\WeeklyIncomeActionPlan.cs">
       <DependentUpon>PartialClasses.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\WeeklyIncomeComboCount.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\WeeklyIncomePlaySheet.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Code Generation\Non Source Output\Services\BearCallSpreadService.cs">
       <DependentUpon>Service.txt4</DependentUpon>
     </Compile>
@@ -182,6 +188,12 @@
       <DependentUpon>Service.txt4</DependentUpon>
     </Compile>
     <Compile Include="Code Generation\Non Source Output\Services\WeeklyIncomeActionPlanService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\WeeklyIncomeComboCountService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\WeeklyIncomePlaySheetService.cs">
       <DependentUpon>Service.txt4</DependentUpon>
     </Compile>
     <Compile Include="Code Generation\PartialClasses.cs">
@@ -255,10 +267,19 @@
     <Compile Include="Entities\Dtos\WeeklyIncomeActionPlanDto.cs">
       <DependentUpon>EntityDto.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Dtos\WeeklyIncomeComboCountDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Dtos\WeeklyIncomePlaySheetDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Enums\AssetClasses.cs">
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\Enums\Sectors.cs">
+      <DependentUpon>Enum.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Enums\WeeklyActionPlanGenerationMethods.cs">
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\OptionChain.cs">
@@ -285,6 +306,8 @@
     <Compile Include="Entities\PartialClasses\Security.cs" />
     <Compile Include="Entities\PartialClasses\WeekCandlestick.cs" />
     <Compile Include="Entities\PartialClasses\WeeklyIncomeActionPlan.cs" />
+    <Compile Include="Entities\PartialClasses\WeeklyIncomeComboCount.cs" />
+    <Compile Include="Entities\PartialClasses\WeeklyIncomePlaySheet.cs" />
     <Compile Include="Entities\PropertyNames\BearCallSpreadPropertyNames.cs">
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
@@ -322,6 +345,12 @@
     <Compile Include="Entities\PropertyNames\WeeklyIncomeActionPlanPropertyNames.cs">
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\PropertyNames\WeeklyIncomeComboCountPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PropertyNames\WeeklyIncomePlaySheetPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Put.cs">
       <DependentUpon>Entity.txt4</DependentUpon>
     </Compile>
@@ -334,9 +363,16 @@
     <Compile Include="Entities\WeeklyIncomeActionPlan.cs">
       <DependentUpon>Entity.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\WeeklyIncomeComboCount.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\WeeklyIncomePlaySheet.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Framework\Dynamic.cs" />
     <Compile Include="Framework\EnumExtensions.cs" />
     <Compile Include="Framework\HelperUtilities.cs" />
+    <Compile Include="Framework\RedirectEventArgs.cs" />
     <Compile Include="Framework\ProgressMessageEventArgs.cs" />
     <Compile Include="Framework\Query.cs" />
     <Compile Include="Framework\QueryExtensions.cs" />
@@ -344,53 +380,9 @@
     <Compile Include="Framework\QueryFilterGroup.cs" />
     <Compile Include="Framework\QueryOperators.cs" />
     <Compile Include="Framework\QuerySingleFilter.cs" />
-    <Compile Include="Migrations\201912162353122_Initial.cs" />
-    <Compile Include="Migrations\201912162353122_Initial.designer.cs">
-      <DependentUpon>201912162353122_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912180031493_AddSecurityMarketCap.cs" />
-    <Compile Include="Migrations\201912180031493_AddSecurityMarketCap.designer.cs">
-      <DependentUpon>201912180031493_AddSecurityMarketCap.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001082130399_AddSector.cs" />
-    <Compile Include="Migrations\202001082130399_AddSector.designer.cs">
-      <DependentUpon>202001082130399_AddSector.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001082220261_AddSectorEnum.cs" />
-    <Compile Include="Migrations\202001082220261_AddSectorEnum.designer.cs">
-      <DependentUpon>202001082220261_AddSectorEnum.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001082229461_AddAssetClass.cs" />
-    <Compile Include="Migrations\202001082229461_AddAssetClass.designer.cs">
-      <DependentUpon>202001082229461_AddAssetClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001082234130_AddAssetClassEnum.cs" />
-    <Compile Include="Migrations\202001082234130_AddAssetClassEnum.designer.cs">
-      <DependentUpon>202001082234130_AddAssetClassEnum.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001082249331_AddPairEligible.cs" />
-    <Compile Include="Migrations\202001082249331_AddPairEligible.designer.cs">
-      <DependentUpon>202001082249331_AddPairEligible.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001100010567_AddOptionChain.cs" />
-    <Compile Include="Migrations\202001100010567_AddOptionChain.designer.cs">
-      <DependentUpon>202001100010567_AddOptionChain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001102243254_ReworkOptionChain.cs" />
-    <Compile Include="Migrations\202001102243254_ReworkOptionChain.designer.cs">
-      <DependentUpon>202001102243254_ReworkOptionChain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001131708461_AddImportantDates2.cs" />
-    <Compile Include="Migrations\202001131708461_AddImportantDates2.designer.cs">
-      <DependentUpon>202001131708461_AddImportantDates2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001131944377_AddWeeklyIncomeEntities.cs" />
-    <Compile Include="Migrations\202001131944377_AddWeeklyIncomeEntities.designer.cs">
-      <DependentUpon>202001131944377_AddWeeklyIncomeEntities.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001150030562_AdjustSpreadEntities.cs" />
-    <Compile Include="Migrations\202001150030562_AdjustSpreadEntities.designer.cs">
-      <DependentUpon>202001150030562_AdjustSpreadEntities.cs</DependentUpon>
+    <Compile Include="Migrations\202001162207209_Fresh.cs" />
+    <Compile Include="Migrations\202001162207209_Fresh.designer.cs">
+      <DependentUpon>202001162207209_Fresh.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\OpcGetOptionChainResponse.cs" />
@@ -433,6 +425,12 @@
     <Compile Include="ServicesFolder\Base\WeeklyIncomeActionPlanServiceBase.cs">
       <DependentUpon>ServiceBase.txt4</DependentUpon>
     </Compile>
+    <Compile Include="ServicesFolder\Base\WeeklyIncomeComboCountServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="ServicesFolder\Base\WeeklyIncomePlaySheetServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
     <Compile Include="ServicesFolder\BearCallSpreadService.cs" />
     <Compile Include="ServicesFolder\BullPutSpreadService.cs" />
     <Compile Include="ServicesFolder\CallService.cs" />
@@ -445,6 +443,8 @@
     <Compile Include="ServicesFolder\SecurityService.cs" />
     <Compile Include="ServicesFolder\WeekCandlestickService.cs" />
     <Compile Include="ServicesFolder\WeeklyIncomeActionPlanService.cs" />
+    <Compile Include="ServicesFolder\WeeklyIncomeComboCountService.cs" />
+    <Compile Include="ServicesFolder\WeeklyIncomePlaySheetService.cs" />
     <Compile Include="ServicesFolder\WeeklyIncomeService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -461,38 +461,8 @@
     <None Include="Entities\Enums\Enum.txt4" />
     <None Include="Entities\PropertyNames\PropertyNames.txt4" />
     <None Include="packages.config" />
-    <EmbeddedResource Include="Migrations\201912180031493_AddSecurityMarketCap.resx">
-      <DependentUpon>201912180031493_AddSecurityMarketCap.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001082130399_AddSector.resx">
-      <DependentUpon>202001082130399_AddSector.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001082220261_AddSectorEnum.resx">
-      <DependentUpon>202001082220261_AddSectorEnum.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001082229461_AddAssetClass.resx">
-      <DependentUpon>202001082229461_AddAssetClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001082234130_AddAssetClassEnum.resx">
-      <DependentUpon>202001082234130_AddAssetClassEnum.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001082249331_AddPairEligible.resx">
-      <DependentUpon>202001082249331_AddPairEligible.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001100010567_AddOptionChain.resx">
-      <DependentUpon>202001100010567_AddOptionChain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001102243254_ReworkOptionChain.resx">
-      <DependentUpon>202001102243254_ReworkOptionChain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001131708461_AddImportantDates2.resx">
-      <DependentUpon>202001131708461_AddImportantDates2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001131944377_AddWeeklyIncomeEntities.resx">
-      <DependentUpon>202001131944377_AddWeeklyIncomeEntities.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001150030562_AdjustSpreadEntities.resx">
-      <DependentUpon>202001150030562_AdjustSpreadEntities.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001162207209_Fresh.resx">
+      <DependentUpon>202001162207209_Fresh.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\SP500_Constituents.csv" />
     <EmbeddedResource Include="SeedData\SPMidCap_Constituents.csv" />
@@ -504,7 +474,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Code Generation\DataAccessStarterEntityMap.xml" />
+    <Content Include="Code Generation\DataAccessStarterEntityMap.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Code Generation\Entity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Entity.cs</LastGenOutput>
@@ -538,11 +510,6 @@
   <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912162353122_Initial.resx">
-      <DependentUpon>201912162353122_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -19,8 +19,16 @@
             var jobProgressHub = $.connection.jobProgressHub;
 
             jobProgressHub.client.progressMessage = function (message) {
-                console.log(message);
                 $("#messageList").prepend(message);
+            };
+
+            jobProgressHub.client.redirect = function (controller, action, id) {
+                var url = $("#uxInput_RootUrl").val() + controller + "/" + action;
+                if (id > 0) {
+                    url += "?id=" + id;
+                }
+
+                window.location.href = url;
             };
 
             $.connection.hub.start().done(function () {

@@ -8,8 +8,7 @@ namespace Entities
 		public PairCondorPropertyNames(String parent) : base(parent) {}
 
 		public String Identifier { get { return ResolvePropertyName("Identifier"); } }
-		public String Credit { get { return ResolvePropertyName("Credit"); } }
-		public String Risk { get { return ResolvePropertyName("Risk"); } }
+		public String Dummy { get { return ResolvePropertyName("Dummy"); } }
 		public String BullPutSpreadIdentifier { get { return ResolvePropertyName("BullPutSpreadIdentifier"); } }
 		public String BullPutSpreadInclude { get { return ResolvePropertyName("BullPutSpread"); } }
 		public BullPutSpreadPropertyNames BullPutSpread { get { return new BullPutSpreadPropertyNames(ResolvePropertyName("BullPutSpread")); } }

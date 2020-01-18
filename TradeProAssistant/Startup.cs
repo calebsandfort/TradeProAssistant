@@ -11,7 +11,7 @@ namespace TradeProAssistant
     {
         public void Configuration(IAppBuilder app)
         {
-            GlobalConfiguration.Configuration.UseSqlServerStorage("TradeProAssistant");
+            GlobalConfiguration.Configuration.UseSqlServerStorage("HangfireDb");
 
             app.UseHangfireDashboard("/hangfire", new DashboardOptions
             {

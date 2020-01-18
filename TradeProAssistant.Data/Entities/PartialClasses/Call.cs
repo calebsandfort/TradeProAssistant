@@ -2,21 +2,37 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
 	public partial class Call
 	{
-		#region Custom Properties
+        #region Custom Properties
+        #region Mid
+        private Decimal mid = -1m;
+        [NotMapped]
+        public Decimal Mid
+        {
+            get
+            {
+                if (mid < 0m)
+                {
+                    mid = (this.Bid + this.Ask) / 2;
+                }
 
-		#endregion
+                return mid;
+            }
+        }
+        #endregion
+        #endregion
 
-		#region Custom Methods
+        #region Custom Methods
 
-		#endregion
+        #endregion
 
-		#region Comparisons
-		public static bool operator ==(Call entity, object obj)
+        #region Comparisons
+        public static bool operator ==(Call entity, object obj)
 		{
 			if ((object)entity == null && obj == null)
 			{
