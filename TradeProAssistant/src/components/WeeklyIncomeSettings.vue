@@ -1,0 +1,49 @@
+<template>
+    <div>
+        <div class="form-group row">
+            <label for="slots" class="col-sm-2 col-form-label">Slots</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="slots" name="slots" placeholder="Slots" v-model="slots">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="maxRisk" class="col-sm-2 col-form-label">Max Risk/Pair</label>
+            <div class="input-group col-sm-10">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">$</div>
+                </div>
+                <input type="text" class="form-control" id="maxRisk" name="maxRisk" placeholder="Max Risk" v-model="maxRisk">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="capitalRequirementsInput" class="col-2 col-form-label">Capital Requirements</label>
+            <div class="col-10">
+                <input id="capitalRequirementsInput" type="text" readonly class="form-control-plaintext" :value="formatMoney(capitalRequirements)" />
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import formatMoney from "accounting-js/lib/formatMoney";
+    import formatNumber from "accounting-js/lib/formatNumber";
+
+export default {
+        name: 'WeeklyIncomeSettings',
+        data: function () {
+            return {
+                slots: 5,
+                maxRisk: 3000
+            };
+        },
+        methods: {
+            formatMoney: formatMoney,
+            formatNumber: formatNumber
+        },
+        computed: {
+            capitalRequirements() {
+                return parseFloat(this.slots) * parseFloat(this.maxRisk);
+            }
+        }
+}
+</script>

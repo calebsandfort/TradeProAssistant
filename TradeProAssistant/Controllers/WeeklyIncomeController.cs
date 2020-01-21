@@ -92,25 +92,27 @@ namespace TradeProAssistant.Controllers
         }
         #endregion
 
-        #region GeneratePlaySheet
+        #region WeeklyIncomeActions
         [HttpPost]
-        public ActionResult GeneratePlaySheet(int generatePlaySheetSlots, Decimal generatePlaySheetMaxRisk)
+        public ActionResult PerformWeeklyIncomeActions(int slots, Decimal maxRisk, List<int> actions)
         {
+            maxRisk /= 200m;
+
             string jobId = Guid.NewGuid().ToString("N");
             ViewBag.JobId = jobId;
-            BackgroundJob.Enqueue(() => GeneratePlaySheetJob(jobId, generatePlaySheetSlots, generatePlaySheetMaxRisk));
+            BackgroundJob.Enqueue(() => PerformWeeklyIncomeActionsJob(jobId, slots, maxRisk, actions));
 
             return View("ProgressLog");
         }
 
-        public async System.Threading.Tasks.Task GeneratePlaySheetJob(string jobId, int slots, Decimal maxRisk)
+        public async System.Threading.Tasks.Task PerformWeeklyIncomeActionsJob(string jobId, int slots, Decimal maxRisk, List<int> actions)
         {
             using (WeeklyIncomeService service = new WeeklyIncomeService(jobId))
             {
                 service.ProgressMessageRaised += Service_ProgressMessageRaised;
                 service.RedirectRaised += Service_RedirectRaised;
 
-                await service.GeneratePlaySheet(slots, maxRisk);
+                await service.PerformWeeklyIncomeActions(slots, maxRisk, actions);
             }
         }
         #endregion

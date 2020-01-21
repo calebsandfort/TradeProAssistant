@@ -132,4 +132,9 @@
     <EnumMember Name="RandomSearch" Value="2" DisplayValue="Random Search"/>
     <EnumMember Name="GeneticOptimization" Value="3" DisplayValue="Genetic Optimization"/>
   </EntityEnum>
+  <EntityEnum Name="WeeklyIncomeActions">
+    <EnumMember Name="SetImportantDates" Value="1" DisplayValue="Set Important Dates"/>
+    <EnumMember Name="DownloadOptionChains" Value="2" DisplayValue="Download Option Chains"/>
+    <EnumMember Name="GeneratePlaySheet" Value="3" DisplayValue="Generate Play Sheet"/>
+  </EntityEnum>
 </EntityMap>

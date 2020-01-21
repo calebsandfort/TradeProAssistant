@@ -30,19 +30,29 @@ namespace Services
         }
         #endregion
 
-        #region BuildPlan
-        public async Task GeneratePlaySheet(int slots, Decimal maxRisk)
+        #region PerformWeeklyIncomeActions
+        public async Task PerformWeeklyIncomeActions(int slots, Decimal maxRisk, List<int> actions)
         {
-            using (SecurityService service = new SecurityService(this.JobId))
+            foreach(int action in actions.OrderBy(x => x))
             {
-                service.ProgressMessageRaised += SecurityService_ProgressMessageRaised;
+                switch ((WeeklyIncomeActions)action)
+                {
+                    case WeeklyIncomeActions.SetImportantDates:
+                        using (SecurityService service = new SecurityService(this.JobId))
+                        {
+                            service.ProgressMessageRaised += SecurityService_ProgressMessageRaised;
 
-                await service.ScrapeDatesMaster();
+                            await service.ScrapeDatesMaster();
+                        }
+                        break;
+                    case WeeklyIncomeActions.DownloadOptionChains:
+                        await DownloadOptionChains();
+                        break;
+                    case WeeklyIncomeActions.GeneratePlaySheet:
+                        await BuildPlan(slots, maxRisk);
+                        break;
+                }
             }
-
-            await DownloadOptionChains();
-
-            await BuildPlan(slots, maxRisk);
         }
         #endregion
 

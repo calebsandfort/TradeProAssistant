@@ -4,77 +4,31 @@
     ViewBag.tab = "WeeklyIncome";
 }
 
-@*@using (Html.BeginForm("Index", "WeeklyIncome", FormMethod.Post))
-    {
-
-        <div class="form-group row">
-            @Html.LabelFor(x => x.Symbol, new { @class = "col-sm-2 col-form-label" })
-
-            <div class="col-sm-10">
-                @(Html.Kendo().ComboBoxFor(x => x.Symbol)
-                                                                        .Placeholder("Select a security")
-                                                                        .DataTextField("SymbolAndName")
-                                                                        .DataValueField("Symbol")
-                                                                        .HtmlAttributes(new { style = "width:100%;" })
-                                                                        .Filter("contains")
-                                                                        .AutoBind(false)
-                                                                        .MinLength(2)
-                                                                        .Delay(250)
-                                                                        .DataSource(source =>
-                                                                        {
-                                                                            source.Read(read =>
-                                                                            {
-                                                                                read.Action("GetSecurities", "Scanner");
-                                                                            })
-                                                                            .ServerFiltering(true);
-                                                                        })
-                )
-            </div>
-        </div>
-
-        <div class="form-group row">
-            @Html.LabelFor(x => x.Price, new { @class = "col-sm-2 col-form-label" })
-
-            <div class="col-sm-10">
-                @Html.TextBoxFor(m => m.Price, new { @class = "form-control-plaintext", Value = String.Format("{0:C}", Model.Price) })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-sm-12">
-                <button type="submit" class="btn btn-primary float-right">Lookup</button>
-            </div>
-        </div>
-    }
-
-    <hr />*@
-
-@using (Html.BeginForm("GeneratePlaySheet", "WeeklyIncome", FormMethod.Post))
+@using (Html.BeginForm("PerformWeeklyIncomeActions", "WeeklyIncome", FormMethod.Post))
 {
     <div class="card" style="margin-bottom: 1rem;">
         <div class="card-body">
+            <weekly-income-settings></weekly-income-settings>
             <div class="form-group row">
-                <label for="generatePlaySheetSlots" class="col-sm-2 col-form-label">Slots</label>
+                <label for="actions" class="col-sm-2 col-form-label">Actions</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="generatePlaySheetSlots" name="generatePlaySheetSlots" placeholder="Slots" value="5">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="generatePlaySheetMaxRisk" class="col-sm-2 col-form-label">Max Risk</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="generatePlaySheetMaxRisk" name="generatePlaySheetMaxRisk" placeholder="Max Risk" value="15">
+                    <select id="actions" name="actions" class="form-control" multiple="multiple" size="3">
+                        <option value="@((int)WeeklyIncomeActions.SetImportantDates)" selected="selected">@WeeklyIncomeActions.SetImportantDates.GetStringValue()</option>
+                        <option value="@((int)WeeklyIncomeActions.DownloadOptionChains)" selected="selected">@WeeklyIncomeActions.DownloadOptionChains.GetStringValue()</option>
+                        <option value="@((int)WeeklyIncomeActions.GeneratePlaySheet)" selected="selected">@WeeklyIncomeActions.GeneratePlaySheet.GetStringValue()</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom: 0;">
                 <div class="col-sm-12 text-center">
-                    <button type="submit" class="btn btn-warning">Generate Play Sheet</button>
+                    <button type="submit" class="btn btn-primary">Perform Action</button>
                 </div>
             </div>
         </div>
     </div>
 }
 
-@using (Html.BeginForm("BuildPlan", "WeeklyIncome", FormMethod.Post))
+@*@using (Html.BeginForm("BuildPlan", "WeeklyIncome", FormMethod.Post))
 {
     <div class="card" style="margin-bottom: 1rem;">
         <div class="card-body">
@@ -115,6 +69,6 @@
             <button type="submit" class="btn btn-info">Scrape Dates</button>
         </div>
     </div>
-}
+}*@
 
 

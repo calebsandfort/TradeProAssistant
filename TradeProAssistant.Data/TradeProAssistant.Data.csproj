@@ -282,6 +282,9 @@
     <Compile Include="Entities\Enums\WeeklyActionPlanGenerationMethods.cs">
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Enums\WeeklyIncomeActions.cs">
+      <DependentUpon>Enum.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\OptionChain.cs">
       <DependentUpon>Entity.txt4</DependentUpon>
     </Compile>
