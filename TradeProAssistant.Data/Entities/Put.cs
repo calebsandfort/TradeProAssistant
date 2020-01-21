@@ -25,6 +25,12 @@ namespace Entities
 		public  Put()
 		{
 				}
+
+		public  Put(Put source)
+		{
+			this.Bid = source.Bid;
+			this.Ask = source.Ask;
+				}
 		#endregion
 	}
 }

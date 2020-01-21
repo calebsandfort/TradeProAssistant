@@ -34,6 +34,16 @@ namespace Entities
 		public  BullPutSpread()
 		{
 				}
+
+		public  BullPutSpread(BullPutSpread source)
+		{
+			this.Quantity = source.Quantity;
+			this.SellStrike = source.SellStrike;
+			this.BuyStrike = source.BuyStrike;
+					if(source.SellPut != null) this.SellPut = new Put(source.SellPut);
+			if(source.BuyPut != null) this.BuyPut = new Put(source.BuyPut);
+			this.SecurityIdentifier = source.SecurityIdentifier;
+		}
 		#endregion
 	}
 }

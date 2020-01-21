@@ -33,6 +33,16 @@ namespace Entities
 		public  WeekCandlestick()
 		{
 				}
+
+		public  WeekCandlestick(WeekCandlestick source)
+		{
+			this.Date = source.Date;
+			this.Open = source.Open;
+			this.High = source.High;
+			this.Low = source.Low;
+			this.Close = source.Close;
+			this.Volume = source.Volume;
+				}
 		#endregion
 	}
 }

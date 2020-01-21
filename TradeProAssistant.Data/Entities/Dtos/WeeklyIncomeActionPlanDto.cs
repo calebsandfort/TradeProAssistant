@@ -10,6 +10,7 @@ namespace Entities.Dtos
 		public bool IsNew { get{ return this.Identifier == 0; } }
 		public Decimal Credit { get; set; }
 		public Decimal Risk { get; set; }
+		public Decimal RequiredCapital { get; set; }
 
 		public WeeklyActionPlanGenerationMethods GenerationMethod { get; set; }
 

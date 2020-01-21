@@ -8,8 +8,10 @@ namespace Enums
 		None = 0,
 		[StringValue("Brute Force")]
 		BruteForce = 1,
-		[StringValue("RandomSearch")]
+		[StringValue("Random Search")]
 		RandomSearch = 2,
+		[StringValue("Genetic Optimization")]
+		GeneticOptimization = 3,
 	}
 
 	public static class WeeklyActionPlanGenerationMethodsExtensions
@@ -23,8 +25,11 @@ namespace Enums
 				case "Brute Force":
 					retVal = WeeklyActionPlanGenerationMethods.BruteForce;
 					break;
-				case "RandomSearch":
+				case "Random Search":
 					retVal = WeeklyActionPlanGenerationMethods.RandomSearch;
+					break;
+				case "Genetic Optimization":
+					retVal = WeeklyActionPlanGenerationMethods.GeneticOptimization;
 					break;
 			}
 

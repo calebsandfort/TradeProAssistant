@@ -45,12 +45,14 @@
         </nav>
     </header>
 
-    <div id="app" class="container" style="padding-top: 70px;">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - TradePro Assistant</p>
-        </footer>
+    <div class="wrapper">
+        <div id="app" class="container-fluid" style="padding-top: 70px;">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - TradePro Assistant</p>
+            </footer>
+        </div>
     </div>
 
     <input type="hidden" id="uxInput_RootUrl" value="@Url.Content("~")" />

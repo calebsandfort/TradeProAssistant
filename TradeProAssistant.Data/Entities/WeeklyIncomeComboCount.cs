@@ -29,6 +29,13 @@ namespace Entities
 		public  WeeklyIncomeComboCount()
 		{
 				}
+
+		public  WeeklyIncomeComboCount(WeeklyIncomeComboCount source)
+		{
+			this.Count = source.Count;
+			this.SectorEnum = source.SectorEnum;
+			if(source.PlaySheet != null) this.PlaySheet = new WeeklyIncomePlaySheet(source.PlaySheet);
+		}
 		#endregion
 	}
 }

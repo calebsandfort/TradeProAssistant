@@ -31,6 +31,14 @@ namespace Entities
 		public  PairCondor()
 		{
 				}
+
+		public  PairCondor(PairCondor source)
+		{
+			this.Dummy = source.Dummy;
+			this.SectorEnum = source.SectorEnum;
+			if(source.BullPutSpread != null) this.BullPutSpread = new BullPutSpread(source.BullPutSpread);
+			if(source.BearCallSpread != null) this.BearCallSpread = new BearCallSpread(source.BearCallSpread);
+		}
 		#endregion
 	}
 }

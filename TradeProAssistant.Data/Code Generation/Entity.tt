@@ -151,6 +151,44 @@ if(collectionProperties.Count > 0)
 }
 #>
 		}
+
+		public  <#= entityName #>(<#= entityName #> source)
+		{
+		<#
+		foreach(XElement prop in properties)
+		{
+		#>
+	this.<#= prop.Attribute("Name").Value #> = source.<#= prop.Attribute("Name").Value #>;
+		<#
+        }
+		foreach(XElement enumProp in enumProperties)
+{
+#>
+	this.<#= enumProp.Attribute("Name").Value #> = source.<#= enumProp.Attribute("Name").Value #>;
+<#
+}
+		foreach(XElement relatedProperty in relatedProperties)
+	{
+	if(relatedProperty.Attribute("Type").Value == "Security")
+	{
+#>
+			this.<#= relatedProperty.Attribute("Name").Value #>Identifier = source.<#= relatedProperty.Attribute("Name").Value #>Identifier;
+<#
+}
+else {
+#>
+			if(source.<#= relatedProperty.Attribute("Name").Value #> != null) this.<#= relatedProperty.Attribute("Name").Value #> = new <#= relatedProperty.Attribute("Type").Value #>(source.<#= relatedProperty.Attribute("Name").Value #>);
+<#
+}
+    }
+foreach(XElement collectionProperty in collectionProperties)
+	{
+#>
+			this.<#= collectionProperty.Attribute("Name").Value #> = source.<#= collectionProperty.Attribute("Name").Value #>.Select(x => new <#= collectionProperty.Attribute("Type").Value #>(x)).ToList();
+<#
+    }
+#>
+		}
 		#endregion
 	}
 }

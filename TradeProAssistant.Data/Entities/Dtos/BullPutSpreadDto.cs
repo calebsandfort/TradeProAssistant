@@ -10,6 +10,7 @@ namespace Entities.Dtos
 		public Int32 Quantity { get; set; }
 		public Decimal SellStrike { get; set; }
 		public Decimal BuyStrike { get; set; }
+		public Decimal Mid { get; set; }
 		public Decimal Credit { get; set; }
 		public Decimal Risk { get; set; }
 

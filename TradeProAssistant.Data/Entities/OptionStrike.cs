@@ -30,6 +30,14 @@ namespace Entities
 		public  OptionStrike()
 		{
 				}
+
+		public  OptionStrike(OptionStrike source)
+		{
+			this.StrikePrice = source.StrikePrice;
+					if(source.OptionDate != null) this.OptionDate = new OptionDate(source.OptionDate);
+			if(source.Call != null) this.Call = new Call(source.Call);
+			if(source.Put != null) this.Put = new Put(source.Put);
+		}
 		#endregion
 	}
 }

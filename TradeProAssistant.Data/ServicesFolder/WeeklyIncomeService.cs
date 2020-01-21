@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TradeProAssistant.Data.Framework;
 using System.Linq;
+using Enums;
 
 namespace Services
 {
@@ -14,6 +15,7 @@ namespace Services
     {
         #region Properties
         public String JobId { get; set; }
+        Random random = new Random(DateTime.Now.Millisecond);
         #endregion
 
         #region Constructors
@@ -29,12 +31,28 @@ namespace Services
         #endregion
 
         #region BuildPlan
-        public async Task BuildPlan()
+        public async Task GeneratePlaySheet(int slots, Decimal maxRisk)
+        {
+            using (SecurityService service = new SecurityService(this.JobId))
+            {
+                service.ProgressMessageRaised += SecurityService_ProgressMessageRaised;
+
+                await service.ScrapeDatesMaster();
+            }
+
+            await DownloadOptionChains();
+
+            await BuildPlan(slots, maxRisk);
+        }
+        #endregion
+
+        #region BuildPlan
+        public async Task BuildPlan(int slots, Decimal maxRisk)
         {
             Thread.Sleep(1000);
 
             DateTime monday = DateTime.Now.GetPreviousDayOfWeekOccurrence(DayOfWeek.Monday);
-            DateTime friday = DateTime.Now.GetPreviousDayOfWeekOccurrence(DayOfWeek.Friday);
+            DateTime friday = DateTime.Now.GetNextDayOfWeekOccurrence(DayOfWeek.Friday);
 
             Query query = new Query();
             query.SortPropertyName = Security.PropertyNames.Symbol;
@@ -65,6 +83,8 @@ namespace Services
 
             foreach(Security security in securities)
             {
+                security.MaxRisk = maxRisk;
+
                 OnProgressMessageRaised(new HtmlTag("li").Class("list-group-item")
                 .Append(HtmlTags.B.Append($"{security.Symbol}"))
                 .Append(HtmlTags.Span.Append("&nbsp;expected move:&nbsp;"))
@@ -135,10 +155,21 @@ namespace Services
 
             playSheet.ComboCounts = comboCounts;
 
-            playSheet.ActionPlans.Add(BruteForceActionPlanGenerator(new List<PairCondor>(pairCondorCandidates)));
-            playSheet.ActionPlans.Add(RandomSearchActionPlanGenerator(new List<PairCondor>(pairCondorCandidates)));
-
             int playSheetId = WeeklyIncomePlaySheetService.Save(playSheet);
+            pairCondorCandidates = pairCondorCandidates.OrderByDescending(x => x.Credit).Select(x => new PairCondor(x)).ToList();
+            WeeklyIncomeActionPlan bruteForceActionPlan = BruteForceActionPlanGenerator(pairCondorCandidates, slots);
+            bruteForceActionPlan.PlaySheetIdentifier = playSheetId;
+            WeeklyIncomeActionPlanService.Save(bruteForceActionPlan);
+
+            pairCondorCandidates = pairCondorCandidates.OrderByDescending(x => x.Credit).Select(x => new PairCondor(x)).ToList();
+            WeeklyIncomeActionPlan randomSearchActionPlan = RandomSearchActionPlanGenerator(pairCondorCandidates, slots);
+            randomSearchActionPlan.PlaySheetIdentifier = playSheetId;
+            WeeklyIncomeActionPlanService.Save(randomSearchActionPlan);
+
+            pairCondorCandidates = pairCondorCandidates.OrderByDescending(x => x.Credit).Select(x => new PairCondor(x)).ToList();
+            WeeklyIncomeActionPlan geneticOptimizationActionPlan = GeneticOptimizationActionPlanGenerator(pairCondorCandidates, slots);
+            geneticOptimizationActionPlan.PlaySheetIdentifier = playSheetId;
+            WeeklyIncomeActionPlanService.Save(geneticOptimizationActionPlan);
 
             Thread.Sleep(1000);
             OnRedirectRaised("WeeklyIncome", "PlaySheet", playSheetId, this.JobId);
@@ -147,7 +178,7 @@ namespace Services
 
         #region ActionPlanGenerators
         #region BruteForceActionPlanGenerator
-        private WeeklyIncomeActionPlan BruteForceActionPlanGenerator(List<PairCondor> pairCondorCandidates, int slots = 5)
+        private WeeklyIncomeActionPlan BruteForceActionPlanGenerator(List<PairCondor> pairCondorCandidates, int slots)
         {
             WeeklyIncomeActionPlan actionPlan = new WeeklyIncomeActionPlan();
             actionPlan.GenerationMethod = Enums.WeeklyActionPlanGenerationMethods.BruteForce;
@@ -168,13 +199,13 @@ namespace Services
 
         #region RandomSearchActionPlanGenerator
         private WeeklyIncomeActionPlan RandomSearchActionPlanGenerator(List<PairCondor> pairCondorCandidates,
-            int slots = 5, int iterations = 500)
+            int slots, int iterations = 500)
         {
-            WeeklyIncomeActionPlan best = RandomSearchBuildSolution(pairCondorCandidates, slots);
+            WeeklyIncomeActionPlan best = BuildRandomSolution(pairCondorCandidates, WeeklyActionPlanGenerationMethods.RandomSearch, slots);
 
             for(int i = 0; i < iterations; i++)
             {
-                WeeklyIncomeActionPlan temp = RandomSearchBuildSolution(pairCondorCandidates, slots);
+                WeeklyIncomeActionPlan temp = BuildRandomSolution(pairCondorCandidates, WeeklyActionPlanGenerationMethods.RandomSearch, slots);
                 if(temp.Credit > best.Credit)
                 {
                     best = temp;
@@ -183,15 +214,53 @@ namespace Services
 
             return best;
         }
+        #endregion
 
-        private WeeklyIncomeActionPlan RandomSearchBuildSolution(List<PairCondor> pairCondorCandidates, int slots = 5)
+        #region GeneticOptimizationActionPlanGenerator
+        private WeeklyIncomeActionPlan GeneticOptimizationActionPlanGenerator(List<PairCondor> pairCondorCandidates,
+            int slots, int popSize = 50, Double mutProb = .2, Double elite = .2, int maxIter = 100)
+        {
+            List<WeeklyIncomeActionPlan> pop = new List<WeeklyIncomeActionPlan>();
+            for(int i = 0; i < popSize; i++)
+            {
+                pop.Add(BuildRandomSolution(pairCondorCandidates, WeeklyActionPlanGenerationMethods.GeneticOptimization, slots));
+            }
+
+            int topElite = (int)(elite * popSize);
+
+            for(int i = 0; i < maxIter; i++)
+            {
+                pop = pop.OrderByDescending(x => x.Credit).Take(topElite).ToList();
+
+                while(pop.Count < popSize)
+                {
+                    if (random.NextDouble() < mutProb)
+                    {
+                        WeeklyIncomeActionPlan mut = new WeeklyIncomeActionPlan(pop.Take(topElite).ToList()[random.Next(0, topElite)]);
+                        Mutate(mut, pairCondorCandidates, slots);
+                        pop.Add(mut);
+                    }
+                    else
+                    {
+                        WeeklyIncomeActionPlan r1 = new WeeklyIncomeActionPlan(pop.Take(topElite).ToList()[random.Next(0, topElite)]);
+                        WeeklyIncomeActionPlan r2 = new WeeklyIncomeActionPlan(pop.Take(topElite).ToList()[random.Next(0, topElite)]);
+                        pop.Add(Crossover(r1, r2, pairCondorCandidates, slots));
+                    }
+                }
+            }
+
+            return pop.OrderByDescending(x => x.Credit).First();
+        }
+        #endregion
+
+        #region Helper Methods
+        #region BuildRandomSolution
+        private WeeklyIncomeActionPlan BuildRandomSolution(List<PairCondor> pairCondorCandidates, WeeklyActionPlanGenerationMethods generationMethod, int slots)
         {
             WeeklyIncomeActionPlan actionPlan = new WeeklyIncomeActionPlan();
-            actionPlan.GenerationMethod = Enums.WeeklyActionPlanGenerationMethods.RandomSearch;
+            actionPlan.GenerationMethod = generationMethod;
 
-            Random random = new Random(DateTime.Now.Millisecond);
-
-            while(actionPlan.Pairs.Count < slots)
+            while (actionPlan.Pairs.Count < slots)
             {
                 int idx = random.Next(pairCondorCandidates.Count);
                 actionPlan.AddPairCondor(pairCondorCandidates[idx]);
@@ -199,6 +268,68 @@ namespace Services
 
             return actionPlan;
         }
+        #endregion
+
+        #region Mutate
+        private void Mutate(WeeklyIncomeActionPlan actionPlan, List<PairCondor> pairCondorCandidates, int slots)
+        {
+            int step = random.Next(0, 2) == 0 ? 1 : -1;
+            int rmvIdx = random.Next(0, actionPlan.Pairs.Count);
+            PairCondor rmvPair = actionPlan.Pairs[rmvIdx];
+            int pairIdx = pairCondorCandidates.FindIndex(x => x.BullPutSpread.SecurityIdentifier == rmvPair.BullPutSpread.SecurityIdentifier
+                && x.BearCallSpread.SecurityIdentifier == rmvPair.BearCallSpread.SecurityIdentifier);
+
+            actionPlan.Pairs.RemoveAt(rmvIdx);
+
+            pairIdx = MutateIndex(pairIdx, step, pairCondorCandidates);
+            while (actionPlan.Pairs.Count < slots)
+            {
+                actionPlan.AddPairCondor(pairCondorCandidates[pairIdx]);
+                pairIdx = MutateIndex(pairIdx, step, pairCondorCandidates);
+            }
+        }
+
+        private int MutateIndex(int pairIdx, int step, List<PairCondor> pairCondorCandidates)
+        {
+            pairIdx += step;
+
+            if(pairIdx < 0)
+            {
+                pairIdx = pairCondorCandidates.Count - 1;
+            }
+            else if( pairIdx > (pairCondorCandidates.Count - 1))
+            {
+                pairIdx = 0;
+            }
+
+            return pairIdx;
+        }
+        #endregion
+
+        #region Crossover
+        private WeeklyIncomeActionPlan Crossover(WeeklyIncomeActionPlan r1, WeeklyIncomeActionPlan r2, List<PairCondor> pairCondorCandidates, int slots)
+        {
+            WeeklyIncomeActionPlan co = new WeeklyIncomeActionPlan();
+            co.GenerationMethod = r1.GenerationMethod;
+
+            int splitIdx = random.Next(1, slots - 1);
+            co.Pairs.AddRange(r1.Pairs.Take(splitIdx));
+
+            for(int i = splitIdx; i < r2.Pairs.Count; i++)
+            {
+                co.AddPairCondor(r2.Pairs[splitIdx]);
+            }
+
+            while (co.Pairs.Count < slots)
+            {
+                int idx = random.Next(pairCondorCandidates.Count);
+                co.AddPairCondor(pairCondorCandidates[idx]);
+            }
+
+            return co;
+        }
+        #endregion
+
         #endregion
         #endregion
 
@@ -256,6 +387,13 @@ namespace Services
                 }
             }
         }
+        #endregion
+
+        #region SecurityService_ProgressMessageRaised
+        private void SecurityService_ProgressMessageRaised(object sender, ProgressMessageEventArgs e)
+        {
+            OnProgressMessageRaised(e.ProgressMessage, e.JobId);
+        } 
         #endregion
 
         #region Dispose

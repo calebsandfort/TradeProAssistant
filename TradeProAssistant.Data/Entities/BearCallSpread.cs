@@ -34,6 +34,16 @@ namespace Entities
 		public  BearCallSpread()
 		{
 				}
+
+		public  BearCallSpread(BearCallSpread source)
+		{
+			this.Quantity = source.Quantity;
+			this.SellStrike = source.SellStrike;
+			this.BuyStrike = source.BuyStrike;
+					if(source.SellCall != null) this.SellCall = new Call(source.SellCall);
+			if(source.BuyCall != null) this.BuyCall = new Call(source.BuyCall);
+			this.SecurityIdentifier = source.SecurityIdentifier;
+		}
 		#endregion
 	}
 }

@@ -30,6 +30,14 @@ namespace Entities
 			ActionPlans = new List<WeeklyIncomeActionPlan>();
 	ComboCounts = new List<WeeklyIncomeComboCount>();
 		}
+
+		public  WeeklyIncomePlaySheet(WeeklyIncomePlaySheet source)
+		{
+			this.TimeStamp = source.TimeStamp;
+			this.Expiry = source.Expiry;
+					this.ActionPlans = source.ActionPlans.Select(x => new WeeklyIncomeActionPlan(x)).ToList();
+			this.ComboCounts = source.ComboCounts.Select(x => new WeeklyIncomeComboCount(x)).ToList();
+		}
 		#endregion
 	}
 }

@@ -29,6 +29,13 @@ namespace Entities
 		{
 			Dates = new List<OptionDate>();
 		}
+
+		public  OptionChain(OptionChain source)
+		{
+			this.Date = source.Date;
+					this.SecurityIdentifier = source.SecurityIdentifier;
+			this.Dates = source.Dates.Select(x => new OptionDate(x)).ToList();
+		}
 		#endregion
 	}
 }

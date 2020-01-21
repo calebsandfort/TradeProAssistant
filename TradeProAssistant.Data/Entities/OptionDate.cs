@@ -26,6 +26,12 @@ namespace Entities
 		{
 			Strikes = new List<OptionStrike>();
 		}
+
+		public  OptionDate(OptionDate source)
+		{
+			this.ExpiryDate = source.ExpiryDate;
+					this.Strikes = source.Strikes.Select(x => new OptionStrike(x)).ToList();
+		}
 		#endregion
 	}
 }

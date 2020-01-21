@@ -55,6 +55,24 @@ namespace Entities
 	WeeklyCandlesticks = new List<WeekCandlestick>();
 	OptionChains = new List<OptionChain>();
 		}
+
+		public  Security(Security source)
+		{
+			this.Name = source.Name;
+			this.Symbol = source.Symbol;
+			this.MarketCap = source.MarketCap;
+			this.CurrentPrice = source.CurrentPrice;
+			this.Sector = source.Sector;
+			this.AssetClass = source.AssetClass;
+			this.PairEligible = source.PairEligible;
+			this.ExDividendDate = source.ExDividendDate;
+			this.NextEarningsDate = source.NextEarningsDate;
+			this.SectorEnum = source.SectorEnum;
+	this.AssetClassEnum = source.AssetClassEnum;
+			this.DailyCandlesticks = source.DailyCandlesticks.Select(x => new DayCandlestick(x)).ToList();
+			this.WeeklyCandlesticks = source.WeeklyCandlesticks.Select(x => new WeekCandlestick(x)).ToList();
+			this.OptionChains = source.OptionChains.Select(x => new OptionChain(x)).ToList();
+		}
 		#endregion
 	}
 }

@@ -10,6 +10,22 @@ namespace Entities
 	public partial class Security
 	{
         #region Custom Properties
+        #region MaxRisk
+        private Decimal maxRisk = 5m;
+        [NotMapped]
+        public Decimal MaxRisk
+        {
+            get
+            {
+                return this.maxRisk;
+            }
+            set
+            {
+                this.maxRisk = value;
+            }
+        }
+        #endregion
+
         #region LatestOptionChain
         private OptionChain latestOptionChain = null;
         [NotMapped]
@@ -251,7 +267,7 @@ namespace Entities
                         - this.LatestOptionStrikes[buyIndex].StrikePrice;
                     }
 
-                    this.bullPutSpread.Quantity = (int)Math.Ceiling(10m / strikeDiff);
+                    this.bullPutSpread.Quantity = (int)Math.Ceiling(this.MaxRisk / strikeDiff);
 
                     this.bullPutSpread.BuyPut = this.LatestOptionStrikes[buyIndex].Put;
                     this.bullPutSpread.BuyStrike = this.LatestOptionStrikes[buyIndex].StrikePrice;
@@ -292,7 +308,7 @@ namespace Entities
                             - this.LatestOptionStrikes[this.UpperBoundStrikeIndex].StrikePrice;
                     }
 
-                    this.bearCallSpread.Quantity = (int)Math.Ceiling(10m / strikeDiff);
+                    this.bearCallSpread.Quantity = (int)Math.Ceiling(this.MaxRisk / strikeDiff);
 
                     this.bearCallSpread.BuyCall= this.LatestOptionStrikes[buyIndex].Call;
                     this.bearCallSpread.BuyStrike = this.LatestOptionStrikes[buyIndex].StrikePrice;

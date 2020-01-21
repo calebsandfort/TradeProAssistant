@@ -1,6 +1,6 @@
 ﻿@model WeeklyIncomeActionPlanDto
 
-<table class="table table-bordered table-sm">
+<table class="table table-bordered table-sm" style="font-size: 14px;">
     <thead>
         <tr>
             <th colspan="6">
@@ -14,37 +14,37 @@
             </th>
         </tr>
         <tr>
-            <th>
+            <th class="table-success">
                 Sym
             </th>
             <th>
                 Cur
             </th>
-            <th>
-                Sell
-            </th>
-            <th>
+            <th class="table-success">
                 Buy
             </th>
-            <th>
+            <th class="table-success">
+                Sell
+            </th>
+            <th class="table-success">
                 Qty
             </th>
             <th>
                 Credit
             </th>
-            <th>
+            <th class="table-danger">
                 Sym
             </th>
             <th>
                 Cur
             </th>
-            <th>
+            <th class="table-danger">
                 Sell
             </th>
-            <th>
+            <th class="table-danger">
                 Buy
             </th>
-            <th>
+            <th class="table-danger">
                 Qty
             </th>
             <th>
@@ -56,45 +56,48 @@
             <th>
                 Risk
             </th>
+            <th>
+                Cap Req
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (PairCondorDto pairCondor in Model.Pairs.OrderByDescending(x => x.Credit))
         {
         <tr>
-            <td>
+            <td class="table-success">
                 @pairCondor.BullPutSpread.Security.Symbol
             </td>
             <td>
                 @pairCondor.BullPutSpread.Security.CurrentPrice.ToString("C")
             </td>
-            <td>
-                @pairCondor.BullPutSpread.SellStrike.ToString("C")
-            </td>
-            <td>
+            <td class="table-success">
                 @pairCondor.BullPutSpread.BuyStrike.ToString("C")
             </td>
-            <td>
-                @pairCondor.BullPutSpread.Quantity
+            <td class="table-success">
+                @pairCondor.BullPutSpread.SellStrike.ToString("C")
+            </td>
+            <td class="table-success">
+                @pairCondor.BullPutSpread.Quantity @@ @pairCondor.BullPutSpread.Mid.ToString("C")
             </td>
             <td>
                 @pairCondor.BullPutSpread.Credit.ToString("C")
             </td>
 
-            <td>
+            <td class="table-danger">
                 @pairCondor.BearCallSpread.Security.Symbol
             </td>
             <td>
                 @pairCondor.BearCallSpread.Security.CurrentPrice.ToString("C")
             </td>
-            <td>
+            <td class="table-danger">
                 @pairCondor.BearCallSpread.SellStrike.ToString("C")
             </td>
-            <td>
+            <td class="table-danger">
                 @pairCondor.BearCallSpread.BuyStrike.ToString("C")
             </td>
-            <td>
-                @pairCondor.BearCallSpread.Quantity
+            <td class="table-danger">
+                @pairCondor.BearCallSpread.Quantity @@ @pairCondor.BearCallSpread.Mid.ToString("C")
             </td>
             <td>
                 @pairCondor.BearCallSpread.Credit.ToString("C")
@@ -105,40 +108,34 @@
             <td>
                 @pairCondor.Risk.ToString("C")
             </td>
+            <td>
+                @pairCondor.RequiredCapital.ToString("C")
+            </td>
         </tr>
         }
     </tbody>
     <tfoot>
         <tr>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="table-warning">
                 @Model.Credit.ToString("C")
             </td>
             <td>
                 @Model.Risk.ToString("C")
+            </td>
+            <td>
+                @Model.RequiredCapital.ToString("C")
             </td>
         </tr>
     </tfoot>

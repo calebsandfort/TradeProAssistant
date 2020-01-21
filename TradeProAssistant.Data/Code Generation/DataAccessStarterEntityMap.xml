@@ -55,6 +55,7 @@
     <Property Name="Dummy" Type="Int32" />
     <DtoOnlyProperty Name="Credit" Type="Decimal" />
     <DtoOnlyProperty Name="Risk" Type="Decimal" />
+    <DtoOnlyProperty Name="RequiredCapital" Type="Decimal" />
     <EnumProperty Name="GenerationMethod" Type="WeeklyActionPlanGenerationMethods" IncludeInDto="true"/>
     <Relationship Name="PlaySheet" Type="WeeklyIncomePlaySheet"/>
     <CollectionProperty Name="Pairs" Type="PairCondor" Cardinality="ManyToOne" IncludeInDto="true"/>
@@ -63,6 +64,7 @@
     <Property Name="Dummy" Type="Int32" />
     <DtoOnlyProperty Name="Credit" Type="Decimal" />
     <DtoOnlyProperty Name="Risk" Type="Decimal" />
+    <DtoOnlyProperty Name="RequiredCapital" Type="Decimal" />
     <EnumProperty Name="SectorEnum" Type="Sectors" IncludeInDto="true"/>
     <Relationship Name="BullPutSpread" Type="BullPutSpread" IncludeInDto="true"/>
     <Relationship Name="BearCallSpread" Type="BearCallSpread" IncludeInDto="true"/>
@@ -71,6 +73,7 @@
     <Property Name="Quantity" Type="Int32" IncludeInDto="true" />
     <Property Name="SellStrike" Type="Decimal" IncludeInDto="true" />
     <Property Name="BuyStrike" Type="Decimal" IncludeInDto="true" />
+    <DtoOnlyProperty Name="Mid" Type="Decimal" />
     <DtoOnlyProperty Name="Credit" Type="Decimal" />
     <DtoOnlyProperty Name="Risk" Type="Decimal" />
     <Relationship Name="SellPut" Type="Put" IncludeInDto="true"/>
@@ -81,6 +84,7 @@
     <Property Name="Quantity" Type="Int32" IncludeInDto="true" />
     <Property Name="SellStrike" Type="Decimal" IncludeInDto="true" />
     <Property Name="BuyStrike" Type="Decimal" IncludeInDto="true" />
+    <DtoOnlyProperty Name="Mid" Type="Decimal" />
     <DtoOnlyProperty Name="Credit" Type="Decimal" />
     <DtoOnlyProperty Name="Risk" Type="Decimal" />
     <Relationship Name="SellCall" Type="Call" IncludeInDto="true"/>
@@ -125,6 +129,7 @@
   </EntityEnum>
   <EntityEnum Name="WeeklyActionPlanGenerationMethods">
     <EnumMember Name="BruteForce" Value="1" DisplayValue="Brute Force"/>
-    <EnumMember Name="RandomSearch" Value="2" DisplayValue="RandomSearch"/>
+    <EnumMember Name="RandomSearch" Value="2" DisplayValue="Random Search"/>
+    <EnumMember Name="GeneticOptimization" Value="3" DisplayValue="Genetic Optimization"/>
   </EntityEnum>
 </EntityMap>

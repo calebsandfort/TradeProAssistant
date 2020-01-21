@@ -42,6 +42,23 @@ namespace Entities
             }
         }
         #endregion
+
+        #region RequiredCapital
+        private Decimal requiredCapital = -1m;
+        [NotMapped]
+        public Decimal RequiredCapital
+        {
+            get
+            {
+                if (requiredCapital < 0m)
+                {
+                    requiredCapital = this.Risk + this.Credit;
+                }
+
+                return requiredCapital;
+            }
+        }
+        #endregion
         #endregion
 
         #region Custom Methods

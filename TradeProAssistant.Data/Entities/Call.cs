@@ -25,6 +25,12 @@ namespace Entities
 		public  Call()
 		{
 				}
+
+		public  Call(Call source)
+		{
+			this.Bid = source.Bid;
+			this.Ask = source.Ask;
+				}
 		#endregion
 	}
 }

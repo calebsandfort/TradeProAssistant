@@ -89,28 +89,51 @@ namespace TradeProAssistant.Controllers
             WeeklyIncomePlaySheetDto model = this.mapper.Map<WeeklyIncomePlaySheetDto>(WeeklyIncomePlaySheetService.Get(id, includes));
 
             return View(model);
-        } 
+        }
         #endregion
 
-        #region BuildPlan
+        #region GeneratePlaySheet
         [HttpPost]
-        public ActionResult BuildPlan()
+        public ActionResult GeneratePlaySheet(int generatePlaySheetSlots, Decimal generatePlaySheetMaxRisk)
         {
             string jobId = Guid.NewGuid().ToString("N");
             ViewBag.JobId = jobId;
-            BackgroundJob.Enqueue(() => BuildPlanJob(jobId));
+            BackgroundJob.Enqueue(() => GeneratePlaySheetJob(jobId, generatePlaySheetSlots, generatePlaySheetMaxRisk));
 
             return View("ProgressLog");
         }
 
-        public async System.Threading.Tasks.Task BuildPlanJob(string jobId)
+        public async System.Threading.Tasks.Task GeneratePlaySheetJob(string jobId, int slots, Decimal maxRisk)
         {
             using (WeeklyIncomeService service = new WeeklyIncomeService(jobId))
             {
                 service.ProgressMessageRaised += Service_ProgressMessageRaised;
                 service.RedirectRaised += Service_RedirectRaised;
 
-                await service.BuildPlan();
+                await service.GeneratePlaySheet(slots, maxRisk);
+            }
+        }
+        #endregion
+
+        #region BuildPlan
+        [HttpPost]
+        public ActionResult BuildPlan(int buildPlanSlots, int buildPlanMaxRisk)
+        {
+            string jobId = Guid.NewGuid().ToString("N");
+            ViewBag.JobId = jobId;
+            BackgroundJob.Enqueue(() => BuildPlanJob(jobId, buildPlanSlots, buildPlanMaxRisk));
+
+            return View("ProgressLog");
+        }
+
+        public async System.Threading.Tasks.Task BuildPlanJob(string jobId, int slots, Decimal maxRisk)
+        {
+            using (WeeklyIncomeService service = new WeeklyIncomeService(jobId))
+            {
+                service.ProgressMessageRaised += Service_ProgressMessageRaised;
+                service.RedirectRaised += Service_RedirectRaised;
+
+                await service.BuildPlan(slots, maxRisk);
             }
         }
         #endregion

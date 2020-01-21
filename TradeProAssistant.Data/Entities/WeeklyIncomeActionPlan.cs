@@ -32,6 +32,14 @@ namespace Entities
 		{
 			Pairs = new List<PairCondor>();
 		}
+
+		public  WeeklyIncomeActionPlan(WeeklyIncomeActionPlan source)
+		{
+			this.Dummy = source.Dummy;
+			this.GenerationMethod = source.GenerationMethod;
+			if(source.PlaySheet != null) this.PlaySheet = new WeeklyIncomePlaySheet(source.PlaySheet);
+			this.Pairs = source.Pairs.Select(x => new PairCondor(x)).ToList();
+		}
 		#endregion
 	}
 }

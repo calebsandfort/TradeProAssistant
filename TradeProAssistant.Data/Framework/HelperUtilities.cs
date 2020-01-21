@@ -17,7 +17,7 @@ namespace TradeProAssistant.Data.Framework
                 nextDayOfWeekOccurrence = nextDayOfWeekOccurrence.AddDays(1);
             }
 
-            return nextDayOfWeekOccurrence;
+            return nextDayOfWeekOccurrence.Date.AddDays(1);
         }
         #endregion
 
@@ -31,7 +31,7 @@ namespace TradeProAssistant.Data.Framework
                 previousDayOfWeekOccurrence = previousDayOfWeekOccurrence.AddDays(-1);
             }
 
-            return previousDayOfWeekOccurrence;
+            return previousDayOfWeekOccurrence.Date;
         } 
         #endregion
     }

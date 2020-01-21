@@ -7,28 +7,77 @@
 <div class="row">
     <div class="col-12">
         <ul class="nav nav-tabs" role="tablist">
-            @for (int i = 0; i < Model.ActionPlans.Count; i++)
+            <li class="nav-item">
+                <a class="nav-link active"
+                   id="overview-tab"
+                   href="#overview"
+                   data-toggle="tab"
+                   role="tab">Overview</a>
+            </li>
+
+            @foreach (WeeklyIncomeActionPlanDto actionPlan in Model.ActionPlans.OrderByDescending(x => x.Credit))
             {
                 <li class="nav-item">
-                    <a class='@String.Format("nav-link{0}", i == 0 ? " active" : "")'
-                       id='@String.Format("{0}-tab", Model.ActionPlans[i].GenerationMethod)'
-                       href='@String.Format("#{0}", Model.ActionPlans[i].GenerationMethod)'
+                    <a class="nav-link"
+                       id='@String.Format("{0}-tab", actionPlan.GenerationMethod)'
+                       href='@String.Format("#{0}", actionPlan.GenerationMethod)'
                        data-toggle="tab"
-                       role="tab">@Model.ActionPlans[i].GenerationMethod.GetStringValue()</a>
+                       role="tab">@actionPlan.GenerationMethod.GetStringValue()</a>
                 </li>
             }
         </ul>
         <div class="tab-content" id="myTabContent">
-            @for (int i = 0; i < Model.ActionPlans.Count; i++)
-            {
-            <div class='@String.Format("tab-pane fade{0}", i == 0 ? " show active" : "")'
-                 id="@Model.ActionPlans[i].GenerationMethod" role="tabpanel" style="padding-top: 10px;">
-                @Html.Partial("_ActionPlanTable", Model.ActionPlans[i])
+            <div class="tab-pane fade show active"
+                 id="overview" role="tabpanel" style="padding-top: 10px;">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Generation Method
+                            </th>
+                            <th>
+                                Credit
+                            </th>
+                            <th>
+                                Risk
+                            </th>
+                            <th>
+                                Capital Requirements
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (WeeklyIncomeActionPlanDto plan in Model.ActionPlans.OrderByDescending(x => x.Credit))
+                        {
+                        <tr>
+                            <td>
+                                @plan.GenerationMethod.GetStringValue()
+                            </td>
+                            <td>
+                                @plan.Credit.ToString("C")
+                            </td>
+                            <td>
+                                @plan.Risk.ToString("C")
+                            </td>
+                            <td>
+                                @plan.RequiredCapital.ToString("C")
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
+
+            @foreach (WeeklyIncomeActionPlanDto actionPlan in Model.ActionPlans.OrderByDescending(x => x.Credit))
+            {
+                <div class="tab-pane fade"
+                     id="@actionPlan.GenerationMethod" role="tabpanel" style="padding-top: 10px;">
+                    @Html.Partial("_ActionPlanTable", actionPlan)
+                </div>
             }
         </div>
     </div>
-        @*<div class="col-4">
+    @*<div class="col-4">
             <table class="table table-borderless table-sm">
                 <tr>
                     <td class="font-weight-bold">Timestamp</td>
