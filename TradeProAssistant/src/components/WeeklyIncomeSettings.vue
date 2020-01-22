@@ -7,6 +7,12 @@
             </div>
         </div>
         <div class="form-group row">
+            <label for="minStrikeDiff" class="col-sm-2 col-form-label">Min Strike Diff</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="minStrikeDiff" name="minStrikeDiff" placeholder="Min Strike Diff" v-model="minStrikeDiff">
+            </div>
+        </div>
+        <div class="form-group row">
             <label for="maxRisk" class="col-sm-2 col-form-label">Max Risk/Pair</label>
             <div class="input-group col-sm-10">
                 <div class="input-group-prepend">
@@ -33,6 +39,7 @@ export default {
         data: function () {
             return {
                 slots: 5,
+                minStrikeDiff: 1,
                 maxRisk: 3000
             };
         },

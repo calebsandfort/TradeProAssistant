@@ -36,6 +36,12 @@ namespace Entities
 
 		public bool PairEligible { get; set; }
 
+		public bool Ignore { get; set; }
+
+		public bool IsBullish { get; set; }
+
+		public bool IsBearish { get; set; }
+
 		public DateTime? ExDividendDate { get; set; }
 
 		public DateTime? NextEarningsDate { get; set; }
@@ -65,6 +71,9 @@ namespace Entities
 			this.Sector = source.Sector;
 			this.AssetClass = source.AssetClass;
 			this.PairEligible = source.PairEligible;
+			this.Ignore = source.Ignore;
+			this.IsBullish = source.IsBullish;
+			this.IsBearish = source.IsBearish;
 			this.ExDividendDate = source.ExDividendDate;
 			this.NextEarningsDate = source.NextEarningsDate;
 			this.SectorEnum = source.SectorEnum;

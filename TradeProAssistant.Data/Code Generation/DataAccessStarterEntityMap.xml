@@ -9,6 +9,9 @@
     <Property Name="Sector" Type="String" Size="50" IncludeInDto="true" />
     <Property Name="AssetClass" Type="String" Size="50" IncludeInDto="true" />
     <Property Name="PairEligible" Type="bool" IncludeInDto="true" />
+    <Property Name="Ignore" Type="bool" IncludeInDto="true" />
+    <Property Name="IsBullish" Type="bool" IncludeInDto="true" />
+    <Property Name="IsBearish" Type="bool" IncludeInDto="true" />
     <Property Name="ExDividendDate" Type="DateTime?" IncludeInDto="true" />
     <Property Name="NextEarningsDate" Type="DateTime?" IncludeInDto="true" />
     <EnumProperty Name="SectorEnum" Type="Sectors" IncludeInDto="true"/>

@@ -15,6 +15,9 @@ namespace Entities.Dtos
 		public String Sector { get; set; }
 		public String AssetClass { get; set; }
 		public bool PairEligible { get; set; }
+		public bool Ignore { get; set; }
+		public bool IsBullish { get; set; }
+		public bool IsBearish { get; set; }
 		public DateTime? ExDividendDate { get; set; }
 		public DateTime? NextEarningsDate { get; set; }
 

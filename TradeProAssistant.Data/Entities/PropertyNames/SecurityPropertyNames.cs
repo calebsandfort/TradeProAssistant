@@ -15,6 +15,9 @@ namespace Entities
 		public String Sector { get { return ResolvePropertyName("Sector"); } }
 		public String AssetClass { get { return ResolvePropertyName("AssetClass"); } }
 		public String PairEligible { get { return ResolvePropertyName("PairEligible"); } }
+		public String Ignore { get { return ResolvePropertyName("Ignore"); } }
+		public String IsBullish { get { return ResolvePropertyName("IsBullish"); } }
+		public String IsBearish { get { return ResolvePropertyName("IsBearish"); } }
 		public String ExDividendDate { get { return ResolvePropertyName("ExDividendDate"); } }
 		public String NextEarningsDate { get { return ResolvePropertyName("NextEarningsDate"); } }
 		public String DailyCandlesticksInclude { get { return ResolvePropertyName("DailyCandlesticks"); } }

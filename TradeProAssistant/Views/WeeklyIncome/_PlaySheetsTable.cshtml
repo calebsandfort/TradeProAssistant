@@ -1,0 +1,35 @@
+﻿@(Html.Kendo().Grid<WeeklyIncomePlaySheetDto>()
+        .Name("playSheetsGrid")
+        .Columns(columns =>
+        {
+            columns.Bound(x => x.TimeStamp).ClientTemplate("<a href='WeeklyIncome/PlaySheet?id=#= Identifier #' >#= TimeStampDisplay #</>").Width(75);
+            columns.Bound(x => x.Expiry).Format("{0:M/d/yy}").Width(75);
+            //columns.Bound(x => x.Total).Width(100).Format("{0:c2}");
+
+        })
+        //.HtmlAttributes(new { style = "height: 730px;" })
+        .PersistSelection()
+    .Sortable(sortable => sortable
+        .AllowUnsort(false))
+    .Pageable(pageable => pageable
+        .Refresh(true)
+        .ButtonCount(5))
+    .Scrollable()
+    .Filterable(filterable => filterable
+        .Extra(false)
+    //.Operators(operators => operators
+    //.ForString(str => str.Clear()
+    //    .IsEqualTo("Is")
+    //))
+    )
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Sort(sort => sort.Add(x => x.TimeStamp).Descending())
+        .PageSize(25)
+        .Read(read =>
+        {
+            read.Action("PlaySheets_Read", "WeeklyIncome");
+        }
+        )
+    )
+)

@@ -25,6 +25,7 @@ namespace TradeProAssistant
                 cfg.CreateMap<DayCandlestick, DayCandlestickDto>();
                 cfg.CreateMap<WeekCandlestick, WeekCandlestickDto>();
                 cfg.CreateMap<WeeklyIncomePlaySheet, WeeklyIncomePlaySheetDto>();
+                cfg.CreateMap<WeeklyIncomePlaySheet, SimpleWeeklyIncomePlaySheetDto>();
                 cfg.CreateMap<WeeklyIncomeActionPlan, WeeklyIncomeActionPlanDto>();
                 cfg.CreateMap<WeeklyIncomeComboCount, WeeklyIncomeComboCountDto>();
                 cfg.CreateMap<BullPutSpread, BullPutSpreadDto>();

@@ -1,0 +1,38 @@
+﻿@(Html.Kendo().Grid<SecurityDto>()
+        .Name("securitiesGrid")
+        .Columns(columns =>
+        {
+            columns.Bound(x => x.Symbol).Width(75);
+            columns.Bound(x => x.Name).Width(250);
+            columns.Bound(x => x.Ignore).ClientTemplate("<input type='checkbox' #= Ignore ? \"checked='checked'\" : \"\" # class='ignoreCheckbox' data-identifier='#= Identifier #' />").Width(50);
+            columns.Bound(x => x.IsBullish).ClientTemplate("<input type='checkbox' #= IsBullish ? \"checked='checked'\" : \"\" # class='isBullishCheckbox' data-identifier='#= Identifier #' />").Width(50);
+            columns.Bound(x => x.IsBearish).ClientTemplate("<input type='checkbox' #= IsBearish ? \"checked='checked'\" : \"\" # class='isBearishCheckbox' data-identifier='#= Identifier #' />").Width(50);
+            //columns.Bound(x => x.Total).Width(100).Format("{0:c2}");
+
+        })
+        //.HtmlAttributes(new { style = "height: 730px;" })
+        .PersistSelection()
+    .Sortable(sortable => sortable
+        .AllowUnsort(false))
+    .Pageable(pageable => pageable
+        .Refresh(true)
+        .ButtonCount(5))
+    .Scrollable()
+    .Filterable(filterable => filterable
+        .Extra(false)
+    //.Operators(operators => operators
+    //.ForString(str => str.Clear()
+    //    .IsEqualTo("Is")
+    //))
+    )
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Sort(sort => sort.Add(x => x.Symbol))
+        .PageSize(50)
+        .Read(read =>
+        {
+            read.Action("Securities_Read", "WeeklyIncome");
+        }
+        )
+    )
+)

@@ -26,6 +26,22 @@ namespace Entities
         }
         #endregion
 
+        #region MinStrikeDiff
+        private Decimal minStrikeDiff = 1m;
+        [NotMapped]
+        public Decimal MinStrikeDiff
+        {
+            get
+            {
+                return this.minStrikeDiff;
+            }
+            set
+            {
+                this.minStrikeDiff = value;
+            }
+        }
+        #endregion
+
         #region LatestOptionChain
         private OptionChain latestOptionChain = null;
         [NotMapped]
@@ -260,7 +276,7 @@ namespace Entities
                     Decimal strikeDiff = this.LatestOptionStrikes[this.LowerBoundStrikeIndex].StrikePrice
                         - this.LatestOptionStrikes[buyIndex].StrikePrice;
 
-                    while(strikeDiff < 1m)
+                    while(strikeDiff < this.MinStrikeDiff)
                     {
                         buyIndex -= 1;
                         strikeDiff = this.LatestOptionStrikes[this.LowerBoundStrikeIndex].StrikePrice
@@ -301,7 +317,7 @@ namespace Entities
                     Decimal strikeDiff = this.LatestOptionStrikes[buyIndex].StrikePrice
                         - this.LatestOptionStrikes[this.UpperBoundStrikeIndex].StrikePrice;
 
-                    while (strikeDiff < 1m)
+                    while (strikeDiff < this.MinStrikeDiff)
                     {
                         buyIndex += 1;
                         strikeDiff = this.LatestOptionStrikes[buyIndex].StrikePrice

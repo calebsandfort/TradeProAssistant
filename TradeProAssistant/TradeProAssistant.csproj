@@ -346,6 +346,8 @@
     <Content Include="Views\WeeklyIncome\PlaySheet.cshtml" />
     <Content Include="Views\WeeklyIncome\_ActionPlanTable.cshtml" />
     <Content Include="src\components\WeeklyIncomeSettings.vue" />
+    <Content Include="Views\WeeklyIncome\_SecuritiesTable.cshtml" />
+    <Content Include="Views\WeeklyIncome\_PlaySheetsTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

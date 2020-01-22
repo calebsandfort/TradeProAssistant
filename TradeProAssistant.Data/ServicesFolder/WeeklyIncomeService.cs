@@ -31,7 +31,7 @@ namespace Services
         #endregion
 
         #region PerformWeeklyIncomeActions
-        public async Task PerformWeeklyIncomeActions(int slots, Decimal maxRisk, List<int> actions)
+        public async Task PerformWeeklyIncomeActions(int slots, Decimal minStrikeDiff, Decimal maxRisk, List<int> actions)
         {
             foreach(int action in actions.OrderBy(x => x))
             {
@@ -49,7 +49,7 @@ namespace Services
                         await DownloadOptionChains();
                         break;
                     case WeeklyIncomeActions.GeneratePlaySheet:
-                        await BuildPlan(slots, maxRisk);
+                        await BuildPlan(slots, minStrikeDiff, maxRisk);
                         break;
                 }
             }
@@ -57,7 +57,7 @@ namespace Services
         #endregion
 
         #region BuildPlan
-        public async Task BuildPlan(int slots, Decimal maxRisk)
+        public async Task BuildPlan(int slots, Decimal minStrikeDiff, Decimal maxRisk)
         {
             Thread.Sleep(1000);
 
@@ -70,7 +70,16 @@ namespace Services
             {
                 PropertyName = Security.PropertyNames.PairEligible,
                 Parameter = "true",
-                QueryOperator = QueryOperators.Equals
+                QueryOperator = QueryOperators.Equals,
+                IsAndFilter = true
+            });
+
+            query.QuerySingleFilters.Add(new QuerySingleFilter()
+            {
+                PropertyName = Security.PropertyNames.Ignore,
+                Parameter = "false",
+                QueryOperator = QueryOperators.Equals,
+                IsAndFilter = true
             });
 
             query.Includes.Add(Security.PropertyNames.OptionChainsInclude);
@@ -93,6 +102,7 @@ namespace Services
 
             foreach(Security security in securities)
             {
+                security.MinStrikeDiff = minStrikeDiff;
                 security.MaxRisk = maxRisk;
 
                 OnProgressMessageRaised(new HtmlTag("li").Class("list-group-item")
@@ -138,18 +148,23 @@ namespace Services
                             Security iSecurity = sectorGroup.Securities[i];
                             Security jSecurity = sectorGroup.Securities[j];
 
-                            PairCondor ijPairCondor = new PairCondor();
-                            ijPairCondor.SectorEnum = sectorGroup.Sector;
-                            ijPairCondor.BullPutSpread = iSecurity.BullPutSpread;
-                            ijPairCondor.BearCallSpread = jSecurity.BearCallSpread;
-                            pairCondorCandidates.Add(ijPairCondor);
+                            if (!iSecurity.IsBearish && !jSecurity.IsBullish)
+                            {
+                                PairCondor ijPairCondor = new PairCondor();
+                                ijPairCondor.SectorEnum = sectorGroup.Sector;
+                                ijPairCondor.BullPutSpread = iSecurity.BullPutSpread;
+                                ijPairCondor.BearCallSpread = jSecurity.BearCallSpread;
+                                pairCondorCandidates.Add(ijPairCondor); 
+                            }
 
-                            PairCondor jiPairCondor = new PairCondor();
-                            jiPairCondor.SectorEnum = sectorGroup.Sector;
-                            jiPairCondor.BullPutSpread = jSecurity.BullPutSpread;
-                            jiPairCondor.BearCallSpread = iSecurity.BearCallSpread;
-                            pairCondorCandidates.Add(jiPairCondor);
-
+                            if (!jSecurity.IsBearish && !iSecurity.IsBullish)
+                            {
+                                PairCondor jiPairCondor = new PairCondor();
+                                jiPairCondor.SectorEnum = sectorGroup.Sector;
+                                jiPairCondor.BullPutSpread = jSecurity.BullPutSpread;
+                                jiPairCondor.BearCallSpread = iSecurity.BearCallSpread;
+                                pairCondorCandidates.Add(jiPairCondor);
+                            }
                         }
                     } 
                 }

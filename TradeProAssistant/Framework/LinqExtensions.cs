@@ -1,4 +1,6 @@
-﻿using Kendo.Mvc;
+﻿using Data.Framework;
+using Kendo.Mvc;
+using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,106 @@ namespace TradeProAssistant.Framework
     public static class LinqExtensions
     {
         #region Kendo
+        public static Query ToQuery(this DataSourceRequest request)
+        {
+            Query query = new Query();
+
+            #region Paging
+            query.UsePaging = true;
+            query.PageSize = request.PageSize;
+            query.CurrentPage = request.Page - 1;
+            #endregion
+
+            #region Sort
+            query.SortPropertyName = request.Sorts[0].Member;
+            query.SortDescending = request.Sorts[0].SortDirection == System.ComponentModel.ListSortDirection.Descending;
+            #endregion
+
+            #region Filters
+            if (request.Filters.Count > 0)
+            {
+                QueryFilterGroup qfg = new QueryFilterGroup() { IsAndFilter = true };
+                foreach (IFilterDescriptor iFilterDescriptor in request.Filters)
+                {
+                    if (iFilterDescriptor is FilterDescriptor)
+                    {
+                        FilterDescriptor filterDescriptor = iFilterDescriptor as FilterDescriptor;
+                        QueryOperators queryOperator = QueryOperators.None;
+
+                        switch (filterDescriptor.Operator)
+                        {
+                            case FilterOperator.IsLessThan:
+                                queryOperator = QueryOperators.LessThan;
+                                break;
+                            case FilterOperator.IsLessThanOrEqualTo:
+                                queryOperator = QueryOperators.LessThanOrEqual;
+                                break;
+                            case FilterOperator.IsEqualTo:
+                                queryOperator = QueryOperators.Equals;
+                                break;
+                            case FilterOperator.IsNotEqualTo:
+                                queryOperator = QueryOperators.NotEquals;
+                                break;
+                            case FilterOperator.IsGreaterThanOrEqualTo:
+                                queryOperator = QueryOperators.GreaterThanOrEqual;
+                                break;
+                            case FilterOperator.IsGreaterThan:
+                                queryOperator = QueryOperators.GreaterThan;
+                                break;
+                            case FilterOperator.StartsWith:
+                                break;
+                            case FilterOperator.EndsWith:
+                                break;
+                            case FilterOperator.Contains:
+                                break;
+                            case FilterOperator.IsContainedIn:
+                                break;
+                            case FilterOperator.DoesNotContain:
+                                break;
+                            case FilterOperator.IsNull:
+                                break;
+                            case FilterOperator.IsNotNull:
+                                break;
+                            case FilterOperator.IsEmpty:
+                                break;
+                            case FilterOperator.IsNotEmpty:
+                                break;
+                            case FilterOperator.IsNullOrEmpty:
+                                break;
+                            case FilterOperator.IsNotNullOrEmpty:
+                                break;
+                            default:
+                                break;
+                        }
+
+                        String parameter = filterDescriptor.Value.ToString();
+                        if (filterDescriptor.Value is String)
+                        {
+                            parameter = String.Format("\'{0}\'", filterDescriptor.Value);
+                        }
+
+                        //filterDescriptor.v
+
+                        if (queryOperator != QueryOperators.None)
+                        {
+                            qfg.QuerySingleFilters.Add(new QuerySingleFilter()
+                            {
+                                IsAndFilter = true,
+                                PropertyName = filterDescriptor.Member,
+                                QueryOperator = queryOperator,
+                                Parameter = parameter
+                            });
+                        }
+                    }
+                }
+
+                query.QueryFilterGroups.Add(qfg);
+            }
+            #endregion
+
+            return query;
+        }
+
         public static String SortExpression(this SortDescriptor sortDescriptor)
         {
             return String.Format("{0} {1}", sortDescriptor.Member, sortDescriptor.SortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : "asc");

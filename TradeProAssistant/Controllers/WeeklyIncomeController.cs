@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Data.Framework;
 using Entities;
 using Entities.Dtos;
 using Hangfire;
+using Kendo.Mvc.UI;
 using Newtonsoft.Json;
 using RestSharp;
 using Services;
@@ -10,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TradeProAssistant.Framework;
 using TradeProAssistant.Models;
 using TradeProAssistant.Utilities;
 
@@ -92,52 +95,52 @@ namespace TradeProAssistant.Controllers
         }
         #endregion
 
-        #region WeeklyIncomeActions
+        #region PerformWeeklyIncomeActions
         [HttpPost]
-        public ActionResult PerformWeeklyIncomeActions(int slots, Decimal maxRisk, List<int> actions)
+        public ActionResult PerformWeeklyIncomeActions(int slots, Decimal minStrikeDiff, Decimal maxRisk, List<int> actions)
         {
             maxRisk /= 200m;
 
             string jobId = Guid.NewGuid().ToString("N");
             ViewBag.JobId = jobId;
-            BackgroundJob.Enqueue(() => PerformWeeklyIncomeActionsJob(jobId, slots, maxRisk, actions));
+            BackgroundJob.Enqueue(() => PerformWeeklyIncomeActionsJob(jobId, slots, minStrikeDiff, maxRisk, actions));
 
             return View("ProgressLog");
         }
 
-        public async System.Threading.Tasks.Task PerformWeeklyIncomeActionsJob(string jobId, int slots, Decimal maxRisk, List<int> actions)
+        public async System.Threading.Tasks.Task PerformWeeklyIncomeActionsJob(string jobId, int slots, Decimal minStrikeDiff, Decimal maxRisk, List<int> actions)
         {
             using (WeeklyIncomeService service = new WeeklyIncomeService(jobId))
             {
                 service.ProgressMessageRaised += Service_ProgressMessageRaised;
                 service.RedirectRaised += Service_RedirectRaised;
 
-                await service.PerformWeeklyIncomeActions(slots, maxRisk, actions);
+                await service.PerformWeeklyIncomeActions(slots, minStrikeDiff, maxRisk, actions);
             }
         }
         #endregion
 
         #region BuildPlan
-        [HttpPost]
-        public ActionResult BuildPlan(int buildPlanSlots, int buildPlanMaxRisk)
-        {
-            string jobId = Guid.NewGuid().ToString("N");
-            ViewBag.JobId = jobId;
-            BackgroundJob.Enqueue(() => BuildPlanJob(jobId, buildPlanSlots, buildPlanMaxRisk));
+        //[HttpPost]
+        //public ActionResult BuildPlan(int buildPlanSlots, int buildPlanMaxRisk)
+        //{
+        //    string jobId = Guid.NewGuid().ToString("N");
+        //    ViewBag.JobId = jobId;
+        //    BackgroundJob.Enqueue(() => BuildPlanJob(jobId, buildPlanSlots, buildPlanMaxRisk));
 
-            return View("ProgressLog");
-        }
+        //    return View("ProgressLog");
+        //}
 
-        public async System.Threading.Tasks.Task BuildPlanJob(string jobId, int slots, Decimal maxRisk)
-        {
-            using (WeeklyIncomeService service = new WeeklyIncomeService(jobId))
-            {
-                service.ProgressMessageRaised += Service_ProgressMessageRaised;
-                service.RedirectRaised += Service_RedirectRaised;
+        //public async System.Threading.Tasks.Task BuildPlanJob(string jobId, int slots, Decimal maxRisk)
+        //{
+        //    using (WeeklyIncomeService service = new WeeklyIncomeService(jobId))
+        //    {
+        //        service.ProgressMessageRaised += Service_ProgressMessageRaised;
+        //        service.RedirectRaised += Service_RedirectRaised;
 
-                await service.BuildPlan(slots, maxRisk);
-            }
-        }
+        //        await service.BuildPlan(slots, maxRisk);
+        //    }
+        //}
         #endregion
 
         #region DownloadOptionChains
@@ -193,7 +196,76 @@ namespace TradeProAssistant.Controllers
         private void Service_RedirectRaised(object sender, Data.Framework.RedirectEventArgs e)
         {
             JobProgressHub.SendRedirect(e.Controller, e.Action, e.Id, e.JobId);
-        } 
+        }
+        #endregion
+
+        #region Securities_Read
+        public ActionResult Securities_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            DataSourceResult result = new DataSourceResult();
+            Query query = request.ToQuery();
+            query.QuerySingleFilters.Add(new QuerySingleFilter()
+            {
+                PropertyName = Security.PropertyNames.PairEligible,
+                Parameter = "true",
+                QueryOperator = QueryOperators.Equals,
+                IsAndFilter = true
+            });
+
+            result.Data = mapper.Map<List<SecurityDto>>(SecurityService.GetCollection(query));
+            result.Total = SecurityService.GetCount(query);
+
+            return new GuerillaLogisticsApiJsonResult(result);
+        }
+        #endregion
+
+        #region PlaySheets_Read
+        public ActionResult PlaySheets_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            DataSourceResult result = new DataSourceResult();
+            Query query = request.ToQuery();
+
+            result.Data = mapper.Map<List<SimpleWeeklyIncomePlaySheetDto>>(WeeklyIncomePlaySheetService.GetCollection(query));
+            result.Total = WeeklyIncomePlaySheetService.GetCount(query);
+
+            return new GuerillaLogisticsApiJsonResult(result);
+        }
+        #endregion
+
+        #region SetIgnore
+        [HttpPost]
+        public ActionResult SetIgnore(int identifier, bool ignore)
+        {
+            Security security = SecurityService.Get(identifier);
+            security.Ignore = ignore;
+            SecurityService.Save(security);
+
+            return new EmptyResult();
+        }
+        #endregion
+
+        #region SetIsBullish
+        [HttpPost]
+        public ActionResult SetIsBullish(int identifier, bool isBullish)
+        {
+            Security security = SecurityService.Get(identifier);
+            security.IsBullish = isBullish;
+            SecurityService.Save(security);
+
+            return new EmptyResult();
+        }
+        #endregion
+
+        #region SetIsBearish
+        [HttpPost]
+        public ActionResult SetIsBearish(int identifier, bool isBearish)
+        {
+            Security security = SecurityService.Get(identifier);
+            security.IsBearish = isBearish;
+            SecurityService.Save(security);
+
+            return new EmptyResult();
+        }
         #endregion
     }
 }
