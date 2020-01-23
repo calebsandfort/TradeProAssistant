@@ -26,6 +26,7 @@ namespace Entities
 		public int? PlaySheetIdentifier { get; set; }
 		public virtual WeeklyIncomePlaySheet PlaySheet { get; set; }
 
+
 		#region Constructor
 		public  WeeklyIncomeComboCount()
 		{

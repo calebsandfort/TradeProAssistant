@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Fresh : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -49,6 +49,9 @@
                         Sector = c.String(maxLength: 50),
                         AssetClass = c.String(maxLength: 50),
                         PairEligible = c.Boolean(nullable: false),
+                        Ignore = c.Boolean(nullable: false),
+                        IsBullish = c.Boolean(nullable: false),
+                        IsBearish = c.Boolean(nullable: false),
                         ExDividendDate = c.DateTime(),
                         NextEarningsDate = c.DateTime(),
                         SectorEnum = c.Int(nullable: false),
@@ -201,6 +204,7 @@
                         Identifier = c.Int(nullable: false, identity: true),
                         TimeStamp = c.DateTime(nullable: false),
                         Expiry = c.DateTime(nullable: false),
+                        Used = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Identifier);
             
@@ -221,8 +225,8 @@
         
         public override void Down()
         {
-            DropForeignKey("dbo.WeeklyIncomeComboCounts", "PlaySheetIdentifier", "dbo.WeeklyIncomePlaySheets");
             DropForeignKey("dbo.WeeklyIncomeActionPlans", "PlaySheetIdentifier", "dbo.WeeklyIncomePlaySheets");
+            DropForeignKey("dbo.WeeklyIncomeComboCounts", "PlaySheetIdentifier", "dbo.WeeklyIncomePlaySheets");
             DropForeignKey("dbo.PairCondors", "WeeklyIncomeActionPlan_Identifier", "dbo.WeeklyIncomeActionPlans");
             DropForeignKey("dbo.PairCondors", "BullPutSpreadIdentifier", "dbo.BullPutSpreads");
             DropForeignKey("dbo.PairCondors", "BearCallSpreadIdentifier", "dbo.BearCallSpreads");

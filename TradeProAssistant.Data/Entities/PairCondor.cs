@@ -25,9 +25,11 @@ namespace Entities
 		[ForeignKey("BullPutSpread")]
 		public int? BullPutSpreadIdentifier { get; set; }
 		public virtual BullPutSpread BullPutSpread { get; set; }
+
 		[ForeignKey("BearCallSpread")]
 		public int? BearCallSpreadIdentifier { get; set; }
 		public virtual BearCallSpread BearCallSpread { get; set; }
+
 
 		#region Constructor
 		public  PairCondor()

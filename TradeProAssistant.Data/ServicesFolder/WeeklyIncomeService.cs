@@ -414,6 +414,66 @@ namespace Services
         }
         #endregion
 
+        #region Purge
+        public static void Purge()
+        {
+            foreach (WeeklyIncomeComboCount x in WeeklyIncomeComboCountService.GetCollection())
+            {
+                WeeklyIncomeComboCountService.Delete(x);
+            }
+
+            foreach (OptionStrike x in OptionStrikeService.GetCollection())
+            {
+                OptionStrikeService.Delete(x);
+            }
+
+            foreach (OptionDate x in OptionDateService.GetCollection())
+            {
+                OptionDateService.Delete(x);
+            }
+
+            foreach (OptionChain x in OptionChainService.GetCollection())
+            {
+                OptionChainService.Delete(x);
+            }
+
+            foreach (BullPutSpread x in BullPutSpreadService.GetCollection())
+            {
+                BullPutSpreadService.Delete(x);
+            }
+
+            foreach (BearCallSpread x in BearCallSpreadService.GetCollection())
+            {
+                BearCallSpreadService.Delete(x);
+            }
+
+            foreach (PairCondor x in PairCondorService.GetCollection())
+            {
+                PairCondorService.Delete(x);
+            }
+
+            foreach (WeeklyIncomeActionPlan x in WeeklyIncomeActionPlanService.GetCollection())
+            {
+                WeeklyIncomeActionPlanService.Delete(x);
+            }
+
+            foreach (Call x in CallService.GetCollection())
+            {
+                CallService.Delete(x);
+            }
+
+            foreach (Put x in PutService.GetCollection())
+            {
+                PutService.Delete(x);
+            }
+
+            foreach (WeeklyIncomePlaySheet x in WeeklyIncomePlaySheetService.GetCollection())
+            {
+                WeeklyIncomePlaySheetService.Delete(x);
+            }
+        }
+        #endregion
+
         #region SecurityService_ProgressMessageRaised
         private void SecurityService_ProgressMessageRaised(object sender, ProgressMessageEventArgs e)
         {

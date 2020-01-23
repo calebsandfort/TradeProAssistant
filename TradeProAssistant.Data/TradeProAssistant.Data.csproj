@@ -384,21 +384,9 @@
     <Compile Include="Framework\QueryFilterGroup.cs" />
     <Compile Include="Framework\QueryOperators.cs" />
     <Compile Include="Framework\QuerySingleFilter.cs" />
-    <Compile Include="Migrations\202001162207209_Fresh.cs" />
-    <Compile Include="Migrations\202001162207209_Fresh.designer.cs">
-      <DependentUpon>202001162207209_Fresh.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001211926142_AddIgnoreProperty.cs" />
-    <Compile Include="Migrations\202001211926142_AddIgnoreProperty.designer.cs">
-      <DependentUpon>202001211926142_AddIgnoreProperty.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001212145150_AddBullishBearishProperties.cs" />
-    <Compile Include="Migrations\202001212145150_AddBullishBearishProperties.designer.cs">
-      <DependentUpon>202001212145150_AddBullishBearishProperties.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001221954021_AddUsedPropertyToPlaySheet.cs" />
-    <Compile Include="Migrations\202001221954021_AddUsedPropertyToPlaySheet.designer.cs">
-      <DependentUpon>202001221954021_AddUsedPropertyToPlaySheet.cs</DependentUpon>
+    <Compile Include="Migrations\202001231655039_Initial.cs" />
+    <Compile Include="Migrations\202001231655039_Initial.designer.cs">
+      <DependentUpon>202001231655039_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\OpcGetOptionChainResponse.cs" />
@@ -477,17 +465,8 @@
     <None Include="Entities\Enums\Enum.txt4" />
     <None Include="Entities\PropertyNames\PropertyNames.txt4" />
     <None Include="packages.config" />
-    <EmbeddedResource Include="Migrations\202001162207209_Fresh.resx">
-      <DependentUpon>202001162207209_Fresh.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001211926142_AddIgnoreProperty.resx">
-      <DependentUpon>202001211926142_AddIgnoreProperty.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001212145150_AddBullishBearishProperties.resx">
-      <DependentUpon>202001212145150_AddBullishBearishProperties.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001221954021_AddUsedPropertyToPlaySheet.resx">
-      <DependentUpon>202001221954021_AddUsedPropertyToPlaySheet.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001231655039_Initial.resx">
+      <DependentUpon>202001231655039_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\SP500_Constituents.csv" />
     <EmbeddedResource Include="SeedData\SPMidCap_Constituents.csv" />

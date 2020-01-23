@@ -22,12 +22,15 @@ namespace Entities
 		[ForeignKey("OptionDate")]
 		public int? OptionDateIdentifier { get; set; }
 		public virtual OptionDate OptionDate { get; set; }
+
 		[ForeignKey("Call")]
 		public int? CallIdentifier { get; set; }
 		public virtual Call Call { get; set; }
+
 		[ForeignKey("Put")]
 		public int? PutIdentifier { get; set; }
 		public virtual Put Put { get; set; }
+
 
 		#region Constructor
 		public  OptionStrike()

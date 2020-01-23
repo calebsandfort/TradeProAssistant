@@ -280,7 +280,7 @@ namespace TradeProAssistant.Controllers
         }
         #endregion
 
-        #region SetIgnore
+        #region ClearBools
         [HttpPost]
         public ActionResult ClearBools()
         {
@@ -318,6 +318,16 @@ namespace TradeProAssistant.Controllers
             return new EmptyResult();
         }
         #endregion 
+
+        #region Purge
+        [HttpPost]
+        public ActionResult Purge()
+        {
+            WeeklyIncomeService.Purge();
+
+            return new EmptyResult();
+        }
+        #endregion
         #endregion
     }
 }

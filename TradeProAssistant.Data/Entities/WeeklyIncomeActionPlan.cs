@@ -26,6 +26,7 @@ namespace Entities
 		public int? PlaySheetIdentifier { get; set; }
 		public virtual WeeklyIncomePlaySheet PlaySheet { get; set; }
 
+
 		public virtual List<PairCondor> Pairs { get; set; }
 
 		#region Constructor

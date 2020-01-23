@@ -23,6 +23,7 @@ namespace Entities
 		public int? SecurityIdentifier { get; set; }
 		public virtual Security Security { get; set; }
 
+
 		public virtual List<OptionDate> Dates { get; set; }
 
 		#region Constructor

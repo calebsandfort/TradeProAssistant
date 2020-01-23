@@ -115,6 +115,15 @@
                                 $("#securitiesGrid .k-grid-content").css("height", "").css("max-height", $(window).height() - 300);
                             }, 500);
                         });
+                })
+                .on("click", "#purgeButton", function () {
+                    var url = $("#uxInput_RootUrl").val() + 'WeeklyIncome/Purge';
+                    $.post(url, {}, function () {
+                        $("#playSheetsGrid").data("kendoGrid").dataSource.read();
+                        setTimeout(function () {
+                            $("#playSheetsGrid .k-grid-content").css("height", "").css("max-height", $(window).height() - 300);
+                        }, 500);
+                    });
                 });
         });
     </script>

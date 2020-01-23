@@ -4,6 +4,8 @@
             {
                 columns.Bound(x => x.Symbol).Width(75);
                 columns.Bound(x => x.Name).Width(250);
+                columns.Bound(x => x.NextEarningsDate).Format("{0:d}").Width(75).Title("Next Earnings");
+                columns.Bound(x => x.ExDividendDate).Format("{0:d}").Width(75).Title("Ex Dividend");
                 columns.Bound(x => x.Ignore).ClientTemplate("<input type='checkbox' #= Ignore ? \"checked='checked'\" : \"\" # class='ignoreCheckbox' data-identifier='#= Identifier #' />").Width(50);
                 columns.Bound(x => x.IsBullish).ClientTemplate("<input type='checkbox' #= IsBullish ? \"checked='checked'\" : \"\" # class='isBullishCheckbox' data-identifier='#= Identifier #' />").Width(50);
                 columns.Bound(x => x.IsBearish).ClientTemplate("<input type='checkbox' #= IsBearish ? \"checked='checked'\" : \"\" # class='isBearishCheckbox' data-identifier='#= Identifier #' />").Width(50);

@@ -26,12 +26,15 @@ namespace Entities
 		[ForeignKey("SellCall")]
 		public int? SellCallIdentifier { get; set; }
 		public virtual Call SellCall { get; set; }
+
 		[ForeignKey("BuyCall")]
 		public int? BuyCallIdentifier { get; set; }
 		public virtual Call BuyCall { get; set; }
+
 		[ForeignKey("Security")]
 		public int? SecurityIdentifier { get; set; }
 		public virtual Security Security { get; set; }
+
 
 		#region Constructor
 		public  BearCallSpread()

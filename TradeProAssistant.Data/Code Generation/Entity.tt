@@ -105,6 +105,7 @@ if(relatedProperties.Count > 0)
 		[ForeignKey("<#= relatedProperty.Attribute("Name").Value #>")]
 		public int? <#= relatedProperty.Attribute("Name").Value #>Identifier { get; set; }
 		public virtual <#= relatedProperty.Attribute("Type").Value #> <#= relatedProperty.Attribute("Name").Value #> { get; set; }
+
 <#
     }
 }
