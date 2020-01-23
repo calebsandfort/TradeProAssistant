@@ -9,6 +9,7 @@ namespace Entities.Dtos
 		public bool IsNew { get{ return this.Identifier == 0; } }
 		public DateTime TimeStamp { get; set; }
 		public DateTime Expiry { get; set; }
+		public bool Used { get; set; }
 
 		public List<WeeklyIncomeActionPlanDto> ActionPlans { get; set; }
 		public List<WeeklyIncomeComboCountDto> ComboCounts { get; set; }

@@ -46,6 +46,7 @@
   <Entity Name="WeeklyIncomePlaySheet" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Expiry">
     <Property Name="TimeStamp" Type="DateTime" IncludeInDto="true" />
     <Property Name="Expiry" Type="DateTime" IncludeInDto="true" />
+    <Property Name="Used" Type="bool" IncludeInDto="true" />
     <CollectionProperty Name="ActionPlans" Type="WeeklyIncomeActionPlan" Cardinality="ManyToOne" IncludeInDto="true"/>
     <CollectionProperty Name="ComboCounts" Type="WeeklyIncomeComboCount" Cardinality="ManyToOne" IncludeInDto="true"/>
   </Entity>

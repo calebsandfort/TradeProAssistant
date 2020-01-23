@@ -23,10 +23,13 @@ namespace Entities
 
 		public Decimal BuyStrike { get; set; }
 
+		[ForeignKey("SellPut")]
 		public int? SellPutIdentifier { get; set; }
 		public virtual Put SellPut { get; set; }
+		[ForeignKey("BuyPut")]
 		public int? BuyPutIdentifier { get; set; }
 		public virtual Put BuyPut { get; set; }
+		[ForeignKey("Security")]
 		public int? SecurityIdentifier { get; set; }
 		public virtual Security Security { get; set; }
 

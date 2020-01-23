@@ -21,6 +21,8 @@ namespace Entities
 
 		public DateTime Expiry { get; set; }
 
+		public bool Used { get; set; }
+
 		public virtual List<WeeklyIncomeActionPlan> ActionPlans { get; set; }
 		public virtual List<WeeklyIncomeComboCount> ComboCounts { get; set; }
 
@@ -35,6 +37,7 @@ namespace Entities
 		{
 			this.TimeStamp = source.TimeStamp;
 			this.Expiry = source.Expiry;
+			this.Used = source.Used;
 					this.ActionPlans = source.ActionPlans.Select(x => new WeeklyIncomeActionPlan(x)).ToList();
 			this.ComboCounts = source.ComboCounts.Select(x => new WeeklyIncomeComboCount(x)).ToList();
 		}

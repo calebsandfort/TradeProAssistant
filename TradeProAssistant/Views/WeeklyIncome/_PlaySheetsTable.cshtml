@@ -1,10 +1,14 @@
-﻿@(Html.Kendo().Grid<WeeklyIncomePlaySheetDto>()
+﻿@(Html.Kendo().Grid<SimpleWeeklyIncomePlaySheetDto>()
         .Name("playSheetsGrid")
         .Columns(columns =>
         {
             columns.Bound(x => x.TimeStamp).ClientTemplate("<a href='WeeklyIncome/PlaySheet?id=#= Identifier #' >#= TimeStampDisplay #</>").Width(75);
             columns.Bound(x => x.Expiry).Format("{0:M/d/yy}").Width(75);
-            //columns.Bound(x => x.Total).Width(100).Format("{0:c2}");
+            columns.Bound(x => x.Slots).Width(75);
+            columns.Bound(x => x.RiskPerSlot).Width(75).Format("{0:c2}").Title("Risk/Slot");
+            columns.Bound(x => x.Credit).Width(75).Format("{0:c2}");
+            columns.Bound(x => x.RequiredCapital).Width(75).Format("{0:c2}").Title("Capital Requirements");
+            columns.Bound(x => x.Used).ClientTemplate("<input type='checkbox' #= Used ? \"checked='checked'\" : \"\" # class='usedCheckbox' data-identifier='#= Identifier #' />").Width(50);
 
         })
         //.HtmlAttributes(new { style = "height: 730px;" })

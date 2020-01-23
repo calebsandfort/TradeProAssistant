@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Entities.Dtos
 {
-	public class SimpleWeeklyIncomePlaySheetDto
-	{
-		public int Identifier { get; set; }
-		public bool IsNew { get{ return this.Identifier == 0; } }
-		public DateTime TimeStamp { get; set; }
-		public DateTime Expiry { get; set; }
-
+	public class SimpleWeeklyIncomePlaySheetDto : WeeklyIncomePlaySheetDto
+    {
+        #region TimeStampDisplay
         public String TimeStampDisplay
         {
             get
@@ -17,63 +14,46 @@ namespace Entities.Dtos
                 return this.TimeStamp.ToString("g");
             }
         }
+        #endregion
 
-        #region Comparisons
-        public static bool operator ==(SimpleWeeklyIncomePlaySheetDto entity, object obj)
-		{
-			if ((object)entity == null && obj == null)
-			{
-				return true;
-			}
-			else if ((object)entity != null && obj is SimpleWeeklyIncomePlaySheetDto && entity.GetType() == obj.GetType())
-			{
-				return (entity.Identifier == ((SimpleWeeklyIncomePlaySheetDto)obj).Identifier);
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		public static bool operator !=(SimpleWeeklyIncomePlaySheetDto entity, object obj)
-		{
-			if ((object)entity == null && obj == null)
-			{
-				return false;
-			}
-			else if ((object)entity != null && obj is SimpleWeeklyIncomePlaySheetDto && entity.GetType() == obj.GetType())
-			{
-				return (entity.Identifier != ((SimpleWeeklyIncomePlaySheetDto)obj).Identifier);
-			}
-			else
-			{
-				return true;
-			}
-		}
-
-		public override bool Equals(object obj)
-		{
-			if (obj is SimpleWeeklyIncomePlaySheetDto && this.GetType() == obj.GetType())
-			{
-				return (this.Identifier == ((SimpleWeeklyIncomePlaySheetDto)obj).Identifier);
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		public override int GetHashCode()
-		{
-			return base.GetHashCode();
-		}
-		#endregion
-
-		#region ToString
-		public override string ToString()
+        #region Credit
+        public Decimal Credit
         {
-            return Expiry.ToString();
+            get
+            {
+                return this.ActionPlans.Count == 0 ? 0m : this.ActionPlans.Max(x => x.Credit);
+            }
         }
-		#endregion
-	}
+        #endregion
+
+        #region Slots
+        public int Slots
+        {
+            get
+            {
+                return this.ActionPlans.Count == 0 ? 0 : this.ActionPlans.First().Pairs.Count;
+            }
+        }
+        #endregion
+
+        #region RequiredCapital
+        public Decimal RequiredCapital
+        {
+            get
+            {
+                return this.ActionPlans.Count == 0 ? 0m : this.ActionPlans.OrderByDescending(x => x.Credit).First().RequiredCapital;
+            }
+        }
+        #endregion
+
+        #region RiskPerSlot
+        public Decimal RiskPerSlot
+        {
+            get
+            {
+                return this.Slots == 0 ? 0m : this.RequiredCapital / this.Slots;
+            }
+        }
+        #endregion
+    }
 }

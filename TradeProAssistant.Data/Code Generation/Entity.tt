@@ -102,6 +102,7 @@ if(relatedProperties.Count > 0)
 	foreach(XElement relatedProperty in relatedProperties)
 	{
 #>
+		[ForeignKey("<#= relatedProperty.Attribute("Name").Value #>")]
 		public int? <#= relatedProperty.Attribute("Name").Value #>Identifier { get; set; }
 		public virtual <#= relatedProperty.Attribute("Type").Value #> <#= relatedProperty.Attribute("Name").Value #> { get; set; }
 <#

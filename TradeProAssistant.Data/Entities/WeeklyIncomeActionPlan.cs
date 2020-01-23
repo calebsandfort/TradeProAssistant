@@ -22,6 +22,7 @@ namespace Entities
 
 		public WeeklyActionPlanGenerationMethods GenerationMethod { get; set; }
 
+		[ForeignKey("PlaySheet")]
 		public int? PlaySheetIdentifier { get; set; }
 		public virtual WeeklyIncomePlaySheet PlaySheet { get; set; }
 

@@ -83,22 +83,39 @@
                         ignore: $(this).prop("checked")
                     });
             })
-            .on("change", ".isBullishCheckbox", function () {
-                var url = $("#uxInput_RootUrl").val() + 'WeeklyIncome/SetIsBullish';
-                $.post(url,
-                    {
-                        identifier: $(this).data("identifier"),
-                        isBullish: $(this).prop("checked")
-                    });
-            })
-            .on("change", ".isBearishCheckbox", function () {
-                var url = $("#uxInput_RootUrl").val() + 'WeeklyIncome/SetIsBearish';
-                $.post(url,
-                    {
-                        identifier: $(this).data("identifier"),
-                        isBearish: $(this).prop("checked")
-                    });
-            });
+                .on("change", ".isBullishCheckbox", function () {
+                    var url = $("#uxInput_RootUrl").val() + 'WeeklyIncome/SetIsBullish';
+                    $.post(url,
+                        {
+                            identifier: $(this).data("identifier"),
+                            isBullish: $(this).prop("checked")
+                        });
+                })
+                .on("change", ".isBearishCheckbox", function () {
+                    var url = $("#uxInput_RootUrl").val() + 'WeeklyIncome/SetIsBearish';
+                    $.post(url,
+                        {
+                            identifier: $(this).data("identifier"),
+                            isBearish: $(this).prop("checked")
+                        });
+                })
+                .on("change", ".usedCheckbox", function () {
+                    var url = $("#uxInput_RootUrl").val() + 'WeeklyIncome/SetUsed';
+                    $.post(url,
+                        {
+                            identifier: $(this).data("identifier"),
+                            used: $(this).prop("checked")
+                        });
+                })
+                .on("click", "#clearBoolsButton", function () {
+                    var url = $("#uxInput_RootUrl").val() + 'WeeklyIncome/ClearBools';
+                    $.post(url, {}, function () {
+                            $("#securitiesGrid").data("kendoGrid").dataSource.read();
+                            setTimeout(function () {
+                                $("#securitiesGrid .k-grid-content").css("height", "").css("max-height", $(window).height() - 300);
+                            }, 500);
+                        });
+                });
         });
     </script>
 }

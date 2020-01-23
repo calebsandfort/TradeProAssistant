@@ -19,6 +19,7 @@ namespace Entities
 
 		public DateTime Date { get; set; }
 
+		[ForeignKey("Security")]
 		public int? SecurityIdentifier { get; set; }
 		public virtual Security Security { get; set; }
 

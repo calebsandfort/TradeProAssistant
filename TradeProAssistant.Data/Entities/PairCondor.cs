@@ -22,8 +22,10 @@ namespace Entities
 
 		public Sectors SectorEnum { get; set; }
 
+		[ForeignKey("BullPutSpread")]
 		public int? BullPutSpreadIdentifier { get; set; }
 		public virtual BullPutSpread BullPutSpread { get; set; }
+		[ForeignKey("BearCallSpread")]
 		public int? BearCallSpreadIdentifier { get; set; }
 		public virtual BearCallSpread BearCallSpread { get; set; }
 

@@ -396,6 +396,10 @@
     <Compile Include="Migrations\202001212145150_AddBullishBearishProperties.designer.cs">
       <DependentUpon>202001212145150_AddBullishBearishProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001221954021_AddUsedPropertyToPlaySheet.cs" />
+    <Compile Include="Migrations\202001221954021_AddUsedPropertyToPlaySheet.designer.cs">
+      <DependentUpon>202001221954021_AddUsedPropertyToPlaySheet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\OpcGetOptionChainResponse.cs" />
     <Compile Include="Models\OpcGetStockPriceResponse.cs" />
@@ -481,6 +485,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001212145150_AddBullishBearishProperties.resx">
       <DependentUpon>202001212145150_AddBullishBearishProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001221954021_AddUsedPropertyToPlaySheet.resx">
+      <DependentUpon>202001221954021_AddUsedPropertyToPlaySheet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\SP500_Constituents.csv" />
     <EmbeddedResource Include="SeedData\SPMidCap_Constituents.csv" />

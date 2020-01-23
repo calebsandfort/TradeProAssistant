@@ -224,6 +224,17 @@ namespace TradeProAssistant.Controllers
         {
             DataSourceResult result = new DataSourceResult();
             Query query = request.ToQuery();
+            query.Includes.Add(WeeklyIncomePlaySheet.PropertyNames.ComboCountsInclude);
+            query.Includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlansInclude);
+            query.Includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.PairsInclude);
+            query.Includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BullPutSpreadInclude);
+            query.Includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BullPutSpread.SecurityInclude);
+            query.Includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BullPutSpread.SellPutInclude);
+            query.Includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BullPutSpread.BuyPutInclude);
+            query.Includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BearCallSpreadInclude);
+            query.Includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BearCallSpread.SecurityInclude);
+            query.Includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BearCallSpread.SellCallInclude);
+            query.Includes.Add(WeeklyIncomePlaySheet.PropertyNames.ActionPlans.Pairs.BearCallSpread.BuyCallInclude);
 
             result.Data = mapper.Map<List<SimpleWeeklyIncomePlaySheetDto>>(WeeklyIncomePlaySheetService.GetCollection(query));
             result.Total = WeeklyIncomePlaySheetService.GetCount(query);
@@ -232,6 +243,7 @@ namespace TradeProAssistant.Controllers
         }
         #endregion
 
+        #region Security Methods
         #region SetIgnore
         [HttpPost]
         public ActionResult SetIgnore(int identifier, bool ignore)
@@ -266,6 +278,46 @@ namespace TradeProAssistant.Controllers
 
             return new EmptyResult();
         }
+        #endregion
+
+        #region SetIgnore
+        [HttpPost]
+        public ActionResult ClearBools()
+        {
+            Query query = new Query();
+            query.QuerySingleFilters.Add(new QuerySingleFilter()
+            {
+                PropertyName = Security.PropertyNames.PairEligible,
+                Parameter = "true",
+                QueryOperator = QueryOperators.Equals,
+                IsAndFilter = true
+            });
+
+            foreach (Security security in SecurityService.GetCollection(query))
+            {
+                security.Ignore = false;
+                security.IsBullish = false;
+                security.IsBearish = false;
+                SecurityService.Save(security);
+            }
+
+            return new EmptyResult();
+        }
+        #endregion
+        #endregion
+
+        #region PlaySheet Methods
+        #region SetUsed
+        [HttpPost]
+        public ActionResult SetUsed(int identifier, bool used)
+        {
+            WeeklyIncomePlaySheet playSheet = WeeklyIncomePlaySheetService.Get(identifier);
+            playSheet.Used = used;
+            WeeklyIncomePlaySheetService.Save(playSheet);
+
+            return new EmptyResult();
+        }
+        #endregion 
         #endregion
     }
 }

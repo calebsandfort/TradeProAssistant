@@ -95,7 +95,7 @@ namespace Entities
             {
                 if (this.latestOptionStrikes == null && this.LatestOptionDate.Strikes.Count > 0)
                 {
-                    this.latestOptionStrikes = this.LatestOptionDate.Strikes;
+                    this.latestOptionStrikes = this.LatestOptionDate.Strikes.OrderBy(x => x.StrikePrice).ToList();
                 }
                 else if (this.latestOptionStrikes == null)
                 {
