@@ -1,4 +1,7 @@
 import Vue from 'vue'
+//import App from "./App.vue";
+import store from "./store/";
+
 Vue.config.productionTip = false
 
 Vue.component('hello-world', require('./components/HelloWorld.vue').default);
@@ -8,5 +11,9 @@ Vue.component('weekly-income-settings', require('./components/WeeklyIncomeSettin
 
 
 window.Vue = Vue;
+
+new Vue({
+    store
+}).$mount('#app')
 
 

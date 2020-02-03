@@ -14,6 +14,7 @@
     <Property Name="IsBearish" Type="bool" IncludeInDto="true" />
     <Property Name="ExDividendDate" Type="DateTime?" IncludeInDto="true" />
     <Property Name="NextEarningsDate" Type="DateTime?" IncludeInDto="true" />
+    <Property Name="BenzingaId" Type="Int32" IncludeInDto="true" />
     <EnumProperty Name="SectorEnum" Type="Sectors" IncludeInDto="true"/>
     <EnumProperty Name="AssetClassEnum" Type="AssetClasses" IncludeInDto="true"/>
     <CollectionProperty Name="DailyCandlesticks" Type="DayCandlestick" Cardinality="ManyToOne"/>
@@ -140,5 +141,6 @@
     <EnumMember Name="SetImportantDates" Value="1" DisplayValue="Set Important Dates"/>
     <EnumMember Name="DownloadOptionChains" Value="2" DisplayValue="Download Option Chains"/>
     <EnumMember Name="GeneratePlaySheet" Value="3" DisplayValue="Generate Play Sheet"/>
+    <EnumMember Name="SetBenzingaIds" Value="4" DisplayValue="Set Benzinga IDs"/>
   </EntityEnum>
 </EntityMap>

@@ -12,6 +12,8 @@ namespace Enums
 		DownloadOptionChains = 2,
 		[StringValue("Generate Play Sheet")]
 		GeneratePlaySheet = 3,
+		[StringValue("Set Benzinga IDs")]
+		SetBenzingaIds = 4,
 	}
 
 	public static class WeeklyIncomeActionsExtensions
@@ -30,6 +32,9 @@ namespace Enums
 					break;
 				case "Generate Play Sheet":
 					retVal = WeeklyIncomeActions.GeneratePlaySheet;
+					break;
+				case "Set Benzinga IDs":
+					retVal = WeeklyIncomeActions.SetBenzingaIds;
 					break;
 			}
 

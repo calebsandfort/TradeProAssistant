@@ -46,6 +46,8 @@ namespace Entities
 
 		public DateTime? NextEarningsDate { get; set; }
 
+		public Int32 BenzingaId { get; set; }
+
 		public Sectors SectorEnum { get; set; }
 
 		public AssetClasses AssetClassEnum { get; set; }
@@ -76,6 +78,7 @@ namespace Entities
 			this.IsBearish = source.IsBearish;
 			this.ExDividendDate = source.ExDividendDate;
 			this.NextEarningsDate = source.NextEarningsDate;
+			this.BenzingaId = source.BenzingaId;
 			this.SectorEnum = source.SectorEnum;
 	this.AssetClassEnum = source.AssetClassEnum;
 			this.DailyCandlesticks = source.DailyCandlesticks.Select(x => new DayCandlestick(x)).ToList();

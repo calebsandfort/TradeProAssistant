@@ -388,7 +388,12 @@
     <Compile Include="Migrations\202001231655039_Initial.designer.cs">
       <DependentUpon>202001231655039_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001301945456_AddBenzingaId.cs" />
+    <Compile Include="Migrations\202001301945456_AddBenzingaId.designer.cs">
+      <DependentUpon>202001301945456_AddBenzingaId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BenzingaNewsResponse.cs" />
     <Compile Include="Models\OpcGetOptionChainResponse.cs" />
     <Compile Include="Models\OpcGetStockPriceResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -467,6 +472,9 @@
     <None Include="packages.config" />
     <EmbeddedResource Include="Migrations\202001231655039_Initial.resx">
       <DependentUpon>202001231655039_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001301945456_AddBenzingaId.resx">
+      <DependentUpon>202001301945456_AddBenzingaId.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\SP500_Constituents.csv" />
     <EmbeddedResource Include="SeedData\SPMidCap_Constituents.csv" />

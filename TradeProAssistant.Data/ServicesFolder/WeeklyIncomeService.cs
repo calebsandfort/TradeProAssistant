@@ -31,7 +31,7 @@ namespace Services
         #endregion
 
         #region PerformWeeklyIncomeActions
-        public async Task PerformWeeklyIncomeActions(int slots, Decimal minStrikeDiff, Decimal maxRisk, List<int> actions)
+        public async Task PerformWeeklyIncomeActions(int slots, Decimal minStrikeDiff, Decimal maxRisk, int strikePadding, List<int> actions)
         {
             foreach(int action in actions.OrderBy(x => x))
             {
@@ -49,7 +49,15 @@ namespace Services
                         await DownloadOptionChains();
                         break;
                     case WeeklyIncomeActions.GeneratePlaySheet:
-                        await BuildPlan(slots, minStrikeDiff, maxRisk);
+                        await BuildPlan(slots, minStrikeDiff, maxRisk, strikePadding);
+                        break;
+                    case WeeklyIncomeActions.SetBenzingaIds:
+                        using (SecurityService service = new SecurityService(this.JobId))
+                        {
+                            service.ProgressMessageRaised += SecurityService_ProgressMessageRaised;
+
+                            await service.ScrapeBenzingaIdsMaster();
+                        }
                         break;
                 }
             }
@@ -57,12 +65,9 @@ namespace Services
         #endregion
 
         #region BuildPlan
-        public async Task BuildPlan(int slots, Decimal minStrikeDiff, Decimal maxRisk)
+        public async Task BuildPlan(int slots, Decimal minStrikeDiff, Decimal maxRisk, int strikePadding)
         {
             Thread.Sleep(1000);
-
-            DateTime monday = DateTime.Now.GetPreviousDayOfWeekOccurrence(DayOfWeek.Monday);
-            DateTime friday = DateTime.Now.GetNextDayOfWeekOccurrence(DayOfWeek.Friday);
 
             Query query = new Query();
             query.SortPropertyName = Security.PropertyNames.Symbol;
@@ -89,9 +94,7 @@ namespace Services
             query.Includes.Add(Security.PropertyNames.OptionChains.Dates.Strikes.PutInclude);
 
             List<Security> securities = SecurityService.GetCollection(query);
-
-            securities.RemoveAll(x => (x.NextEarningsDate.HasValue && x.NextEarningsDate >= monday && x.NextEarningsDate <= friday));
-            securities.RemoveAll(x => (x.ExDividendDate.HasValue && x.ExDividendDate >= monday && x.ExDividendDate <= friday));
+            securities.FilterForImportantDates();            
 
             //securities = securities.Where(x => x.SectorEnum == Enums.Sectors.Index).ToList();
 
@@ -104,6 +107,7 @@ namespace Services
             {
                 security.MinStrikeDiff = minStrikeDiff;
                 security.MaxRisk = maxRisk;
+                security.StrikePadding = strikePadding;
 
                 OnProgressMessageRaised(new HtmlTag("li").Class("list-group-item")
                 .Append(HtmlTags.B.Append($"{security.Symbol}"))

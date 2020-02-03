@@ -1,0 +1,17 @@
+﻿@model List<SecurityDto>
+
+<div class="row">
+    <div class="col-3">
+        <div id="newsWatchlist" class="list-group" style="overflow: auto;">
+            @foreach (SecurityDto dto in Model)
+            {
+                <button type="button" data-benzinga-id="@dto.BenzingaId" class="list-group-item list-group-item-action">@dto.Symbol <small class="text-muted float-right">@dto.Name</small> </button>
+            }
+        </div>
+    </div>
+    <div class="col-9">
+        <div id="newsWrapper"  style="overflow: auto;">
+
+        </div>
+    </div>
+</div>

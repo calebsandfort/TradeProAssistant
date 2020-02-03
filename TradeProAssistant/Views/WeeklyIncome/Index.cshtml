@@ -1,4 +1,4 @@
-﻿@model WeeklyIncomeModel
+﻿@model List<SecurityDto>
 
 @{
     ViewBag.tab = "WeeklyIncome";
@@ -28,6 +28,13 @@
                    data-toggle="tab"
                    role="tab">Play Sheets</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   id="news-tab"
+                   href="#news"
+                   data-toggle="tab"
+                   role="tab">News</a>
+            </li>
         </ul>
         <div class="tab-content" id="myTabContent" style="padding-top: 10px;">
             <div class="tab-pane fade show active" id="actions" role="tabpanel">
@@ -39,10 +46,11 @@
                             <div class="form-group row">
                                 <label for="actions" class="col-sm-2 col-form-label">Actions</label>
                                 <div class="col-sm-10">
-                                    <select id="actions" name="actions" class="form-control" multiple="multiple" size="3">
+                                    <select id="actions" name="actions" class="form-control" multiple="multiple" size="4">
                                         <option value="@((int)WeeklyIncomeActions.SetImportantDates)" selected="selected">@WeeklyIncomeActions.SetImportantDates.GetStringValue()</option>
                                         <option value="@((int)WeeklyIncomeActions.DownloadOptionChains)" selected="selected">@WeeklyIncomeActions.DownloadOptionChains.GetStringValue()</option>
                                         <option value="@((int)WeeklyIncomeActions.GeneratePlaySheet)" selected="selected">@WeeklyIncomeActions.GeneratePlaySheet.GetStringValue()</option>
+                                        <option value="@((int)WeeklyIncomeActions.SetBenzingaIds)">@WeeklyIncomeActions.SetBenzingaIds.GetStringValue()</option>
                                     </select>
                                 </div>
                             </div>
@@ -61,6 +69,9 @@
             <div class="tab-pane fade" id="play-sheets" role="tabpanel">
                 @Html.Partial("_PlaySheetsTable")
             </div>
+            <div class="tab-pane fade" id="news" role="tabpanel">
+                @Html.Partial("_News", Model)
+            </div>
         </div>
     </div>
 </div>
@@ -72,6 +83,8 @@
             setTimeout(function () {
                 $("#securitiesGrid .k-grid-content").css("height", "").css("max-height", $(window).height() - 300);
                 $("#playSheetsGrid .k-grid-content").css("height", "").css("max-height", $(window).height() - 300);
+                $("#newsWatchlist").css("height", "").css("max-height", $(window).height() - 225);
+                $("#newsWrapper").css("height", "").css("max-height", $(window).height() - 225);
             }, 500);
 
 
@@ -124,7 +137,16 @@
                             $("#playSheetsGrid .k-grid-content").css("height", "").css("max-height", $(window).height() - 300);
                         }, 500);
                     });
+                })
+                .on("click", "#newsWatchlist button", function () {
+                    var url = $("#uxInput_RootUrl").val() + 'WeeklyIncome/GetNews';
+                    $.post(url, {
+                        benzingaId: $(this).data("benzingaId")
+                    }, function (result) {
+                        $("#newsWrapper").html(result);
+                    });
                 });
+
         });
     </script>
 }

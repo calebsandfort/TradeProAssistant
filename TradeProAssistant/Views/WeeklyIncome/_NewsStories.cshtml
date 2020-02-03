@@ -1,0 +1,15 @@
+﻿@model List<BenzingaNewsStory>
+
+<div class="list-group">
+    @foreach(BenzingaNewsStory story in Model)
+    {
+        <a href="@story.Url" class='@String.Format("list-group-item list-group-item-action{0}", story.Important ? " list-group-item-primary" : String.Empty)' target="_blank">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1 text-primary">@story.Title</h5>
+              <small class="text-muted">@story.Created.ToString("g")</small>
+            </div>
+            <p class="mb-1">@(story.Teaser.Length > 100 ? String.Format("{0}...", story.Teaser.Substring(0, 100)) : story.Teaser)</p>
+            @*<small class="text-muted">Donec id elit non mi porta.</small>*@
+          </a>
+    }
+</div>

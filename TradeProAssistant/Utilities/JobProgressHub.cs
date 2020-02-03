@@ -25,5 +25,10 @@ namespace TradeProAssistant.Utilities
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<JobProgressHub>();
             context.Clients.Group(jobId).redirect(controller, action, id);
         }
+
+        public async Task StartGetNews(string jobId, string symbol)
+        {
+            await AssociateJob(jobId);
+        }
     }
 }

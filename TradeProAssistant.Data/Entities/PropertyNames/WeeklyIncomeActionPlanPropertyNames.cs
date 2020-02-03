@@ -9,6 +9,8 @@ namespace Entities
 
 		public String Identifier { get { return ResolvePropertyName("Identifier"); } }
 		public String Dummy { get { return ResolvePropertyName("Dummy"); } }
+
+		public String GenerationMethod { get { return ResolvePropertyName("GenerationMethod"); } }
 		public String PlaySheetIdentifier { get { return ResolvePropertyName("PlaySheetIdentifier"); } }
 		public String PlaySheetInclude { get { return ResolvePropertyName("PlaySheet"); } }
 		public WeeklyIncomePlaySheetPropertyNames PlaySheet { get { return new WeeklyIncomePlaySheetPropertyNames(ResolvePropertyName("PlaySheet")); } }

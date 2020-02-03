@@ -20,6 +20,11 @@ namespace Entities
 		public String IsBearish { get { return ResolvePropertyName("IsBearish"); } }
 		public String ExDividendDate { get { return ResolvePropertyName("ExDividendDate"); } }
 		public String NextEarningsDate { get { return ResolvePropertyName("NextEarningsDate"); } }
+		public String BenzingaId { get { return ResolvePropertyName("BenzingaId"); } }
+
+		public String SectorEnum { get { return ResolvePropertyName("SectorEnum"); } }
+
+		public String AssetClassEnum { get { return ResolvePropertyName("AssetClassEnum"); } }
 		public String DailyCandlesticksInclude { get { return ResolvePropertyName("DailyCandlesticks"); } }
 		public DayCandlestickPropertyNames DailyCandlesticks { get { return new DayCandlestickPropertyNames(ResolvePropertyName("DailyCandlesticks")); } }
 		public String WeeklyCandlesticksInclude { get { return ResolvePropertyName("WeeklyCandlesticks"); } }

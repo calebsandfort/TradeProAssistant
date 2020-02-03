@@ -45,6 +45,15 @@ foreach(XElement prop in properties)
 <#
 }
 
+List<XElement> enumProperties = entity.Descendants(entityMapNamespace + "EnumProperty").ToList();
+foreach(XElement enumProp in enumProperties)
+{
+#>
+
+		public String <#= enumProp.Attribute("Name").Value #> { get { return ResolvePropertyName("<#= enumProp.Attribute("Name").Value #>"); } }
+<#
+}
+
 List<XElement> relatedProperties = entity.Descendants(entityMapNamespace + "Relationship").ToList();
 
 if(relatedProperties.Count > 0)

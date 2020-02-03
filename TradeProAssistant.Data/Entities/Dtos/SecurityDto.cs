@@ -20,6 +20,7 @@ namespace Entities.Dtos
 		public bool IsBearish { get; set; }
 		public DateTime? ExDividendDate { get; set; }
 		public DateTime? NextEarningsDate { get; set; }
+		public Int32 BenzingaId { get; set; }
 
 		public Sectors SectorEnum { get; set; }
 

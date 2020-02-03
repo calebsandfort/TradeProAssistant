@@ -42,6 +42,22 @@ namespace Entities
         }
         #endregion
 
+        #region StrikePadding
+        private int strikePadding = 0;
+        [NotMapped]
+        public int StrikePadding
+        {
+            get
+            {
+                return this.strikePadding;
+            }
+            set
+            {
+                this.strikePadding = value;
+            }
+        }
+        #endregion
+
         #region LatestOptionChain
         private OptionChain latestOptionChain = null;
         [NotMapped]
@@ -181,7 +197,7 @@ namespace Entities
                 if (lowerBoundStrikeIndex < 0)
                 {
                     OptionStrike strike = this.LatestOptionStrikes.Where(x => x.StrikePrice < this.ExpectedLowerMove).OrderBy(x => x.StrikePrice).Last();
-                    lowerBoundStrikeIndex = this.LatestOptionStrikes.IndexOf(strike);
+                    lowerBoundStrikeIndex = this.LatestOptionStrikes.IndexOf(strike) - this.StrikePadding;
                 }
 
                 return lowerBoundStrikeIndex;
@@ -233,7 +249,7 @@ namespace Entities
                 if (upperBoundStrikeIndex < 0)
                 {
                     OptionStrike strike = this.LatestOptionStrikes.Where(x => x.StrikePrice > this.ExpectedUpperMove).OrderBy(x => x.StrikePrice).First();
-                    upperBoundStrikeIndex = this.LatestOptionStrikes.IndexOf(strike);
+                    upperBoundStrikeIndex = this.LatestOptionStrikes.IndexOf(strike) + this.StrikePadding;
                 }
 
                 return upperBoundStrikeIndex;

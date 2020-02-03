@@ -10,11 +10,13 @@ using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TradeProAssistant.Framework;
 using TradeProAssistant.Models;
 using TradeProAssistant.Utilities;
+using TradeProAssistant.Data.Framework;
 
 namespace TradeProAssistant.Controllers
 {
@@ -37,7 +39,20 @@ namespace TradeProAssistant.Controllers
         // GET: WeeklyIncome
         public ActionResult Index()
         {
-            return View(new WeeklyIncomeModel() { Symbol = "FB" });
+            Query query = new Query();
+            query.SortPropertyName = Security.PropertyNames.Symbol;
+            query.QuerySingleFilters.Add(new QuerySingleFilter()
+            {
+                PropertyName = Security.PropertyNames.PairEligible,
+                Parameter = "true",
+                QueryOperator = QueryOperators.Equals,
+                IsAndFilter = true
+            });
+
+            List<SecurityDto> list = mapper.Map<List<SecurityDto>>(SecurityService.GetCollection(query)).Where(x => x.AssetClassEnum == Enums.AssetClasses.Equity).ToList();
+            list.FilterForImportantDates();
+
+            return View(list);
         }
 
         [HttpPost]
@@ -97,25 +112,25 @@ namespace TradeProAssistant.Controllers
 
         #region PerformWeeklyIncomeActions
         [HttpPost]
-        public ActionResult PerformWeeklyIncomeActions(int slots, Decimal minStrikeDiff, Decimal maxRisk, List<int> actions)
+        public ActionResult PerformWeeklyIncomeActions(int slots, Decimal minStrikeDiff, Decimal maxRisk, int strikePadding, List<int> actions)
         {
             maxRisk /= 200m;
 
             string jobId = Guid.NewGuid().ToString("N");
             ViewBag.JobId = jobId;
-            BackgroundJob.Enqueue(() => PerformWeeklyIncomeActionsJob(jobId, slots, minStrikeDiff, maxRisk, actions));
+            BackgroundJob.Enqueue(() => PerformWeeklyIncomeActionsJob(jobId, slots, minStrikeDiff, strikePadding, maxRisk, actions));
 
             return View("ProgressLog");
         }
 
-        public async System.Threading.Tasks.Task PerformWeeklyIncomeActionsJob(string jobId, int slots, Decimal minStrikeDiff, Decimal maxRisk, List<int> actions)
+        public async System.Threading.Tasks.Task PerformWeeklyIncomeActionsJob(string jobId, int slots, Decimal minStrikeDiff, int strikePadding, Decimal maxRisk, List<int> actions)
         {
             using (WeeklyIncomeService service = new WeeklyIncomeService(jobId))
             {
                 service.ProgressMessageRaised += Service_ProgressMessageRaised;
                 service.RedirectRaised += Service_RedirectRaised;
 
-                await service.PerformWeeklyIncomeActions(slots, minStrikeDiff, maxRisk, actions);
+                await service.PerformWeeklyIncomeActions(slots, minStrikeDiff, maxRisk, strikePadding, actions);
             }
         }
         #endregion
@@ -212,8 +227,11 @@ namespace TradeProAssistant.Controllers
                 IsAndFilter = true
             });
 
-            result.Data = mapper.Map<List<SecurityDto>>(SecurityService.GetCollection(query));
-            result.Total = SecurityService.GetCount(query);
+            List<SecurityDto> securities = mapper.Map<List<SecurityDto>>(SecurityService.GetCollection(query));
+            securities.FilterForImportantDates();
+
+            result.Data = securities;
+            result.Total = securities.Count;
 
             return new GuerillaLogisticsApiJsonResult(result);
         }
@@ -302,6 +320,28 @@ namespace TradeProAssistant.Controllers
             }
 
             return new EmptyResult();
+        }
+        #endregion
+
+        #region GetNews
+        [HttpPost]
+        public async Task<ActionResult> GetNews(int benzingaId)
+        {
+            using (SecurityService service = new SecurityService())
+            {
+                List<Data.Models.BenzingaNewsStory> stories = await service.GetBenzingaNews(benzingaId);
+                return PartialView("_NewsStories", stories);
+            }
+        }
+
+        public async System.Threading.Tasks.Task GetNewsJob(string jobId, int benzingaId)
+        {
+            using (SecurityService service = new SecurityService(jobId))
+            {
+                //service.ProgressMessageRaised += Service_ProgressMessageRaised;
+
+                await service.GetBenzingaNews(benzingaId);
+            }
         }
         #endregion
         #endregion

@@ -312,6 +312,8 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="src\assets\logo.png" />
     <Content Include="src\main.js" />
+    <Content Include="src\store\index.js" />
+    <Content Include="src\store\modules\weekly-income.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -348,6 +350,8 @@
     <Content Include="src\components\WeeklyIncomeSettings.vue" />
     <Content Include="Views\WeeklyIncome\_SecuritiesTable.cshtml" />
     <Content Include="Views\WeeklyIncome\_PlaySheetsTable.cshtml" />
+    <Content Include="Views\WeeklyIncome\_News.cshtml" />
+    <Content Include="Views\WeeklyIncome\_NewsStories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
