@@ -48,6 +48,12 @@ namespace Entities
 
 		public Int32 BenzingaId { get; set; }
 
+		public Decimal Support { get; set; }
+
+		public Decimal Resistance { get; set; }
+
+		public bool IronCondorEligible { get; set; }
+
 		public Sectors SectorEnum { get; set; }
 
 		public AssetClasses AssetClassEnum { get; set; }
@@ -79,6 +85,9 @@ namespace Entities
 			this.ExDividendDate = source.ExDividendDate;
 			this.NextEarningsDate = source.NextEarningsDate;
 			this.BenzingaId = source.BenzingaId;
+			this.Support = source.Support;
+			this.Resistance = source.Resistance;
+			this.IronCondorEligible = source.IronCondorEligible;
 			this.SectorEnum = source.SectorEnum;
 	this.AssetClassEnum = source.AssetClassEnum;
 			this.DailyCandlesticks = source.DailyCandlesticks.Select(x => new DayCandlestick(x)).ToList();

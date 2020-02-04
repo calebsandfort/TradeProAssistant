@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TradeProAssistant.Data.Models;
 using System.Linq;
+using TradeProAssistant.Data.Framework;
 
 namespace Services
 {
@@ -118,7 +119,7 @@ namespace Services
                 DateTime exDividendDate = DateTime.MinValue;
                 if (matches.Count > 0 && DateTime.TryParse(matches[0].Groups["ExDividendDate"].Value, out exDividendDate))
                 {
-                    security.ExDividendDate = exDividendDate;
+                    security.ExDividendDate = exDividendDate.AdjustDateForWeekend();
                 }
 
                 matches = _regexNextEarningsDate.Matches(html);
@@ -126,7 +127,7 @@ namespace Services
                 DateTime nextEarningsDate = DateTime.MinValue;
                 if (matches.Count > 0 && DateTime.TryParse(matches[0].Groups["NextEarningsDate"].Value, out nextEarningsDate))
                 {
-                    security.NextEarningsDate = nextEarningsDate;
+                    security.NextEarningsDate = nextEarningsDate.AdjustDateForWeekend();
                 }
 
                 Save(security);

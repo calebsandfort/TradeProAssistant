@@ -38,6 +38,22 @@ namespace TradeProAssistant.Data.Framework
         }
         #endregion
 
+        #region AdjustDateForWeekend
+        public static DateTime AdjustDateForWeekend(this DateTime date)
+        {
+            if(date.DayOfWeek == DayOfWeek.Sunday)
+            {
+                return date.AddDays(1);
+            }
+            else if (date.DayOfWeek == DayOfWeek.Saturday)
+            {
+                return date.AddDays(-1);
+            }
+
+            return date;
+        }
+        #endregion
+
         #region ScrubHtml
         public static string ScrubHtml(this string value)
         {

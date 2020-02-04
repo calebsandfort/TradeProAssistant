@@ -21,6 +21,9 @@ namespace Entities
 		public String ExDividendDate { get { return ResolvePropertyName("ExDividendDate"); } }
 		public String NextEarningsDate { get { return ResolvePropertyName("NextEarningsDate"); } }
 		public String BenzingaId { get { return ResolvePropertyName("BenzingaId"); } }
+		public String Support { get { return ResolvePropertyName("Support"); } }
+		public String Resistance { get { return ResolvePropertyName("Resistance"); } }
+		public String IronCondorEligible { get { return ResolvePropertyName("IronCondorEligible"); } }
 
 		public String SectorEnum { get { return ResolvePropertyName("SectorEnum"); } }
 

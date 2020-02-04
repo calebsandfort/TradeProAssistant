@@ -277,6 +277,9 @@
     <Compile Include="Entities\Enums\AssetClasses.cs">
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Enums\CondorTypes.cs">
+      <DependentUpon>Enum.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Enums\Sectors.cs">
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
@@ -392,6 +395,10 @@
     <Compile Include="Migrations\202001301945456_AddBenzingaId.designer.cs">
       <DependentUpon>202001301945456_AddBenzingaId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002041701243_IronCondorFields.cs" />
+    <Compile Include="Migrations\202002041701243_IronCondorFields.designer.cs">
+      <DependentUpon>202002041701243_IronCondorFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BenzingaNewsResponse.cs" />
     <Compile Include="Models\OpcGetOptionChainResponse.cs" />
@@ -475,6 +482,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001301945456_AddBenzingaId.resx">
       <DependentUpon>202001301945456_AddBenzingaId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002041701243_IronCondorFields.resx">
+      <DependentUpon>202002041701243_IronCondorFields.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\SP500_Constituents.csv" />
     <EmbeddedResource Include="SeedData\SPMidCap_Constituents.csv" />

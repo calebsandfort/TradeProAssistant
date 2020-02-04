@@ -96,6 +96,14 @@
                         ignore: $(this).prop("checked")
                     });
             })
+                .on("change", ".ironCondorEligibleCheckbox", function () {
+                var url = $("#uxInput_RootUrl").val() + 'WeeklyIncome/SetIronCondorEligible';
+                $.post(url,
+                    {
+                        identifier: $(this).data("identifier"),
+                        ironCondorEligible: $(this).prop("checked")
+                    });
+            })
                 .on("change", ".isBullishCheckbox", function () {
                     var url = $("#uxInput_RootUrl").val() + 'WeeklyIncome/SetIsBullish';
                     $.post(url,
@@ -148,6 +156,22 @@
                 });
 
         });
+
+        function updateSR(e) {
+            e.preventDefault();
+
+            var row = $(e.currentTarget).closest("tr");
+            var supportTextbox = row.find(".supportTextbox");
+            var resistanceTextbox = row.find(".resistanceTextbox");
+
+            var url = $("#uxInput_RootUrl").val() + 'WeeklyIncome/SetSR';
+                    $.post(url,
+                        {
+                            identifier: supportTextbox.data("identifier"),
+                            support: supportTextbox.val(),
+                            resistance: resistanceTextbox.val()
+                        });
+        }
     </script>
 }
 

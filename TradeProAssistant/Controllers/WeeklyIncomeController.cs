@@ -50,7 +50,7 @@ namespace TradeProAssistant.Controllers
             });
 
             List<SecurityDto> list = mapper.Map<List<SecurityDto>>(SecurityService.GetCollection(query)).Where(x => x.AssetClassEnum == Enums.AssetClasses.Equity).ToList();
-            list.FilterForImportantDates();
+            //list.FilterForImportantDates();
 
             return View(list);
         }
@@ -298,6 +298,31 @@ namespace TradeProAssistant.Controllers
         }
         #endregion
 
+        #region SetIronCondorEligible
+        [HttpPost]
+        public ActionResult SetIronCondorEligible(int identifier, bool ironCondorEligible)
+        {
+            Security security = SecurityService.Get(identifier);
+            security.IronCondorEligible = ironCondorEligible;
+            SecurityService.Save(security);
+
+            return new EmptyResult();
+        }
+        #endregion
+
+        #region SetIronCondorEligible
+        [HttpPost]
+        public ActionResult SetSR(int identifier, Decimal support, Decimal resistance)
+        {
+            Security security = SecurityService.Get(identifier);
+            security.Support = support;
+            security.Resistance = resistance;
+            SecurityService.Save(security);
+
+            return new EmptyResult();
+        }
+        #endregion
+
         #region ClearBools
         [HttpPost]
         public ActionResult ClearBools()
@@ -316,6 +341,9 @@ namespace TradeProAssistant.Controllers
                 security.Ignore = false;
                 security.IsBullish = false;
                 security.IsBearish = false;
+                security.IronCondorEligible = false;
+                security.Support = 0m;
+                security.Resistance = 0m;
                 SecurityService.Save(security);
             }
 

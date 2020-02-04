@@ -15,6 +15,9 @@
     <Property Name="ExDividendDate" Type="DateTime?" IncludeInDto="true" />
     <Property Name="NextEarningsDate" Type="DateTime?" IncludeInDto="true" />
     <Property Name="BenzingaId" Type="Int32" IncludeInDto="true" />
+    <Property Name="Support" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Resistance" Type="Decimal" IncludeInDto="true" />
+    <Property Name="IronCondorEligible" Type="bool" IncludeInDto="true" />
     <EnumProperty Name="SectorEnum" Type="Sectors" IncludeInDto="true"/>
     <EnumProperty Name="AssetClassEnum" Type="AssetClasses" IncludeInDto="true"/>
     <CollectionProperty Name="DailyCandlesticks" Type="DayCandlestick" Cardinality="ManyToOne"/>
@@ -142,5 +145,9 @@
     <EnumMember Name="DownloadOptionChains" Value="2" DisplayValue="Download Option Chains"/>
     <EnumMember Name="GeneratePlaySheet" Value="3" DisplayValue="Generate Play Sheet"/>
     <EnumMember Name="SetBenzingaIds" Value="4" DisplayValue="Set Benzinga IDs"/>
+  </EntityEnum>
+  <EntityEnum Name="CondorTypes">
+    <EnumMember Name="Pair" Value="1" DisplayValue="Pair"/>
+    <EnumMember Name="Iron" Value="2" DisplayValue="Iron"/>
   </EntityEnum>
 </EntityMap>

@@ -21,6 +21,9 @@ namespace Entities.Dtos
 		public DateTime? ExDividendDate { get; set; }
 		public DateTime? NextEarningsDate { get; set; }
 		public Int32 BenzingaId { get; set; }
+		public Decimal Support { get; set; }
+		public Decimal Resistance { get; set; }
+		public bool IronCondorEligible { get; set; }
 
 		public Sectors SectorEnum { get; set; }
 
