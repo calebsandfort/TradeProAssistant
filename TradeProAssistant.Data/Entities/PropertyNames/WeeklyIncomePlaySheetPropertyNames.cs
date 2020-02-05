@@ -11,6 +11,8 @@ namespace Entities
 		public String TimeStamp { get { return ResolvePropertyName("TimeStamp"); } }
 		public String Expiry { get { return ResolvePropertyName("Expiry"); } }
 		public String Used { get { return ResolvePropertyName("Used"); } }
+
+		public String Strategy { get { return ResolvePropertyName("Strategy"); } }
 		public String ActionPlansInclude { get { return ResolvePropertyName("ActionPlans"); } }
 		public WeeklyIncomeActionPlanPropertyNames ActionPlans { get { return new WeeklyIncomeActionPlanPropertyNames(ResolvePropertyName("ActionPlans")); } }
 		public String ComboCountsInclude { get { return ResolvePropertyName("ComboCounts"); } }

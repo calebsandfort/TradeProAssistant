@@ -10,6 +10,7 @@ namespace Entities
 	public partial class Security
 	{
         #region Custom Properties
+        #region Settings
         #region MaxRisk
         private Decimal maxRisk = 5m;
         [NotMapped]
@@ -57,7 +58,9 @@ namespace Entities
             }
         }
         #endregion
+        #endregion
 
+        #region Latest Option Entities
         #region LatestOptionChain
         private OptionChain latestOptionChain = null;
         [NotMapped]
@@ -65,7 +68,7 @@ namespace Entities
         {
             get
             {
-                if(this.latestOptionChain == null && this.OptionChains.Count > 0)
+                if (this.latestOptionChain == null && this.OptionChains.Count > 0)
                 {
                     this.latestOptionChain = this.OptionChains.OrderByDescending(x => x.Identifier).First();
                 }
@@ -121,8 +124,10 @@ namespace Entities
                 return this.latestOptionStrikes;
             }
         }
+        #endregion 
         #endregion
 
+        #region Expected Move Props
         #region ExpectedMove
         private Decimal expectedMove = -1m;
         [NotMapped]
@@ -153,7 +158,7 @@ namespace Entities
         }
         #endregion
 
-        #region ExpectedMove
+        #region ExpectedMovePtcg
         private Decimal expectedMovePtcg = -1m;
         [NotMapped]
         public Decimal ExpectedMovePtcg
@@ -187,41 +192,6 @@ namespace Entities
         }
         #endregion
 
-        #region LowerBoundStrikeIndex
-        private int lowerBoundStrikeIndex = -1;
-        [NotMapped]
-        public int LowerBoundStrikeIndex
-        {
-            get
-            {
-                if (lowerBoundStrikeIndex < 0)
-                {
-                    OptionStrike strike = this.LatestOptionStrikes.Where(x => x.StrikePrice < this.ExpectedLowerMove).OrderBy(x => x.StrikePrice).Last();
-                    lowerBoundStrikeIndex = this.LatestOptionStrikes.IndexOf(strike) - this.StrikePadding;
-                }
-
-                return lowerBoundStrikeIndex;
-            }
-        }
-        #endregion
-
-        #region LowerBoundStrike
-        private Decimal lowerBoundStrike = -1m;
-        [NotMapped]
-        public Decimal LowerBoundStrike
-        {
-            get
-            {
-                if (lowerBoundStrike < 0m)
-                {
-                    lowerBoundStrike = this.LatestOptionStrikes[this.LowerBoundStrikeIndex].StrikePrice;
-                }
-
-                return lowerBoundStrike;
-            }
-        }
-        #endregion
-
         #region ExpectedUpperMove
         private Decimal expectedUpperMove = -1m;
         [NotMapped]
@@ -238,122 +208,314 @@ namespace Entities
             }
         }
         #endregion
+        #endregion
 
-        #region UpperBoundStrikeIndex
-        private int upperBoundStrikeIndex = -1;
+        #region Pair Condor
+        #region PcLowerBoundStrikeIndex
+        private int pcLowerBoundStrikeIndex = -1;
         [NotMapped]
-        public int UpperBoundStrikeIndex
+        public int PcLowerBoundStrikeIndex
         {
             get
             {
-                if (upperBoundStrikeIndex < 0)
+                if (pcLowerBoundStrikeIndex < 0)
+                {
+                    OptionStrike strike = this.LatestOptionStrikes.Where(x => x.StrikePrice < this.ExpectedLowerMove).OrderBy(x => x.StrikePrice).Last();
+                    pcLowerBoundStrikeIndex = this.LatestOptionStrikes.IndexOf(strike) - this.StrikePadding;
+                }
+
+                return pcLowerBoundStrikeIndex;
+            }
+        }
+        #endregion
+
+        #region PcLowerBoundStrike
+        private Decimal pcLowerBoundStrike = -1m;
+        [NotMapped]
+        public Decimal PcLowerBoundStrike
+        {
+            get
+            {
+                if (pcLowerBoundStrike < 0m)
+                {
+                    pcLowerBoundStrike = this.LatestOptionStrikes[this.PcLowerBoundStrikeIndex].StrikePrice;
+                }
+
+                return pcLowerBoundStrike;
+            }
+        }
+        #endregion
+
+        #region PcUpperBoundStrikeIndex
+        private int pcUpperBoundStrikeIndex = -1;
+        [NotMapped]
+        public int PcUpperBoundStrikeIndex
+        {
+            get
+            {
+                if (pcUpperBoundStrikeIndex < 0)
                 {
                     OptionStrike strike = this.LatestOptionStrikes.Where(x => x.StrikePrice > this.ExpectedUpperMove).OrderBy(x => x.StrikePrice).First();
-                    upperBoundStrikeIndex = this.LatestOptionStrikes.IndexOf(strike) + this.StrikePadding;
+                    pcUpperBoundStrikeIndex = this.LatestOptionStrikes.IndexOf(strike) + this.StrikePadding;
                 }
 
-                return upperBoundStrikeIndex;
+                return pcUpperBoundStrikeIndex;
             }
         }
         #endregion
 
-        #region UpperBoundStrike
-        private Decimal upperBoundStrike = -1m;
+        #region PcUpperBoundStrike
+        private Decimal pcUpperBoundStrike = -1m;
         [NotMapped]
-        public Decimal UpperBoundStrike
+        public Decimal PcUpperBoundStrike
         {
             get
             {
-                if (upperBoundStrike < 0m)
+                if (pcUpperBoundStrike < 0m)
                 {
-                    upperBoundStrike = this.LatestOptionStrikes[this.UpperBoundStrikeIndex].StrikePrice;
+                    pcUpperBoundStrike = this.LatestOptionStrikes[this.PcUpperBoundStrikeIndex].StrikePrice;
                 }
 
-                return upperBoundStrike;
+                return pcUpperBoundStrike;
             }
         }
         #endregion
 
-        #region BullPutSpread
-        private BullPutSpread bullPutSpread = null;
+        #region PcBullPutSpread
+        private BullPutSpread pcBullPutSpread = null;
         [NotMapped]
-        public BullPutSpread BullPutSpread
+        public BullPutSpread PcBullPutSpread
         {
             get
             {
-                if (this.bullPutSpread == null && this.OptionChains.Count > 0)
+                if (this.pcBullPutSpread == null && this.OptionChains.Count > 0)
                 {
-                    this.bullPutSpread = new BullPutSpread();
-                    this.bullPutSpread.SecurityIdentifier = this.Identifier;
-                    this.bullPutSpread.SellPut = this.LatestOptionStrikes[this.LowerBoundStrikeIndex].Put;
-                    this.bullPutSpread.SellStrike = this.LatestOptionStrikes[this.LowerBoundStrikeIndex].StrikePrice;
+                    this.pcBullPutSpread = new BullPutSpread();
+                    this.pcBullPutSpread.SecurityIdentifier = this.Identifier;
+                    this.pcBullPutSpread.SellPut = this.LatestOptionStrikes[this.PcLowerBoundStrikeIndex].Put;
+                    this.pcBullPutSpread.SellStrike = this.LatestOptionStrikes[this.PcLowerBoundStrikeIndex].StrikePrice;
 
-                    int buyIndex = this.LowerBoundStrikeIndex - 1;
-                    Decimal strikeDiff = this.LatestOptionStrikes[this.LowerBoundStrikeIndex].StrikePrice
+                    int buyIndex = this.PcLowerBoundStrikeIndex - 1;
+                    Decimal strikeDiff = this.LatestOptionStrikes[this.PcLowerBoundStrikeIndex].StrikePrice
                         - this.LatestOptionStrikes[buyIndex].StrikePrice;
 
-                    while(strikeDiff < this.MinStrikeDiff)
+                    while (strikeDiff < this.MinStrikeDiff)
                     {
                         buyIndex -= 1;
-                        strikeDiff = this.LatestOptionStrikes[this.LowerBoundStrikeIndex].StrikePrice
+                        strikeDiff = this.LatestOptionStrikes[this.PcLowerBoundStrikeIndex].StrikePrice
                         - this.LatestOptionStrikes[buyIndex].StrikePrice;
                     }
 
-                    this.bullPutSpread.Quantity = (int)Math.Ceiling(this.MaxRisk / strikeDiff);
+                    this.pcBullPutSpread.Quantity = (int)Math.Ceiling(this.MaxRisk / strikeDiff);
 
-                    this.bullPutSpread.BuyPut = this.LatestOptionStrikes[buyIndex].Put;
-                    this.bullPutSpread.BuyStrike = this.LatestOptionStrikes[buyIndex].StrikePrice;
+                    this.pcBullPutSpread.BuyPut = this.LatestOptionStrikes[buyIndex].Put;
+                    this.pcBullPutSpread.BuyStrike = this.LatestOptionStrikes[buyIndex].StrikePrice;
                 }
-                else if (this.bullPutSpread == null)
+                else if (this.pcBullPutSpread == null)
                 {
-                    this.bullPutSpread = new BullPutSpread();
+                    this.pcBullPutSpread = new BullPutSpread();
                 }
 
-                return this.bullPutSpread;
+                return this.pcBullPutSpread;
             }
 
         }
         #endregion
 
-        #region BearCallSpread
-        private BearCallSpread bearCallSpread = null;
+        #region PcBearCallSpread
+        private BearCallSpread pcBearCallSpread = null;
         [NotMapped]
-        public BearCallSpread BearCallSpread
+        public BearCallSpread PcBearCallSpread
         {
             get
             {
-                if (this.bearCallSpread == null && this.OptionChains.Count > 0)
+                if (this.pcBearCallSpread == null && this.OptionChains.Count > 0)
                 {
-                    this.bearCallSpread = new BearCallSpread();
-                    this.bearCallSpread.SecurityIdentifier = this.Identifier;
-                    this.bearCallSpread.SellCall = this.LatestOptionStrikes[this.UpperBoundStrikeIndex].Call;
-                    this.bearCallSpread.SellStrike = this.LatestOptionStrikes[this.UpperBoundStrikeIndex].StrikePrice;
+                    this.pcBearCallSpread = new BearCallSpread();
+                    this.pcBearCallSpread.SecurityIdentifier = this.Identifier;
+                    this.pcBearCallSpread.SellCall = this.LatestOptionStrikes[this.PcUpperBoundStrikeIndex].Call;
+                    this.pcBearCallSpread.SellStrike = this.LatestOptionStrikes[this.PcUpperBoundStrikeIndex].StrikePrice;
 
-                    int buyIndex = this.UpperBoundStrikeIndex + 1;
+                    int buyIndex = this.PcUpperBoundStrikeIndex + 1;
                     Decimal strikeDiff = this.LatestOptionStrikes[buyIndex].StrikePrice
-                        - this.LatestOptionStrikes[this.UpperBoundStrikeIndex].StrikePrice;
+                        - this.LatestOptionStrikes[this.PcUpperBoundStrikeIndex].StrikePrice;
 
                     while (strikeDiff < this.MinStrikeDiff)
                     {
                         buyIndex += 1;
                         strikeDiff = this.LatestOptionStrikes[buyIndex].StrikePrice
-                            - this.LatestOptionStrikes[this.UpperBoundStrikeIndex].StrikePrice;
+                            - this.LatestOptionStrikes[this.PcUpperBoundStrikeIndex].StrikePrice;
                     }
 
-                    this.bearCallSpread.Quantity = (int)Math.Ceiling(this.MaxRisk / strikeDiff);
+                    this.pcBearCallSpread.Quantity = (int)Math.Ceiling(this.MaxRisk / strikeDiff);
 
-                    this.bearCallSpread.BuyCall= this.LatestOptionStrikes[buyIndex].Call;
-                    this.bearCallSpread.BuyStrike = this.LatestOptionStrikes[buyIndex].StrikePrice;
+                    this.pcBearCallSpread.BuyCall = this.LatestOptionStrikes[buyIndex].Call;
+                    this.pcBearCallSpread.BuyStrike = this.LatestOptionStrikes[buyIndex].StrikePrice;
                 }
-                else if (this.bearCallSpread == null)
+                else if (this.pcBearCallSpread == null)
                 {
-                    this.bearCallSpread = new BearCallSpread();
+                    this.pcBearCallSpread = new BearCallSpread();
                 }
 
-                return this.bearCallSpread;
+                return this.pcBearCallSpread;
             }
 
         }
+        #endregion 
+        #endregion
+
+        #region Iron Condor
+        #region IcLowerBoundStrikeIndex
+        private int icLowerBoundStrikeIndex = -1;
+        [NotMapped]
+        public int IcLowerBoundStrikeIndex
+        {
+            get
+            {
+                if (icLowerBoundStrikeIndex < 0)
+                {
+                    OptionStrike strike = this.LatestOptionStrikes.Where(x => x.StrikePrice <= this.Support).OrderBy(x => x.StrikePrice).Last();
+                    icLowerBoundStrikeIndex = this.LatestOptionStrikes.IndexOf(strike) - this.StrikePadding;
+                }
+
+                return icLowerBoundStrikeIndex;
+            }
+        }
+        #endregion
+
+        #region IcLowerBoundStrike
+        private Decimal icLowerBoundStrike = -1m;
+        [NotMapped]
+        public Decimal IcLowerBoundStrike
+        {
+            get
+            {
+                if (icLowerBoundStrike < 0m)
+                {
+                    icLowerBoundStrike = this.LatestOptionStrikes[this.IcLowerBoundStrikeIndex].StrikePrice;
+                }
+
+                return icLowerBoundStrike;
+            }
+        }
+        #endregion
+
+        #region IcUpperBoundStrikeIndex
+        private int icUpperBoundStrikeIndex = -1;
+        [NotMapped]
+        public int IcUpperBoundStrikeIndex
+        {
+            get
+            {
+                if (icUpperBoundStrikeIndex < 0)
+                {
+                    OptionStrike strike = this.LatestOptionStrikes.Where(x => x.StrikePrice >= this.Resistance).OrderBy(x => x.StrikePrice).First();
+                    icUpperBoundStrikeIndex = this.LatestOptionStrikes.IndexOf(strike) + this.StrikePadding;
+                }
+
+                return icUpperBoundStrikeIndex;
+            }
+        }
+        #endregion
+
+        #region IcUpperBoundStrike
+        private Decimal icUpperBoundStrike = -1m;
+        [NotMapped]
+        public Decimal IcUpperBoundStrike
+        {
+            get
+            {
+                if (icUpperBoundStrike < 0m)
+                {
+                    icUpperBoundStrike = this.LatestOptionStrikes[this.IcUpperBoundStrikeIndex].StrikePrice;
+                }
+
+                return icUpperBoundStrike;
+            }
+        }
+        #endregion
+
+        #region IcBullPutSpread
+        private BullPutSpread icBullPutSpread = null;
+        [NotMapped]
+        public BullPutSpread IcBullPutSpread
+        {
+            get
+            {
+                if (this.icBullPutSpread == null && this.OptionChains.Count > 0 && this.IronCondorEligible && this.Support > 0)
+                {
+                    this.icBullPutSpread = new BullPutSpread();
+                    this.icBullPutSpread.SecurityIdentifier = this.Identifier;
+                    this.icBullPutSpread.SellPut = this.LatestOptionStrikes[this.IcLowerBoundStrikeIndex].Put;
+                    this.icBullPutSpread.SellStrike = this.LatestOptionStrikes[this.IcLowerBoundStrikeIndex].StrikePrice;
+
+                    int buyIndex = this.IcLowerBoundStrikeIndex - 1;
+                    Decimal strikeDiff = this.LatestOptionStrikes[this.IcLowerBoundStrikeIndex].StrikePrice
+                        - this.LatestOptionStrikes[buyIndex].StrikePrice;
+
+                    while (strikeDiff < this.MinStrikeDiff)
+                    {
+                        buyIndex -= 1;
+                        strikeDiff = this.LatestOptionStrikes[this.IcLowerBoundStrikeIndex].StrikePrice
+                        - this.LatestOptionStrikes[buyIndex].StrikePrice;
+                    }
+
+                    this.icBullPutSpread.Quantity = (int)Math.Ceiling((this.MaxRisk * 2) / strikeDiff);
+
+                    this.icBullPutSpread.BuyPut = this.LatestOptionStrikes[buyIndex].Put;
+                    this.icBullPutSpread.BuyStrike = this.LatestOptionStrikes[buyIndex].StrikePrice;
+                }
+                else if (this.icBullPutSpread == null)
+                {
+                    this.icBullPutSpread = new BullPutSpread();
+                }
+
+                return this.icBullPutSpread;
+            }
+
+        }
+        #endregion
+
+        #region IcBearCallSpread
+        private BearCallSpread icBearCallSpread = null;
+        [NotMapped]
+        public BearCallSpread IcBearCallSpread
+        {
+            get
+            {
+                if (this.icBearCallSpread == null && this.OptionChains.Count > 0 && this.IronCondorEligible && this.Resistance > 0)
+                {
+                    this.icBearCallSpread = new BearCallSpread();
+                    this.icBearCallSpread.SecurityIdentifier = this.Identifier;
+                    this.icBearCallSpread.SellCall = this.LatestOptionStrikes[this.IcUpperBoundStrikeIndex].Call;
+                    this.icBearCallSpread.SellStrike = this.LatestOptionStrikes[this.IcUpperBoundStrikeIndex].StrikePrice;
+
+                    int buyIndex = this.IcUpperBoundStrikeIndex + 1;
+                    Decimal strikeDiff = this.LatestOptionStrikes[buyIndex].StrikePrice
+                        - this.LatestOptionStrikes[this.IcUpperBoundStrikeIndex].StrikePrice;
+
+                    while (strikeDiff < this.MinStrikeDiff)
+                    {
+                        buyIndex += 1;
+                        strikeDiff = this.LatestOptionStrikes[buyIndex].StrikePrice
+                            - this.LatestOptionStrikes[this.IcUpperBoundStrikeIndex].StrikePrice;
+                    }
+
+                    this.icBearCallSpread.Quantity = (int)Math.Ceiling((this.MaxRisk * 2) / strikeDiff);
+
+                    this.icBearCallSpread.BuyCall = this.LatestOptionStrikes[buyIndex].Call;
+                    this.icBearCallSpread.BuyStrike = this.LatestOptionStrikes[buyIndex].StrikePrice;
+                }
+                else if (this.icBearCallSpread == null)
+                {
+                    this.icBearCallSpread = new BearCallSpread();
+                }
+
+                return this.icBearCallSpread;
+            }
+
+        }
+        #endregion 
         #endregion
         #endregion
 

@@ -11,6 +11,8 @@ namespace Entities
 		public String Dummy { get { return ResolvePropertyName("Dummy"); } }
 
 		public String SectorEnum { get { return ResolvePropertyName("SectorEnum"); } }
+
+		public String Strategy { get { return ResolvePropertyName("Strategy"); } }
 		public String BullPutSpreadIdentifier { get { return ResolvePropertyName("BullPutSpreadIdentifier"); } }
 		public String BullPutSpreadInclude { get { return ResolvePropertyName("BullPutSpread"); } }
 		public BullPutSpreadPropertyNames BullPutSpread { get { return new BullPutSpreadPropertyNames(ResolvePropertyName("BullPutSpread")); } }

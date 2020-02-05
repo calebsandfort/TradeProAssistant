@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Enums;
 
 namespace Entities.Dtos
 {
@@ -10,6 +11,8 @@ namespace Entities.Dtos
 		public DateTime TimeStamp { get; set; }
 		public DateTime Expiry { get; set; }
 		public bool Used { get; set; }
+
+		public StrategyTypes Strategy { get; set; }
 
 		public List<WeeklyIncomeActionPlanDto> ActionPlans { get; set; }
 		public List<WeeklyIncomeComboCountDto> ComboCounts { get; set; }

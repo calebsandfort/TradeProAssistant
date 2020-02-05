@@ -391,9 +391,21 @@ namespace TradeProAssistant.Controllers
         [HttpPost]
         public ActionResult Purge()
         {
-            WeeklyIncomeService.Purge();
+            string jobId = Guid.NewGuid().ToString("N");
+            ViewBag.JobId = jobId;
+            BackgroundJob.Enqueue(() => PurgeJob(jobId));
 
-            return new EmptyResult();
+            return View("ProgressLog");
+        }
+
+        public async System.Threading.Tasks.Task PurgeJob(string jobId)
+        {
+            using (WeeklyIncomeService service = new WeeklyIncomeService(jobId))
+            {
+                service.ProgressMessageRaised += Service_ProgressMessageRaised;
+                service.RedirectRaised += Service_RedirectRaised;
+                service.Purge();
+            }
         }
         #endregion
         #endregion

@@ -13,6 +13,7 @@ namespace Entities.Dtos
 		public Decimal Mid { get; set; }
 		public Decimal Credit { get; set; }
 		public Decimal Risk { get; set; }
+		public Decimal CapitalRequirement { get; set; }
 
 		public PutDto SellPut { get; set; }
 		public PutDto BuyPut { get; set; }

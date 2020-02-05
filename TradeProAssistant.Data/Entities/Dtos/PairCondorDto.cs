@@ -14,6 +14,8 @@ namespace Entities.Dtos
 
 		public Sectors SectorEnum { get; set; }
 
+		public StrategyTypes Strategy { get; set; }
+
 		public BullPutSpreadDto BullPutSpread { get; set; }
 		public BearCallSpreadDto BearCallSpread { get; set; }
 

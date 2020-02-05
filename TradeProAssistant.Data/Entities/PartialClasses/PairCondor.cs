@@ -35,7 +35,17 @@ namespace Entities
             {
                 if (risk < 0m)
                 {
-                    risk = this.BullPutSpread.Risk + this.BearCallSpread.Risk;
+                    switch (this.Strategy)
+                    {
+                        case Enums.StrategyTypes.PairCondor:
+                            risk = this.BullPutSpread.Risk + this.BearCallSpread.Risk;
+                            break;
+                        case Enums.StrategyTypes.IronCondor:
+                            risk = Math.Max(this.BullPutSpread.CapitalRequirement, this.BearCallSpread.CapitalRequirement);
+                            break;
+                    }
+
+                    
                 }
 
                 return risk;
@@ -52,7 +62,16 @@ namespace Entities
             {
                 if (requiredCapital < 0m)
                 {
-                    requiredCapital = this.Risk + this.Credit;
+                    switch (this.Strategy)
+                    {
+                        case Enums.StrategyTypes.PairCondor:
+                            requiredCapital = this.Risk + this.Credit;
+                            break;
+                        case Enums.StrategyTypes.IronCondor:
+                            requiredCapital = this.Risk;
+                            break;
+                    }
+                   
                 }
 
                 return requiredCapital;

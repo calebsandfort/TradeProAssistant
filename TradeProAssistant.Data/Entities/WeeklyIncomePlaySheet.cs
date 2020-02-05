@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Enums;
 
 namespace Entities
 {
@@ -23,6 +24,8 @@ namespace Entities
 
 		public bool Used { get; set; }
 
+		public StrategyTypes Strategy { get; set; }
+
 		public virtual List<WeeklyIncomeActionPlan> ActionPlans { get; set; }
 		public virtual List<WeeklyIncomeComboCount> ComboCounts { get; set; }
 
@@ -38,7 +41,8 @@ namespace Entities
 			this.TimeStamp = source.TimeStamp;
 			this.Expiry = source.Expiry;
 			this.Used = source.Used;
-					this.ActionPlans = source.ActionPlans.Select(x => new WeeklyIncomeActionPlan(x)).ToList();
+			this.Strategy = source.Strategy;
+			this.ActionPlans = source.ActionPlans.Select(x => new WeeklyIncomeActionPlan(x)).ToList();
 			this.ComboCounts = source.ComboCounts.Select(x => new WeeklyIncomeComboCount(x)).ToList();
 		}
 		#endregion

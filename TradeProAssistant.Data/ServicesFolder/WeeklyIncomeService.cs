@@ -48,8 +48,11 @@ namespace Services
                     case WeeklyIncomeActions.DownloadOptionChains:
                         await DownloadOptionChains();
                         break;
-                    case WeeklyIncomeActions.GeneratePlaySheet:
-                        await BuildPlan(slots, minStrikeDiff, maxRisk, strikePadding);
+                    case WeeklyIncomeActions.GeneratePairCondorPlaySheet:
+                        await BuildPcPlan(slots, minStrikeDiff, maxRisk, strikePadding);
+                        break;
+                    case WeeklyIncomeActions.GenerateIronCondorPlaySheet:
+                        await BuildIcPlan(slots, minStrikeDiff, maxRisk, strikePadding);
                         break;
                     case WeeklyIncomeActions.SetBenzingaIds:
                         using (SecurityService service = new SecurityService(this.JobId))
@@ -64,8 +67,9 @@ namespace Services
         }
         #endregion
 
-        #region BuildPlan
-        public async Task BuildPlan(int slots, Decimal minStrikeDiff, Decimal maxRisk, int strikePadding)
+        #region Pair Condor Methods
+        #region BuildPcPlan
+        public async Task BuildPcPlan(int slots, Decimal minStrikeDiff, Decimal maxRisk, int strikePadding)
         {
             Thread.Sleep(1000);
 
@@ -94,7 +98,7 @@ namespace Services
             query.Includes.Add(Security.PropertyNames.OptionChains.Dates.Strikes.PutInclude);
 
             List<Security> securities = SecurityService.GetCollection(query);
-            securities.FilterForImportantDates();            
+            securities.FilterForImportantDates();
 
             //securities = securities.Where(x => x.SectorEnum == Enums.Sectors.Index).ToList();
 
@@ -103,7 +107,7 @@ namespace Services
                         .Append(HtmlTags.Span.Append("&nbsp;optionable securities retrieved"))
                         .ToHtml().ToString(), this.JobId);
 
-            foreach(Security security in securities)
+            foreach (Security security in securities)
             {
                 security.MinStrikeDiff = minStrikeDiff;
                 security.MaxRisk = maxRisk;
@@ -114,7 +118,7 @@ namespace Services
                 .Append(HtmlTags.Span.Append("&nbsp;expected move:&nbsp;"))
                 .Append(HtmlTags.B.Append($"{security.ExpectedMove:C} ({(security.ExpectedMove / security.CurrentPrice):P2})"))
                 .Append(HtmlTags.Span.Append("&nbsp;credit spreads:&nbsp;"))
-                .Append(HtmlTags.B.Append($"{security.BearCallSpread}, {security.BullPutSpread}"))
+                .Append(HtmlTags.B.Append($"{security.PcBearCallSpread}, {security.PcBullPutSpread}"))
                 //.Append(HtmlTags.Span.Append($",&nbsp;price range:&nbsp;"))
                 //.Append(HtmlTags.B.Append($"{security.LowerBoundStrike:C} : {security.ExpectedLowerMove:C} : {security.CurrentPrice:C} : {security.ExpectedUpperMove:C} : {security.UpperBoundStrike:C}"))
                 //.Append(HtmlTags.Span.Append($",&nbsp;step/qty:&nbsp;"))
@@ -156,47 +160,50 @@ namespace Services
                             {
                                 PairCondor ijPairCondor = new PairCondor();
                                 ijPairCondor.SectorEnum = sectorGroup.Sector;
-                                ijPairCondor.BullPutSpread = iSecurity.BullPutSpread;
-                                ijPairCondor.BearCallSpread = jSecurity.BearCallSpread;
-                                pairCondorCandidates.Add(ijPairCondor); 
+                                ijPairCondor.Strategy = StrategyTypes.PairCondor;
+                                ijPairCondor.BullPutSpread = iSecurity.PcBullPutSpread;
+                                ijPairCondor.BearCallSpread = jSecurity.PcBearCallSpread;
+                                pairCondorCandidates.Add(ijPairCondor);
                             }
 
                             if (!jSecurity.IsBearish && !iSecurity.IsBullish)
                             {
                                 PairCondor jiPairCondor = new PairCondor();
                                 jiPairCondor.SectorEnum = sectorGroup.Sector;
-                                jiPairCondor.BullPutSpread = jSecurity.BullPutSpread;
-                                jiPairCondor.BearCallSpread = iSecurity.BearCallSpread;
+                                jiPairCondor.Strategy = StrategyTypes.PairCondor;
+                                jiPairCondor.BullPutSpread = jSecurity.PcBullPutSpread;
+                                jiPairCondor.BearCallSpread = iSecurity.PcBearCallSpread;
                                 pairCondorCandidates.Add(jiPairCondor);
                             }
                         }
-                    } 
+                    }
                 }
             }
 
             List<WeeklyIncomeComboCount> comboCounts = (from x in pairCondorCandidates
-                                                       group x by x.SectorEnum into g
-                                                       select new WeeklyIncomeComboCount()
-                                                       {
-                                                           SectorEnum = g.Key,
-                                                           Count = g.Count()
-                                                       }).OrderByDescending(x => x.Count).ToList();
+                                                        group x by x.SectorEnum into g
+                                                        select new WeeklyIncomeComboCount()
+                                                        {
+                                                            SectorEnum = g.Key,
+                                                            Count = g.Count()
+                                                        }).OrderByDescending(x => x.Count).ToList();
 
             playSheet.ComboCounts = comboCounts;
+            playSheet.Strategy = StrategyTypes.PairCondor;
 
             int playSheetId = WeeklyIncomePlaySheetService.Save(playSheet);
             pairCondorCandidates = pairCondorCandidates.OrderByDescending(x => x.Credit).Select(x => new PairCondor(x)).ToList();
-            WeeklyIncomeActionPlan bruteForceActionPlan = BruteForceActionPlanGenerator(pairCondorCandidates, slots);
+            WeeklyIncomeActionPlan bruteForceActionPlan = PcBruteForceActionPlanGenerator(pairCondorCandidates, slots);
             bruteForceActionPlan.PlaySheetIdentifier = playSheetId;
             WeeklyIncomeActionPlanService.Save(bruteForceActionPlan);
 
             pairCondorCandidates = pairCondorCandidates.OrderByDescending(x => x.Credit).Select(x => new PairCondor(x)).ToList();
-            WeeklyIncomeActionPlan randomSearchActionPlan = RandomSearchActionPlanGenerator(pairCondorCandidates, slots);
+            WeeklyIncomeActionPlan randomSearchActionPlan = PcRandomSearchActionPlanGenerator(pairCondorCandidates, slots);
             randomSearchActionPlan.PlaySheetIdentifier = playSheetId;
             WeeklyIncomeActionPlanService.Save(randomSearchActionPlan);
 
             pairCondorCandidates = pairCondorCandidates.OrderByDescending(x => x.Credit).Select(x => new PairCondor(x)).ToList();
-            WeeklyIncomeActionPlan geneticOptimizationActionPlan = GeneticOptimizationActionPlanGenerator(pairCondorCandidates, slots);
+            WeeklyIncomeActionPlan geneticOptimizationActionPlan = PcGeneticOptimizationActionPlanGenerator(pairCondorCandidates, slots);
             geneticOptimizationActionPlan.PlaySheetIdentifier = playSheetId;
             WeeklyIncomeActionPlanService.Save(geneticOptimizationActionPlan);
 
@@ -205,9 +212,9 @@ namespace Services
         }
         #endregion
 
-        #region ActionPlanGenerators
-        #region BruteForceActionPlanGenerator
-        private WeeklyIncomeActionPlan BruteForceActionPlanGenerator(List<PairCondor> pairCondorCandidates, int slots)
+        #region PcActionPlanGenerators
+        #region PcBruteForceActionPlanGenerator
+        private WeeklyIncomeActionPlan PcBruteForceActionPlanGenerator(List<PairCondor> pairCondorCandidates, int slots)
         {
             WeeklyIncomeActionPlan actionPlan = new WeeklyIncomeActionPlan();
             actionPlan.GenerationMethod = Enums.WeeklyActionPlanGenerationMethods.BruteForce;
@@ -226,16 +233,16 @@ namespace Services
         }
         #endregion
 
-        #region RandomSearchActionPlanGenerator
-        private WeeklyIncomeActionPlan RandomSearchActionPlanGenerator(List<PairCondor> pairCondorCandidates,
+        #region PcRandomSearchActionPlanGenerator
+        private WeeklyIncomeActionPlan PcRandomSearchActionPlanGenerator(List<PairCondor> pairCondorCandidates,
             int slots, int iterations = 500)
         {
             WeeklyIncomeActionPlan best = BuildRandomSolution(pairCondorCandidates, WeeklyActionPlanGenerationMethods.RandomSearch, slots);
 
-            for(int i = 0; i < iterations; i++)
+            for (int i = 0; i < iterations; i++)
             {
                 WeeklyIncomeActionPlan temp = BuildRandomSolution(pairCondorCandidates, WeeklyActionPlanGenerationMethods.RandomSearch, slots);
-                if(temp.Credit > best.Credit)
+                if (temp.Credit > best.Credit)
                 {
                     best = temp;
                 }
@@ -245,23 +252,23 @@ namespace Services
         }
         #endregion
 
-        #region GeneticOptimizationActionPlanGenerator
-        private WeeklyIncomeActionPlan GeneticOptimizationActionPlanGenerator(List<PairCondor> pairCondorCandidates,
+        #region PcGeneticOptimizationActionPlanGenerator
+        private WeeklyIncomeActionPlan PcGeneticOptimizationActionPlanGenerator(List<PairCondor> pairCondorCandidates,
             int slots, int popSize = 50, Double mutProb = .2, Double elite = .2, int maxIter = 100)
         {
             List<WeeklyIncomeActionPlan> pop = new List<WeeklyIncomeActionPlan>();
-            for(int i = 0; i < popSize; i++)
+            for (int i = 0; i < popSize; i++)
             {
                 pop.Add(BuildRandomSolution(pairCondorCandidates, WeeklyActionPlanGenerationMethods.GeneticOptimization, slots));
             }
 
             int topElite = (int)(elite * popSize);
 
-            for(int i = 0; i < maxIter; i++)
+            for (int i = 0; i < maxIter; i++)
             {
                 pop = pop.OrderByDescending(x => x.Credit).Take(topElite).ToList();
 
-                while(pop.Count < popSize)
+                while (pop.Count < popSize)
                 {
                     if (random.NextDouble() < mutProb)
                     {
@@ -322,11 +329,11 @@ namespace Services
         {
             pairIdx += step;
 
-            if(pairIdx < 0)
+            if (pairIdx < 0)
             {
                 pairIdx = pairCondorCandidates.Count - 1;
             }
-            else if( pairIdx > (pairCondorCandidates.Count - 1))
+            else if (pairIdx > (pairCondorCandidates.Count - 1))
             {
                 pairIdx = 0;
             }
@@ -344,7 +351,7 @@ namespace Services
             int splitIdx = random.Next(1, slots - 1);
             co.Pairs.AddRange(r1.Pairs.Take(splitIdx));
 
-            for(int i = splitIdx; i < r2.Pairs.Count; i++)
+            for (int i = splitIdx; i < r2.Pairs.Count; i++)
             {
                 co.AddPairCondor(r2.Pairs[splitIdx]);
             }
@@ -359,6 +366,102 @@ namespace Services
         }
         #endregion
 
+        #endregion
+        #endregion
+        #endregion
+
+        #region Iron Condor Methods
+        #region BuildIcPlan
+        public async Task BuildIcPlan(int slots, Decimal minStrikeDiff, Decimal maxRisk, int strikePadding)
+        {
+            Thread.Sleep(1000);
+
+            Query query = new Query();
+            query.SortPropertyName = Security.PropertyNames.Symbol;
+            query.QuerySingleFilters.Add(new QuerySingleFilter()
+            {
+                PropertyName = Security.PropertyNames.IronCondorEligible,
+                Parameter = "true",
+                QueryOperator = QueryOperators.Equals,
+                IsAndFilter = true
+            });
+
+            query.QuerySingleFilters.Add(new QuerySingleFilter()
+            {
+                PropertyName = Security.PropertyNames.Ignore,
+                Parameter = "false",
+                QueryOperator = QueryOperators.Equals,
+                IsAndFilter = true
+            });
+
+            query.Includes.Add(Security.PropertyNames.OptionChainsInclude);
+            query.Includes.Add(Security.PropertyNames.OptionChains.DatesInclude);
+            query.Includes.Add(Security.PropertyNames.OptionChains.Dates.StrikesInclude);
+            query.Includes.Add(Security.PropertyNames.OptionChains.Dates.Strikes.CallInclude);
+            query.Includes.Add(Security.PropertyNames.OptionChains.Dates.Strikes.PutInclude);
+
+            List<Security> securities = SecurityService.GetCollection(query);
+            securities.FilterForImportantDates();
+
+            //securities = securities.Where(x => x.SectorEnum == Enums.Sectors.Index).ToList();
+
+            OnProgressMessageRaised(new HtmlTag("li").Class("list-group-item").Class("active")
+                        .Append(HtmlTags.B.Append(securities.Count.ToString()))
+                        .Append(HtmlTags.Span.Append("&nbsp;optionable securities retrieved"))
+                        .ToHtml().ToString(), this.JobId);
+
+
+            WeeklyIncomePlaySheet playSheet = new WeeklyIncomePlaySheet();
+            playSheet.TimeStamp = DateTime.Now;
+            playSheet.Expiry = securities[0].LatestOptionDate.ExpiryDate;
+
+            List<PairCondor> ironCondorCandidates = new List<PairCondor>();
+
+            foreach (Security security in securities)
+            {
+                security.MinStrikeDiff = minStrikeDiff;
+                security.MaxRisk = maxRisk;
+                security.StrikePadding = strikePadding;
+
+                PairCondor ironCondor = new PairCondor();
+                ironCondor.SectorEnum = security.SectorEnum;
+                ironCondor.Strategy = StrategyTypes.IronCondor;
+                ironCondor.BullPutSpread = security.IcBullPutSpread;
+                ironCondor.BearCallSpread = security.IcBearCallSpread;
+                ironCondorCandidates.Add(ironCondor);
+            }
+
+            playSheet.Strategy = StrategyTypes.IronCondor;
+
+            int playSheetId = WeeklyIncomePlaySheetService.Save(playSheet);
+            ironCondorCandidates = ironCondorCandidates.OrderByDescending(x => x.Credit).Select(x => new PairCondor(x)).ToList();
+            WeeklyIncomeActionPlan bruteForceActionPlan = IcBruteForceActionPlanGenerator(ironCondorCandidates, slots);
+            bruteForceActionPlan.PlaySheetIdentifier = playSheetId;
+            WeeklyIncomeActionPlanService.Save(bruteForceActionPlan);
+
+            Thread.Sleep(1000);
+            OnRedirectRaised("WeeklyIncome", "PlaySheet", playSheetId, this.JobId);
+        }
+        #endregion 
+
+        #region IcBruteForceActionPlanGenerator
+        private WeeklyIncomeActionPlan IcBruteForceActionPlanGenerator(List<PairCondor> ironCondorCandidates, int slots)
+        {
+            WeeklyIncomeActionPlan actionPlan = new WeeklyIncomeActionPlan();
+            actionPlan.GenerationMethod = Enums.WeeklyActionPlanGenerationMethods.BruteForce;
+
+            foreach (PairCondor ironCondor in ironCondorCandidates.OrderByDescending(x => x.Credit))
+            {
+                actionPlan.Pairs.Add(ironCondor);
+
+                if (actionPlan.Pairs.Count == slots)
+                {
+                    break;
+                }
+            }
+
+            return actionPlan;
+        }
         #endregion
         #endregion
 
@@ -419,62 +522,85 @@ namespace Services
         #endregion
 
         #region Purge
-        public static void Purge()
+        public void Purge()
         {
+            Thread.Sleep(1500);
+
+            SendPurgeMessage("WeeklyIncomeComboCount");
             foreach (WeeklyIncomeComboCount x in WeeklyIncomeComboCountService.GetCollection())
             {
                 WeeklyIncomeComboCountService.Delete(x);
             }
 
+            SendPurgeMessage("OptionStrike");
             foreach (OptionStrike x in OptionStrikeService.GetCollection())
             {
                 OptionStrikeService.Delete(x);
             }
 
+            SendPurgeMessage("OptionDate");
             foreach (OptionDate x in OptionDateService.GetCollection())
             {
                 OptionDateService.Delete(x);
             }
 
+            SendPurgeMessage("OptionChain");
             foreach (OptionChain x in OptionChainService.GetCollection())
             {
                 OptionChainService.Delete(x);
             }
 
+            SendPurgeMessage("BullPutSpread");
             foreach (BullPutSpread x in BullPutSpreadService.GetCollection())
             {
                 BullPutSpreadService.Delete(x);
             }
 
+            SendPurgeMessage("BearCallSpread");
             foreach (BearCallSpread x in BearCallSpreadService.GetCollection())
             {
                 BearCallSpreadService.Delete(x);
             }
 
+            SendPurgeMessage("PairCondor");
             foreach (PairCondor x in PairCondorService.GetCollection())
             {
                 PairCondorService.Delete(x);
             }
 
+            SendPurgeMessage("WeeklyIncomeActionPlan");
             foreach (WeeklyIncomeActionPlan x in WeeklyIncomeActionPlanService.GetCollection())
             {
                 WeeklyIncomeActionPlanService.Delete(x);
             }
 
+            SendPurgeMessage("Call");
             foreach (Call x in CallService.GetCollection())
             {
                 CallService.Delete(x);
             }
 
+            SendPurgeMessage("Put");
             foreach (Put x in PutService.GetCollection())
             {
                 PutService.Delete(x);
             }
 
+            SendPurgeMessage("WeeklyIncomePlaySheet");
             foreach (WeeklyIncomePlaySheet x in WeeklyIncomePlaySheetService.GetCollection())
             {
                 WeeklyIncomePlaySheetService.Delete(x);
             }
+
+            OnRedirectRaised("WeeklyIncome", "Index", 0, this.JobId);
+        }
+
+        private void SendPurgeMessage(String entity)
+        {
+            OnProgressMessageRaised(new HtmlTag("li").Class("list-group-item")
+                        .Append(HtmlTags.B.Append(entity))
+                        .Append(HtmlTags.Span.Append("&nbsp;being purged"))
+                        .ToHtml().ToString(), this.JobId);
         }
         #endregion
 

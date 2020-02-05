@@ -35,7 +35,15 @@ namespace Entities
             {
                 if (risk < 0m)
                 {
-                    risk = this.Pairs.Sum(x => x.Risk);
+                    switch (this.PlaySheet.Strategy)
+                    {
+                        case Enums.StrategyTypes.PairCondor:
+                            risk = this.Pairs.Sum(x => x.Risk);
+                            break;
+                        case Enums.StrategyTypes.IronCondor:
+                            risk = this.Pairs.Sum(x => x.Risk) - this.Pairs.Sum(x => x.Credit);
+                            break;
+                    }
                 }
 
                 return risk;
@@ -52,7 +60,15 @@ namespace Entities
             {
                 if (requiredCapital < 0m)
                 {
-                    requiredCapital = this.Risk + this.Credit;
+                    switch (this.PlaySheet.Strategy)
+                    {
+                        case Enums.StrategyTypes.PairCondor:
+                            requiredCapital = this.Risk + this.Credit;
+                            break;
+                        case Enums.StrategyTypes.IronCondor:
+                            requiredCapital = this.Pairs.Sum(x => x.Risk);
+                            break;
+                    }
                 }
 
                 return requiredCapital;

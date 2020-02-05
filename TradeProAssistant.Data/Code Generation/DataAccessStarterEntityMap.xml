@@ -51,6 +51,7 @@
     <Property Name="TimeStamp" Type="DateTime" IncludeInDto="true" />
     <Property Name="Expiry" Type="DateTime" IncludeInDto="true" />
     <Property Name="Used" Type="bool" IncludeInDto="true" />
+    <EnumProperty Name="Strategy" Type="StrategyTypes" IncludeInDto="true"/>
     <CollectionProperty Name="ActionPlans" Type="WeeklyIncomeActionPlan" Cardinality="ManyToOne" IncludeInDto="true"/>
     <CollectionProperty Name="ComboCounts" Type="WeeklyIncomeComboCount" Cardinality="ManyToOne" IncludeInDto="true"/>
   </Entity>
@@ -74,6 +75,7 @@
     <DtoOnlyProperty Name="Risk" Type="Decimal" />
     <DtoOnlyProperty Name="RequiredCapital" Type="Decimal" />
     <EnumProperty Name="SectorEnum" Type="Sectors" IncludeInDto="true"/>
+    <EnumProperty Name="Strategy" Type="StrategyTypes" IncludeInDto="true"/>
     <Relationship Name="BullPutSpread" Type="BullPutSpread" IncludeInDto="true"/>
     <Relationship Name="BearCallSpread" Type="BearCallSpread" IncludeInDto="true"/>
   </Entity>
@@ -84,6 +86,7 @@
     <DtoOnlyProperty Name="Mid" Type="Decimal" />
     <DtoOnlyProperty Name="Credit" Type="Decimal" />
     <DtoOnlyProperty Name="Risk" Type="Decimal" />
+    <DtoOnlyProperty Name="CapitalRequirement" Type="Decimal" />
     <Relationship Name="SellPut" Type="Put" IncludeInDto="true"/>
     <Relationship Name="BuyPut" Type="Put" IncludeInDto="true"/>
     <Relationship Name="Security" Type="Security" IncludeInDto="true"/>
@@ -95,6 +98,7 @@
     <DtoOnlyProperty Name="Mid" Type="Decimal" />
     <DtoOnlyProperty Name="Credit" Type="Decimal" />
     <DtoOnlyProperty Name="Risk" Type="Decimal" />
+    <DtoOnlyProperty Name="CapitalRequirement" Type="Decimal" />
     <Relationship Name="SellCall" Type="Call" IncludeInDto="true"/>
     <Relationship Name="BuyCall" Type="Call" IncludeInDto="true"/>
     <Relationship Name="Security" Type="Security" IncludeInDto="true"/>
@@ -143,11 +147,12 @@
   <EntityEnum Name="WeeklyIncomeActions">
     <EnumMember Name="SetImportantDates" Value="1" DisplayValue="Set Important Dates"/>
     <EnumMember Name="DownloadOptionChains" Value="2" DisplayValue="Download Option Chains"/>
-    <EnumMember Name="GeneratePlaySheet" Value="3" DisplayValue="Generate Play Sheet"/>
+    <EnumMember Name="GeneratePairCondorPlaySheet" Value="3" DisplayValue="Generate Pair Condor Play Sheet"/>
     <EnumMember Name="SetBenzingaIds" Value="4" DisplayValue="Set Benzinga IDs"/>
+    <EnumMember Name="GenerateIronCondorPlaySheet" Value="5" DisplayValue="Generate Iron Condor Play Sheet"/>
   </EntityEnum>
-  <EntityEnum Name="CondorTypes">
-    <EnumMember Name="Pair" Value="1" DisplayValue="Pair"/>
-    <EnumMember Name="Iron" Value="2" DisplayValue="Iron"/>
+  <EntityEnum Name="StrategyTypes">
+    <EnumMember Name="PairCondor" Value="1" DisplayValue="Pair Condor"/>
+    <EnumMember Name="IronCondor" Value="2" DisplayValue="Iron Condor"/>
   </EntityEnum>
 </EntityMap>

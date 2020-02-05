@@ -22,6 +22,8 @@ namespace Entities
 
 		public Sectors SectorEnum { get; set; }
 
+		public StrategyTypes Strategy { get; set; }
+
 		[ForeignKey("BullPutSpread")]
 		public int? BullPutSpreadIdentifier { get; set; }
 		public virtual BullPutSpread BullPutSpread { get; set; }
@@ -40,6 +42,7 @@ namespace Entities
 		{
 			this.Dummy = source.Dummy;
 			this.SectorEnum = source.SectorEnum;
+			this.Strategy = source.Strategy;
 			if(source.BullPutSpread != null) this.BullPutSpread = new BullPutSpread(source.BullPutSpread);
 			if(source.BearCallSpread != null) this.BearCallSpread = new BearCallSpread(source.BearCallSpread);
 		}

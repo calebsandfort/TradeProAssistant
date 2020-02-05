@@ -95,6 +95,23 @@ namespace Entities
             }
         }
         #endregion
+
+        #region CapitalRequirement
+        private Decimal capitalRequirement = -1m;
+        [NotMapped]
+        public Decimal CapitalRequirement
+        {
+            get
+            {
+                if (capitalRequirement < 0m)
+                {
+                    capitalRequirement = ((this.BuyStrike - this.SellStrike) * this.Quantity * 100);
+                }
+
+                return capitalRequirement;
+            }
+        }
+        #endregion
         #endregion
 
         #region Custom Methods

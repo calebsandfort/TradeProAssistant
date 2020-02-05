@@ -10,10 +10,12 @@ namespace Enums
 		SetImportantDates = 1,
 		[StringValue("Download Option Chains")]
 		DownloadOptionChains = 2,
-		[StringValue("Generate Play Sheet")]
-		GeneratePlaySheet = 3,
+		[StringValue("Generate Pair Condor Play Sheet")]
+		GeneratePairCondorPlaySheet = 3,
 		[StringValue("Set Benzinga IDs")]
 		SetBenzingaIds = 4,
+		[StringValue("Generate Iron Condor Play Sheet")]
+		GenerateIronCondorPlaySheet = 5,
 	}
 
 	public static class WeeklyIncomeActionsExtensions
@@ -30,11 +32,14 @@ namespace Enums
 				case "Download Option Chains":
 					retVal = WeeklyIncomeActions.DownloadOptionChains;
 					break;
-				case "Generate Play Sheet":
-					retVal = WeeklyIncomeActions.GeneratePlaySheet;
+				case "Generate Pair Condor Play Sheet":
+					retVal = WeeklyIncomeActions.GeneratePairCondorPlaySheet;
 					break;
 				case "Set Benzinga IDs":
 					retVal = WeeklyIncomeActions.SetBenzingaIds;
+					break;
+				case "Generate Iron Condor Play Sheet":
+					retVal = WeeklyIncomeActions.GenerateIronCondorPlaySheet;
 					break;
 			}
 

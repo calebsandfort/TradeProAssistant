@@ -3,6 +3,7 @@
             .Columns(columns =>
             {
                 columns.Bound(x => x.TimeStamp).ClientTemplate("<a href='WeeklyIncome/PlaySheet?id=#= Identifier #' >#= TimeStampDisplay #</>").Width(75);
+                columns.Bound(x => x.Strategy).Width(75);
                 columns.Bound(x => x.Expiry).Format("{0:M/d/yy}").Width(75);
                 columns.Bound(x => x.Slots).Width(75);
                 columns.Bound(x => x.RiskPerSlot).Width(75).Format("{0:c2}").Title("Risk/Slot");
@@ -38,6 +39,10 @@
         )
             .ToolBar(toolbar =>
             {
-                toolbar.Template(@<text><button id="purgeButton" type="button" class="btn btn-primary">Purge</button></text>);
-                    })
-)
+                toolbar.Template(@<text>
+                    <form action="/TradeProAssistant/WeeklyIncome/Purge" method="post">
+                        <button id="purgeButton" type="submit" class="btn btn-primary">Purge</button>
+                    </form>
+</text>);
+})
+                        )
