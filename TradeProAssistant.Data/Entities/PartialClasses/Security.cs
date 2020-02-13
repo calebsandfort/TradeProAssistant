@@ -361,7 +361,31 @@ namespace Entities
             }
 
         }
-        #endregion 
+        #endregion
+        #endregion
+
+        #region IC Options Exists
+        public bool IcOptionsExist
+        {
+            get {
+
+                try
+                {
+                    if(this.IcLowerBoundStrikeIndex > 0
+                        && this.IcUpperBoundStrikeIndex > 0)
+                    {
+                        return true;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
         #endregion
 
         #region Iron Condor

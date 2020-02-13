@@ -422,7 +422,10 @@ namespace Services
                 security.MinStrikeDiff = minStrikeDiff;
                 security.MaxRisk = maxRisk;
                 security.StrikePadding = strikePadding;
+            }
 
+            foreach (Security security in securities.Where(x => x.IcOptionsExist))
+            {
                 PairCondor ironCondor = new PairCondor();
                 ironCondor.SectorEnum = security.SectorEnum;
                 ironCondor.Strategy = StrategyTypes.IronCondor;
