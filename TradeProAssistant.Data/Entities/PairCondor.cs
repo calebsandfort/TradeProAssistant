@@ -42,7 +42,7 @@ namespace Entities
 		{
 			this.Dummy = source.Dummy;
 			this.SectorEnum = source.SectorEnum;
-			this.Strategy = source.Strategy;
+	this.Strategy = source.Strategy;
 			if(source.BullPutSpread != null) this.BullPutSpread = new BullPutSpread(source.BullPutSpread);
 			if(source.BearCallSpread != null) this.BearCallSpread = new BearCallSpread(source.BearCallSpread);
 		}

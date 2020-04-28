@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="EconomicDayServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -100,6 +101,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TradeProAssistant.Data\TradeProAssistant.Data.csproj">
+      <Project>{24bef412-6c0d-4971-a930-15f28c7ba93a}</Project>
+      <Name>TradeProAssistant.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TradeProAssistant\TradeProAssistant.csproj">
       <Project>{09FEE74C-F6F0-46CB-B721-4506DD000B9B}</Project>
       <Name>TradeProAssistant</Name>

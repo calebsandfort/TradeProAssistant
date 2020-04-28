@@ -10,6 +10,10 @@ namespace TradeProAssistant.Data.Framework
 {
     public static class HelperUtilities
     {
+        #region Regex
+        private static Regex _regexRemoveNewLines = new Regex(@"\t|\n|\r", RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        #endregion
+
         #region GetNextDayOfWeekOccurrence
         public static DateTime GetNextDayOfWeekOccurrence(this DateTime date, DayOfWeek dayOfWeek)
         {
@@ -80,6 +84,13 @@ namespace TradeProAssistant.Data.Framework
             DateTime friday = DateTime.Now.GetNextDayOfWeekOccurrence(DayOfWeek.Friday);
             securities.RemoveAll(x => (x.NextEarningsDate.HasValue && x.NextEarningsDate >= monday && x.NextEarningsDate <= friday));
             securities.RemoveAll(x => (x.ExDividendDate.HasValue && x.ExDividendDate >= monday && x.ExDividendDate <= friday));
+        }
+        #endregion
+
+        #region RemoveNewLines
+        public static String RemoveNewLines(this String s)
+        {
+            return _regexRemoveNewLines.Replace(s, String.Empty);
         }
         #endregion
     }

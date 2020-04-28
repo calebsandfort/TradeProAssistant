@@ -3,6 +3,10 @@
 // Generated helper templates
 // TradeProAssistant\TradeProAssistant.Data\ServicesFolder\Base\ServiceBase.txt4
 // Generated items
+// TradeProAssistant\TradeProAssistant.Data\ServicesFolder\Base\EconomicEventServiceBase.cs
+// TradeProAssistant\TradeProAssistant.Data\ServicesFolder\Base\EconomicDayServiceBase.cs
+// TradeProAssistant\TradeProAssistant.Data\ServicesFolder\Base\CandlestickServiceBase.cs
+// TradeProAssistant\TradeProAssistant.Data\ServicesFolder\Base\FutureContractServiceBase.cs
 // TradeProAssistant\TradeProAssistant.Data\ServicesFolder\Base\WeekCandlestickServiceBase.cs
 // TradeProAssistant\TradeProAssistant.Data\ServicesFolder\Base\DayCandlestickServiceBase.cs
 // TradeProAssistant\TradeProAssistant.Data\ServicesFolder\Base\BearCallSpreadServiceBase.cs

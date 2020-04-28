@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entities
 {
-	public partial class WeeklyIncomeActionPlan
+	public partial class EconomicDay
 	{
 		#region Custom Properties
 
@@ -17,15 +17,15 @@ namespace Entities
 		#endregion
 
 		#region Comparisons
-		public static bool operator ==(WeeklyIncomeActionPlan entity, object obj)
+		public static bool operator ==(EconomicDay entity, object obj)
 		{
 			if ((object)entity == null && obj == null)
 			{
 				return true;
 			}
-			else if ((object)entity != null && obj is WeeklyIncomeActionPlan && entity.GetType() == obj.GetType())
+			else if ((object)entity != null && obj is EconomicDay && entity.GetType() == obj.GetType())
 			{
-				return (entity.Identifier == ((WeeklyIncomeActionPlan)obj).Identifier);
+				return (entity.Identifier == ((EconomicDay)obj).Identifier);
 			}
 			else
 			{
@@ -33,15 +33,15 @@ namespace Entities
 			}
 		}
 
-		public static bool operator !=(WeeklyIncomeActionPlan entity, object obj)
+		public static bool operator !=(EconomicDay entity, object obj)
 		{
 			if ((object)entity == null && obj == null)
 			{
 				return false;
 			}
-			else if ((object)entity != null && obj is WeeklyIncomeActionPlan && entity.GetType() == obj.GetType())
+			else if ((object)entity != null && obj is EconomicDay && entity.GetType() == obj.GetType())
 			{
-				return (entity.Identifier != ((WeeklyIncomeActionPlan)obj).Identifier);
+				return (entity.Identifier != ((EconomicDay)obj).Identifier);
 			}
 			else
 			{
@@ -51,9 +51,9 @@ namespace Entities
 
 		public override bool Equals(object obj)
 		{
-			if (obj is WeeklyIncomeActionPlan && this.GetType() == obj.GetType())
+			if (obj is EconomicDay && this.GetType() == obj.GetType())
 			{
-				return (this.Identifier == ((WeeklyIncomeActionPlan)obj).Identifier);
+				return (this.Identifier == ((EconomicDay)obj).Identifier);
 			}
 			else
 			{
@@ -70,7 +70,7 @@ namespace Entities
 		#region ToString
 		public override string ToString()
         {
-            return Identifier.ToString();
+            return Date.ToString();
         }
 		#endregion
 	}

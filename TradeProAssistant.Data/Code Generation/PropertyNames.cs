@@ -3,6 +3,10 @@
 // Generated helper templates
 // TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\PropertyNames.txt4
 // Generated items
+// TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\EconomicEventPropertyNames.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\EconomicDayPropertyNames.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\CandlestickPropertyNames.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\FutureContractPropertyNames.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\WeekCandlestickPropertyNames.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\DayCandlestickPropertyNames.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\BearCallSpreadPropertyNames.cs

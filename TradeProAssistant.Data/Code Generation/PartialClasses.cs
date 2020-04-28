@@ -3,6 +3,10 @@
 // Generated helper templates
 // TradeProAssistant\TradeProAssistant.Data\Code Generation\Non Source Output\Partial Classes\PartialClasses.txt4
 // Generated items
+// TradeProAssistant\TradeProAssistant.Data\Code Generation\Non Source Output\Partial Classes\EconomicEvent.cs
+// TradeProAssistant\TradeProAssistant.Data\Code Generation\Non Source Output\Partial Classes\EconomicDay.cs
+// TradeProAssistant\TradeProAssistant.Data\Code Generation\Non Source Output\Partial Classes\Candlestick.cs
+// TradeProAssistant\TradeProAssistant.Data\Code Generation\Non Source Output\Partial Classes\FutureContract.cs
 // TradeProAssistant\TradeProAssistant.Data\Code Generation\Non Source Output\Partial Classes\WeekCandlestick.cs
 // TradeProAssistant\TradeProAssistant.Data\Code Generation\Non Source Output\Partial Classes\DayCandlestick.cs
 // TradeProAssistant\TradeProAssistant.Data\Code Generation\Non Source Output\Partial Classes\BearCallSpread.cs

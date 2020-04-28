@@ -110,6 +110,25 @@ namespace TradeProAssistant.Data.Migrations
                     }
                 } 
             }
+
+            AddFuturesContract(context, "E-mini S&P 500", "ES", .25m, 12.5m);
+            AddFuturesContract(context, "Euro FX", "6E", .00005m, 6.25m);
+        }
+
+        private void AddFuturesContract(TradeProAssistantContext context, String name, String symbol, Decimal tickSize, Decimal tickValue)
+        {
+            if(!context.FutureContracts.Any(x => x.Symbol == symbol))
+            {
+                context.FutureContracts.Add(new FutureContract()
+                {
+                    Name = name,
+                    Symbol = symbol,
+                    TickSize = tickSize,
+                    TickValue = tickValue
+                });
+
+                context.SaveChanges();
+            }
         }
 
         private sealed class SecurityMap : ClassMap<Security>

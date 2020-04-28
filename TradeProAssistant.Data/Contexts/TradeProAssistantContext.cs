@@ -19,6 +19,10 @@ namespace Contexts
 		public DbSet<BearCallSpread> BearCallSpreads { get; set; }
 		public DbSet<DayCandlestick> DayCandlesticks { get; set; }
 		public DbSet<WeekCandlestick> WeekCandlesticks { get; set; }
+		public DbSet<FutureContract> FutureContracts { get; set; }
+		public DbSet<Candlestick> Candlesticks { get; set; }
+		public DbSet<EconomicDay> EconomicDays { get; set; }
+		public DbSet<EconomicEvent> EconomicEvents { get; set; }
 		
 		public TradeProAssistantContext() : base("TradeProAssistant") {}
 

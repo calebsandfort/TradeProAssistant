@@ -1,12 +1,11 @@
-﻿/*
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 
 namespace Entities
 {
-	public partial class WeeklyIncomeActionPlan
+	public partial class Candlestick
 	{
 		#region Custom Properties
 
@@ -17,15 +16,15 @@ namespace Entities
 		#endregion
 
 		#region Comparisons
-		public static bool operator ==(WeeklyIncomeActionPlan entity, object obj)
+		public static bool operator ==(Candlestick entity, object obj)
 		{
 			if ((object)entity == null && obj == null)
 			{
 				return true;
 			}
-			else if ((object)entity != null && obj is WeeklyIncomeActionPlan && entity.GetType() == obj.GetType())
+			else if ((object)entity != null && obj is Candlestick && entity.GetType() == obj.GetType())
 			{
-				return (entity.Identifier == ((WeeklyIncomeActionPlan)obj).Identifier);
+				return (entity.Identifier == ((Candlestick)obj).Identifier);
 			}
 			else
 			{
@@ -33,15 +32,15 @@ namespace Entities
 			}
 		}
 
-		public static bool operator !=(WeeklyIncomeActionPlan entity, object obj)
+		public static bool operator !=(Candlestick entity, object obj)
 		{
 			if ((object)entity == null && obj == null)
 			{
 				return false;
 			}
-			else if ((object)entity != null && obj is WeeklyIncomeActionPlan && entity.GetType() == obj.GetType())
+			else if ((object)entity != null && obj is Candlestick && entity.GetType() == obj.GetType())
 			{
-				return (entity.Identifier != ((WeeklyIncomeActionPlan)obj).Identifier);
+				return (entity.Identifier != ((Candlestick)obj).Identifier);
 			}
 			else
 			{
@@ -51,9 +50,9 @@ namespace Entities
 
 		public override bool Equals(object obj)
 		{
-			if (obj is WeeklyIncomeActionPlan && this.GetType() == obj.GetType())
+			if (obj is Candlestick && this.GetType() == obj.GetType())
 			{
-				return (this.Identifier == ((WeeklyIncomeActionPlan)obj).Identifier);
+				return (this.Identifier == ((Candlestick)obj).Identifier);
 			}
 			else
 			{
@@ -75,4 +74,3 @@ namespace Entities
 		#endregion
 	}
 }
-*/

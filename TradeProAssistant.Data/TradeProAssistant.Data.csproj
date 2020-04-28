@@ -43,14 +43,25 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="Fizzler, Version=1.2.0.0, Culture=neutral, PublicKeyToken=4ebff4844e382110, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fizzler.1.2.0\lib\netstandard2.0\Fizzler.dll</HintPath>
+    </Reference>
+    <Reference Include="Fizzler.Systems.HtmlAgilityPack, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fizzler.Systems.HtmlAgilityPack.1.2.0\lib\netstandard1.3\Fizzler.Systems.HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.5.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.5.1\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="HtmlBuilders, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlBuilders.2.0.5\lib\net45\HtmlBuilders.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -59,9 +70,85 @@
       <HintPath>..\packages\RestSharp.106.10.0\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.3.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.0\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -88,8 +175,12 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code Generation\Context.cs">
@@ -121,7 +212,19 @@
     <Compile Include="Code Generation\Non Source Output\Partial Classes\Call.cs">
       <DependentUpon>PartialClasses.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\Candlestick.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Code Generation\Non Source Output\Partial Classes\DayCandlestick.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\EconomicDay.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\EconomicEvent.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\FutureContract.cs">
       <DependentUpon>PartialClasses.txt4</DependentUpon>
     </Compile>
     <Compile Include="Code Generation\Non Source Output\Partial Classes\OptionChain.cs">
@@ -163,7 +266,19 @@
     <Compile Include="Code Generation\Non Source Output\Services\CallService.cs">
       <DependentUpon>Service.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\CandlestickService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Code Generation\Non Source Output\Services\DayCandlestickService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\EconomicDayService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\EconomicEventService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\FutureContractService.cs">
       <DependentUpon>Service.txt4</DependentUpon>
     </Compile>
     <Compile Include="Code Generation\Non Source Output\Services\OptionChainService.cs">
@@ -228,6 +343,9 @@
     <Compile Include="Entities\Call.cs">
       <DependentUpon>Entity.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Candlestick.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\DayCandlestick.cs">
       <DependentUpon>Entity.txt4</DependentUpon>
     </Compile>
@@ -240,7 +358,19 @@
     <Compile Include="Entities\Dtos\CallDto.cs">
       <DependentUpon>EntityDto.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Dtos\CandlestickDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Dtos\DayCandlestickDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Dtos\EconomicDayDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Dtos\EconomicEventDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Dtos\FutureContractDto.cs">
       <DependentUpon>EntityDto.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\Dtos\OptionChainDto.cs">
@@ -274,7 +404,19 @@
     <Compile Include="Entities\Dtos\WeeklyIncomePlaySheetDto.cs">
       <DependentUpon>EntityDto.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\EconomicDay.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\EconomicEvent.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Enums\AssetClasses.cs">
+      <DependentUpon>Enum.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Enums\CandlestickIntervals.cs">
+      <DependentUpon>Enum.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Enums\EconomicEventTypes.cs">
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\Enums\Sectors.cs">
@@ -288,6 +430,9 @@
     </Compile>
     <Compile Include="Entities\Enums\WeeklyIncomeActions.cs">
       <DependentUpon>Enum.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\FutureContract.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\OptionChain.cs">
       <DependentUpon>Entity.txt4</DependentUpon>
@@ -304,7 +449,11 @@
     <Compile Include="Entities\PartialClasses\BearCallSpread.cs" />
     <Compile Include="Entities\PartialClasses\BullPutSpread.cs" />
     <Compile Include="Entities\PartialClasses\Call.cs" />
+    <Compile Include="Entities\PartialClasses\Candlestick.cs" />
     <Compile Include="Entities\PartialClasses\DayCandlestick.cs" />
+    <Compile Include="Entities\PartialClasses\EconomicDay.cs" />
+    <Compile Include="Entities\PartialClasses\EconomicEvent.cs" />
+    <Compile Include="Entities\PartialClasses\FutureContract.cs" />
     <Compile Include="Entities\PartialClasses\OptionChain.cs" />
     <Compile Include="Entities\PartialClasses\OptionDate.cs" />
     <Compile Include="Entities\PartialClasses\OptionStrike.cs" />
@@ -324,7 +473,19 @@
     <Compile Include="Entities\PropertyNames\CallPropertyNames.cs">
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\PropertyNames\CandlestickPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\PropertyNames\DayCandlestickPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PropertyNames\EconomicDayPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PropertyNames\EconomicEventPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PropertyNames\FutureContractPropertyNames.cs">
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\PropertyNames\OptionChainPropertyNames.cs">
@@ -407,6 +568,14 @@
     <Compile Include="Migrations\202002042344443_Test.designer.cs">
       <DependentUpon>202002042344443_Test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002202202176_AddFuturesContract.cs" />
+    <Compile Include="Migrations\202002202202176_AddFuturesContract.designer.cs">
+      <DependentUpon>202002202202176_AddFuturesContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002202220420_AddEconomicEventEntities.cs" />
+    <Compile Include="Migrations\202002202220420_AddEconomicEventEntities.designer.cs">
+      <DependentUpon>202002202220420_AddEconomicEventEntities.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BenzingaNewsResponse.cs" />
     <Compile Include="Models\OpcGetOptionChainResponse.cs" />
@@ -421,7 +590,19 @@
     <Compile Include="ServicesFolder\Base\CallServiceBase.cs">
       <DependentUpon>ServiceBase.txt4</DependentUpon>
     </Compile>
+    <Compile Include="ServicesFolder\Base\CandlestickServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
     <Compile Include="ServicesFolder\Base\DayCandlestickServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="ServicesFolder\Base\EconomicDayServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="ServicesFolder\Base\EconomicEventServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="ServicesFolder\Base\FutureContractServiceBase.cs">
       <DependentUpon>ServiceBase.txt4</DependentUpon>
     </Compile>
     <Compile Include="ServicesFolder\Base\OptionChainServiceBase.cs">
@@ -458,7 +639,11 @@
     <Compile Include="ServicesFolder\BearCallSpreadService.cs" />
     <Compile Include="ServicesFolder\BullPutSpreadService.cs" />
     <Compile Include="ServicesFolder\CallService.cs" />
+    <Compile Include="ServicesFolder\CandlestickService.cs" />
     <Compile Include="ServicesFolder\DayCandlestickService.cs" />
+    <Compile Include="ServicesFolder\EconomicDayService.cs" />
+    <Compile Include="ServicesFolder\EconomicEventService.cs" />
+    <Compile Include="ServicesFolder\FutureContractService.cs" />
     <Compile Include="ServicesFolder\OptionChainService.cs" />
     <Compile Include="ServicesFolder\OptionDateService.cs" />
     <Compile Include="ServicesFolder\OptionStrikeService.cs" />
@@ -499,6 +684,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002042344443_Test.resx">
       <DependentUpon>202002042344443_Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002202202176_AddFuturesContract.resx">
+      <DependentUpon>202002202202176_AddFuturesContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002202220420_AddEconomicEventEntities.resx">
+      <DependentUpon>202002202220420_AddEconomicEventEntities.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\SP500_Constituents.csv" />
     <EmbeddedResource Include="SeedData\SPMidCap_Constituents.csv" />

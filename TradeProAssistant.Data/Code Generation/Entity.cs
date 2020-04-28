@@ -3,6 +3,10 @@
 // Generated helper templates
 // TradeProAssistant\TradeProAssistant.Data\Entities\Entity.txt4
 // Generated items
+// TradeProAssistant\TradeProAssistant.Data\Entities\EconomicEvent.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\EconomicDay.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\Candlestick.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\FutureContract.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\WeekCandlestick.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\DayCandlestick.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\BearCallSpread.cs

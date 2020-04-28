@@ -119,6 +119,32 @@
     <Property Name="Close" Type="Decimal" IncludeInDto="true" />
     <Property Name="Volume" Type="Int32" IncludeInDto="true" />
   </Entity>
+  <Entity Name="FutureContract" DefaultSortField="Name" DefaultSortDescending="false" ToStringField="Name">
+    <Property Name="Name" Type="String" Size="255" IncludeInDto="true" />
+    <Property Name="Symbol" Type="String" Size="2" IncludeInDto="true" />
+    <Property Name="TickValue" Type="Decimal" IncludeInDto="true" />
+    <Property Name="TickSize" Type="Decimal" IncludeInDto="true" />
+    <CollectionProperty Name="Candlesticks" Type="Candlestick" Cardinality="ManyToOne"/>
+  </Entity>
+  <Entity Name="Candlestick" DefaultSortField="Timestamp" DefaultSortDescending="false" ToStringField="Identifier">
+    <Property Name="Timestamp" Type="DateTime" IncludeInDto="true" />
+    <Property Name="Open" Type="Decimal" IncludeInDto="true" />
+    <Property Name="High" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Low" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Close" Type="Decimal" IncludeInDto="true" />
+    <Property Name="Volume" Type="Int32" IncludeInDto="true" />
+    <EnumProperty Name="Interval" Type="CandlestickIntervals" IncludeInDto="true"/>
+    <Relationship Name="FutureContract" Type="FutureContract"/>
+  </Entity>
+  <Entity Name="EconomicDay" DefaultSortField="Date" DefaultSortDescending="false" ToStringField="Date">
+    <Property Name="Date" Type="DateTime" IncludeInDto="true" />
+    <CollectionProperty Name="Events" Type="EconomicEvent" Cardinality="ManyToOne" IncludeInDto="true"/>
+  </Entity>
+  <Entity Name="EconomicEvent" DefaultSortField="Timestamp" DefaultSortDescending="false" ToStringField="Timestamp">
+    <Property Name="Timestamp" Type="DateTime" IncludeInDto="true" />
+    <EnumProperty Name="EventType" Type="EconomicEventTypes" IncludeInDto="true"/>
+    <Relationship Name="EconomicDay" Type="EconomicDay"/>
+  </Entity>
   <EntityEnum Name="Sectors">
     <EnumMember Name="ConsumerDiscretionary" Value="1" DisplayValue="Consumer Discretionary"/>
     <EnumMember Name="ConsumerStaples" Value="2" DisplayValue="Consumer Staples"/>
@@ -154,5 +180,14 @@
   <EntityEnum Name="StrategyTypes">
     <EnumMember Name="PairCondor" Value="1" DisplayValue="Pair Condor"/>
     <EnumMember Name="IronCondor" Value="2" DisplayValue="Iron Condor"/>
+  </EntityEnum>
+  <EntityEnum Name="CandlestickIntervals">
+    <EnumMember Name="OneMinute" Value="1" DisplayValue="1 Minute"/>
+    <EnumMember Name="ThreeMinutes" Value="3" DisplayValue="3 Minutes"/>
+    <EnumMember Name="FiveMinutes" Value="5" DisplayValue="5 Minutes"/>
+    <EnumMember Name="TenMinutes" Value="10" DisplayValue="10 Minutes"/>
+  </EntityEnum>
+  <EntityEnum Name="EconomicEventTypes">
+    <EnumMember Name="IsmManufacturingPmi" Value="1" DisplayValue="ISM Manufacturing PMI"/>
   </EntityEnum>
 </EntityMap>
