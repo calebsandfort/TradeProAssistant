@@ -153,23 +153,23 @@
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20505.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20505.0\lib\net40\System.Web.Razor.dll</HintPath>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -239,7 +239,13 @@
     <Compile Include="Code Generation\Non Source Output\Partial Classes\PairCondor.cs">
       <DependentUpon>PartialClasses.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\PullbackTradeTicket.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Code Generation\Non Source Output\Partial Classes\Put.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\RiskParameters.cs">
       <DependentUpon>PartialClasses.txt4</DependentUpon>
     </Compile>
     <Compile Include="Code Generation\Non Source Output\Partial Classes\Security.cs">
@@ -293,7 +299,13 @@
     <Compile Include="Code Generation\Non Source Output\Services\PairCondorService.cs">
       <DependentUpon>Service.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\PullbackTradeTicketService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Code Generation\Non Source Output\Services\PutService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\RiskParametersService.cs">
       <DependentUpon>Service.txt4</DependentUpon>
     </Compile>
     <Compile Include="Code Generation\Non Source Output\Services\SecurityService.cs">
@@ -385,7 +397,13 @@
     <Compile Include="Entities\Dtos\PairCondorDto.cs">
       <DependentUpon>EntityDto.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Dtos\PullbackTradeTicketDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Dtos\PutDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Dtos\RiskParametersDto.cs">
       <DependentUpon>EntityDto.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\Dtos\SecurityDto.cs">
@@ -425,6 +443,15 @@
     <Compile Include="Entities\Enums\StrategyTypes.cs">
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Enums\TimeIntervals.cs">
+      <DependentUpon>Enum.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Enums\TradeProAssets.cs">
+      <DependentUpon>Enum.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Enums\TradeQualifiers.cs">
+      <DependentUpon>Enum.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Enums\WeeklyActionPlanGenerationMethods.cs">
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
@@ -458,7 +485,9 @@
     <Compile Include="Entities\PartialClasses\OptionDate.cs" />
     <Compile Include="Entities\PartialClasses\OptionStrike.cs" />
     <Compile Include="Entities\PartialClasses\PairCondor.cs" />
+    <Compile Include="Entities\PartialClasses\PullbackTradeTicket.cs" />
     <Compile Include="Entities\PartialClasses\Put.cs" />
+    <Compile Include="Entities\PartialClasses\RiskParameters.cs" />
     <Compile Include="Entities\PartialClasses\Security.cs" />
     <Compile Include="Entities\PartialClasses\WeekCandlestick.cs" />
     <Compile Include="Entities\PartialClasses\WeeklyIncomeActionPlan.cs" />
@@ -501,7 +530,13 @@
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\PropertyNames\PropertyNamesBase.cs" />
+    <Compile Include="Entities\PropertyNames\PullbackTradeTicketPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\PropertyNames\PutPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PropertyNames\RiskParametersPropertyNames.cs">
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\PropertyNames\SecurityPropertyNames.cs">
@@ -519,7 +554,13 @@
     <Compile Include="Entities\PropertyNames\WeeklyIncomePlaySheetPropertyNames.cs">
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\PullbackTradeTicket.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Put.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\RiskParameters.cs">
       <DependentUpon>Entity.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\Security.cs">
@@ -576,8 +617,29 @@
     <Compile Include="Migrations\202002202220420_AddEconomicEventEntities.designer.cs">
       <DependentUpon>202002202220420_AddEconomicEventEntities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005040347048_AddPnLField.cs" />
+    <Compile Include="Migrations\202005040347048_AddPnLField.designer.cs">
+      <DependentUpon>202005040347048_AddPnLField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005042101405_AddScratchField.cs" />
+    <Compile Include="Migrations\202005042101405_AddScratchField.designer.cs">
+      <DependentUpon>202005042101405_AddScratchField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005051756456_AdjustNotesSize.cs" />
+    <Compile Include="Migrations\202005051756456_AdjustNotesSize.designer.cs">
+      <DependentUpon>202005051756456_AdjustNotesSize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005062312322_AddQuantityField2.cs" />
+    <Compile Include="Migrations\202005062312322_AddQuantityField2.designer.cs">
+      <DependentUpon>202005062312322_AddQuantityField2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005082223363_AddRiskParameters.cs" />
+    <Compile Include="Migrations\202005082223363_AddRiskParameters.designer.cs">
+      <DependentUpon>202005082223363_AddRiskParameters.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BenzingaNewsResponse.cs" />
+    <Compile Include="Models\DayPerformanceModel.cs" />
     <Compile Include="Models\OpcGetOptionChainResponse.cs" />
     <Compile Include="Models\OpcGetStockPriceResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -617,7 +679,13 @@
     <Compile Include="ServicesFolder\Base\PairCondorServiceBase.cs">
       <DependentUpon>ServiceBase.txt4</DependentUpon>
     </Compile>
+    <Compile Include="ServicesFolder\Base\PullbackTradeTicketServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
     <Compile Include="ServicesFolder\Base\PutServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="ServicesFolder\Base\RiskParametersServiceBase.cs">
       <DependentUpon>ServiceBase.txt4</DependentUpon>
     </Compile>
     <Compile Include="ServicesFolder\Base\SecurityServiceBase.cs">
@@ -648,7 +716,9 @@
     <Compile Include="ServicesFolder\OptionDateService.cs" />
     <Compile Include="ServicesFolder\OptionStrikeService.cs" />
     <Compile Include="ServicesFolder\PairCondorService.cs" />
+    <Compile Include="ServicesFolder\PullbackTradeTicketService.cs" />
     <Compile Include="ServicesFolder\PutService.cs" />
+    <Compile Include="ServicesFolder\RiskParametersService.cs" />
     <Compile Include="ServicesFolder\SecurityService.cs" />
     <Compile Include="ServicesFolder\WeekCandlestickService.cs" />
     <Compile Include="ServicesFolder\WeeklyIncomeActionPlanService.cs" />
@@ -690,6 +760,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002202220420_AddEconomicEventEntities.resx">
       <DependentUpon>202002202220420_AddEconomicEventEntities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005040347048_AddPnLField.resx">
+      <DependentUpon>202005040347048_AddPnLField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005042101405_AddScratchField.resx">
+      <DependentUpon>202005042101405_AddScratchField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005051756456_AdjustNotesSize.resx">
+      <DependentUpon>202005051756456_AdjustNotesSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005062312322_AddQuantityField2.resx">
+      <DependentUpon>202005062312322_AddQuantityField2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005082223363_AddRiskParameters.resx">
+      <DependentUpon>202005082223363_AddRiskParameters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\SP500_Constituents.csv" />
     <EmbeddedResource Include="SeedData\SPMidCap_Constituents.csv" />

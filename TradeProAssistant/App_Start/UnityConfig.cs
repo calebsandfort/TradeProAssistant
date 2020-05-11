@@ -12,14 +12,24 @@ namespace TradeProAssistant
     {
         public static void RegisterComponents()
         {
-			var container = new UnityContainer();
+            var container = new UnityContainer();
 
             // register all your components with the container here
             // it is NOT necessary to register your controllers
 
             // e.g. container.RegisterType<ITestService, TestService>();
 
-            var config = new MapperConfiguration(cfg => {
+            MapperConfiguration config = GetAutoMapperConfig();
+            IMapper mapper = config.CreateMapper();
+            container.RegisterInstance(mapper);
+
+            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+        }
+
+        public static MapperConfiguration GetAutoMapperConfig()
+        {
+            return new MapperConfiguration(cfg =>
+            {
                 cfg.CreateMap<Security, SecurityDto>();
                 cfg.CreateMap<Security, SecurityModel>();
                 cfg.CreateMap<DayCandlestick, DayCandlestickDto>();
@@ -33,11 +43,10 @@ namespace TradeProAssistant
                 cfg.CreateMap<Put, PutDto>();
                 cfg.CreateMap<Call, CallDto>();
                 cfg.CreateMap<PairCondor, PairCondorDto>();
+                cfg.CreateMap<PullbackTradeTicket, PullbackTradeTicketDto>();
+                cfg.CreateMap<PullbackTradeTicketDto, PullbackTradeTicket>();
+                cfg.CreateMap<RiskParameters, RiskParametersDto>();
             });
-            IMapper mapper = config.CreateMapper();
-            container.RegisterInstance(mapper);
-
-            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }
 }

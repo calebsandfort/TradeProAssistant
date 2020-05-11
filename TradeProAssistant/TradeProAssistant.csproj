@@ -168,7 +168,9 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\CalculatorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HuntAKillerController.cs" />
     <Compile Include="Controllers\ScannerController.cs" />
+    <Compile Include="Controllers\TradeProStrategyController.cs" />
     <Compile Include="Controllers\WeeklyIncomeController.cs" />
     <Compile Include="Framework\GuerillaLogisticsApiJsonResult.cs" />
     <Compile Include="Framework\HelperUtilities.cs" />
@@ -176,11 +178,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\HakDecoderModel.cs" />
     <Compile Include="Models\OpcGetStockPriceResponse.cs" />
     <Compile Include="Models\SecurityModel.cs" />
+    <Compile Include="Models\StrategiesModel.cs" />
     <Compile Include="Models\WeeklyIncomeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\GlobalSettings.cs" />
     <Compile Include="Utilities\JobProgressHub.cs" />
     <Compile Include="Utilities\MyAuthorizationFilter.cs" />
   </ItemGroup>
@@ -195,7 +200,10 @@
     <Content Include="Content\dist\favicon.ico" />
     <Content Include="Content\dist\index.html" />
     <Content Include="Content\dist\js\app.js" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -225,6 +233,11 @@
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="Content\dist\js\app.js.map" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -233,16 +246,23 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\kendo.modernizr.custom.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />
@@ -352,6 +372,12 @@
     <Content Include="Views\WeeklyIncome\_PlaySheetsTable.cshtml" />
     <Content Include="Views\WeeklyIncome\_News.cshtml" />
     <Content Include="Views\WeeklyIncome\_NewsStories.cshtml" />
+    <Content Include="Views\HuntAKiller\Decoder.cshtml" />
+    <Content Include="Views\TradeProStrategy\_PullbackTradeTicketForm.cshtml" />
+    <Content Include="Views\TradeProStrategy\_PullbackStrategyTab.cshtml" />
+    <Content Include="Views\TradeProStrategy\Strategies.cshtml" />
+    <Content Include="Views\TradeProStrategy\_PullbackTradeTicketsTable.cshtml" />
+    <Content Include="Views\TradeProStrategy\_PullbackTradeDayPerformanceTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

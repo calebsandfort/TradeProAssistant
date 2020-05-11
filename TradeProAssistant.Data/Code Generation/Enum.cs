@@ -3,6 +3,9 @@
 // Generated helper templates
 // TradeProAssistant\TradeProAssistant.Data\Entities\Enums\Enum.txt4
 // Generated items
+// TradeProAssistant\TradeProAssistant.Data\Entities\Enums\TimeIntervals.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\Enums\TradeProAssets.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\Enums\TradeQualifiers.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\Enums\EconomicEventTypes.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\Enums\CandlestickIntervals.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\Enums\StrategyTypes.cs

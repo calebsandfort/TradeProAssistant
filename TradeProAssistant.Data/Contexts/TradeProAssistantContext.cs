@@ -23,6 +23,8 @@ namespace Contexts
 		public DbSet<Candlestick> Candlesticks { get; set; }
 		public DbSet<EconomicDay> EconomicDays { get; set; }
 		public DbSet<EconomicEvent> EconomicEvents { get; set; }
+		public DbSet<PullbackTradeTicket> PullbackTradeTickets { get; set; }
+		public DbSet<RiskParameters> RiskParameters { get; set; }
 		
 		public TradeProAssistantContext() : base("TradeProAssistant") {}
 

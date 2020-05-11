@@ -91,10 +91,10 @@ namespace TradeProAssistant.Data.Migrations
                         csvReader.Configuration.MissingFieldFound = null;
                         var stocks = csvReader.GetRecords<Security>().ToArray();
                         //context.Securities.AddOrUpdate(s => s.Symbol, stocks);
-                        foreach(Security stock in stocks)
+                        foreach (Security stock in stocks)
                         {
                             Security s = context.Securities.FirstOrDefault(x => x.Symbol == stock.Symbol);
-                            if(s == null)
+                            if (s == null)
                             {
                                 context.Securities.Add(stock);
                             }
@@ -108,11 +108,26 @@ namespace TradeProAssistant.Data.Migrations
                         }
                         context.SaveChanges();
                     }
-                } 
+                }
             }
 
             AddFuturesContract(context, "E-mini S&P 500", "ES", .25m, 12.5m);
             AddFuturesContract(context, "Euro FX", "6E", .00005m, 6.25m);
+
+            if (context.RiskParameters.Count() == 0)
+            {
+                context.RiskParameters.Add(new RiskParameters()
+                {
+                    Name = "Demo Month",
+                    Active = true,
+                    DailyTarget = 250m,
+                    WeeklyTarget = 1250m,
+                    MonthlyTarget = 5000m,
+                    DailyStop = -150m,
+                    WeeklyStop = -450m,
+                    MonthlyStop = -1000m
+                });
+            }
         }
 
         private void AddFuturesContract(TradeProAssistantContext context, String name, String symbol, Decimal tickSize, Decimal tickValue)

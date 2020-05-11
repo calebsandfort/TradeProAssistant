@@ -70,7 +70,7 @@ namespace Entities
 		#region ToString
 		public override string ToString()
         {
-            return Date.ToString();
+            return Timestamp.ToString();
         }
 		#endregion
 	}

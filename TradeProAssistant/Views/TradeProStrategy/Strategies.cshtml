@@ -1,0 +1,58 @@
+﻿@model StrategiesModel
+
+@{
+    ViewBag.tab = "Strategies";
+}
+
+<ul class="nav nav-tabs" id="strategiesTabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pullback-tab" data-toggle="tab" href="#pullback" role="tab" aria-controls="pullback" aria-selected="true">Pullback</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="breakout-tab" data-toggle="tab" href="#breakout" role="tab" aria-controls="breakout" aria-selected="false">Breakout</a>
+    </li>
+</ul>
+<div class="tab-content" id="strategiesTabContent">
+    <div class="tab-pane fade show active" id="pullback" role="tabpanel" aria-labelledby="pullback-tab">
+        @Html.Partial("_PullbackStrategyTab", Model.PullbackTradeTicket)
+    </div>
+    <div class="tab-pane fade" id="breakout" role="tabpanel" aria-labelledby="breakout-tab">...</div>
+    @*<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>*@
+</div>
+
+@section scripts
+{
+    <script>
+        $(function () {
+            setTimeout(function () {
+                $("#pullbackTradeTicketsGrid .k-grid-content").css("height", "").css("max-height", $(window).height() - 300);
+                $("#pullbackDayPerformanceGrid .k-grid-content").css("height", "").css("max-height", $(window).height() - 300);
+            }, 500);
+
+            $("body").on("change", ".pullback-trade-steps input[type=checkbox]", function () {
+                var $this = $(this);
+
+                if ($(this).prop("checked")) {
+                    $this.parent().addClass("list-group-item-success")
+                }
+                else {
+                    $this.parent().removeClass("list-group-item-success")
+                }
+            })
+                .on("click", "#uxButton_SetTimestamp", function () {
+                    $("#Timestamp").val(moment().format("M/D/YYYY h:mm:ss A"));
+                })
+                .on("click", "#uxButton_Reset", function () {
+                    window.location.href = window.location.href;
+                });
+
+        });
+
+
+        function PullbackTradeTicketFormOnSuccess(response) {
+            alert("success");
+            $('#PullbackTradeTicketForm').get(0).reset();
+            refreshGrid("pullbackDayPerformanceGrid", 300);
+        }
+    </script>
+}
