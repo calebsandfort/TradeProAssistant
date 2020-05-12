@@ -22,6 +22,8 @@ namespace Entities
 
 		public String Asset { get { return ResolvePropertyName("Asset"); } }
 
+		public String Strategy { get { return ResolvePropertyName("Strategy"); } }
+
 		public String Qualifier1 { get { return ResolvePropertyName("Qualifier1"); } }
 
 		public String Qualifier2 { get { return ResolvePropertyName("Qualifier2"); } }

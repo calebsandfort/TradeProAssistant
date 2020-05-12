@@ -1,5 +1,7 @@
 ﻿using System;
 using Data.Framework;
+using System.Collections.Generic;
+using System.Web.Mvc;
 namespace Enums
 {
 	public enum TradeProAssets
@@ -29,6 +31,16 @@ namespace Enums
 			}
 
 			return retVal;
+		}
+	
+
+		public static IEnumerable<SelectListItem> SelectItems()
+		{
+			List<SelectListItem> selectItems = new List<SelectListItem>();
+			selectItems.Add(new SelectListItem() { Text = "None", Value = TradeProAssets.None.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "ES", Value = TradeProAssets.ES.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "YM", Value = TradeProAssets.YM.ToString() });
+			return selectItems;
 		}
 	}
 }

@@ -440,6 +440,9 @@
     <Compile Include="Entities\Enums\Sectors.cs">
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Enums\Strategies.cs">
+      <DependentUpon>Enum.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Enums\StrategyTypes.cs">
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
@@ -450,6 +453,9 @@
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\Enums\TradeQualifiers.cs">
+      <DependentUpon>Enum.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Enums\TradeQualifierTypes.cs">
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\Enums\WeeklyActionPlanGenerationMethods.cs">
@@ -637,6 +643,10 @@
     <Compile Include="Migrations\202005082223363_AddRiskParameters.designer.cs">
       <DependentUpon>202005082223363_AddRiskParameters.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005112238222_AddStrategyToTradeTicket.cs" />
+    <Compile Include="Migrations\202005112238222_AddStrategyToTradeTicket.designer.cs">
+      <DependentUpon>202005112238222_AddStrategyToTradeTicket.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BenzingaNewsResponse.cs" />
     <Compile Include="Models\DayPerformanceModel.cs" />
@@ -775,6 +785,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005082223363_AddRiskParameters.resx">
       <DependentUpon>202005082223363_AddRiskParameters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005112238222_AddStrategyToTradeTicket.resx">
+      <DependentUpon>202005112238222_AddStrategyToTradeTicket.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\SP500_Constituents.csv" />
     <EmbeddedResource Include="SeedData\SPMidCap_Constituents.csv" />

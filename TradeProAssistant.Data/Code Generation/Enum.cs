@@ -3,6 +3,8 @@
 // Generated helper templates
 // TradeProAssistant\TradeProAssistant.Data\Entities\Enums\Enum.txt4
 // Generated items
+// TradeProAssistant\TradeProAssistant.Data\Entities\Enums\TradeQualifierTypes.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\Enums\Strategies.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\Enums\TimeIntervals.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\Enums\TradeProAssets.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\Enums\TradeQualifiers.cs

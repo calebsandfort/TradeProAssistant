@@ -22,6 +22,8 @@ namespace Entities.Dtos
 
 		public TradeProAssets Asset { get; set; }
 
+		public Strategies Strategy { get; set; }
+
 		public TradeQualifiers Qualifier1 { get; set; }
 
 		public TradeQualifiers Qualifier2 { get; set; }

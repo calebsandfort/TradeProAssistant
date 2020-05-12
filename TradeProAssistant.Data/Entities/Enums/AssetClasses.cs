@@ -1,5 +1,7 @@
 ﻿using System;
 using Data.Framework;
+using System.Collections.Generic;
+using System.Web.Mvc;
 namespace Enums
 {
 	public enum AssetClasses
@@ -29,6 +31,16 @@ namespace Enums
 			}
 
 			return retVal;
+		}
+	
+
+		public static IEnumerable<SelectListItem> SelectItems()
+		{
+			List<SelectListItem> selectItems = new List<SelectListItem>();
+			selectItems.Add(new SelectListItem() { Text = "None", Value = AssetClasses.None.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Equity", Value = AssetClasses.Equity.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "ETF", Value = AssetClasses.ETF.ToString() });
+			return selectItems;
 		}
 	}
 }

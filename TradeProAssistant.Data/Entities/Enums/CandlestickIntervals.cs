@@ -1,5 +1,7 @@
 ﻿using System;
 using Data.Framework;
+using System.Collections.Generic;
+using System.Web.Mvc;
 namespace Enums
 {
 	public enum CandlestickIntervals
@@ -39,6 +41,18 @@ namespace Enums
 			}
 
 			return retVal;
+		}
+	
+
+		public static IEnumerable<SelectListItem> SelectItems()
+		{
+			List<SelectListItem> selectItems = new List<SelectListItem>();
+			selectItems.Add(new SelectListItem() { Text = "None", Value = CandlestickIntervals.None.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "1 Minute", Value = CandlestickIntervals.OneMinute.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "3 Minutes", Value = CandlestickIntervals.ThreeMinutes.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "5 Minutes", Value = CandlestickIntervals.FiveMinutes.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "10 Minutes", Value = CandlestickIntervals.TenMinutes.ToString() });
+			return selectItems;
 		}
 	}
 }

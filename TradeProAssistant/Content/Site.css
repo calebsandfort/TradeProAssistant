@@ -14,3 +14,10 @@
     #PullbackTradeTicketForm .form-group.row .custom-switch {
         padding-top: 7px;
     }
+
+
+#trade-ticket-qualifiers .list-group-item:not(.list-group-item-dark) {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    cursor:pointer;
+}

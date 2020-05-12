@@ -1,5 +1,7 @@
 ﻿using System;
 using Data.Framework;
+using System.Collections.Generic;
+using System.Web.Mvc;
 namespace Enums
 {
 	public enum WeeklyIncomeActions
@@ -44,6 +46,19 @@ namespace Enums
 			}
 
 			return retVal;
+		}
+	
+
+		public static IEnumerable<SelectListItem> SelectItems()
+		{
+			List<SelectListItem> selectItems = new List<SelectListItem>();
+			selectItems.Add(new SelectListItem() { Text = "None", Value = WeeklyIncomeActions.None.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Set Important Dates", Value = WeeklyIncomeActions.SetImportantDates.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Download Option Chains", Value = WeeklyIncomeActions.DownloadOptionChains.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Generate Pair Condor Play Sheet", Value = WeeklyIncomeActions.GeneratePairCondorPlaySheet.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Set Benzinga IDs", Value = WeeklyIncomeActions.SetBenzingaIds.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Generate Iron Condor Play Sheet", Value = WeeklyIncomeActions.GenerateIronCondorPlaySheet.ToString() });
+			return selectItems;
 		}
 	}
 }

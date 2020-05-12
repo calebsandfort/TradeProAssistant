@@ -182,6 +182,7 @@
     <Compile Include="Models\OpcGetStockPriceResponse.cs" />
     <Compile Include="Models\SecurityModel.cs" />
     <Compile Include="Models\StrategiesModel.cs" />
+    <Compile Include="Models\TradeQualifiersModel.cs" />
     <Compile Include="Models\WeeklyIncomeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -378,6 +379,7 @@
     <Content Include="Views\TradeProStrategy\Strategies.cshtml" />
     <Content Include="Views\TradeProStrategy\_PullbackTradeTicketsTable.cshtml" />
     <Content Include="Views\TradeProStrategy\_PullbackTradeDayPerformanceTable.cshtml" />
+    <Content Include="Views\TradeProStrategy\_TradeTicketQualifiers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

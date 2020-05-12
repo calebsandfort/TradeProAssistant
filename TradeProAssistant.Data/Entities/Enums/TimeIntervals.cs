@@ -1,5 +1,7 @@
 ﻿using System;
 using Data.Framework;
+using System.Collections.Generic;
+using System.Web.Mvc;
 namespace Enums
 {
 	public enum TimeIntervals
@@ -34,6 +36,17 @@ namespace Enums
 			}
 
 			return retVal;
+		}
+	
+
+		public static IEnumerable<SelectListItem> SelectItems()
+		{
+			List<SelectListItem> selectItems = new List<SelectListItem>();
+			selectItems.Add(new SelectListItem() { Text = "None", Value = TimeIntervals.None.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Day", Value = TimeIntervals.Day.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Week", Value = TimeIntervals.Week.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Month", Value = TimeIntervals.Month.ToString() });
+			return selectItems;
 		}
 	}
 }

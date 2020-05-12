@@ -1,5 +1,7 @@
 ﻿using System;
 using Data.Framework;
+using System.Collections.Generic;
+using System.Web.Mvc;
 namespace Enums
 {
 	public enum Sectors
@@ -89,6 +91,28 @@ namespace Enums
 			}
 
 			return retVal;
+		}
+	
+
+		public static IEnumerable<SelectListItem> SelectItems()
+		{
+			List<SelectListItem> selectItems = new List<SelectListItem>();
+			selectItems.Add(new SelectListItem() { Text = "None", Value = Sectors.None.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Consumer Discretionary", Value = Sectors.ConsumerDiscretionary.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Consumer Staples", Value = Sectors.ConsumerStaples.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Utilities", Value = Sectors.Utilities.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Cash and/or Derivatives", Value = Sectors.CashAndOrDerivatives.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Materials", Value = Sectors.Materials.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Financials", Value = Sectors.Financials.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Real Estate", Value = Sectors.RealEstate.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Energy", Value = Sectors.Energy.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Health Care", Value = Sectors.HealthCare.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Industrials", Value = Sectors.Industrials.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Information Technology", Value = Sectors.InformationTechnology.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Communication", Value = Sectors.Communication.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Technology", Value = Sectors.Technology.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Index", Value = Sectors.Index.ToString() });
+			return selectItems;
 		}
 	}
 }

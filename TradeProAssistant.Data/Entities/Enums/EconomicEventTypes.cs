@@ -1,5 +1,7 @@
 ﻿using System;
 using Data.Framework;
+using System.Collections.Generic;
+using System.Web.Mvc;
 namespace Enums
 {
 	public enum EconomicEventTypes
@@ -24,6 +26,15 @@ namespace Enums
 			}
 
 			return retVal;
+		}
+	
+
+		public static IEnumerable<SelectListItem> SelectItems()
+		{
+			List<SelectListItem> selectItems = new List<SelectListItem>();
+			selectItems.Add(new SelectListItem() { Text = "None", Value = EconomicEventTypes.None.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "ISM Manufacturing PMI", Value = EconomicEventTypes.IsmManufacturingPmi.ToString() });
+			return selectItems;
 		}
 	}
 }

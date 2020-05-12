@@ -1,0 +1,26 @@
+﻿@model List<TradeQualifiersModel>
+
+<div class="card mb-3">
+    <div class="card-header text-white bg-primary">Trade Qualifiers</div>
+    @*<ul class="list-group list-group-flush pullback-trade-steps">
+            <li class="list-group-item">Step 1: Your zone is hit <input type="checkbox" style="float: right; margin-top: 6px;" /></li>
+            <li class="list-group-item">Step 2: Rotations appear <input type="checkbox" style="float: right; margin-top: 6px;" /></li>
+            <li class="list-group-item">Step 3: Selling absorption <input type="checkbox" style="float: right; margin-top: 6px;" /></li>
+            <li class="list-group-item">Step 4: Identify battle area <input type="checkbox" style="float: right; margin-top: 6px;" /></li>
+            <li class="list-group-item">Step 5: Identify trade qualifiers <input type="checkbox" style="float: right; margin-top: 6px;" /></li>
+            <li class="list-group-item">Step 6: Limit 1-2 ticks above Step 4 <input type="checkbox" style="float: right; margin-top: 6px;" /></li>
+            <li class="list-group-item">Step 7: Disqualify process - scratch <input type="checkbox" style="float: right; margin-top: 6px;" /></li>
+        </ul>*@
+
+    <ul class="list-group list-group-flush">
+        @foreach (TradeQualifiersModel m in Model)
+        {
+            <li class="list-group-item list-group-item-dark">@m.TradeQualifierType.GetStringValue()</li>
+
+            foreach (TradeQualifiers tq in m.TradeQualifiersList)
+            {
+                <li class="list-group-item" data-trade-qualifier="@tq.ToString()">@tq.GetStringValue() <i class="fa fa-arrow-circle-right text-primary" style="float: right; margin-top: 6px;"></i></li>
+            }
+        }
+    </ul>
+</div>

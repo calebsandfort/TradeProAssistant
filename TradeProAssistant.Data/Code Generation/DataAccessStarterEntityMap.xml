@@ -158,6 +158,7 @@
     <Property Name="PnL" Type="Decimal" IncludeInDto="true" />
     <Property Name="Quantity" Type="int" IncludeInDto="true" DefaultValue="1" />
     <EnumProperty Name="Asset" Type="TradeProAssets" IncludeInDto="true"/>
+    <EnumProperty Name="Strategy" Type="Strategies" IncludeInDto="true"/>
     <EnumProperty Name="Qualifier1" Type="TradeQualifiers" IncludeInDto="true"/>
     <EnumProperty Name="Qualifier2" Type="TradeQualifiers" IncludeInDto="true"/>
     <EnumProperty Name="Qualifier3" Type="TradeQualifiers" IncludeInDto="true"/>
@@ -225,10 +226,10 @@
     <EnumMember Name="BidsMovingHigher" Value="4" DisplayValue="Bids Moving Higher"/>
     <EnumMember Name="OffersMovingHigherOrPulled" Value="5" DisplayValue="Offers Moving Higher or Pulled"/>
     <EnumMember Name="OfferMagnet" Value="6" DisplayValue="Offer Magnet"/>
-    <EnumMember Name="BuyImbalancesMovingHigher" Value="7" DisplayValue="BuyImbalancesMovingHigher"/>
+    <EnumMember Name="BuyImbalancesMovingHigher" Value="7" DisplayValue="Buy Imbalances Moving Higher"/>
     <EnumMember Name="MostRecentSellImbalanceBelowCurrentPrice" Value="8" DisplayValue="Most Recent Sell Imbalance Below Current Price"/>
     <EnumMember Name="LargeSellImbalanceNearLowsOfPriorMove" Value="9" DisplayValue="Large Sell Imbalance Near Lows of Prior Move" />
-    <EnumMember Name="PointsOfControlBelowMarketPrice" Value="10" DisplayValue="PointsOfControlBelowMarketPrice" />
+    <EnumMember Name="PointsOfControlBelowMarketPrice" Value="10" DisplayValue="Points of Control Below Market Price" />
 
     <EnumMember Name="EquityMarketsDown" Value="11" DisplayValue="Equity Markets Down"/>
     <EnumMember Name="NasdaqLowerFaster" Value="12" DisplayValue="Nasdaq Lower Faster than ES"/>
@@ -236,10 +237,10 @@
     <EnumMember Name="OffersMovingLower" Value="14" DisplayValue="Offers Moving Lower"/>
     <EnumMember Name="BidsMovingLowerOrPulled" Value="15" DisplayValue="Bids Moving Lower or Pulled"/>
     <EnumMember Name="BidMagnet" Value="16" DisplayValue="Bid Magnet"/>
-    <EnumMember Name="SellImbalancesMovingLower" Value="17" DisplayValue="SellImbalancesMovingLower"/>
+    <EnumMember Name="SellImbalancesMovingLower" Value="17" DisplayValue="Sell Imbalances Moving Lower"/>
     <EnumMember Name="MostRecentBuyImbalanceAboveCurrentPrice" Value="18" DisplayValue="Most Recent Buy Imbalance Above Current Price"/>
     <EnumMember Name="LargeBuyImbalanceNearHighsOfPriorMove" Value="19" DisplayValue="Large Buy Imbalance Near Highs of Prior Move" />
-    <EnumMember Name="PointsOfControlAboveMarketPrice" Value="20" DisplayValue="PointsOfControlAboveMarketPrice" />
+    <EnumMember Name="PointsOfControlAboveMarketPrice" Value="20" DisplayValue="Points of Control Above Market Price" />
     
     <EnumMember Name="Volume" Value="80" DisplayValue="Volume"/>
     <EnumMember Name="PivotPoints" Value="81" DisplayValue="Pivot Points"/>
@@ -254,5 +255,19 @@
     <EnumMember Name="Day" Value="1" DisplayValue="Day"/>
     <EnumMember Name="Week" Value="2" DisplayValue="Week"/>
     <EnumMember Name="Month" Value="3" DisplayValue="Month"/>
+  </EntityEnum>
+  <EntityEnum Name="Strategies">
+    <EnumMember Name="BuyTheDip" Value="1" DisplayValue="Buy the Dip"/>
+    <EnumMember Name="SellTheRip" Value="2" DisplayValue="Sell the Rip"/>
+    <EnumMember Name="FadeTheRally" Value="3" DisplayValue="Fade the Rally"/>
+    <EnumMember Name="FadeTheDrop" Value="4" DisplayValue="Fade the Drop"/>
+    <EnumMember Name="BuyTheBreakout" Value="5" DisplayValue="Buy the Breakout"/>
+    <EnumMember Name="SellTheBreakout" Value="6" DisplayValue="Sell the Breakout"/>
+  </EntityEnum>
+  <EntityEnum Name="TradeQualifierTypes">
+    <EnumMember Name="MarketCorrelations" Value="1" DisplayValue="Market Correlations"/>
+    <EnumMember Name="Inventory" Value="2" DisplayValue="Inventory"/>
+    <EnumMember Name="FootprintCharts" Value="3" DisplayValue="Footprint Charts"/>
+    <EnumMember Name="Misc" Value="4" DisplayValue="Misc"/>
   </EntityEnum>
 </EntityMap>

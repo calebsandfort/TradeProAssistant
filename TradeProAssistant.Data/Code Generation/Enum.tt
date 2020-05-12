@@ -29,6 +29,8 @@ foreach(XElement entityEnum in entityEnums)
 #>
 using System;
 using Data.Framework;
+using System.Collections.Generic;
+using System.Web.Mvc;
 namespace <#= enumNamespace #>
 {
 	public enum <#= entityEnumName #>
@@ -74,6 +76,25 @@ foreach(XElement enumMember in enumMembers)
 			}
 
 			return retVal;
+		}
+	
+
+		public static IEnumerable<SelectListItem> SelectItems()
+		{
+			List<SelectListItem> selectItems = new List<SelectListItem>();
+			selectItems.Add(new SelectListItem() { Text = "None", Value = <#= entityEnumName #>.None.ToString() });
+<#	
+			foreach(XElement enumMember in enumMembers)
+{
+	string enumMemberName = enumMember.Attribute("Name").Value;
+	string enumMemberValue = enumMember.Attribute("Value").Value;
+	string enumMemberDisplayValue = enumMember.Attribute("DisplayValue").Value;
+#>
+			selectItems.Add(new SelectListItem() { Text = "<#= enumMemberDisplayValue #>", Value = <#= entityEnumName #>.<#= enumMemberName #>.ToString() });
+<#
+}
+#>
+			return selectItems;
 		}
 	}
 }

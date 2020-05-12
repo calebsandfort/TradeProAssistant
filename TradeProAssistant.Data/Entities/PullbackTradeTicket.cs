@@ -42,6 +42,8 @@ namespace Entities
 
 		public TradeProAssets Asset { get; set; }
 
+		public Strategies Strategy { get; set; }
+
 		public TradeQualifiers Qualifier1 { get; set; }
 
 		public TradeQualifiers Qualifier2 { get; set; }
@@ -69,6 +71,7 @@ namespace Entities
 			this.PnL = source.PnL;
 			this.Quantity = source.Quantity;
 			this.Asset = source.Asset;
+	this.Strategy = source.Strategy;
 	this.Qualifier1 = source.Qualifier1;
 	this.Qualifier2 = source.Qualifier2;
 	this.Qualifier3 = source.Qualifier3;

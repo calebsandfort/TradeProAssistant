@@ -1,5 +1,7 @@
 ﻿using System;
 using Data.Framework;
+using System.Collections.Generic;
+using System.Web.Mvc;
 namespace Enums
 {
 	public enum StrategyTypes
@@ -29,6 +31,16 @@ namespace Enums
 			}
 
 			return retVal;
+		}
+	
+
+		public static IEnumerable<SelectListItem> SelectItems()
+		{
+			List<SelectListItem> selectItems = new List<SelectListItem>();
+			selectItems.Add(new SelectListItem() { Text = "None", Value = StrategyTypes.None.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Pair Condor", Value = StrategyTypes.PairCondor.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Iron Condor", Value = StrategyTypes.IronCondor.ToString() });
+			return selectItems;
 		}
 	}
 }

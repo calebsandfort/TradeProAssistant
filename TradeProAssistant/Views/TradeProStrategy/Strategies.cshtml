@@ -44,8 +44,45 @@
                 })
                 .on("click", "#uxButton_Reset", function () {
                     window.location.href = window.location.href;
-                });
+                })
+                .on("click", "#trade-ticket-qualifiers .list-group-item:not(.list-group-item-dark)", function () {
+                    var tradeQualifier = $(this).data("tradeQualifier");
+                    var Qualifier1Select = $("#Qualifier1");
+                    var Qualifier2Select = $("#Qualifier2");
+                    var Qualifier3Select = $("#Qualifier3");
+                    var Qualifier4Select = $("#Qualifier4");
 
+                    if (Qualifier1Select.val() == "None") {
+                        Qualifier1Select.val(tradeQualifier);
+                    }
+                    else if (Qualifier2Select.val() == "None") {
+                        Qualifier2Select.val(tradeQualifier);
+                    }
+                    else if (Qualifier3Select.val() == "None") {
+                        Qualifier3Select.val(tradeQualifier);
+                    }
+                    else if (Qualifier4Select.val() == "None") {
+                        Qualifier4Select.val(tradeQualifier);
+                    }
+                })
+                .on("change", "#Strategy", function () {
+                    Qualifier1Select = $("#Qualifier1").val("None");
+                    Qualifier2Select = $("#Qualifier2").val("None");
+                    Qualifier3Select = $("#Qualifier3").val("None");
+                    Qualifier4Select = $("#Qualifier4").val("None");
+
+                    var strategy = $(this).val();
+
+                    var url = $("#uxInput_RootUrl").val() + 'TradeProStrategy/TradeTicketQualifiers';
+                    $.post(url, {
+                        strategy: strategy
+                    }, function (result) {
+                        $("#trade-ticket-qualifiers").html(result);
+                    });
+                })
+                .on("click", ".clear-trade-qualifier", function () {
+                    $(this).closest(".form-group.row").find("select").val("None");
+                });
         });
 
 

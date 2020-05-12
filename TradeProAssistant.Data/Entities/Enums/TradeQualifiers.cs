@@ -1,5 +1,7 @@
 ﻿using System;
 using Data.Framework;
+using System.Collections.Generic;
+using System.Web.Mvc;
 namespace Enums
 {
 	public enum TradeQualifiers
@@ -18,13 +20,13 @@ namespace Enums
 		OffersMovingHigherOrPulled = 5,
 		[StringValue("Offer Magnet")]
 		OfferMagnet = 6,
-		[StringValue("BuyImbalancesMovingHigher")]
+		[StringValue("Buy Imbalances Moving Higher")]
 		BuyImbalancesMovingHigher = 7,
 		[StringValue("Most Recent Sell Imbalance Below Current Price")]
 		MostRecentSellImbalanceBelowCurrentPrice = 8,
 		[StringValue("Large Sell Imbalance Near Lows of Prior Move")]
 		LargeSellImbalanceNearLowsOfPriorMove = 9,
-		[StringValue("PointsOfControlBelowMarketPrice")]
+		[StringValue("Points of Control Below Market Price")]
 		PointsOfControlBelowMarketPrice = 10,
 		[StringValue("Equity Markets Down")]
 		EquityMarketsDown = 11,
@@ -38,13 +40,13 @@ namespace Enums
 		BidsMovingLowerOrPulled = 15,
 		[StringValue("Bid Magnet")]
 		BidMagnet = 16,
-		[StringValue("SellImbalancesMovingLower")]
+		[StringValue("Sell Imbalances Moving Lower")]
 		SellImbalancesMovingLower = 17,
 		[StringValue("Most Recent Buy Imbalance Above Current Price")]
 		MostRecentBuyImbalanceAboveCurrentPrice = 18,
 		[StringValue("Large Buy Imbalance Near Highs of Prior Move")]
 		LargeBuyImbalanceNearHighsOfPriorMove = 19,
-		[StringValue("PointsOfControlAboveMarketPrice")]
+		[StringValue("Points of Control Above Market Price")]
 		PointsOfControlAboveMarketPrice = 20,
 		[StringValue("Volume")]
 		Volume = 80,
@@ -82,7 +84,7 @@ namespace Enums
 				case "Offer Magnet":
 					retVal = TradeQualifiers.OfferMagnet;
 					break;
-				case "BuyImbalancesMovingHigher":
+				case "Buy Imbalances Moving Higher":
 					retVal = TradeQualifiers.BuyImbalancesMovingHigher;
 					break;
 				case "Most Recent Sell Imbalance Below Current Price":
@@ -91,7 +93,7 @@ namespace Enums
 				case "Large Sell Imbalance Near Lows of Prior Move":
 					retVal = TradeQualifiers.LargeSellImbalanceNearLowsOfPriorMove;
 					break;
-				case "PointsOfControlBelowMarketPrice":
+				case "Points of Control Below Market Price":
 					retVal = TradeQualifiers.PointsOfControlBelowMarketPrice;
 					break;
 				case "Equity Markets Down":
@@ -112,7 +114,7 @@ namespace Enums
 				case "Bid Magnet":
 					retVal = TradeQualifiers.BidMagnet;
 					break;
-				case "SellImbalancesMovingLower":
+				case "Sell Imbalances Moving Lower":
 					retVal = TradeQualifiers.SellImbalancesMovingLower;
 					break;
 				case "Most Recent Buy Imbalance Above Current Price":
@@ -121,7 +123,7 @@ namespace Enums
 				case "Large Buy Imbalance Near Highs of Prior Move":
 					retVal = TradeQualifiers.LargeBuyImbalanceNearHighsOfPriorMove;
 					break;
-				case "PointsOfControlAboveMarketPrice":
+				case "Points of Control Above Market Price":
 					retVal = TradeQualifiers.PointsOfControlAboveMarketPrice;
 					break;
 				case "Volume":
@@ -139,6 +141,38 @@ namespace Enums
 			}
 
 			return retVal;
+		}
+	
+
+		public static IEnumerable<SelectListItem> SelectItems()
+		{
+			List<SelectListItem> selectItems = new List<SelectListItem>();
+			selectItems.Add(new SelectListItem() { Text = "None", Value = TradeQualifiers.None.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Equity Markets Up", Value = TradeQualifiers.EquityMarketsUp.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Nasdaq Higher Faster than ES", Value = TradeQualifiers.NasdaqHigherFaster.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Risk Off Down", Value = TradeQualifiers.RiskOffDown.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Bids Moving Higher", Value = TradeQualifiers.BidsMovingHigher.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Offers Moving Higher or Pulled", Value = TradeQualifiers.OffersMovingHigherOrPulled.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Offer Magnet", Value = TradeQualifiers.OfferMagnet.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Buy Imbalances Moving Higher", Value = TradeQualifiers.BuyImbalancesMovingHigher.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Most Recent Sell Imbalance Below Current Price", Value = TradeQualifiers.MostRecentSellImbalanceBelowCurrentPrice.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Large Sell Imbalance Near Lows of Prior Move", Value = TradeQualifiers.LargeSellImbalanceNearLowsOfPriorMove.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Points of Control Below Market Price", Value = TradeQualifiers.PointsOfControlBelowMarketPrice.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Equity Markets Down", Value = TradeQualifiers.EquityMarketsDown.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Nasdaq Lower Faster than ES", Value = TradeQualifiers.NasdaqLowerFaster.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Risk Off Up", Value = TradeQualifiers.RiskOffUp.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Offers Moving Lower", Value = TradeQualifiers.OffersMovingLower.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Bids Moving Lower or Pulled", Value = TradeQualifiers.BidsMovingLowerOrPulled.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Bid Magnet", Value = TradeQualifiers.BidMagnet.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Sell Imbalances Moving Lower", Value = TradeQualifiers.SellImbalancesMovingLower.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Most Recent Buy Imbalance Above Current Price", Value = TradeQualifiers.MostRecentBuyImbalanceAboveCurrentPrice.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Large Buy Imbalance Near Highs of Prior Move", Value = TradeQualifiers.LargeBuyImbalanceNearHighsOfPriorMove.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Points of Control Above Market Price", Value = TradeQualifiers.PointsOfControlAboveMarketPrice.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Volume", Value = TradeQualifiers.Volume.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Pivot Points", Value = TradeQualifiers.PivotPoints.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Technicals", Value = TradeQualifiers.Technicals.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "Market Structure", Value = TradeQualifiers.MarketStructure.ToString() });
+			return selectItems;
 		}
 	}
 }

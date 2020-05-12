@@ -1,19 +1,8 @@
 ﻿@model PullbackTradeTicketDto
 
 <div class="row">
-    <div class="col-4">
-        <div class="card mb-3">
-            <div class="card-header text-white bg-primary">Steps</div>
-            <ul class="list-group list-group-flush pullback-trade-steps">
-                <li class="list-group-item">Step 1: Your zone is hit <input type="checkbox" style="float: right; margin-top: 6px;" /></li>
-                <li class="list-group-item">Step 2: Rotations appear <input type="checkbox" style="float: right; margin-top: 6px;" /></li>
-                <li class="list-group-item">Step 3: Selling absorption <input type="checkbox" style="float: right; margin-top: 6px;" /></li>
-                <li class="list-group-item">Step 4: Identify battle area <input type="checkbox" style="float: right; margin-top: 6px;" /></li>
-                <li class="list-group-item">Step 5: Identify trade qualifiers <input type="checkbox" style="float: right; margin-top: 6px;" /></li>
-                <li class="list-group-item">Step 6: Limit 1-2 ticks above Step 4 <input type="checkbox" style="float: right; margin-top: 6px;" /></li>
-                <li class="list-group-item">Step 7: Disqualify process - scratch <input type="checkbox" style="float: right; margin-top: 6px;" /></li>
-            </ul>
-        </div>
+    <div id="trade-ticket-qualifiers" class="col-4">
+        @Html.Action("TradeTicketQualifiers", "TradeProStrategy", new { strategy = Model.Strategy })
     </div>
     <div class="col-8">
         @using (Ajax.BeginForm("PullbackTradeTicketForm", "TradeProStrategy", null,
@@ -28,7 +17,7 @@
                     <div class="form-group row hasSelect">
                         @Html.LabelFor(x => x.Asset, new { @class = "col-sm-2 col-form-label" })
                         <div class="col-sm-4">
-                            @Html.DropDownListFor(x => x.Asset, new SelectList(Enum.GetValues(typeof(TradeProAssets))), "--Select Asset--", new { @class = "form-control" })
+                            @Html.DropDownListFor(x => x.Asset, new SelectList(Enums.TradeProAssetsExtensions.SelectItems(), "Value", "Text"), "--Select Asset--", new { @class = "form-control" })
                         </div>
                         @Html.LabelFor(x => x.Timestamp, new { @class = "col-sm-2 col-form-label" })
                         <div class="col-sm-4">
@@ -42,12 +31,16 @@
                     </div>
 
                     <div class="form-group row">
-                        @Html.LabelFor(x => x.ZoneQualified, new { @class = "col-sm-2 col-form-label" })
+                        @*@Html.LabelFor(x => x.ZoneQualified, new { @class = "col-sm-2 col-form-label" })
                         <div class="col-sm-4">
                             <div class="custom-control custom-switch">
                                 @Html.CheckBoxFor(x => x.ZoneQualified, new { @class = "custom-control-input" })
                                 <label class="custom-control-label" for="ZoneQualified"></label>
                             </div>
+                        </div>*@
+                        @Html.LabelFor(x => x.Strategy, new { @class = "col-sm-2 col-form-label" })
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(x => x.Strategy, new SelectList(Enums.StrategiesExtensions.SelectItems(), "Value", "Text"), "--Select Strategy--", new { @class = "form-control" })
                         </div>
                         @Html.LabelFor(x => x.Quantity, new { @class = "col-sm-2 col-form-label" })
                         <div class="col-sm-4">
@@ -58,22 +51,28 @@
                     <div class="form-group row">
                         @Html.LabelFor(x => x.Qualifier1, new { @class = "col-sm-2 col-form-label" })
                         <div class="col-sm-4">
-                            @Html.DropDownListFor(x => x.Qualifier1, new SelectList(Enum.GetValues(typeof(TradeQualifiers))), "--Select Qualifier--", new { @class = "form-control"})
-                        </div>                       
-                        <div class="col-sm-6">
+                            @Html.DropDownListFor(x => x.Qualifier1, new SelectList(Enums.TradeQualifiersExtensions.SelectItems(), "Value", "Text"), "--Select Qualifier--", new { @class = "form-control"})
+                        </div>      
+                        <div class="col-sm-3">
+                            <button class="clear-trade-qualifier btn btn-warning" type="button">Clear</button>
+                        </div>
+                        <div class="col-sm-3">
                             <div class="custom-control custom-switch">
                                 @Html.CheckBoxFor(x => x.Qualifier1Disqualified, new { @class = "custom-control-input" })
                                 <label class="custom-control-label" for="Qualifier1Disqualified">Disqualified</label>
                             </div>
                         </div>
-                    </div>
+                        </div>
 
                     <div class="form-group row hasSelect">
                         @Html.LabelFor(x => x.Qualifier2, new { @class = "col-sm-2 col-form-label" })
                         <div class="col-sm-4">
-                            @Html.DropDownListFor(x => x.Qualifier2, new SelectList(Enum.GetValues(typeof(TradeQualifiers))), "--Select Qualifier--", new { @class = "form-control" })
+                            @Html.DropDownListFor(x => x.Qualifier2, new SelectList(Enums.TradeQualifiersExtensions.SelectItems(), "Value", "Text"), "--Select Qualifier--", new { @class = "form-control" })
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
+                            <button class="clear-trade-qualifier btn btn-warning" type="button">Clear</button>
+                        </div>
+                        <div class="col-sm-3">
                             <div class="custom-control custom-switch">
                                 @Html.CheckBoxFor(x => x.Qualifier2Disqualified, new { @class = "custom-control-input" })
                                 <label class="custom-control-label" for="Qualifier2Disqualified">Disqualified</label>
@@ -84,9 +83,12 @@
                     <div class="form-group row hasSelect">
                         @Html.LabelFor(x => x.Qualifier3, new { @class = "col-sm-2 col-form-label" })
                         <div class="col-sm-4">
-                            @Html.DropDownListFor(x => x.Qualifier3, new SelectList(Enum.GetValues(typeof(TradeQualifiers))), "--Select Qualifier--", new { @class = "form-control" })
+                            @Html.DropDownListFor(x => x.Qualifier3, new SelectList(Enums.TradeQualifiersExtensions.SelectItems(), "Value", "Text"), "--Select Qualifier--", new { @class = "form-control" })
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
+                            <button class="clear-trade-qualifier btn btn-warning" type="button">Clear</button>
+                        </div>
+                        <div class="col-sm-3">
                             <div class="custom-control custom-switch">
                                 @Html.CheckBoxFor(x => x.Qualifier3Disqualified, new { @class = "custom-control-input" })
                                 <label class="custom-control-label" for="Qualifier3Disqualified">Disqualified</label>
@@ -97,9 +99,12 @@
                     <div class="form-group row hasSelect">
                         @Html.LabelFor(x => x.Qualifier4, new { @class = "col-sm-2 col-form-label" })
                         <div class="col-sm-4">
-                            @Html.DropDownListFor(x => x.Qualifier4, new SelectList(Enum.GetValues(typeof(TradeQualifiers))), "--Select Qualifier--", new { @class = "form-control" })
+                            @Html.DropDownListFor(x => x.Qualifier4, new SelectList(Enums.TradeQualifiersExtensions.SelectItems(), "Value", "Text"), "--Select Qualifier--", new { @class = "form-control" })
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
+                            <button class="clear-trade-qualifier btn btn-warning" type="button">Clear</button>
+                        </div>
+                        <div class="col-sm-3">
                             <div class="custom-control custom-switch">
                                 @Html.CheckBoxFor(x => x.Qualifier4Disqualified, new { @class = "custom-control-input" })
                                 <label class="custom-control-label" for="Qualifier4Disqualified">Disqualified</label>
