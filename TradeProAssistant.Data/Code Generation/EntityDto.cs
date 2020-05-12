@@ -4,7 +4,7 @@
 // TradeProAssistant\TradeProAssistant.Data\Entities\Dtos\EntityDto.txt4
 // Generated items
 // TradeProAssistant\TradeProAssistant.Data\Entities\Dtos\RiskParametersDto.cs
-// TradeProAssistant\TradeProAssistant.Data\Entities\Dtos\PullbackTradeTicketDto.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\Dtos\TradeTicketDto.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\Dtos\EconomicEventDto.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\Dtos\EconomicDayDto.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\Dtos\CandlestickDto.cs

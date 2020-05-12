@@ -374,11 +374,11 @@
     <Content Include="Views\WeeklyIncome\_News.cshtml" />
     <Content Include="Views\WeeklyIncome\_NewsStories.cshtml" />
     <Content Include="Views\HuntAKiller\Decoder.cshtml" />
-    <Content Include="Views\TradeProStrategy\_PullbackTradeTicketForm.cshtml" />
-    <Content Include="Views\TradeProStrategy\_PullbackStrategyTab.cshtml" />
-    <Content Include="Views\TradeProStrategy\Strategies.cshtml" />
-    <Content Include="Views\TradeProStrategy\_PullbackTradeTicketsTable.cshtml" />
-    <Content Include="Views\TradeProStrategy\_PullbackTradeDayPerformanceTable.cshtml" />
+    <Content Include="Views\TradeProStrategy\_TradeTicketForm.cshtml" />
+    <Content Include="Views\TradeProStrategy\_StrategyTab.cshtml" />
+    <Content Include="Views\TradeProStrategy\Trading.cshtml" />
+    <Content Include="Views\TradeProStrategy\_TradeTicketsTable.cshtml" />
+    <Content Include="Views\TradeProStrategy\_TradeDayPerformanceTable.cshtml" />
     <Content Include="Views\TradeProStrategy\_TradeTicketQualifiers.cshtml" />
   </ItemGroup>
   <ItemGroup>

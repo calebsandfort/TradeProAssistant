@@ -47,7 +47,7 @@ namespace TradeProAssistant.Data.Models
 
         }
 
-        public DayPerformanceModel(DateTime date, List<PullbackTradeTicket> tradeTickets)
+        public DayPerformanceModel(DateTime date, List<TradeTicket> tradeTickets)
         {
             this.Date = date;
             this.Wins = tradeTickets.Count(x => x.Won);

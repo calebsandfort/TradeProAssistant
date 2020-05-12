@@ -7,10 +7,11 @@ using Enums;
 
 namespace Entities
 {
-	public partial class PullbackTradeTicket
+	[Table("TradeTickets")]
+	public partial class TradeTicket
 	{
 		[NotMapped]
-		public static PullbackTradeTicketPropertyNames PropertyNames = new PullbackTradeTicketPropertyNames();
+		public static TradeTicketPropertyNames PropertyNames = new TradeTicketPropertyNames();
 
 		[Key]
 		public int Identifier { get; set; }
@@ -53,11 +54,11 @@ namespace Entities
 		public TradeQualifiers Qualifier4 { get; set; }
 
 		#region Constructor
-		public  PullbackTradeTicket()
+		public  TradeTicket()
 		{
 				}
 
-		public  PullbackTradeTicket(PullbackTradeTicket source)
+		public  TradeTicket(TradeTicket source)
 		{
 			this.Timestamp = source.Timestamp;
 			this.ZoneQualified = source.ZoneQualified;

@@ -43,8 +43,8 @@ namespace TradeProAssistant
                 cfg.CreateMap<Put, PutDto>();
                 cfg.CreateMap<Call, CallDto>();
                 cfg.CreateMap<PairCondor, PairCondorDto>();
-                cfg.CreateMap<PullbackTradeTicket, PullbackTradeTicketDto>();
-                cfg.CreateMap<PullbackTradeTicketDto, PullbackTradeTicket>();
+                cfg.CreateMap<TradeTicket, TradeTicketDto>();
+                cfg.CreateMap<TradeTicketDto, TradeTicket>();
                 cfg.CreateMap<RiskParameters, RiskParametersDto>();
             });
         }

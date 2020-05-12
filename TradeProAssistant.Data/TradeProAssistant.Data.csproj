@@ -239,9 +239,6 @@
     <Compile Include="Code Generation\Non Source Output\Partial Classes\PairCondor.cs">
       <DependentUpon>PartialClasses.txt4</DependentUpon>
     </Compile>
-    <Compile Include="Code Generation\Non Source Output\Partial Classes\PullbackTradeTicket.cs">
-      <DependentUpon>PartialClasses.txt4</DependentUpon>
-    </Compile>
     <Compile Include="Code Generation\Non Source Output\Partial Classes\Put.cs">
       <DependentUpon>PartialClasses.txt4</DependentUpon>
     </Compile>
@@ -249,6 +246,9 @@
       <DependentUpon>PartialClasses.txt4</DependentUpon>
     </Compile>
     <Compile Include="Code Generation\Non Source Output\Partial Classes\Security.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\TradeTicket.cs">
       <DependentUpon>PartialClasses.txt4</DependentUpon>
     </Compile>
     <Compile Include="Code Generation\Non Source Output\Partial Classes\WeekCandlestick.cs">
@@ -299,9 +299,6 @@
     <Compile Include="Code Generation\Non Source Output\Services\PairCondorService.cs">
       <DependentUpon>Service.txt4</DependentUpon>
     </Compile>
-    <Compile Include="Code Generation\Non Source Output\Services\PullbackTradeTicketService.cs">
-      <DependentUpon>Service.txt4</DependentUpon>
-    </Compile>
     <Compile Include="Code Generation\Non Source Output\Services\PutService.cs">
       <DependentUpon>Service.txt4</DependentUpon>
     </Compile>
@@ -309,6 +306,9 @@
       <DependentUpon>Service.txt4</DependentUpon>
     </Compile>
     <Compile Include="Code Generation\Non Source Output\Services\SecurityService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\TradeTicketService.cs">
       <DependentUpon>Service.txt4</DependentUpon>
     </Compile>
     <Compile Include="Code Generation\Non Source Output\Services\WeekCandlestickService.cs">
@@ -397,9 +397,6 @@
     <Compile Include="Entities\Dtos\PairCondorDto.cs">
       <DependentUpon>EntityDto.txt4</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Dtos\PullbackTradeTicketDto.cs">
-      <DependentUpon>EntityDto.txt4</DependentUpon>
-    </Compile>
     <Compile Include="Entities\Dtos\PutDto.cs">
       <DependentUpon>EntityDto.txt4</DependentUpon>
     </Compile>
@@ -410,6 +407,9 @@
       <DependentUpon>EntityDto.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\Dtos\SimpleWeeklyIncomePlaySheetDto.cs" />
+    <Compile Include="Entities\Dtos\TradeTicketDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Dtos\WeekCandlestickDto.cs">
       <DependentUpon>EntityDto.txt4</DependentUpon>
     </Compile>
@@ -491,10 +491,10 @@
     <Compile Include="Entities\PartialClasses\OptionDate.cs" />
     <Compile Include="Entities\PartialClasses\OptionStrike.cs" />
     <Compile Include="Entities\PartialClasses\PairCondor.cs" />
-    <Compile Include="Entities\PartialClasses\PullbackTradeTicket.cs" />
     <Compile Include="Entities\PartialClasses\Put.cs" />
     <Compile Include="Entities\PartialClasses\RiskParameters.cs" />
     <Compile Include="Entities\PartialClasses\Security.cs" />
+    <Compile Include="Entities\PartialClasses\TradeTicket.cs" />
     <Compile Include="Entities\PartialClasses\WeekCandlestick.cs" />
     <Compile Include="Entities\PartialClasses\WeeklyIncomeActionPlan.cs" />
     <Compile Include="Entities\PartialClasses\WeeklyIncomeComboCount.cs" />
@@ -536,9 +536,6 @@
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\PropertyNames\PropertyNamesBase.cs" />
-    <Compile Include="Entities\PropertyNames\PullbackTradeTicketPropertyNames.cs">
-      <DependentUpon>PropertyNames.txt4</DependentUpon>
-    </Compile>
     <Compile Include="Entities\PropertyNames\PutPropertyNames.cs">
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
@@ -546,6 +543,9 @@
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\PropertyNames\SecurityPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PropertyNames\TradeTicketPropertyNames.cs">
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\PropertyNames\WeekCandlestickPropertyNames.cs">
@@ -560,9 +560,6 @@
     <Compile Include="Entities\PropertyNames\WeeklyIncomePlaySheetPropertyNames.cs">
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
-    <Compile Include="Entities\PullbackTradeTicket.cs">
-      <DependentUpon>Entity.txt4</DependentUpon>
-    </Compile>
     <Compile Include="Entities\Put.cs">
       <DependentUpon>Entity.txt4</DependentUpon>
     </Compile>
@@ -570,6 +567,9 @@
       <DependentUpon>Entity.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\Security.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TradeTicket.cs">
       <DependentUpon>Entity.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\WeekCandlestick.cs">
@@ -647,6 +647,10 @@
     <Compile Include="Migrations\202005112238222_AddStrategyToTradeTicket.designer.cs">
       <DependentUpon>202005112238222_AddStrategyToTradeTicket.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005122133022_ChangePullbackTradeTicketToTradeTicket.cs" />
+    <Compile Include="Migrations\202005122133022_ChangePullbackTradeTicketToTradeTicket.designer.cs">
+      <DependentUpon>202005122133022_ChangePullbackTradeTicketToTradeTicket.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BenzingaNewsResponse.cs" />
     <Compile Include="Models\DayPerformanceModel.cs" />
@@ -689,9 +693,6 @@
     <Compile Include="ServicesFolder\Base\PairCondorServiceBase.cs">
       <DependentUpon>ServiceBase.txt4</DependentUpon>
     </Compile>
-    <Compile Include="ServicesFolder\Base\PullbackTradeTicketServiceBase.cs">
-      <DependentUpon>ServiceBase.txt4</DependentUpon>
-    </Compile>
     <Compile Include="ServicesFolder\Base\PutServiceBase.cs">
       <DependentUpon>ServiceBase.txt4</DependentUpon>
     </Compile>
@@ -702,6 +703,9 @@
       <DependentUpon>ServiceBase.txt4</DependentUpon>
     </Compile>
     <Compile Include="ServicesFolder\Base\ServiceBase.cs" />
+    <Compile Include="ServicesFolder\Base\TradeTicketServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
     <Compile Include="ServicesFolder\Base\WeekCandlestickServiceBase.cs">
       <DependentUpon>ServiceBase.txt4</DependentUpon>
     </Compile>
@@ -726,10 +730,10 @@
     <Compile Include="ServicesFolder\OptionDateService.cs" />
     <Compile Include="ServicesFolder\OptionStrikeService.cs" />
     <Compile Include="ServicesFolder\PairCondorService.cs" />
-    <Compile Include="ServicesFolder\PullbackTradeTicketService.cs" />
     <Compile Include="ServicesFolder\PutService.cs" />
     <Compile Include="ServicesFolder\RiskParametersService.cs" />
     <Compile Include="ServicesFolder\SecurityService.cs" />
+    <Compile Include="ServicesFolder\TradeTicketService.cs" />
     <Compile Include="ServicesFolder\WeekCandlestickService.cs" />
     <Compile Include="ServicesFolder\WeeklyIncomeActionPlanService.cs" />
     <Compile Include="ServicesFolder\WeeklyIncomeComboCountService.cs" />
@@ -788,6 +792,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005112238222_AddStrategyToTradeTicket.resx">
       <DependentUpon>202005112238222_AddStrategyToTradeTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005122133022_ChangePullbackTradeTicketToTradeTicket.resx">
+      <DependentUpon>202005122133022_ChangePullbackTradeTicketToTradeTicket.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\SP500_Constituents.csv" />
     <EmbeddedResource Include="SeedData\SPMidCap_Constituents.csv" />

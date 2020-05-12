@@ -31,23 +31,9 @@ namespace TradeProAssistant.Controllers
         }
         #endregion
 
-        public ActionResult Strategies()
+        public ActionResult Trading()
         {
-            return View(new StrategiesModel
-            {
-                PullbackTradeTicket = new PullbackTradeTicketDto()
-                {
-                    Timestamp = DateTime.Now,
-                    Asset = Enums.TradeProAssets.ES,
-                    Strategy = Enums.Strategies.BuyTheDip,
-                    Quantity = 1
-                }
-            });
-        }
-
-        public ActionResult PullbackStrategyTab()
-        {
-            return View(new PullbackTradeTicketDto()
+            return View(new TradeTicketDto()
             {
                 Timestamp = DateTime.Now,
                 Asset = Enums.TradeProAssets.ES,
@@ -56,9 +42,9 @@ namespace TradeProAssistant.Controllers
             });
         }
 
-        public ActionResult PullbackTradeTicketForm()
+        public ActionResult TradeTicketForm()
         {
-            return View(new PullbackTradeTicketDto()
+            return View(new TradeTicketDto()
             {
                 Timestamp = DateTime.Now,
                 Asset = Enums.TradeProAssets.ES,
@@ -68,9 +54,9 @@ namespace TradeProAssistant.Controllers
         }
 
         [HttpPost]
-        public JsonResult PullbackTradeTicketForm(PullbackTradeTicketDto dto)
+        public JsonResult TradeTicketForm(TradeTicketDto dto)
         {
-            dto.Identifier = PullbackTradeTicketService.Save(mapper.Map<PullbackTradeTicket>(dto));
+            dto.Identifier = TradeTicketService.Save(mapper.Map<TradeTicket>(dto));
             return Json(dto);
         }
 
@@ -191,13 +177,13 @@ namespace TradeProAssistant.Controllers
             return PartialView("_TradeTicketQualifiers", model);
         }
 
-        #region PullbackTradeTickets_Read
-        public ActionResult PullbackTradeTickets_Read([DataSourceRequest] DataSourceRequest request)
+        #region TradeTickets_Read
+        public ActionResult TradeTickets_Read([DataSourceRequest] DataSourceRequest request)
         {
             DataSourceResult result = new DataSourceResult();
             Query query = request.ToQuery();
 
-            List<PullbackTradeTicketDto> tradeTickets = mapper.Map<List<PullbackTradeTicketDto>>(PullbackTradeTicketService.GetCollection(query));
+            List<TradeTicketDto> tradeTickets = mapper.Map<List<TradeTicketDto>>(TradeTicketService.GetCollection(query));
 
             result.Data = tradeTickets;
             result.Total = tradeTickets.Count;
@@ -206,10 +192,10 @@ namespace TradeProAssistant.Controllers
         }
         #endregion
 
-        #region PullbackDayPerformance_Read
-        public ActionResult PullbackDayPerformance_Read([DataSourceRequest] DataSourceRequest request)
+        #region DayPerformance_Read
+        public ActionResult DayPerformance_Read([DataSourceRequest] DataSourceRequest request)
         {
-            List<DayPerformanceModel> list = PullbackTradeTicketService.GetDayPerformance();
+            List<DayPerformanceModel> list = TradeTicketService.GetDayPerformance();
 
             DataSourceResult result = new DataSourceResult();
             result.Data = list;

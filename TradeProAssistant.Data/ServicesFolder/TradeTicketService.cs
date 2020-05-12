@@ -7,14 +7,14 @@ using TradeProAssistant.Data.Models;
 
 namespace Services
 {
-	public class PullbackTradeTicketService : PullbackTradeTicketServiceBase
-	{
-		#region Custom Methods
+    public class TradeTicketService : TradeTicketServiceBase
+    {
+        #region Custom Methods
         public static List<DayPerformanceModel> GetDayPerformance()
         {
             List<DayPerformanceModel> list = new List<DayPerformanceModel>();
 
-            List<PullbackTradeTicket> tradeTickets = GetCollection();
+            List<TradeTicket> tradeTickets = GetCollection();
 
             var groupings = from tt in tradeTickets
                             group tt by tt.Timestamp.Date into g
@@ -25,14 +25,13 @@ namespace Services
                                 TradeTickets = g.ToList()
                             };
 
-            foreach(var g in groupings)
+            foreach (var g in groupings)
             {
                 list.Add(new DayPerformanceModel(g.Date, g.TradeTickets));
             }
 
             return list;
         }
-		#endregion
-	}
+        #endregion
+    }
 }
-

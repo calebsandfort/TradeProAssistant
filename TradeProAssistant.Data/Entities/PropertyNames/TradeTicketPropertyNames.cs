@@ -2,10 +2,10 @@
 
 namespace Entities
 {
-	public class PullbackTradeTicketPropertyNames : PropertyNamesBase
+	public class TradeTicketPropertyNames : PropertyNamesBase
 	{
-		public PullbackTradeTicketPropertyNames() : base(String.Empty) {}
-		public PullbackTradeTicketPropertyNames(String parent) : base(parent) {}
+		public TradeTicketPropertyNames() : base(String.Empty) {}
+		public TradeTicketPropertyNames(String parent) : base(parent) {}
 
 		public String Identifier { get { return ResolvePropertyName("Identifier"); } }
 		public String Timestamp { get { return ResolvePropertyName("Timestamp"); } }

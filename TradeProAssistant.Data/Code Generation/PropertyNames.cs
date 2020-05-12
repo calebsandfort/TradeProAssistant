@@ -4,7 +4,7 @@
 // TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\PropertyNames.txt4
 // Generated items
 // TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\RiskParametersPropertyNames.cs
-// TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\PullbackTradeTicketPropertyNames.cs
+// TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\TradeTicketPropertyNames.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\EconomicEventPropertyNames.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\EconomicDayPropertyNames.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\PropertyNames\CandlestickPropertyNames.cs

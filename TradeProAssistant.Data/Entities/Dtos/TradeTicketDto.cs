@@ -4,7 +4,7 @@ using Enums;
 
 namespace Entities.Dtos
 {
-	public class PullbackTradeTicketDto
+	public class TradeTicketDto
 	{
 		public int Identifier { get; set; }
 		public bool IsNew { get{ return this.Identifier == 0; } }
@@ -33,15 +33,15 @@ namespace Entities.Dtos
 		public TradeQualifiers Qualifier4 { get; set; }
 
 		#region Comparisons
-		public static bool operator ==(PullbackTradeTicketDto entity, object obj)
+		public static bool operator ==(TradeTicketDto entity, object obj)
 		{
 			if ((object)entity == null && obj == null)
 			{
 				return true;
 			}
-			else if ((object)entity != null && obj is PullbackTradeTicketDto && entity.GetType() == obj.GetType())
+			else if ((object)entity != null && obj is TradeTicketDto && entity.GetType() == obj.GetType())
 			{
-				return (entity.Identifier == ((PullbackTradeTicketDto)obj).Identifier);
+				return (entity.Identifier == ((TradeTicketDto)obj).Identifier);
 			}
 			else
 			{
@@ -49,15 +49,15 @@ namespace Entities.Dtos
 			}
 		}
 
-		public static bool operator !=(PullbackTradeTicketDto entity, object obj)
+		public static bool operator !=(TradeTicketDto entity, object obj)
 		{
 			if ((object)entity == null && obj == null)
 			{
 				return false;
 			}
-			else if ((object)entity != null && obj is PullbackTradeTicketDto && entity.GetType() == obj.GetType())
+			else if ((object)entity != null && obj is TradeTicketDto && entity.GetType() == obj.GetType())
 			{
-				return (entity.Identifier != ((PullbackTradeTicketDto)obj).Identifier);
+				return (entity.Identifier != ((TradeTicketDto)obj).Identifier);
 			}
 			else
 			{
@@ -67,9 +67,9 @@ namespace Entities.Dtos
 
 		public override bool Equals(object obj)
 		{
-			if (obj is PullbackTradeTicketDto && this.GetType() == obj.GetType())
+			if (obj is TradeTicketDto && this.GetType() == obj.GetType())
 			{
-				return (this.Identifier == ((PullbackTradeTicketDto)obj).Identifier);
+				return (this.Identifier == ((TradeTicketDto)obj).Identifier);
 			}
 			else
 			{

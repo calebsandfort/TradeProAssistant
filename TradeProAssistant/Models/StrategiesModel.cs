@@ -8,12 +8,12 @@ namespace TradeProAssistant.Models
 {
     public class StrategiesModel
     {
-        private PullbackTradeTicketDto pullbackTradeTicket;
+        private TradeTicketDto tradeTicket;
 
-        public PullbackTradeTicketDto PullbackTradeTicket
+        public TradeTicketDto TradeTicket
         {
-            get { return pullbackTradeTicket; }
-            set { pullbackTradeTicket = value; }
+            get { return tradeTicket; }
+            set { tradeTicket = value; }
         }
 
     }

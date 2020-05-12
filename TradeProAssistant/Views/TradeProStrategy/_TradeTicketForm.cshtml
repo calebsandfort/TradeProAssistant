@@ -1,15 +1,15 @@
-﻿@model PullbackTradeTicketDto
+﻿@model TradeTicketDto
 
 <div class="row">
     <div id="trade-ticket-qualifiers" class="col-4">
         @Html.Action("TradeTicketQualifiers", "TradeProStrategy", new { strategy = Model.Strategy })
     </div>
     <div class="col-8">
-        @using (Ajax.BeginForm("PullbackTradeTicketForm", "TradeProStrategy", null,
+        @using (Ajax.BeginForm("TradeTicketForm", "TradeProStrategy", null,
             new AjaxOptions
             {
-                OnSuccess = "PullbackTradeTicketFormOnSuccess"
-            }, new { id = "PullbackTradeTicketForm" }))
+                OnSuccess = "TradeTicketFormOnSuccess"
+            }, new { id = "TradeTicketForm" }))
         {
             <div class="card mb-3">
                 <div class="card-header text-white bg-warning">Trade Ticket</div>

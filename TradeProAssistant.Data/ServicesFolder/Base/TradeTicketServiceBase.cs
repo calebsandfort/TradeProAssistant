@@ -11,10 +11,10 @@ using System.Data.Entity;
 
 namespace Services
 {
-	public class PullbackTradeTicketServiceBase : ServiceBase
+	public class TradeTicketServiceBase : ServiceBase
 	{
 		#region SetIncludes
-		private static DbQuery<PullbackTradeTicket> SetIncludes(DbQuery<PullbackTradeTicket> dbQuery, List<String> includes)
+		private static DbQuery<TradeTicket> SetIncludes(DbQuery<TradeTicket> dbQuery, List<String> includes)
         {
             foreach (String include in includes)
             {
@@ -26,12 +26,12 @@ namespace Services
 		#endregion
 
 		#region Get
-        public static PullbackTradeTicket Get(int identifier)
+        public static TradeTicket Get(int identifier)
         {
             return Get(identifier, new List<String>());
         }
 
-		public static PullbackTradeTicket Get(int identifier, List<String> includes)
+		public static TradeTicket Get(int identifier, List<String> includes)
         {
             Query query = new Query();
 			query.Includes = includes;
@@ -39,43 +39,43 @@ namespace Services
             {
                 IsAndFilter = false,
                 Parameter = identifier.ToString(),
-                PropertyName = PullbackTradeTicket.PropertyNames.Identifier,
+                PropertyName = TradeTicket.PropertyNames.Identifier,
                 QueryOperator = QueryOperators.Equals
             });
 
             return Get(query);
         }
 
-        public static PullbackTradeTicket Get(Query query)
+        public static TradeTicket Get(Query query)
         {
             using(TradeProAssistantContext context = new TradeProAssistantContext()) 
 			{
-				DbQuery<PullbackTradeTicket> dbQuery = context.PullbackTradeTickets;
+				DbQuery<TradeTicket> dbQuery = context.TradeTickets;
 
 				if(query.Includes.Count > 0)
 				{
 					dbQuery = SetIncludes(dbQuery, query.Includes);
 				}
 
-				var pullbacktradetickets = dbQuery.Where(query.WhereClause).Take(1);
+				var tradetickets = dbQuery.Where(query.WhereClause).Take(1);
 
-				return (pullbacktradetickets != null && pullbacktradetickets.Count() > 0) ? pullbacktradetickets.First() : null;
+				return (tradetickets != null && tradetickets.Count() > 0) ? tradetickets.First() : null;
 			}
         }
         #endregion
 
 		#region GetCollection
-        public static List<PullbackTradeTicket> GetCollection()
+        public static List<TradeTicket> GetCollection()
         {
             return GetCollection(new List<String>());
         }
 
-		public static List<PullbackTradeTicket> GetCollection(List<String> includes)
+		public static List<TradeTicket> GetCollection(List<String> includes)
         {
             return GetCollection(new Query() { Includes = includes });
         }
 
-        public static List<PullbackTradeTicket> GetCollection(Query query)
+        public static List<TradeTicket> GetCollection(Query query)
         {
             using(TradeProAssistantContext context = new TradeProAssistantContext()) 
 			{
@@ -85,18 +85,18 @@ namespace Services
 					{
 						IsAndFilter = false,
 						Parameter = "0",
-						PropertyName = PullbackTradeTicket.PropertyNames.Identifier,
+						PropertyName = TradeTicket.PropertyNames.Identifier,
 						QueryOperator = QueryOperators.NotEquals
 					});
 				}
 
 				if (String.IsNullOrEmpty(query.SortPropertyName))
 				{
-					query.SortPropertyName = PullbackTradeTicket.PropertyNames.Timestamp;
+					query.SortPropertyName = TradeTicket.PropertyNames.Timestamp;
 					query.SortDescending = false;
 				}
 
-				DbQuery<PullbackTradeTicket> dbQuery = context.PullbackTradeTickets;
+				DbQuery<TradeTicket> dbQuery = context.TradeTickets;
 
 				if(query.Includes.Count > 0)
 				{
@@ -131,28 +131,28 @@ namespace Services
 					{
 						IsAndFilter = false,
 						Parameter = "0",
-						PropertyName = PullbackTradeTicket.PropertyNames.Identifier,
+						PropertyName = TradeTicket.PropertyNames.Identifier,
 						QueryOperator = QueryOperators.NotEquals
 					});
 				}
 
-				return context.PullbackTradeTickets.Count(query.WhereClause);
+				return context.TradeTickets.Count(query.WhereClause);
 			}
         }
         #endregion
 
 		#region Save
-		public static int Save(PullbackTradeTicket pullbacktradeticket)
+		public static int Save(TradeTicket tradeticket)
 		{
 			using(TradeProAssistantContext context = new TradeProAssistantContext()) 
 			{
-				context.Entry(pullbacktradeticket).State = pullbacktradeticket.IsNew ?
+				context.Entry(tradeticket).State = tradeticket.IsNew ?
 										   EntityState.Added :
 										   EntityState.Modified;
  
 				context.SaveChanges();
 
-				return pullbacktradeticket.Identifier;
+				return tradeticket.Identifier;
 			}
 		}
 		#endregion
@@ -162,7 +162,7 @@ namespace Services
         {
             using (TradeProAssistantContext context = new TradeProAssistantContext())
             {
-                DbQuery<PullbackTradeTicket> dbQuery = context.PullbackTradeTickets;
+                DbQuery<TradeTicket> dbQuery = context.TradeTickets;
                 List<int> identifiers = dbQuery.Where(query.WhereClause).Select(i => i.Identifier).ToList();
 
                 foreach (int identifier in identifiers)
@@ -172,9 +172,9 @@ namespace Services
             }
         }
 
-        public static void Delete(PullbackTradeTicket pullbacktradeticket)
+        public static void Delete(TradeTicket tradeticket)
         {
-            Delete(pullbacktradeticket.Identifier);
+            Delete(tradeticket.Identifier);
         }
 
         public static void Delete(int identifier)
@@ -183,8 +183,8 @@ namespace Services
 			{
                 try
                 {
-                    PullbackTradeTicket pullbacktradeticket = context.PullbackTradeTickets.Find(identifier);
-                    context.Entry(pullbacktradeticket).State = EntityState.Deleted;
+                    TradeTicket tradeticket = context.TradeTickets.Find(identifier);
+                    context.Entry(tradeticket).State = EntityState.Deleted;
                     context.SaveChanges();
                 }
                 catch { }

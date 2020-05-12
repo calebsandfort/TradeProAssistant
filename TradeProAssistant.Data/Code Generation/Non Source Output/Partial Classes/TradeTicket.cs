@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entities
 {
-	public partial class PullbackTradeTicket
+	public partial class TradeTicket
 	{
 		#region Custom Properties
 
@@ -17,15 +17,15 @@ namespace Entities
 		#endregion
 
 		#region Comparisons
-		public static bool operator ==(PullbackTradeTicket entity, object obj)
+		public static bool operator ==(TradeTicket entity, object obj)
 		{
 			if ((object)entity == null && obj == null)
 			{
 				return true;
 			}
-			else if ((object)entity != null && obj is PullbackTradeTicket && entity.GetType() == obj.GetType())
+			else if ((object)entity != null && obj is TradeTicket && entity.GetType() == obj.GetType())
 			{
-				return (entity.Identifier == ((PullbackTradeTicket)obj).Identifier);
+				return (entity.Identifier == ((TradeTicket)obj).Identifier);
 			}
 			else
 			{
@@ -33,15 +33,15 @@ namespace Entities
 			}
 		}
 
-		public static bool operator !=(PullbackTradeTicket entity, object obj)
+		public static bool operator !=(TradeTicket entity, object obj)
 		{
 			if ((object)entity == null && obj == null)
 			{
 				return false;
 			}
-			else if ((object)entity != null && obj is PullbackTradeTicket && entity.GetType() == obj.GetType())
+			else if ((object)entity != null && obj is TradeTicket && entity.GetType() == obj.GetType())
 			{
-				return (entity.Identifier != ((PullbackTradeTicket)obj).Identifier);
+				return (entity.Identifier != ((TradeTicket)obj).Identifier);
 			}
 			else
 			{
@@ -51,9 +51,9 @@ namespace Entities
 
 		public override bool Equals(object obj)
 		{
-			if (obj is PullbackTradeTicket && this.GetType() == obj.GetType())
+			if (obj is TradeTicket && this.GetType() == obj.GetType())
 			{
-				return (this.Identifier == ((PullbackTradeTicket)obj).Identifier);
+				return (this.Identifier == ((TradeTicket)obj).Identifier);
 			}
 			else
 			{

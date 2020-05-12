@@ -145,7 +145,7 @@
     <EnumProperty Name="EventType" Type="EconomicEventTypes" IncludeInDto="true"/>
     <Relationship Name="EconomicDay" Type="EconomicDay"/>
   </Entity>
-  <Entity Name="PullbackTradeTicket" DefaultSortField="Timestamp" DefaultSortDescending="false" ToStringField="Timestamp">
+  <Entity Name="TradeTicket" DefaultSortField="Timestamp" DefaultSortDescending="false" ToStringField="Timestamp" TableName="TradeTickets">
     <Property Name="Timestamp" Type="DateTime" IncludeInDto="true" />
     <Property Name="ZoneQualified" Type="bool" IncludeInDto="true" />
     <Property Name="Qualifier1Disqualified" Type="bool" IncludeInDto="true" />

@@ -1,23 +1,31 @@
-﻿@model StrategiesModel
+﻿@model TradeTicketDto
 
 @{
-    ViewBag.tab = "Strategies";
+    ViewBag.tab = "Trading";
 }
 
-<ul class="nav nav-tabs" id="strategiesTabs" role="tablist">
+<ul class="nav nav-tabs pt-2" id="tabs" role="tablist">
     <li class="nav-item">
-        <a class="nav-link active" id="pullback-tab" data-toggle="tab" href="#pullback" role="tab" aria-controls="pullback" aria-selected="true">Pullback</a>
+        <a class="nav-link active" id="trade-ticket-tab" data-toggle="tab" href="#trade-ticket" role="tab" aria-controls="trade-ticket" aria-selected="true">Trade Ticket</a>
     </li>
+    @*<li class="nav-item">
+        <a class="nav-link" id="trades-tab" data-toggle="tab" href="#trades" role="tab" aria-controls="trades" aria-selected="false">Trades</a>
+    </li>*@
     <li class="nav-item">
-        <a class="nav-link" id="breakout-tab" data-toggle="tab" href="#breakout" role="tab" aria-controls="breakout" aria-selected="false">Breakout</a>
+        <a class="nav-link" id="trade-day-performance-tab" data-toggle="tab"
+           href="#trade-day-performance" role="tab" aria-controls="trade-day-performance" aria-selected="false">Day Perf</a>
     </li>
 </ul>
-<div class="tab-content" id="strategiesTabContent">
-    <div class="tab-pane fade show active" id="pullback" role="tabpanel" aria-labelledby="pullback-tab">
-        @Html.Partial("_PullbackStrategyTab", Model.PullbackTradeTicket)
+<div class="tab-content pt-2" id="strategiesTabContent">
+    <div class="tab-pane fade show active" id="trade-ticket" role="tabpanel" aria-labelledby="trade-ticket-tab">
+        @Html.Partial("_TradeTicketForm", Model)
     </div>
-    <div class="tab-pane fade" id="breakout" role="tabpanel" aria-labelledby="breakout-tab">...</div>
-    @*<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>*@
+    @*<div class="tab-pane fade" id="trades" role="tabpanel" aria-labelledby="trades-tab">
+        @Html.Partial("_TradeTicketsTable")
+    </div>*@
+    <div class="tab-pane fade" id="trade-day-performance" role="tabpanel" aria-labelledby="trade-day-performance-tab">
+        @Html.Partial("_TradeDayPerformanceTable")
+    </div>
 </div>
 
 @section scripts
@@ -25,11 +33,11 @@
     <script>
         $(function () {
             setTimeout(function () {
-                $("#pullbackTradeTicketsGrid .k-grid-content").css("height", "").css("max-height", $(window).height() - 300);
-                $("#pullbackDayPerformanceGrid .k-grid-content").css("height", "").css("max-height", $(window).height() - 300);
-            }, 500);
+                //$("#tradeTicketsGrid .k-grid-content").css("height", "").css("max-height", $(window).height() - 300);
+                $("#dayPerformanceGrid .k-grid-content").css("height", "").css("max-height", $(window).height() - 300);
+            }, 1000);
 
-            $("body").on("change", ".pullback-trade-steps input[type=checkbox]", function () {
+            $("body").on("change", ".trade-steps input[type=checkbox]", function () {
                 var $this = $(this);
 
                 if ($(this).prop("checked")) {
@@ -86,10 +94,10 @@
         });
 
 
-        function PullbackTradeTicketFormOnSuccess(response) {
+        function TradeTicketFormOnSuccess(response) {
             alert("success");
-            $('#PullbackTradeTicketForm').get(0).reset();
-            refreshGrid("pullbackDayPerformanceGrid", 300);
+            $('#TradeTicketForm').get(0).reset();
+            refreshGrid("dayPerformanceGrid", 300);
         }
     </script>
 }

@@ -3,15 +3,15 @@
     margin: 0 auto;
 }
 
-#PullbackTradeTicketForm .form-group.row {
+#TradeTicketForm .form-group.row {
     margin-bottom: .5rem;
 }
 
-/*#PullbackTradeTicketForm .form-group.row.hasSelect {
+/*#TradeTicketForm .form-group.row.hasSelect {
     margin-top: .5rem;
 }*/
 
-    #PullbackTradeTicketForm .form-group.row .custom-switch {
+    #TradeTicketForm .form-group.row .custom-switch {
         padding-top: 7px;
     }
 
