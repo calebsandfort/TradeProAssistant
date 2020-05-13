@@ -25,6 +25,7 @@ namespace Contexts
 		public DbSet<EconomicEvent> EconomicEvents { get; set; }
 		public DbSet<TradeTicket> TradeTickets { get; set; }
 		public DbSet<RiskParameters> RiskParameters { get; set; }
+		public DbSet<TradingSettings> TradingSettings { get; set; }
 		
 		public TradeProAssistantContext() : base("TradeProAssistant") {}
 

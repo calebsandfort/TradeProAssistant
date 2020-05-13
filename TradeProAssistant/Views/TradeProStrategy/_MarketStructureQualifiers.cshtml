@@ -1,0 +1,33 @@
+﻿@model MarketStructureQualifiersModel
+
+
+@if (Model.MarketStructureQualifier1 != MarketStructureQualifiers.None)
+{
+<div class="btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary active">
+        <input id="MarketStructureQualified1" type="checkbox"> @Model.MarketStructureQualifier1.GetStringValue()
+    </label>
+</div>
+}
+
+@if (Model.MarketStructureQualifier2 != MarketStructureQualifiers.None)
+{
+    <i class="fa fa-2x fa-long-arrow-right px-3 text-primary" style="padding-top: 3px;"></i>
+
+    <div class="btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+            <input id="MarketStructureQualified2" type="checkbox"> @Model.MarketStructureQualifier2.GetStringValue()
+        </label>
+    </div>
+}
+
+@if (Model.MarketStructureQualifier3 != MarketStructureQualifiers.None)
+{
+    <i class="fa fa-2x fa-long-arrow-right px-3 text-primary" style="padding-top: 3px;"></i>
+
+    <div class="btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+            <input id="MarketStructureQualified3" type="checkbox"> @Model.MarketStructureQualifier3.GetStringValue()
+        </label>
+    </div>
+}

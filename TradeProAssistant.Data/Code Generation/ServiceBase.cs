@@ -3,6 +3,7 @@
 // Generated helper templates
 // TradeProAssistant\TradeProAssistant.Data\ServicesFolder\Base\ServiceBase.txt4
 // Generated items
+// TradeProAssistant\TradeProAssistant.Data\ServicesFolder\Base\TradingSettingsServiceBase.cs
 // TradeProAssistant\TradeProAssistant.Data\ServicesFolder\Base\RiskParametersServiceBase.cs
 // TradeProAssistant\TradeProAssistant.Data\ServicesFolder\Base\TradeTicketServiceBase.cs
 // TradeProAssistant\TradeProAssistant.Data\ServicesFolder\Base\EconomicEventServiceBase.cs

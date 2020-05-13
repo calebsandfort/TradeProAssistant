@@ -49,7 +49,7 @@ namespace TradeProAssistant.Controllers
                 IsAndFilter = true
             });
 
-            List<SecurityDto> list = mapper.Map<List<SecurityDto>>(SecurityService.GetCollection(query)).Where(x => x.AssetClassEnum == Enums.AssetClasses.Equity).ToList();
+            List<SecurityDto> list = mapper.Map<List<SecurityDto>>(SecurityService.GetCollection(query)).Where(x => x.AssetClassEnum == Enums.AssetClasses.Equity || x.AssetClassEnum == Enums.AssetClasses.ETF).ToList();
             //list.FilterForImportantDates();
 
             return View(list);

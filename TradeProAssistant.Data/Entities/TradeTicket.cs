@@ -21,7 +21,11 @@ namespace Entities
 
 		public DateTime Timestamp { get; set; }
 
-		public bool ZoneQualified { get; set; }
+		public bool MarketStructureQualified1 { get; set; }
+
+		public bool MarketStructureQualified2 { get; set; }
+
+		public bool MarketStructureQualified3 { get; set; }
 
 		public bool Qualifier1Disqualified { get; set; }
 
@@ -61,7 +65,9 @@ namespace Entities
 		public  TradeTicket(TradeTicket source)
 		{
 			this.Timestamp = source.Timestamp;
-			this.ZoneQualified = source.ZoneQualified;
+			this.MarketStructureQualified1 = source.MarketStructureQualified1;
+			this.MarketStructureQualified2 = source.MarketStructureQualified2;
+			this.MarketStructureQualified3 = source.MarketStructureQualified3;
 			this.Qualifier1Disqualified = source.Qualifier1Disqualified;
 			this.Qualifier2Disqualified = source.Qualifier2Disqualified;
 			this.Qualifier3Disqualified = source.Qualifier3Disqualified;

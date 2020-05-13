@@ -3,6 +3,7 @@
 // Generated helper templates
 // TradeProAssistant\TradeProAssistant.Data\Entities\Entity.txt4
 // Generated items
+// TradeProAssistant\TradeProAssistant.Data\Entities\TradingSettings.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\RiskParameters.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\TradeTicket.cs
 // TradeProAssistant\TradeProAssistant.Data\Entities\EconomicEvent.cs

@@ -9,9 +9,12 @@ namespace Entities.Dtos
 		public bool IsNew { get{ return this.Identifier == 0; } }
 		public String Name { get; set; }
 		public bool Active { get; set; }
-		public Decimal DailyTarget { get; set; }
-		public Decimal WeeklyTarget { get; set; }
-		public Decimal MonthlyTarget { get; set; }
+		public Decimal TpaDailyTarget { get; set; }
+		public Decimal TpaWeeklyTarget { get; set; }
+		public Decimal TpaMonthlyTarget { get; set; }
+		public Decimal MyDailyTarget { get; set; }
+		public Decimal MyWeeklyTarget { get; set; }
+		public Decimal MyMonthlyTarget { get; set; }
 		public Decimal DailyStop { get; set; }
 		public Decimal WeeklyStop { get; set; }
 		public Decimal MonthlyStop { get; set; }

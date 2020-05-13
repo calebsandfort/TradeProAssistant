@@ -87,9 +87,39 @@
                     }, function (result) {
                         $("#trade-ticket-qualifiers").html(result);
                     });
+
+                    url = $("#uxInput_RootUrl").val() + 'TradeProStrategy/MarketStructureQualifiers';
+                    $.post(url, {
+                        strategy: strategy
+                    }, function (result) {
+                        $("#market-structure-qualifiers").html(result);
+                    });
                 })
                 .on("click", ".clear-trade-qualifier", function () {
                     $(this).closest(".form-group.row").find("select").val("None");
+                })
+                .on("change", "#market-structure-qualifiers input[type=checkbox]", function () {
+                    var $this = $(this);
+                    var strategy = $("#Strategy").val();
+                    var btnClass = "";
+
+                    switch (strategy) {
+                        case "BuyTheDip":
+                            btnClass = "btn-success";
+                            break;
+                        case "SellTheRip":
+                            btnClass = "btn-danger";
+                            break;
+                    }
+
+                    var checked = $this.prop("checked");
+
+                    if (checked) {
+                        $this.parent().addClass(btnClass).removeClass("btn-secondary");
+                    }
+                    else {
+                        $this.parent().addClass("btn-secondary").removeClass(btnClass);
+                    }
                 });
         });
 
@@ -97,6 +127,7 @@
         function TradeTicketFormOnSuccess(response) {
             alert("success");
             $('#TradeTicketForm').get(0).reset();
+            $("#uxButton_SetTimestamp").trigger("click");
             refreshGrid("dayPerformanceGrid", 300);
         }
     </script>

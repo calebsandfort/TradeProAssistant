@@ -120,12 +120,24 @@ namespace TradeProAssistant.Data.Migrations
                 {
                     Name = "Demo Month",
                     Active = true,
-                    DailyTarget = 250m,
-                    WeeklyTarget = 1250m,
-                    MonthlyTarget = 5000m,
+                    TpaDailyTarget = 150m,
+                    TpaWeeklyTarget = 750m,
+                    TpaMonthlyTarget = 3000m,
+                    MyDailyTarget = 250m,
+                    MyWeeklyTarget = 1250m,
+                    MyMonthlyTarget = 5000m,
                     DailyStop = -150m,
                     WeeklyStop = -450m,
                     MonthlyStop = -1000m
+                });
+            }
+
+            if (context.TradingSettings.Count() == 0)
+            {
+                context.TradingSettings.Add(new TradingSettings()
+                {
+                    MonthStart = new DateTime(2020, 5, 11),
+                    RiskParametersIdentifier = context.RiskParameters.First().Identifier
                 });
             }
         }

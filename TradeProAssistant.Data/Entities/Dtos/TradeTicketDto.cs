@@ -9,7 +9,9 @@ namespace Entities.Dtos
 		public int Identifier { get; set; }
 		public bool IsNew { get{ return this.Identifier == 0; } }
 		public DateTime Timestamp { get; set; }
-		public bool ZoneQualified { get; set; }
+		public bool MarketStructureQualified1 { get; set; }
+		public bool MarketStructureQualified2 { get; set; }
+		public bool MarketStructureQualified3 { get; set; }
 		public bool Qualifier1Disqualified { get; set; }
 		public bool Qualifier2Disqualified { get; set; }
 		public bool Qualifier3Disqualified { get; set; }

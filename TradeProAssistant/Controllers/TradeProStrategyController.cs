@@ -60,6 +60,39 @@ namespace TradeProAssistant.Controllers
             return Json(dto);
         }
 
+        public ActionResult MarketStructureQualifiers(Strategies strategy)
+        {
+            MarketStructureQualifiersModel model = new MarketStructureQualifiersModel();
+
+            switch (strategy)
+            {
+                case Strategies.None:
+                    break;
+                case Strategies.BuyTheDip:
+                    model.MarketStructureQualifier1 = Enums.MarketStructureQualifiers.HigherHighOnImpulse;
+                    model.MarketStructureQualifier2 = Enums.MarketStructureQualifiers.HigherLowsOnImpulse;
+                    model.MarketStructureQualifier3 = Enums.MarketStructureQualifiers.PreviousHighIsSupport;
+                    break;
+                case Strategies.SellTheRip:
+                    model.MarketStructureQualifier1 = Enums.MarketStructureQualifiers.LowerLowOnImpulse;
+                    model.MarketStructureQualifier2 = Enums.MarketStructureQualifiers.LowerHighsOnImpulse;
+                    model.MarketStructureQualifier3 = Enums.MarketStructureQualifiers.PreviousLowIsResistance;
+                    break;
+                case Strategies.FadeTheRally:
+                    break;
+                case Strategies.FadeTheDrop:
+                    break;
+                case Strategies.BuyTheBreakout:
+                    break;
+                case Strategies.SellTheBreakout:
+                    break;
+                default:
+                    break;
+            }
+
+            return PartialView("_MarketStructureQualifiers", model);
+        }
+
         public ActionResult TradeTicketQualifiers(Strategies strategy)
         {
             List<TradeQualifiersModel> model = new List<TradeQualifiersModel>();

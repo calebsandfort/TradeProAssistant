@@ -3,6 +3,7 @@
 // Generated helper templates
 // TradeProAssistant\TradeProAssistant.Data\Code Generation\Non Source Output\Services\Service.txt4
 // Generated items
+// TradeProAssistant\TradeProAssistant.Data\Code Generation\Non Source Output\Services\TradingSettingsService.cs
 // TradeProAssistant\TradeProAssistant.Data\Code Generation\Non Source Output\Services\RiskParametersService.cs
 // TradeProAssistant\TradeProAssistant.Data\Code Generation\Non Source Output\Services\TradeTicketService.cs
 // TradeProAssistant\TradeProAssistant.Data\Code Generation\Non Source Output\Services\EconomicEventService.cs

@@ -13,6 +13,7 @@ namespace TradeProAssistant.Utilities
     public static class GlobalSettings
     {
         #region Properties
+        #region ActiveRiskParameters
         private static RiskParametersDto activeRiskParameters = null;
 
         public static RiskParametersDto ActiveRiskParameters
@@ -38,6 +39,36 @@ namespace TradeProAssistant.Utilities
             }
             set { activeRiskParameters = value; }
         }
+        #endregion
+
+        #region ActiveTradingSettings
+        private static TradingSettingsDto activeTradingSettings = null;
+
+        public static TradingSettingsDto ActiveTradingSettings
+        {
+            get
+            {
+                if (activeTradingSettings == null)
+                {
+                    Query query = new Query();
+                    query.Includes = new List<string>() { TradingSettings.PropertyNames.RiskParametersInclude };
+                    query.SortPropertyName = TradingSettings.PropertyNames.Identifier;
+                    query.QuerySingleFilters.Add(new QuerySingleFilter()
+                    {
+                        PropertyName = TradingSettings.PropertyNames.Identifier,
+                        Parameter = "0",
+                        QueryOperator = QueryOperators.GreaterThan,
+                        IsAndFilter = true
+                    });
+
+                    activeTradingSettings = mapper.Map<TradingSettingsDto>(TradingSettingsService.Get(query));
+                }
+
+                return activeTradingSettings;
+            }
+            set { activeTradingSettings = value; }
+        }
+        #endregion
         #endregion
 
         #region Ctor

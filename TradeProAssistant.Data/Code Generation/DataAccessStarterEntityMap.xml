@@ -147,7 +147,9 @@
   </Entity>
   <Entity Name="TradeTicket" DefaultSortField="Timestamp" DefaultSortDescending="false" ToStringField="Timestamp" TableName="TradeTickets">
     <Property Name="Timestamp" Type="DateTime" IncludeInDto="true" />
-    <Property Name="ZoneQualified" Type="bool" IncludeInDto="true" />
+    <Property Name="MarketStructureQualified1" Type="bool" IncludeInDto="true" />
+    <Property Name="MarketStructureQualified2" Type="bool" IncludeInDto="true" />
+    <Property Name="MarketStructureQualified3" Type="bool" IncludeInDto="true" />
     <Property Name="Qualifier1Disqualified" Type="bool" IncludeInDto="true" />
     <Property Name="Qualifier2Disqualified" Type="bool" IncludeInDto="true" />
     <Property Name="Qualifier3Disqualified" Type="bool" IncludeInDto="true" />
@@ -167,12 +169,19 @@
   <Entity Name="RiskParameters" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Identifier">
     <Property Name="Name" Type="String" Size="50" IncludeInDto="true" />
     <Property Name="Active" Type="bool" IncludeInDto="true" />
-    <Property Name="DailyTarget" Type="Decimal" IncludeInDto="true" DefaultValue="250" />
-    <Property Name="WeeklyTarget" Type="Decimal" IncludeInDto="true" DefaultValue="1250" />
-    <Property Name="MonthlyTarget" Type="Decimal" IncludeInDto="true" DefaultValue="5000" />
+    <Property Name="TpaDailyTarget" Type="Decimal" IncludeInDto="true" DefaultValue="150" />
+    <Property Name="TpaWeeklyTarget" Type="Decimal" IncludeInDto="true" DefaultValue="750" />
+    <Property Name="TpaMonthlyTarget" Type="Decimal" IncludeInDto="true" DefaultValue="3000" />
+    <Property Name="MyDailyTarget" Type="Decimal" IncludeInDto="true" DefaultValue="250" />
+    <Property Name="MyWeeklyTarget" Type="Decimal" IncludeInDto="true" DefaultValue="1250" />
+    <Property Name="MyMonthlyTarget" Type="Decimal" IncludeInDto="true" DefaultValue="5000" />
     <Property Name="DailyStop" Type="Decimal" IncludeInDto="true" DefaultValue="-150" />
     <Property Name="WeeklyStop" Type="Decimal" IncludeInDto="true" DefaultValue="-450" />
     <Property Name="MonthlyStop" Type="Decimal" IncludeInDto="true" DefaultValue="-1000" />
+  </Entity>
+  <Entity Name="TradingSettings" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Identifier">
+    <Property Name="MonthStart" Type="DateTime" IncludeInDto="true" />
+    <Relationship Name="RiskParameters" Type="RiskParameters" IncludeInDto="true"/>
   </Entity>
   <EntityEnum Name="Sectors">
     <EnumMember Name="ConsumerDiscretionary" Value="1" DisplayValue="Consumer Discretionary"/>
@@ -269,5 +278,13 @@
     <EnumMember Name="Inventory" Value="2" DisplayValue="Inventory"/>
     <EnumMember Name="FootprintCharts" Value="3" DisplayValue="Footprint Charts"/>
     <EnumMember Name="Misc" Value="4" DisplayValue="Misc"/>
+  </EntityEnum>
+  <EntityEnum Name="MarketStructureQualifiers">
+    <EnumMember Name="HigherHighOnImpulse" Value="1" DisplayValue="Higher High on Impulse"/>
+    <EnumMember Name="HigherLowsOnImpulse" Value="2" DisplayValue="Higher Lows on Impulse"/>
+    <EnumMember Name="PreviousHighIsSupport" Value="3" DisplayValue="Previous High is Support"/>
+    <EnumMember Name="LowerLowOnImpulse" Value="4" DisplayValue="Lower Low on Impulse"/>
+    <EnumMember Name="LowerHighsOnImpulse" Value="5" DisplayValue="Lower Highs on Impulse"/>
+    <EnumMember Name="PreviousLowIsResistance" Value="6" DisplayValue="Previous Low is Resistance"/>
   </EntityEnum>
 </EntityMap>

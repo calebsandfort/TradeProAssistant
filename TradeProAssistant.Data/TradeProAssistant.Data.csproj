@@ -251,6 +251,9 @@
     <Compile Include="Code Generation\Non Source Output\Partial Classes\TradeTicket.cs">
       <DependentUpon>PartialClasses.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Code Generation\Non Source Output\Partial Classes\TradingSettings.cs">
+      <DependentUpon>PartialClasses.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Code Generation\Non Source Output\Partial Classes\WeekCandlestick.cs">
       <DependentUpon>PartialClasses.txt4</DependentUpon>
     </Compile>
@@ -309,6 +312,9 @@
       <DependentUpon>Service.txt4</DependentUpon>
     </Compile>
     <Compile Include="Code Generation\Non Source Output\Services\TradeTicketService.cs">
+      <DependentUpon>Service.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Code Generation\Non Source Output\Services\TradingSettingsService.cs">
       <DependentUpon>Service.txt4</DependentUpon>
     </Compile>
     <Compile Include="Code Generation\Non Source Output\Services\WeekCandlestickService.cs">
@@ -410,6 +416,9 @@
     <Compile Include="Entities\Dtos\TradeTicketDto.cs">
       <DependentUpon>EntityDto.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Dtos\TradingSettingsDto.cs">
+      <DependentUpon>EntityDto.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Dtos\WeekCandlestickDto.cs">
       <DependentUpon>EntityDto.txt4</DependentUpon>
     </Compile>
@@ -435,6 +444,9 @@
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\Enums\EconomicEventTypes.cs">
+      <DependentUpon>Enum.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Enums\MarketStructureQualifiers.cs">
       <DependentUpon>Enum.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\Enums\Sectors.cs">
@@ -495,6 +507,7 @@
     <Compile Include="Entities\PartialClasses\RiskParameters.cs" />
     <Compile Include="Entities\PartialClasses\Security.cs" />
     <Compile Include="Entities\PartialClasses\TradeTicket.cs" />
+    <Compile Include="Entities\PartialClasses\TradingSettings.cs" />
     <Compile Include="Entities\PartialClasses\WeekCandlestick.cs" />
     <Compile Include="Entities\PartialClasses\WeeklyIncomeActionPlan.cs" />
     <Compile Include="Entities\PartialClasses\WeeklyIncomeComboCount.cs" />
@@ -548,6 +561,9 @@
     <Compile Include="Entities\PropertyNames\TradeTicketPropertyNames.cs">
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
+    <Compile Include="Entities\PropertyNames\TradingSettingsPropertyNames.cs">
+      <DependentUpon>PropertyNames.txt4</DependentUpon>
+    </Compile>
     <Compile Include="Entities\PropertyNames\WeekCandlestickPropertyNames.cs">
       <DependentUpon>PropertyNames.txt4</DependentUpon>
     </Compile>
@@ -570,6 +586,9 @@
       <DependentUpon>Entity.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\TradeTicket.cs">
+      <DependentUpon>Entity.txt4</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TradingSettings.cs">
       <DependentUpon>Entity.txt4</DependentUpon>
     </Compile>
     <Compile Include="Entities\WeekCandlestick.cs">
@@ -651,6 +670,18 @@
     <Compile Include="Migrations\202005122133022_ChangePullbackTradeTicketToTradeTicket.designer.cs">
       <DependentUpon>202005122133022_ChangePullbackTradeTicketToTradeTicket.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005122312069_AdditionalRiskParameterFields.cs" />
+    <Compile Include="Migrations\202005122312069_AdditionalRiskParameterFields.designer.cs">
+      <DependentUpon>202005122312069_AdditionalRiskParameterFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005122329558_AddTradeSettingsModel.cs" />
+    <Compile Include="Migrations\202005122329558_AddTradeSettingsModel.designer.cs">
+      <DependentUpon>202005122329558_AddTradeSettingsModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005131940308_AddMarketStructureQualifiers.cs" />
+    <Compile Include="Migrations\202005131940308_AddMarketStructureQualifiers.designer.cs">
+      <DependentUpon>202005131940308_AddMarketStructureQualifiers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BenzingaNewsResponse.cs" />
     <Compile Include="Models\DayPerformanceModel.cs" />
@@ -706,6 +737,9 @@
     <Compile Include="ServicesFolder\Base\TradeTicketServiceBase.cs">
       <DependentUpon>ServiceBase.txt4</DependentUpon>
     </Compile>
+    <Compile Include="ServicesFolder\Base\TradingSettingsServiceBase.cs">
+      <DependentUpon>ServiceBase.txt4</DependentUpon>
+    </Compile>
     <Compile Include="ServicesFolder\Base\WeekCandlestickServiceBase.cs">
       <DependentUpon>ServiceBase.txt4</DependentUpon>
     </Compile>
@@ -734,6 +768,7 @@
     <Compile Include="ServicesFolder\RiskParametersService.cs" />
     <Compile Include="ServicesFolder\SecurityService.cs" />
     <Compile Include="ServicesFolder\TradeTicketService.cs" />
+    <Compile Include="ServicesFolder\TradingSettingsService.cs" />
     <Compile Include="ServicesFolder\WeekCandlestickService.cs" />
     <Compile Include="ServicesFolder\WeeklyIncomeActionPlanService.cs" />
     <Compile Include="ServicesFolder\WeeklyIncomeComboCountService.cs" />
@@ -795,6 +830,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005122133022_ChangePullbackTradeTicketToTradeTicket.resx">
       <DependentUpon>202005122133022_ChangePullbackTradeTicketToTradeTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005122312069_AdditionalRiskParameterFields.resx">
+      <DependentUpon>202005122312069_AdditionalRiskParameterFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005122329558_AddTradeSettingsModel.resx">
+      <DependentUpon>202005122329558_AddTradeSettingsModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005131940308_AddMarketStructureQualifiers.resx">
+      <DependentUpon>202005131940308_AddMarketStructureQualifiers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\SP500_Constituents.csv" />
     <EmbeddedResource Include="SeedData\SPMidCap_Constituents.csv" />

@@ -22,11 +22,17 @@ namespace Entities
 
 		public bool Active { get; set; }
 
-		public Decimal DailyTarget { get; set; }
+		public Decimal TpaDailyTarget { get; set; }
 
-		public Decimal WeeklyTarget { get; set; }
+		public Decimal TpaWeeklyTarget { get; set; }
 
-		public Decimal MonthlyTarget { get; set; }
+		public Decimal TpaMonthlyTarget { get; set; }
+
+		public Decimal MyDailyTarget { get; set; }
+
+		public Decimal MyWeeklyTarget { get; set; }
+
+		public Decimal MyMonthlyTarget { get; set; }
 
 		public Decimal DailyStop { get; set; }
 
@@ -43,9 +49,12 @@ namespace Entities
 		{
 			this.Name = source.Name;
 			this.Active = source.Active;
-			this.DailyTarget = source.DailyTarget;
-			this.WeeklyTarget = source.WeeklyTarget;
-			this.MonthlyTarget = source.MonthlyTarget;
+			this.TpaDailyTarget = source.TpaDailyTarget;
+			this.TpaWeeklyTarget = source.TpaWeeklyTarget;
+			this.TpaMonthlyTarget = source.TpaMonthlyTarget;
+			this.MyDailyTarget = source.MyDailyTarget;
+			this.MyWeeklyTarget = source.MyWeeklyTarget;
+			this.MyMonthlyTarget = source.MyMonthlyTarget;
 			this.DailyStop = source.DailyStop;
 			this.WeeklyStop = source.WeeklyStop;
 			this.MonthlyStop = source.MonthlyStop;

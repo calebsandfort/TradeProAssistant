@@ -9,7 +9,9 @@ namespace Entities
 
 		public String Identifier { get { return ResolvePropertyName("Identifier"); } }
 		public String Timestamp { get { return ResolvePropertyName("Timestamp"); } }
-		public String ZoneQualified { get { return ResolvePropertyName("ZoneQualified"); } }
+		public String MarketStructureQualified1 { get { return ResolvePropertyName("MarketStructureQualified1"); } }
+		public String MarketStructureQualified2 { get { return ResolvePropertyName("MarketStructureQualified2"); } }
+		public String MarketStructureQualified3 { get { return ResolvePropertyName("MarketStructureQualified3"); } }
 		public String Qualifier1Disqualified { get { return ResolvePropertyName("Qualifier1Disqualified"); } }
 		public String Qualifier2Disqualified { get { return ResolvePropertyName("Qualifier2Disqualified"); } }
 		public String Qualifier3Disqualified { get { return ResolvePropertyName("Qualifier3Disqualified"); } }
