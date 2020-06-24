@@ -132,6 +132,125 @@ namespace TradeProAssistant.Data.Migrations
                 });
             }
 
+            if (!context.RiskParameters.Any(x => x.Name == "7/11 Micro"))
+            {
+                context.RiskParameters.Add(new RiskParameters()
+                {
+                    Name = "7/11 Micro",
+                    Active = true,
+                    TpaDailyTarget = 21m,
+                    TpaWeeklyTarget = 21m * 5m,
+                    TpaMonthlyTarget = 21m * 5m * 4m,
+                    MyDailyTarget = 0,
+                    MyWeeklyTarget = 0,
+                    MyMonthlyTarget = 0,
+                    DailyStop = -21m,
+                    WeeklyStop = -21m * 3m,
+                    MonthlyStop = (21m * 5m * 4m) / -3m
+                });
+            }
+
+            if (!context.RiskParameters.Any(x => x.Name == "6/10 Micro"))
+            {
+                Decimal profitBase = 10m * 1.25m;
+                Decimal lossBase = 6m * 1.25m;
+
+                context.RiskParameters.Add(new RiskParameters()
+                {
+                    Name = "6/10 Micro",
+                    Active = true,
+                    TpaDailyTarget = profitBase * 1.5m,
+                    TpaWeeklyTarget = profitBase * 1.5m * 5m,
+                    TpaMonthlyTarget = profitBase * 1.5m * 5m * 2m,
+                    MyDailyTarget = 0,
+                    MyWeeklyTarget = 0,
+                    MyMonthlyTarget = 0,
+                    DailyStop = -lossBase * 2.5m,
+                    WeeklyStop = -lossBase * 2.5m * 2.5m,
+                    MonthlyStop = -75m
+                });
+            }
+
+            if (!context.RiskParameters.Any(x => x.Name == "2/6/8 Micro"))
+            {
+                Decimal profitBase = 2m * 8m * 1.25m;
+                Decimal lossBase = 2m * 6m * 1.25m;
+
+                context.RiskParameters.Add(new RiskParameters()
+                {
+                    Name = "2/6/8 Micro Micro",
+                    Active = true,
+                    TpaDailyTarget = profitBase * 1.5m,
+                    TpaWeeklyTarget = profitBase * 1.5m * 5m,
+                    TpaMonthlyTarget = profitBase * 1.5m * 5m * 4m,
+                    MyDailyTarget = 0,
+                    MyWeeklyTarget = 0,
+                    MyMonthlyTarget = 0,
+                    DailyStop = -lossBase * 2m,
+                    WeeklyStop = -lossBase * 2m * 2.5m,
+                    MonthlyStop = -lossBase * 2m * 2.5m * 2.5m
+                });
+            }
+
+            if (!context.RiskParameters.Any(x => x.Name == "2/5/8 Micro"))
+            {
+                Decimal profitBase = 2m * 8m * 1.25m;
+                Decimal lossBase = 2m * 5m * 1.25m;
+
+                context.RiskParameters.Add(new RiskParameters()
+                {
+                    Name = "2/5/8 Micro",
+                    Active = true,
+                    TpaDailyTarget = profitBase * 1.75m,
+                    TpaWeeklyTarget = profitBase * 1.75m * 5m,
+                    TpaMonthlyTarget = profitBase * 1.75m * 5m * 4m,
+                    MyDailyTarget = 0,
+                    MyWeeklyTarget = 0,
+                    MyMonthlyTarget = 0,
+                    DailyStop = -lossBase * 2.5m,
+                    WeeklyStop = -lossBase * 2.5m * 2.5m,
+                    MonthlyStop = -lossBase * 2.5m * 2.5m * 2.5m
+                });
+            }
+
+            if (!context.RiskParameters.Any(x => x.Name == "1 Lot Micro"))
+            {
+                context.RiskParameters.Add(new RiskParameters()
+                {
+                    Name = "1 Lot Micro",
+                    Active = true,
+                    TpaDailyTarget = 15m,
+                    TpaWeeklyTarget = 75m,
+                    TpaMonthlyTarget = 300m,
+                    MyDailyTarget = 25m,
+                    MyWeeklyTarget = 125m,
+                    MyMonthlyTarget = 500m,
+                    DailyStop = -15m,
+                    WeeklyStop = -45m,
+                    MonthlyStop = -100m
+                });
+            }
+
+            if (!context.RiskParameters.Any(x => x.Name == "1.5 Lot Micro"))
+            {
+                Decimal accountSize = 450m;
+
+                context.RiskParameters.Add(new RiskParameters()
+                {
+                    Name = "1.5 Lot Micro",
+                    Active = true,
+                    TpaDailyTarget = accountSize * .05m,
+                    TpaWeeklyTarget = accountSize * .05m * 5m,
+                    TpaMonthlyTarget = accountSize * .05m * 5m * 4m,
+                    MyDailyTarget = 25m,
+                    MyWeeklyTarget = 125m,
+                    MyMonthlyTarget = 500m,
+                    DailyStop = -accountSize * .05m,
+                    WeeklyStop = -accountSize * .05m * 2.5m,
+                    MonthlyStop = -accountSize * .4m
+                });
+            }
+
             if (context.TradingSettings.Count() == 0)
             {
                 context.TradingSettings.Add(new TradingSettings()

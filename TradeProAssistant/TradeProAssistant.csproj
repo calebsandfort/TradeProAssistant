@@ -204,6 +204,25 @@
     <Content Include="Content\dist\js\app.js" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\StrategyVisuals\MarketCorrelations\riskOffDown.png" />
+    <Content Include="Content\StrategyVisuals\MarketCorrelations\riskOffDownTurning.png" />
+    <Content Include="Content\StrategyVisuals\MarketCorrelations\riskOffUp.png" />
+    <Content Include="Content\StrategyVisuals\MarketCorrelations\riskOffUpTurning.png" />
+    <Content Include="Content\StrategyVisuals\MarketCorrelations\riskOnDown.png" />
+    <Content Include="Content\StrategyVisuals\MarketCorrelations\riskOnDownTurning.png" />
+    <Content Include="Content\StrategyVisuals\MarketCorrelations\riskOnUp.png" />
+    <Content Include="Content\StrategyVisuals\MarketCorrelations\riskOnUpTurning.png" />
+    <Content Include="Content\StrategyVisuals\MarketStructure\Breakouts.PNG" />
+    <Content Include="Content\StrategyVisuals\MarketStructure\BuyTheBreakout.png" />
+    <Content Include="Content\StrategyVisuals\MarketStructure\BuyTheDip.png" />
+    <Content Include="Content\StrategyVisuals\MarketStructure\FadeTheDrop.png" />
+    <Content Include="Content\StrategyVisuals\MarketStructure\FadeTheRally.png" />
+    <Content Include="Content\StrategyVisuals\MarketStructure\Fading.png" />
+    <Content Include="Content\StrategyVisuals\MarketStructure\magnet.png" />
+    <Content Include="Content\StrategyVisuals\MarketStructure\Pullbacks.png" />
+    <Content Include="Content\StrategyVisuals\MarketStructure\SellTheBreakout.png" />
+    <Content Include="Content\StrategyVisuals\MarketStructure\SellTheRip.png" />
+    <Content Include="Content\StrategyVisuals\Qualifiers\BuyTheDip.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
@@ -382,6 +401,10 @@
     <Content Include="Views\TradeProStrategy\_TradeDayPerformanceTable.cshtml" />
     <Content Include="Views\TradeProStrategy\_TradeTicketQualifiers.cshtml" />
     <Content Include="Views\TradeProStrategy\_MarketStructureQualifiers.cshtml" />
+    <Content Include="Views\TradeProStrategy\_TradePerformance.cshtml" />
+    <Content Include="Views\TradeProStrategy\_MonthPerformance.cshtml" />
+    <Content Include="Views\TradeProStrategy\_WeekPerformance.cshtml" />
+    <Content Include="Views\TradeProStrategy\_Visuals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

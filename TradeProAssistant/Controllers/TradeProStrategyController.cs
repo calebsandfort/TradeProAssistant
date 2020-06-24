@@ -13,6 +13,7 @@ using TradeProAssistant.Models;
 using TradeProAssistant.Framework;
 using TradeProAssistant.Data.Models;
 using Enums;
+using TradeProAssistant.Utilities;
 
 namespace TradeProAssistant.Controllers
 {
@@ -53,6 +54,23 @@ namespace TradeProAssistant.Controllers
             });
         }
 
+        public ActionResult Visuals()
+        {
+            return PartialView("_Visuals", new TradeTicketDto()
+            {
+                Strategy = Enums.Strategies.BuyTheDip,
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Visuals(Strategies strategy)
+        {
+            return PartialView("_Visuals", new TradeTicketDto()
+            {
+                Strategy = strategy,
+            });
+        }
+
         [HttpPost]
         public JsonResult TradeTicketForm(TradeTicketDto dto)
         {
@@ -79,12 +97,24 @@ namespace TradeProAssistant.Controllers
                     model.MarketStructureQualifier3 = Enums.MarketStructureQualifiers.PreviousLowIsResistance;
                     break;
                 case Strategies.FadeTheRally:
+                    model.MarketStructureQualifier1 = Enums.MarketStructureQualifiers.FadeTheRally1;
+                    model.MarketStructureQualifier2 = Enums.MarketStructureQualifiers.FadeTheRally2;
+                    model.MarketStructureQualifier3 = Enums.MarketStructureQualifiers.None;
                     break;
                 case Strategies.FadeTheDrop:
+                    model.MarketStructureQualifier1 = Enums.MarketStructureQualifiers.FadeTheDrop1;
+                    model.MarketStructureQualifier2 = Enums.MarketStructureQualifiers.FadeTheDrop2;
+                    model.MarketStructureQualifier3 = Enums.MarketStructureQualifiers.None;
                     break;
                 case Strategies.BuyTheBreakout:
+                    model.MarketStructureQualifier1 = Enums.MarketStructureQualifiers.BuyTheBreakout1;
+                    model.MarketStructureQualifier2 = Enums.MarketStructureQualifiers.BuyTheBreakout2;
+                    model.MarketStructureQualifier3 = Enums.MarketStructureQualifiers.BuyTheBreakout3;
                     break;
                 case Strategies.SellTheBreakout:
+                    model.MarketStructureQualifier1 = Enums.MarketStructureQualifiers.SellTheBreakout1;
+                    model.MarketStructureQualifier2 = Enums.MarketStructureQualifiers.SellTheBreakout2;
+                    model.MarketStructureQualifier3 = Enums.MarketStructureQualifiers.SellTheBreakout3;
                     break;
                 default:
                     break;
@@ -101,6 +131,7 @@ namespace TradeProAssistant.Controllers
             {
                 case Enums.Strategies.None:
                     break;
+                #region BuyTheDip
                 case Enums.Strategies.BuyTheDip:
                     model.Add(new TradeQualifiersModel()
                     {
@@ -148,6 +179,8 @@ namespace TradeProAssistant.Controllers
                         }
                     });
                     break;
+                #endregion
+                #region SellTheRip
                 case Enums.Strategies.SellTheRip:
                     model.Add(new TradeQualifiersModel()
                     {
@@ -195,14 +228,203 @@ namespace TradeProAssistant.Controllers
                         }
                     });
                     break;
+                #endregion
+                #region FadeTheRally
                 case Enums.Strategies.FadeTheRally:
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.MarketCorrelations,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.FadeTheRallyMC1,
+                            TradeQualifiers.FadeTheRallyMC2,
+                            TradeQualifiers.FadeTheRallyMC3
+                        }
+                    });
+
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.Inventory,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.FadeTheRallyI1,
+                            TradeQualifiers.FadeTheRallyI2,
+                            TradeQualifiers.FadeTheRallyI3
+                        }
+                    });
+
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.FootprintCharts,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.FadeTheRallyFP1,
+                            TradeQualifiers.FadeTheRallyFP2,
+                            TradeQualifiers.FadeTheRallyFP3,
+                            TradeQualifiers.FadeTheRallyFP4
+                        }
+                    });
+
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.Misc,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.Volume,
+                            TradeQualifiers.PivotPoints,
+                            TradeQualifiers.Technicals,
+                            TradeQualifiers.MarketStructure
+                        }
+                    });
                     break;
+                #endregion
+                #region FadeTheDrop
                 case Enums.Strategies.FadeTheDrop:
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.MarketCorrelations,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.FadeTheDropMC1,
+                            TradeQualifiers.FadeTheDropMC2,
+                            TradeQualifiers.FadeTheDropMC3
+                        }
+                    });
+
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.Inventory,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.FadeTheDropI1,
+                            TradeQualifiers.FadeTheDropI2,
+                            TradeQualifiers.FadeTheDropI3
+                        }
+                    });
+
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.FootprintCharts,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.FadeTheDropFP1,
+                            TradeQualifiers.FadeTheDropFP2,
+                            TradeQualifiers.FadeTheDropFP3,
+                            TradeQualifiers.FadeTheDropFP4
+                        }
+                    });
+
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.Misc,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.Volume,
+                            TradeQualifiers.PivotPoints,
+                            TradeQualifiers.Technicals,
+                            TradeQualifiers.MarketStructure
+                        }
+                    });
                     break;
+                #endregion
+                #region BuyTheBreakout
                 case Enums.Strategies.BuyTheBreakout:
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.MarketCorrelations,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.BuyTheBreakoutMC1,
+                            TradeQualifiers.BuyTheBreakoutMC2,
+                            TradeQualifiers.BuyTheBreakoutMC3
+                        }
+                    });
+
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.Inventory,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.BuyTheBreakoutI1,
+                            TradeQualifiers.BuyTheBreakoutI2,
+                            TradeQualifiers.BuyTheBreakoutI3
+                        }
+                    });
+
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.FootprintCharts,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.BuyTheBreakoutFP1,
+                            TradeQualifiers.BuyTheBreakoutFP2,
+                            TradeQualifiers.BuyTheBreakoutFP3,
+                            TradeQualifiers.BuyTheBreakoutFP4
+                        }
+                    });
+
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.Misc,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.Volume,
+                            TradeQualifiers.PivotPoints,
+                            TradeQualifiers.Technicals,
+                            TradeQualifiers.MarketStructure
+                        }
+                    });
                     break;
+                #endregion
+                #region SellTheBreakout
                 case Enums.Strategies.SellTheBreakout:
-                    break;
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.MarketCorrelations,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.SellTheBreakoutMC1,
+                            TradeQualifiers.SellTheBreakoutMC2,
+                            TradeQualifiers.SellTheBreakoutMC3
+                        }
+                    });
+
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.Inventory,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.SellTheBreakoutI1,
+                            TradeQualifiers.SellTheBreakoutI2,
+                            TradeQualifiers.SellTheBreakoutI3
+                        }
+                    });
+
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.FootprintCharts,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.SellTheBreakoutFP1,
+                            TradeQualifiers.SellTheBreakoutFP2,
+                            TradeQualifiers.SellTheBreakoutFP3,
+                            TradeQualifiers.SellTheBreakoutFP4
+                        }
+                    });
+
+                    model.Add(new TradeQualifiersModel()
+                    {
+                        TradeQualifierType = TradeQualifierTypes.Misc,
+                        TradeQualifiersList = new List<TradeQualifiers>()
+                        {
+                            TradeQualifiers.Volume,
+                            TradeQualifiers.PivotPoints,
+                            TradeQualifiers.Technicals,
+                            TradeQualifiers.MarketStructure
+                        }
+                    });
+                    break; 
+                #endregion
                 default:
                     break;
             }
@@ -235,6 +457,13 @@ namespace TradeProAssistant.Controllers
             result.Total = list.Count;
 
             return new GuerillaLogisticsApiJsonResult(result);
+        }
+        #endregion
+
+        #region TradePerformance
+        public ActionResult TradePerformance()
+        {
+            return PartialView("_TradePerformance", TradeTicketService.GetMonthPerformance(GlobalSettings.ActiveTradingSettings.MonthStart));
         }
         #endregion
     }

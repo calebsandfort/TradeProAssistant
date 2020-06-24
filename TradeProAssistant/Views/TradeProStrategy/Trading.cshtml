@@ -6,25 +6,25 @@
 
 <ul class="nav nav-tabs pt-2" id="tabs" role="tablist">
     <li class="nav-item">
-        <a class="nav-link active" id="trade-ticket-tab" data-toggle="tab" href="#trade-ticket" role="tab" aria-controls="trade-ticket" aria-selected="true">Trade Ticket</a>
+        <a class="nav-link" id="trade-ticket-tab" data-toggle="tab" href="#trade-ticket" role="tab" aria-controls="trade-ticket" aria-selected="true">Trade Ticket</a>
     </li>
-    @*<li class="nav-item">
-        <a class="nav-link" id="trades-tab" data-toggle="tab" href="#trades" role="tab" aria-controls="trades" aria-selected="false">Trades</a>
-    </li>*@
     <li class="nav-item">
-        <a class="nav-link" id="trade-day-performance-tab" data-toggle="tab"
-           href="#trade-day-performance" role="tab" aria-controls="trade-day-performance" aria-selected="false">Day Perf</a>
+        <a class="nav-link active" id="visuals-tab" data-toggle="tab" href="#visuals" role="tab" aria-controls="visuals" aria-selected="false">Visuals</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="trade-performance-tab" data-toggle="tab"
+           href="#trade-performance" role="tab" aria-controls="trade-performance" aria-selected="false">Performance</a>
     </li>
 </ul>
 <div class="tab-content pt-2" id="strategiesTabContent">
-    <div class="tab-pane fade show active" id="trade-ticket" role="tabpanel" aria-labelledby="trade-ticket-tab">
+    <div class="tab-pane fade" id="trade-ticket" role="tabpanel" aria-labelledby="trade-ticket-tab">
         @Html.Partial("_TradeTicketForm", Model)
     </div>
-    @*<div class="tab-pane fade" id="trades" role="tabpanel" aria-labelledby="trades-tab">
-        @Html.Partial("_TradeTicketsTable")
-    </div>*@
-    <div class="tab-pane fade" id="trade-day-performance" role="tabpanel" aria-labelledby="trade-day-performance-tab">
-        @Html.Partial("_TradeDayPerformanceTable")
+    <div class="tab-pane fade show active" id="visuals" role="tabpanel" aria-labelledby="visuals-tab">
+        @Html.Action("Visuals", "TradeProStrategy")
+    </div>
+    <div class="tab-pane fade" id="trade-performance" role="tabpanel" aria-labelledby="trade-performance-tab">
+        @Html.Action("TradePerformance", "TradeProStrategy")
     </div>
 </div>
 
@@ -73,6 +73,9 @@
                         Qualifier4Select.val(tradeQualifier);
                     }
                 })
+                .on("click", ".strategyButton", function () {
+                    $("#Strategy").val($(this).val()).trigger("change");
+                })
                 .on("change", "#Strategy", function () {
                     Qualifier1Select = $("#Qualifier1").val("None");
                     Qualifier2Select = $("#Qualifier2").val("None");
@@ -94,6 +97,13 @@
                     }, function (result) {
                         $("#market-structure-qualifiers").html(result);
                     });
+
+                    url = $("#uxInput_RootUrl").val() + 'TradeProStrategy/Visuals';
+                    $.post(url, {
+                        strategy: strategy
+                    }, function (result) {
+                        $("#visuals").html(result);
+                    });
                 })
                 .on("click", ".clear-trade-qualifier", function () {
                     $(this).closest(".form-group.row").find("select").val("None");
@@ -105,9 +115,13 @@
 
                     switch (strategy) {
                         case "BuyTheDip":
+                        case "FadeTheDrop":
+                        case "BuyTheBreakout":
                             btnClass = "btn-success";
                             break;
                         case "SellTheRip":
+                        case "FadeTheRally":
+                        case "SellTheBreakout":
                             btnClass = "btn-danger";
                             break;
                     }
@@ -125,10 +139,10 @@
 
 
         function TradeTicketFormOnSuccess(response) {
-            alert("success");
-            $('#TradeTicketForm').get(0).reset();
-            $("#uxButton_SetTimestamp").trigger("click");
-            refreshGrid("dayPerformanceGrid", 300);
+            //alert("success");
+            //$('#TradeTicketForm').get(0).reset();
+            $("#uxButton_Reset").trigger("click");
+            //refreshGrid("dayPerformanceGrid", 300);
         }
     </script>
 }

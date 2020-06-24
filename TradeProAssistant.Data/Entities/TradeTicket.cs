@@ -37,6 +37,8 @@ namespace Entities
 
 		public String Notes { get; set; }
 
+		public String NBT { get; set; }
+
 		public bool Won { get; set; }
 
 		public bool Scratch { get; set; }
@@ -73,6 +75,7 @@ namespace Entities
 			this.Qualifier3Disqualified = source.Qualifier3Disqualified;
 			this.Qualifier4Disqualified = source.Qualifier4Disqualified;
 			this.Notes = source.Notes;
+			this.NBT = source.NBT;
 			this.Won = source.Won;
 			this.Scratch = source.Scratch;
 			this.PnL = source.PnL;

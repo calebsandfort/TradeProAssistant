@@ -17,6 +17,7 @@ namespace Entities
 		public String Qualifier3Disqualified { get { return ResolvePropertyName("Qualifier3Disqualified"); } }
 		public String Qualifier4Disqualified { get { return ResolvePropertyName("Qualifier4Disqualified"); } }
 		public String Notes { get { return ResolvePropertyName("Notes"); } }
+		public String NBT { get { return ResolvePropertyName("NBT"); } }
 		public String Won { get { return ResolvePropertyName("Won"); } }
 		public String Scratch { get { return ResolvePropertyName("Scratch"); } }
 		public String PnL { get { return ResolvePropertyName("PnL"); } }

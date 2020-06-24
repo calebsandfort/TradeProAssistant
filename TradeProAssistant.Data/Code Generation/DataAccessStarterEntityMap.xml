@@ -155,6 +155,7 @@
     <Property Name="Qualifier3Disqualified" Type="bool" IncludeInDto="true" />
     <Property Name="Qualifier4Disqualified" Type="bool" IncludeInDto="true" />
     <Property Name="Notes" Type="String" IncludeInDto="true" />
+    <Property Name="NBT" Type="String" IncludeInDto="true" />
     <Property Name="Won" Type="bool" IncludeInDto="true" />
     <Property Name="Scratch" Type="bool" IncludeInDto="true" />
     <Property Name="PnL" Type="Decimal" IncludeInDto="true" />
@@ -255,6 +256,50 @@
     <EnumMember Name="PivotPoints" Value="81" DisplayValue="Pivot Points"/>
     <EnumMember Name="Technicals" Value="82" DisplayValue="Technicals"/>
     <EnumMember Name="MarketStructure" Value="83" DisplayValue="Market Structure"/>
+
+    <EnumMember Name="FadeTheRallyMC1" Value="100" DisplayValue="Equity markets sideways after big rally higher" />
+    <EnumMember Name="FadeTheRallyMC2" Value="101" DisplayValue="Nasdaq is higher than ES and moving sideways, or lower" />
+    <EnumMember Name="FadeTheRallyMC3" Value="102" DisplayValue="Risk off sideways near lows or starting to move up" />
+    <EnumMember Name="FadeTheRallyI1" Value="103" DisplayValue="Offers are moving lower and closer to market price" />
+    <EnumMember Name="FadeTheRallyI2" Value="104" DisplayValue="Bids have stopped moving higher with the trend" />
+    <EnumMember Name="FadeTheRallyI3" Value="105" DisplayValue="Bids are being pulled below market price or moving lower" />
+    <EnumMember Name="FadeTheRallyFP1" Value="106" DisplayValue="Cluster of buy imbalances near move highs (extreme market buying)" />
+    <EnumMember Name="FadeTheRallyFP2" Value="107" DisplayValue="Large buy imbalance near top of price extreme (stuck buyers)" />
+    <EnumMember Name="FadeTheRallyFP3" Value="108" DisplayValue="Recent sell imbalances showing up above current market level" />
+    <EnumMember Name="FadeTheRallyFP4" Value="109" DisplayValue="Points of control are clustered near extreme highs (ideally above market price)" />
+
+    <EnumMember Name="FadeTheDropMC1" Value="110" DisplayValue="Equity markets sideways after big drop lower" />
+    <EnumMember Name="FadeTheDropMC2" Value="111" DisplayValue="Nasdaq is lower than ES and moving sideways, or higher" />
+    <EnumMember Name="FadeTheDropMC3" Value="112" DisplayValue="Risk off sideways near highs or starting to move lower" />
+    <EnumMember Name="FadeTheDropI1" Value="113" DisplayValue="Bids are moving higher and closer to market price" />
+    <EnumMember Name="FadeTheDropI2" Value="114" DisplayValue="Offers have stopped moving lower with the trend" />
+    <EnumMember Name="FadeTheDropI3" Value="115" DisplayValue="Offers are being pulled above market price or moving higher" />
+    <EnumMember Name="FadeTheDropFP1" Value="116" DisplayValue="Cluster of sell imbalances near move lows (extreme market selling)" />
+    <EnumMember Name="FadeTheDropFP2" Value="117" DisplayValue="Large sell imbalance near low of price extreme (stuck shorts)" />
+    <EnumMember Name="FadeTheDropFP3" Value="118" DisplayValue="Recent buy imbalances showing up below current market level" />
+    <EnumMember Name="FadeTheDropFP4" Value="119" DisplayValue="Points of control are clustered near extreme lows (ideally below market price)" />
+
+    <EnumMember Name="BuyTheBreakoutMC1" Value="120" DisplayValue="Equity markets up" />
+    <EnumMember Name="BuyTheBreakoutMC2" Value="121" DisplayValue="Nasdaq is higher (already broken) and moving faster than ES" />
+    <EnumMember Name="BuyTheBreakoutMC3" Value="122" DisplayValue="Risk off down" />
+    <EnumMember Name="BuyTheBreakoutI1" Value="123" DisplayValue="Bids moving higher with trend on heat map" />
+    <EnumMember Name="BuyTheBreakoutI2" Value="124" DisplayValue="Offers are moving higher or being canceled (pulled)" />
+    <EnumMember Name="BuyTheBreakoutI3" Value="125" DisplayValue="Large offer sitting above current price as potential target" />
+    <EnumMember Name="BuyTheBreakoutFP1" Value="126" DisplayValue="Buy imbalances are moving higher (market buying at higher prices)" />
+    <EnumMember Name="BuyTheBreakoutFP2" Value="127" DisplayValue="Most recent sell imbalance is below the current market price" />
+    <EnumMember Name="BuyTheBreakoutFP3" Value="128" DisplayValue="Large sell imbalance trade stuck near highs of current move" />
+    <EnumMember Name="BuyTheBreakoutFP4" Value="129" DisplayValue="Points of control are below market price supporting move higher" />
+
+    <EnumMember Name="SellTheBreakoutMC1" Value="130" DisplayValue="Equity markets down" />
+    <EnumMember Name="SellTheBreakoutMC2" Value="131" DisplayValue="Nasdaq is lower (already broken) and moving faster than ES" />
+    <EnumMember Name="SellTheBreakoutMC3" Value="132" DisplayValue="Risk off up" />
+    <EnumMember Name="SellTheBreakoutI1" Value="133" DisplayValue="Offers moving lower with trend on heat map" />
+    <EnumMember Name="SellTheBreakoutI2" Value="134" DisplayValue="Bids are moving lower or being canceled (pulled)" />
+    <EnumMember Name="SellTheBreakoutI3" Value="135" DisplayValue="Large bid sitting below current price as potential target" />
+    <EnumMember Name="SellTheBreakoutFP1" Value="136" DisplayValue="Sell imbalances are moving lower (market selling at lower prices)" />
+    <EnumMember Name="SellTheBreakoutFP2" Value="137" DisplayValue="Most recent buy imbalance is above the current market price" />
+    <EnumMember Name="SellTheBreakoutFP3" Value="138" DisplayValue="Large buy imbalance stuck near lows of current move" />
+    <EnumMember Name="SellTheBreakoutFP4" Value="139" DisplayValue="Points of control are above market price supporting move lower" />
   </EntityEnum>
   <EntityEnum Name="TradeProAssets">
     <EnumMember Name="ES" Value="1" DisplayValue="ES"/>
@@ -278,6 +323,7 @@
     <EnumMember Name="Inventory" Value="2" DisplayValue="Inventory"/>
     <EnumMember Name="FootprintCharts" Value="3" DisplayValue="Footprint Charts"/>
     <EnumMember Name="Misc" Value="4" DisplayValue="Misc"/>
+    <EnumMember Name="MarketStructure" Value="5" DisplayValue="MarketStructure"/>
   </EntityEnum>
   <EntityEnum Name="MarketStructureQualifiers">
     <EnumMember Name="HigherHighOnImpulse" Value="1" DisplayValue="Higher High on Impulse"/>
@@ -286,5 +332,19 @@
     <EnumMember Name="LowerLowOnImpulse" Value="4" DisplayValue="Lower Low on Impulse"/>
     <EnumMember Name="LowerHighsOnImpulse" Value="5" DisplayValue="Lower Highs on Impulse"/>
     <EnumMember Name="PreviousLowIsResistance" Value="6" DisplayValue="Previous Low is Resistance"/>
+
+    <EnumMember Name="FadeTheRally1" Value="7" DisplayValue="Price is at Key Resistance Level Above"/>
+    <EnumMember Name="FadeTheRally2" Value="8" DisplayValue="Price is currently at new higher high on impulse move or at previous failed high"/>
+
+    <EnumMember Name="FadeTheDrop1" Value="9" DisplayValue="Price is at a key support level"/>
+    <EnumMember Name="FadeTheDrop2" Value="10" DisplayValue="Price is currently at new lower low on impulse move or at previous failed low"/>
+
+    <EnumMember Name="BuyTheBreakout1" Value="11" DisplayValue="Price has just broken or is at top tick of previous swing high"/>
+    <EnumMember Name="BuyTheBreakout2" Value="12" DisplayValue="This is the first, or second bullish impulse wave at most"/>
+    <EnumMember Name="BuyTheBreakout3" Value="13" DisplayValue="Higher lows were formed on price movement up to current level"/>
+
+    <EnumMember Name="SellTheBreakout1" Value="14" DisplayValue="Price has just broken or is at low tick of previous swing low"/>
+    <EnumMember Name="SellTheBreakout2" Value="15" DisplayValue="This is the first, or second bearish impulse wave at most"/>
+    <EnumMember Name="SellTheBreakout3" Value="16" DisplayValue="Lower highs were formed on price movement down to current level"/>
   </EntityEnum>
 </EntityMap>

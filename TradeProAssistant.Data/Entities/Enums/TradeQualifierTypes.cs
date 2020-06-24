@@ -16,6 +16,8 @@ namespace Enums
 		FootprintCharts = 3,
 		[StringValue("Misc")]
 		Misc = 4,
+		[StringValue("MarketStructure")]
+		MarketStructure = 5,
 	}
 
 	public static class TradeQualifierTypesExtensions
@@ -38,6 +40,9 @@ namespace Enums
 				case "Misc":
 					retVal = TradeQualifierTypes.Misc;
 					break;
+				case "MarketStructure":
+					retVal = TradeQualifierTypes.MarketStructure;
+					break;
 			}
 
 			return retVal;
@@ -52,6 +57,7 @@ namespace Enums
 			selectItems.Add(new SelectListItem() { Text = "Inventory", Value = TradeQualifierTypes.Inventory.ToString() });
 			selectItems.Add(new SelectListItem() { Text = "Footprint Charts", Value = TradeQualifierTypes.FootprintCharts.ToString() });
 			selectItems.Add(new SelectListItem() { Text = "Misc", Value = TradeQualifierTypes.Misc.ToString() });
+			selectItems.Add(new SelectListItem() { Text = "MarketStructure", Value = TradeQualifierTypes.MarketStructure.ToString() });
 			return selectItems;
 		}
 	}

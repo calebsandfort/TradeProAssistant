@@ -21,3 +21,11 @@
     padding-bottom: .5rem;
     cursor:pointer;
 }
+
+#visuals .card-header{
+    padding: .5rem
+}
+
+.correlationImage{
+    height: 400px;
+}

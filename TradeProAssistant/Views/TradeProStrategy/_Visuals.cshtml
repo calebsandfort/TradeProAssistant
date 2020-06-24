@@ -1,0 +1,102 @@
+﻿@model TradeTicketDto
+
+@*@Html.DropDownListFor(x => x.Strategy, new SelectList(Enums.StrategiesExtensions.SelectItems(), "Value", "Text"), "--Select Strategy--", new { @class = "form-control", id = "VisualsStrategy", Name = "VisualsStrategy" })*@
+
+<div class="text-center">
+    <button class="@String.Format("strategyButton btn btn{0}success", Model.Strategy == Strategies.BuyTheDip ? "-" : "-outline-")" value="BuyTheDip">Buy The Dip</button>
+    <button class="@String.Format("strategyButton btn btn{0}danger", Model.Strategy == Strategies.SellTheRip ? "-" : "-outline-")" value="SellTheRip">Sell The Rip</button>
+    <button class="@String.Format("strategyButton btn btn{0}success", Model.Strategy == Strategies.FadeTheDrop ? "-" : "-outline-")" value="FadeTheDrop">Fade The Drop</button>
+    <button class="@String.Format("strategyButton btn btn{0}danger", Model.Strategy == Strategies.FadeTheRally ? "-" : "-outline-")" value="FadeTheRally">Fade The Rally</button>
+    <button class="@String.Format("strategyButton btn btn{0}success", Model.Strategy == Strategies.BuyTheBreakout ? "-" : "-outline-")" value="BuyTheBreakout">Buy The Breakout</button>
+    <button class="@String.Format("strategyButton btn btn{0}danger", Model.Strategy == Strategies.SellTheBreakout ? "-" : "-outline-")" value="SellTheBreakout">Sell The Breakout</button>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-3">
+        @switch (Model.Strategy)
+        {
+            case Strategies.BuyTheDip:
+                <div class="card">
+                    <h6 class="card-header">@TradeQualifiers.EquityMarketsUp.GetStringValue()</h6>
+                    <img src="~/Content/StrategyVisuals/MarketCorrelations/riskOnUp.png" class="correlationImage" />
+                </div>
+                <br />
+                <div class="card">
+                    <h6 class="card-header">@TradeQualifiers.RiskOffDown.GetStringValue()</h6>
+                    <img class="correlationImage" src="~/Content/StrategyVisuals/MarketCorrelations/riskOffDown.png" />
+                </div>
+                break;
+            case Strategies.SellTheRip:
+                <div class="card">
+                    <h6 class="card-header">@TradeQualifiers.EquityMarketsDown.GetStringValue()</h6>
+                    <img src="~/Content/StrategyVisuals/MarketCorrelations/riskOnDown.png" class="correlationImage" />
+                </div>
+                <br />
+                <div class="card">
+                    <h6 class="card-header">@TradeQualifiers.RiskOffUp.GetStringValue()</h6>
+                    <img class="correlationImage" src="~/Content/StrategyVisuals/MarketCorrelations/riskOffUp.png" />
+                </div>
+                break;
+            case Strategies.FadeTheRally:
+                <div class="card">
+                    <h6 class="card-header">@TradeQualifiers.FadeTheRallyMC1.GetStringValue()</h6>
+                    <img src="~/Content/StrategyVisuals/MarketCorrelations/riskOnUpTurning.png" class="correlationImage" />
+                </div>
+                <br />
+                <div class="card">
+                    <h6 class="card-header">@TradeQualifiers.FadeTheRallyMC3.GetStringValue()</h6>
+                    <img class="correlationImage" src="~/Content/StrategyVisuals/MarketCorrelations/riskOffDownTurning.png" />
+                </div>
+                break;
+            case Strategies.FadeTheDrop:
+                <div class="card">
+                    <h6 class="card-header">@TradeQualifiers.FadeTheDropMC1.GetStringValue()</h6>
+                    <img src="~/Content/StrategyVisuals/MarketCorrelations/riskOnDownTurning.png" class="correlationImage" />
+                </div>
+                <br />
+                <div class="card">
+                    <h6 class="card-header">@TradeQualifiers.FadeTheDropMC3.GetStringValue()</h6>
+                    <img class="correlationImage" src="~/Content/StrategyVisuals/MarketCorrelations/riskOffUpTurning.png" />
+                </div>
+                break;
+            case Strategies.BuyTheBreakout:
+                <div class="card">
+                    <h6 class="card-header">@TradeQualifiers.BuyTheBreakoutMC1.GetStringValue()</h6>
+                    <img src="~/Content/StrategyVisuals/MarketCorrelations/riskOnUp.png" class="correlationImage" />
+                </div>
+                <br />
+                <div class="card">
+                    <h6 class="card-header">@TradeQualifiers.BuyTheBreakoutMC3.GetStringValue()</h6>
+                    <img class="correlationImage" src="~/Content/StrategyVisuals/MarketCorrelations/riskOffDown.png" />
+                </div>
+                break;
+            case Strategies.SellTheBreakout:
+                <div class="card">
+                    <h6 class="card-header">@TradeQualifiers.SellTheBreakoutMC1.GetStringValue()</h6>
+                    <img src="~/Content/StrategyVisuals/MarketCorrelations/riskOnDown.png" class="correlationImage" />
+                </div>
+                <br />
+                <div class="card">
+                    <h6 class="card-header">@TradeQualifiers.SellTheBreakoutMC3.GetStringValue()</h6>
+                    <img class="correlationImage" src="~/Content/StrategyVisuals/MarketCorrelations/riskOffUp.png" />
+                </div>
+                break;
+        }
+    </div>
+    <div class="col-9">
+        <div class="card">
+            <h6 class="card-header">@Model.Strategy.GetStringValue()</h6>
+            <img src="@Url.Content(String.Format("~/Content/StrategyVisuals/MarketStructure/{0}.png", Model.Strategy))" class="" />
+        </div>
+        <br />
+        <div class="card">
+            <h6 class="card-header">Qualifiers</h6>
+            <div class="float-left" >
+                <img src="@Url.Content(String.Format("~/Content/StrategyVisuals/Qualifiers/{0}Inventory.png", Model.Strategy))" class="" style="width: 250px; vertical-align: top;"/>
+                <img src="@Url.Content(String.Format("~/Content/StrategyVisuals/Qualifiers/{0}Footprint.png", Model.Strategy))" class="" style="width: 400px; vertical-align: top;" />
+            </div>
+        </div>
+    </div>
+</div>

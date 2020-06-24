@@ -1,0 +1,85 @@
+﻿@model WeekPerformanceModel
+
+@*columns.Bound(x => x.Date).Format("{0:d}").Width(75);
+    columns.Bound(x => x.Day).Width(75);
+    columns.Bound(x => x.Wins).Width(75);
+    columns.Bound(x => x.Losses).Width(75);
+    columns.Bound(x => x.Trades).Width(75);
+    columns.Bound(x => x.WinPtg).Width(75).Format("{0:p0}");
+    columns.Bound(x => x.PPC).Width(75).Format("{0:c2}");
+    columns.Bound(x => x.PnL).Width(75).Format("{0:c2}");*@
+
+@{ 
+    string cardHeaderClass = DateTime.Now >= Model.Date && DateTime.Now < Model.Date.AddDays(6) ? "bg-primary" : "bg-secondary";
+}
+
+@functions{
+    string FooterClass(WeekPerformanceModel m)
+    {
+        string footerClass = String.Empty;
+
+        if(m.PnL < GlobalSettings.ActiveRiskParameters.WeeklyStop)
+        {
+            footerClass = " table-danger";
+        }
+        else if (m.PnL > GlobalSettings.ActiveRiskParameters.TpaWeeklyTarget)
+        {
+            footerClass = " table-success";
+        }
+
+        return footerClass;
+    }
+}
+
+<div class="col-6">
+    <div class="card mb-3">
+        <div class="@String.Format("card-header text-white {0}", cardHeaderClass)">Week of @Model.Date.ToShortDateString() - @Model.Date.AddDays(4).ToShortDateString()</div>
+        <div class="card-body p-3">
+            <div class="row">
+                @*<div class="col-12">
+                   
+                </div>*@
+                <div class="col-12">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr class="table-secondary">
+                                <th scope="col">Date</th>
+                                <th scope="col">Day</th>
+                                <th scope="col">Wins</th>
+                                <th scope="col">Losses</th>
+                                <th scope="col">Trades</th>
+                                <th scope="col">Win Ptg</th>
+                                <th scope="col">PnL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (DayPerformanceModel dayModel in Model.Days)
+                            {
+                                <tr>
+                                    <td>@dayModel.Date.ToShortDateString()</td>
+                                    <td>@dayModel.Day.ToString()</td>
+                                    <td>@dayModel.Wins</td>
+                                    <td>@dayModel.Losses</td>
+                                    <td>@dayModel.Trades</td>
+                                    <td>@dayModel.WinPtg.ToString("P2")</td>
+                                    <td>@dayModel.PnL.ToString("C2")</td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="@FooterClass(Model)" style="font-weight: bold;">
+                                <td></td>
+                                <td></td>
+                                <td>@Model.Wins</td>
+                                <td>@Model.Losses</td>
+                                <td>@Model.Trades</td>
+                                <td>@Model.WinPtg.ToString("P2")</td>
+                                <td>@Model.PnL.ToString("C2")</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

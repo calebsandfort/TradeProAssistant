@@ -17,6 +17,7 @@ namespace Entities.Dtos
 		public bool Qualifier3Disqualified { get; set; }
 		public bool Qualifier4Disqualified { get; set; }
 		public String Notes { get; set; }
+		public String NBT { get; set; }
 		public bool Won { get; set; }
 		public bool Scratch { get; set; }
 		public Decimal PnL { get; set; }

@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using Contexts;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
@@ -31,6 +32,16 @@ namespace Services
             }
 
             return list;
+        }
+
+        public static MonthPerformanceModel GetMonthPerformance(DateTime start)
+        {
+            using (TradeProAssistantContext context = new TradeProAssistantContext())
+            {
+                DateTime end = start.AddDays(28);
+                List<TradeTicket> tradeTickets = context.TradeTickets.Where(x => x.Timestamp >= start && x.Timestamp < end).ToList();
+                return new MonthPerformanceModel(start, tradeTickets);
+            }
         }
         #endregion
     }
