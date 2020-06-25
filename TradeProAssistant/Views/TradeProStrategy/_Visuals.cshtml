@@ -1,4 +1,4 @@
-﻿@model TradeTicketDto
+﻿@model TradeTicketModel
 
 @*@Html.DropDownListFor(x => x.Strategy, new SelectList(Enums.StrategiesExtensions.SelectItems(), "Value", "Text"), "--Select Strategy--", new { @class = "form-control", id = "VisualsStrategy", Name = "VisualsStrategy" })*@
 
@@ -91,12 +91,40 @@
             <img src="@Url.Content(String.Format("~/Content/StrategyVisuals/MarketStructure/{0}.png", Model.Strategy))" class="" />
         </div>
         <br />
-        <div class="card">
-            <h6 class="card-header">Qualifiers</h6>
-            <div class="float-left" >
-                <img src="@Url.Content(String.Format("~/Content/StrategyVisuals/Qualifiers/{0}Inventory.png", Model.Strategy))" class="" style="width: 250px; vertical-align: top;"/>
-                <img src="@Url.Content(String.Format("~/Content/StrategyVisuals/Qualifiers/{0}Footprint.png", Model.Strategy))" class="" style="width: 400px; vertical-align: top;" />
+        <div class="row">
+            <div class="col-4">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-danger p-2">Market Structure</li>
+
+                    @foreach (MarketStructureQualifiers ms in Model.MarketStructureQualifiersForStrategy)
+                    {
+                        <li class="list-group-item p-2">@ms.GetStringValue()</li>
+                    }
+                </ul>
             </div>
+
+            <div class="col-4">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success p-2">@Model.TradeQualifiersForStrategy[0].TradeQualifierType.GetStringValue()</li>
+
+                    @foreach (TradeQualifiers tq in Model.TradeQualifiersForStrategy[0].TradeQualifiersList)
+                    {
+                        <li class="list-group-item p-2">@tq.GetStringValue()</li>
+                    }
+                </ul>
+            </div>
+
+            <div class="col-4">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-primary p-2">@Model.TradeQualifiersForStrategy[1].TradeQualifierType.GetStringValue()</li>
+
+                    @foreach (TradeQualifiers tq in Model.TradeQualifiersForStrategy[1].TradeQualifiersList)
+                    {
+                        <li class="list-group-item p-2">@tq.GetStringValue()</li>
+                    }
+                </ul>
+            </div>
+
         </div>
     </div>
 </div>

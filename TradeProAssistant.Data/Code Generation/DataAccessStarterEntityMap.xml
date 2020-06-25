@@ -182,6 +182,7 @@
   </Entity>
   <Entity Name="TradingSettings" DefaultSortField="Identifier" DefaultSortDescending="false" ToStringField="Identifier">
     <Property Name="MonthStart" Type="DateTime" IncludeInDto="true" />
+    <Property Name="Weeks" Type="int" IncludeInDto="true" DefaultValue="4" />
     <Relationship Name="RiskParameters" Type="RiskParameters" IncludeInDto="true"/>
   </Entity>
   <EntityEnum Name="Sectors">

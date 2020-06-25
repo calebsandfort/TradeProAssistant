@@ -8,9 +8,9 @@ namespace TradeProAssistant.Models
 {
     public class StrategiesModel
     {
-        private TradeTicketDto tradeTicket;
+        private TradeTicketModel tradeTicket;
 
-        public TradeTicketDto TradeTicket
+        public TradeTicketModel TradeTicket
         {
             get { return tradeTicket; }
             set { tradeTicket = value; }

@@ -19,6 +19,8 @@ namespace Entities
 
 		public DateTime MonthStart { get; set; }
 
+		public int Weeks { get; set; }
+
 		[ForeignKey("RiskParameters")]
 		public int? RiskParametersIdentifier { get; set; }
 		public virtual RiskParameters RiskParameters { get; set; }
@@ -32,6 +34,7 @@ namespace Entities
 		public  TradingSettings(TradingSettings source)
 		{
 			this.MonthStart = source.MonthStart;
+			this.Weeks = source.Weeks;
 					if(source.RiskParameters != null) this.RiskParameters = new RiskParameters(source.RiskParameters);
 		}
 		#endregion

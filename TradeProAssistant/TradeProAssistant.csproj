@@ -184,6 +184,7 @@
     <Compile Include="Models\StrategiesModel.cs" />
     <Compile Include="Models\MarketStructureQualifiersModel.cs" />
     <Compile Include="Models\TradeQualifiersModel.cs" />
+    <Compile Include="Models\TradeTicketModel.cs" />
     <Compile Include="Models\WeeklyIncomeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -222,7 +223,18 @@
     <Content Include="Content\StrategyVisuals\MarketStructure\Pullbacks.png" />
     <Content Include="Content\StrategyVisuals\MarketStructure\SellTheBreakout.png" />
     <Content Include="Content\StrategyVisuals\MarketStructure\SellTheRip.png" />
-    <Content Include="Content\StrategyVisuals\Qualifiers\BuyTheDip.png" />
+    <Content Include="Content\StrategyVisuals\Qualifiers\BuyTheBreakoutFootprint.png" />
+    <Content Include="Content\StrategyVisuals\Qualifiers\BuyTheBreakoutInventory.png" />
+    <Content Include="Content\StrategyVisuals\Qualifiers\BuyTheDipFootprint.png" />
+    <Content Include="Content\StrategyVisuals\Qualifiers\BuyTheDipInventory.png" />
+    <Content Include="Content\StrategyVisuals\Qualifiers\FadeTheDropFootprint.png" />
+    <Content Include="Content\StrategyVisuals\Qualifiers\FadeTheDropInventory.png" />
+    <Content Include="Content\StrategyVisuals\Qualifiers\FadeTheRallyFootprint.png" />
+    <Content Include="Content\StrategyVisuals\Qualifiers\FadeTheRallyInventory.png" />
+    <Content Include="Content\StrategyVisuals\Qualifiers\SellTheBreakoutFootprint.png" />
+    <Content Include="Content\StrategyVisuals\Qualifiers\SellTheBreakoutInventory.png" />
+    <Content Include="Content\StrategyVisuals\Qualifiers\SellTheRipFootprint.png" />
+    <Content Include="Content\StrategyVisuals\Qualifiers\SellTheRipInventory.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />

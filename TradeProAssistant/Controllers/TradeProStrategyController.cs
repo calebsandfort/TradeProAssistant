@@ -34,7 +34,7 @@ namespace TradeProAssistant.Controllers
 
         public ActionResult Trading()
         {
-            return View(new TradeTicketDto()
+            return View(new TradeTicketModel()
             {
                 Timestamp = DateTime.Now,
                 Asset = Enums.TradeProAssets.ES,
@@ -45,7 +45,7 @@ namespace TradeProAssistant.Controllers
 
         public ActionResult TradeTicketForm()
         {
-            return View(new TradeTicketDto()
+            return View(new TradeTicketModel()
             {
                 Timestamp = DateTime.Now,
                 Asset = Enums.TradeProAssets.ES,
@@ -56,7 +56,7 @@ namespace TradeProAssistant.Controllers
 
         public ActionResult Visuals()
         {
-            return PartialView("_Visuals", new TradeTicketDto()
+            return PartialView("_Visuals", new TradeTicketModel()
             {
                 Strategy = Enums.Strategies.BuyTheDip,
             });
@@ -65,14 +65,14 @@ namespace TradeProAssistant.Controllers
         [HttpPost]
         public ActionResult Visuals(Strategies strategy)
         {
-            return PartialView("_Visuals", new TradeTicketDto()
+            return PartialView("_Visuals", new TradeTicketModel()
             {
                 Strategy = strategy,
             });
         }
 
         [HttpPost]
-        public JsonResult TradeTicketForm(TradeTicketDto dto)
+        public JsonResult TradeTicketForm(TradeTicketModel dto)
         {
             dto.Identifier = TradeTicketService.Save(mapper.Map<TradeTicket>(dto));
             return Json(dto);
@@ -438,7 +438,7 @@ namespace TradeProAssistant.Controllers
             DataSourceResult result = new DataSourceResult();
             Query query = request.ToQuery();
 
-            List<TradeTicketDto> tradeTickets = mapper.Map<List<TradeTicketDto>>(TradeTicketService.GetCollection(query));
+            List<TradeTicketModel> tradeTickets = mapper.Map<List<TradeTicketModel>>(TradeTicketService.GetCollection(query));
 
             result.Data = tradeTickets;
             result.Total = tradeTickets.Count;

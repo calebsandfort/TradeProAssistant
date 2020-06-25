@@ -38,7 +38,7 @@ namespace Services
         {
             using (TradeProAssistantContext context = new TradeProAssistantContext())
             {
-                DateTime end = start.AddDays(28);
+                DateTime end = start.AddDays(context.TradingSettings.First().Weeks * 7);
                 List<TradeTicket> tradeTickets = context.TradeTickets.Where(x => x.Timestamp >= start && x.Timestamp < end).ToList();
                 return new MonthPerformanceModel(start, tradeTickets);
             }

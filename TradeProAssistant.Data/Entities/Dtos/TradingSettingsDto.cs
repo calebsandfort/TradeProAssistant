@@ -8,6 +8,7 @@ namespace Entities.Dtos
 		public int Identifier { get; set; }
 		public bool IsNew { get{ return this.Identifier == 0; } }
 		public DateTime MonthStart { get; set; }
+		public int Weeks { get; set; }
 
 		public RiskParametersDto RiskParameters { get; set; }
 

@@ -686,6 +686,10 @@
     <Compile Include="Migrations\202005160305552_AddNbtField.designer.cs">
       <DependentUpon>202005160305552_AddNbtField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006252313497_AddWeeksToTradeSettings.cs" />
+    <Compile Include="Migrations\202006252313497_AddWeeksToTradeSettings.designer.cs">
+      <DependentUpon>202006252313497_AddWeeksToTradeSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BenzingaNewsResponse.cs" />
     <Compile Include="Models\DayPerformanceModel.cs" />
@@ -849,6 +853,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005160305552_AddNbtField.resx">
       <DependentUpon>202005160305552_AddNbtField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006252313497_AddWeeksToTradeSettings.resx">
+      <DependentUpon>202006252313497_AddWeeksToTradeSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\SP500_Constituents.csv" />
     <EmbeddedResource Include="SeedData\SPMidCap_Constituents.csv" />
